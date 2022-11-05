@@ -1,0 +1,27 @@
+:root {
+    --dark-blue: #6320EE;
+    --light-blue: #8075FF;
+    --red: #D52941;
+    --white: #EBEBEB;
+    --black: #151515;
+
+    --main-font : 'Montserrat';
+
+}
+
+* {
+    font-family: var(--main-font);
+}
+
+h4 {
+    color: var(--grey);
+}
+
+.black-button {
+    color: var(--white);
+    background-color: var(--black);
+    text-decoration: none;
+    font-size: 0.7em;
+    padding: 1em;
+    line-height: 5em;
+}
