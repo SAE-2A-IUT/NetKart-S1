@@ -9,7 +9,7 @@ startPage("A propos",[K_STYLE."main",K_STYLE."about"],[]);
         <span>Qui sommes nous ? Pourquoi avoir crée NetKart</span>
     </div>
     <div class="body">
-        <h2>NetKar, une serious game imaginé par des étudiants</h2>
+        <h2>NetKart, une serious game imaginé par des étudiants</h2>
         <h3>2022</h3>
         <div class="text inline-text">
             <span class="left">
