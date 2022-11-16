@@ -2,9 +2,7 @@
 function endPage(){
 ?>
     <footer class="footer">
-        <div><img src="<?php echo K_IMAGE ?>icon_black.png" alt="NetKart Icon" width="100em"></div>
-        <div>PAGES<br/><a href="#homepage">Accueil</a>
-        <div class="footer-one"><img src="./assets/image/icon_black.png" alt="NetKart Icon" width="90em"></div>
+        <div class="footer-one"><img src="<?php echo K_IMAGE ?>icon_black.png" alt="NetKart Icon" width="90em"></div>
         <div class="footer-two">
             PAGES<br/>
             <a href="#homepage">Accueil</a>

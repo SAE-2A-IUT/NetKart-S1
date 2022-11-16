@@ -1,5 +1,5 @@
 <?php
-require 'pages/constants.php';
+require './constants.php';
 function startPage($title, $css_name, $js_script){
 ?>
 <!DOCTYPE html>
@@ -33,10 +33,8 @@ function startPage($title, $css_name, $js_script){
 </header>
 
 <div class="header">
-    <div>
-        <a href="#default"><img src="<?php echo K_IMAGE?>icon_black_small.png " alt="logo" width="90em"></a>
     <div class="header-left">
-        <a href="#default"><img src="./assets/image/icon_black_small.png " alt="logo" width="90em"></a>
+        <a href="#default"><img src="<?php echo K_IMAGE?>icon_black_small.png" alt="logo" width="90em"></a>
     </div>
     <div class="header-right">
         <div>
