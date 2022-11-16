@@ -1,0 +1,108 @@
+:root {
+    --dark-blue: #6320EE;
+    --light-blue: #8075FF;
+    --red: #D52941;
+    --light-grey: #EBEBEB;
+    --white: #FAFAFA;
+    --black: #151515;
+    --grey: #8D8D8D;
+
+    --main-font : 'Montserrat';
+}
+/* Style the header with a grey background and some padding */
+.header {
+    overflow: hidden;
+    padding: 0.5em;
+}
+
+/* Style the header links */
+.header a {
+    font-family: var(--main-font);
+    color: var(--grey);
+    text-align: center;
+    padding: 1em;
+    line-height: 5em;
+    text-decoration: none;
+    font-size: 0.7em;
+}
+
+/* Style button link*/
+.header a.hbutton {
+    color: var(--white);
+    background-color: var(--black);
+    margin: 1em;
+}
+
+.header a.hbutton:hover {
+    background-color: var(--black);
+}
+
+/* Change the background color on mouse-over */
+.header a:hover {
+    background-color: var(--white);
+    color: var(--light-blue);
+}
+
+/* Style the active/current link*/
+.header a.active {
+    color: var(--black);
+    font-weight: bold;
+}
+
+/* Float the link section to the right */
+.header-right {
+    display: flex;
+    align-items: center;
+    float: right;
+}
+
+.input-header  {
+    height: 2.2em;
+    border : 1px solid var(--grey);
+    margin-left: 1em;
+    font-family: var(--main-font);
+}
+
+.submit-header {
+    font-family: var(--main-font);
+    background-color: var(--light-grey);
+    margin-left: 0.1em;
+}
+
+.submit-header:hover {
+    color: var(--light-blue);
+}
+
+/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+@media screen and (max-width: 500px) {
+    .header a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+    .header-right {
+        float: none;
+    }
+}
+
+.footer{
+    background-color: var(--light-grey);
+    display: flex;
+    flex-direction: row;
+}
+
+.footer > div {
+    color: var(--black);
+    font-weight: bold;
+}
+
+footer > div > a {
+    font-weight: normal;
+    color: var(--black);
+    text-decoration: none;
+}
+.footer {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
