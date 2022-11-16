@@ -25,3 +25,7 @@ h4 {
     padding: 1em;
     line-height: 5em;
 }
+
+.black-button:hover {
+    color: var(--red);
+}

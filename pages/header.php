@@ -11,7 +11,7 @@ function startPage($title, $cssName, $jsScript){
 
     <title> <?php echo $title;?> </title>
     <link rel="icon" type="image/x-icon" href="assets/image/icon.ico">
-    <link rel="stylesheet" href="./assets/style/header.css">
+    <link rel="stylesheet" href="./assets/style/header_and_footer.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <?php
     //stylesheet
@@ -32,7 +32,9 @@ function startPage($title, $cssName, $jsScript){
 </header>
 
 <div class="header">
-    <a href="#default"><img src="./assets/image/icon_black_small.png " alt="logo" width="6%"></a>
+    <div>
+        <a href="#default"><img src="./assets/image/icon_black_small.png " alt="logo" width="6%"></a>
+    </div>
     <div class="header-right">
         <div>
         <a class="active" href="#home">ACCUEIL</a>

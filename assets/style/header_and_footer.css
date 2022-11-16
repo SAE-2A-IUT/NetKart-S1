@@ -84,3 +84,25 @@
         float: none;
     }
 }
+
+.footer{
+    background-color: var(--light-grey);
+    display: flex;
+    flex-direction: row;
+}
+
+.footer > div {
+    color: var(--black);
+    font-weight: bold;
+}
+
+footer > div > a {
+    font-weight: normal;
+    color: var(--black);
+    text-decoration: none;
+}
+.footer {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}

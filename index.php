@@ -11,3 +11,7 @@ startPage("Accueil",["./assets/style/main"],[]);
 <img src="./assets/image/index_background.webp" width="100%" alt="racing car image" style="opacity: 1">
 <br/>
 
+<?php
+include './pages/footer.php';
+endPage();
+?>
