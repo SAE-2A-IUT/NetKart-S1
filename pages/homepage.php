@@ -1,5 +1,5 @@
 <?php
-include './header.php';
+require './header.php';
 startPage("Accueil",["../assets/style/main"],[]);
 ?>
 
@@ -30,6 +30,6 @@ startPage("Accueil",["../assets/style/main"],[]);
 </div>
 
 <?php
-include './footer.php';
+require './footer.php';
 endPage();
 ?>

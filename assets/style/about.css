@@ -1,0 +1,70 @@
+:root{
+    --dark-grey: #6b6b6b;
+}
+
+.body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+/* Titre */
+.title{
+    max-width: 100%;
+    width: auto;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* blocs text */
+h3{
+    width: 100%;
+}
+.title span,.text, h3{
+    color: var(--grey);
+}
+
+.title img{
+    height: 12.5em;
+}
+
+
+
+.text{
+    text-align: center;
+    width: 60%;
+    line-height: 1.6em;
+    margin-bottom: 5%;
+}
+
+.text.inline-text{
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: start;
+}
+
+.text.inline-text .left{
+    padding-right: 4em;
+}
+
+.text.inline-text .right{
+    padding-left: 4em;
+}
+
+/* lien */
+
+.text a{
+    text-decoration: none;
+    color: var(--dark-grey);
+}
+
+.text a:hover{
+    font-size: 1.1em;
+    color: var(--black);
+}
