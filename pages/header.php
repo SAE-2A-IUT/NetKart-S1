@@ -1,5 +1,5 @@
 <?php
-require 'pages/constants.php';
+require './constants.php';
 function startPage($title, $css_name, $js_script){
 ?>
 <!DOCTYPE html>
