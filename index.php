@@ -1,5 +1,5 @@
 <?php
-include './pages/header.php';
+require './pages/header.php';
 startPage("Accueil",[K_STYLE."main"],[]);
 ?>
 
@@ -12,6 +12,6 @@ startPage("Accueil",[K_STYLE."main"],[]);
 <br/>
 
 <?php
-include './pages/footer.php';
+require './pages/footer.php';
 endPage();
 ?>
