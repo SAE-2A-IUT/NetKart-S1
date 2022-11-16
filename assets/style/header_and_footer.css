@@ -106,3 +106,8 @@ footer > div > a {
     justify-content: space-around;
     flex-direction: row;
 }
+
+p{
+    color: var(--grey);
+    line-height: 1.5em;
+}

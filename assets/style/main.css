@@ -29,3 +29,20 @@ h4 {
 .black-button:hover {
     color: var(--red);
 }
+
+.description{
+    display: flex;
+    flex-direction: row;
+}
+
+.description div{
+    width: 45%;
+    margin: 1em;
+}
+
+.description div img{
+}
+
+div h4 a{
+    color: var(--grey)
+}
