@@ -56,6 +56,12 @@
     float: right;
 }
 
+.header-left {
+    display: flex;
+    align-items: center;
+    float: left;
+}
+
 .input-header  {
     height: 2.2em;
     border : 1px solid var(--grey);
@@ -86,8 +92,24 @@
 }
 
 .footer{
+    padding: 1em;
     background-color: var(--light-grey);
     display: flex;
+    font-size: 0.8em;
+    line-height: 2em;
+}
+
+.footer-one{
+    flex: 2 1 auto;
+}
+
+.footer-two{
+    flex: 1 1 auto;
+    flex-direction: row;
+}
+
+.footer-three{
+    flex: 1 1 auto;
     flex-direction: row;
 }
 
@@ -101,8 +123,14 @@ footer > div > a {
     color: var(--black);
     text-decoration: none;
 }
+
 .footer {
     display: flex;
     justify-content: space-around;
     flex-direction: row;
+}
+
+p{
+    color: var(--grey);
+    line-height: 1.5em;
 }

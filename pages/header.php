@@ -1,6 +1,6 @@
 <?php
 require 'pages/constants.php';
-function startPage($title, $cssName, $jsScript){
+function startPage($title, $css_name, $js_script){
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
@@ -16,12 +16,12 @@ function startPage($title, $cssName, $jsScript){
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <?php
     //stylesheet
-    foreach($cssName as $stylesheet){?>
+    foreach($css_name as $stylesheet){?>
         <link rel="stylesheet" href="<?php echo $stylesheet; ?>.css" type="text/css">
         <?php
     }
     //script
-    foreach($jsScript as $script){?>
+    foreach($js_script as $script){?>
         <script src="<?php echo $script; ?>.js"></script>
         <?php
     }
@@ -34,7 +34,9 @@ function startPage($title, $cssName, $jsScript){
 
 <div class="header">
     <div>
-        <a href="#default"><img src="<?php echo K_IMAGE?>icon_black_small.png " alt="logo" width="6%"></a>
+        <a href="#default"><img src="<?php echo K_IMAGE?>icon_black_small.png " alt="logo" width="90em"></a>
+    <div class="header-left">
+        <a href="#default"><img src="./assets/image/icon_black_small.png " alt="logo" width="90em"></a>
     </div>
     <div class="header-right">
         <div>
