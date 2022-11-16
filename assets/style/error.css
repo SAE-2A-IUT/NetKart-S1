@@ -1,0 +1,60 @@
+:root {
+    --main-font : 'Montserrat';
+}
+body, html {
+    margin: 10px;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+}
+.container {
+    background: #EBEBEB;
+    width:  97%;
+    height: 95%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+}
+
+.button {
+    background-color: #647aff; /* Green */
+    font-family: var(--main-font);
+    color: #EBEBEB;
+    border: none;
+    padding: 14px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+}
+
+.image {
+    max-width: 10%;
+    max-height: 10%;
+}
+
+h1 {
+    font-family: var(--main-font);
+    font-weight: normal;
+    text-align: center;
+    text-decoration: none;
+    font-size: 3em;
+}
+
+p {
+    font-family: var(--main-font);
+    color: #8D8D8D;
+    font-weight: normal;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    padding-bottom: 10px;
+}
