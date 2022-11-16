@@ -1,0 +1,48 @@
+:root {
+    --main-font : 'Montserrat';
+}
+.container {
+    background: #EBEBEB;
+    margin: 10px;
+    height: 100%;
+    text-align: center;
+    position: relative;
+    padding-top: 12%;
+    padding-bottom: 14%;
+}
+
+.button {
+    background-color: #647aff; /* Green */
+    font-family: var(--main-font);
+    color: #EBEBEB;
+    border: none;
+    padding: 14px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+}
+
+.image {
+    max-width: 10%;
+    max-height: 10%;
+
+}
+
+h1 {
+    font-family: var(--main-font);
+    font-weight: normal;
+    text-align: center;
+    text-decoration: none;
+    font-size: 3em;
+}
+
+p {
+    font-family: var(--main-font);
+    color: #8D8D8D;
+    font-weight: normal;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    padding-bottom: 10px;
+}
