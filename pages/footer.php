@@ -2,7 +2,7 @@
 function endPage(){
 ?>
     <footer class="footer">
-        <div class="footer-one"><img src="./assets/image/icon_black.png" alt="NetKart Icon" width="90em"></div>
+        <div class="footer-one"><img src="../assets/image/icon_black.png" alt="NetKart Icon" width="90em"></div>
         <div class="footer-two">
             PAGES<br/>
             <a href="#homepage">Accueil</a>

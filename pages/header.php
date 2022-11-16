@@ -10,8 +10,8 @@ function startPage($title, $css_name, $js_script){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title> <?php echo $title;?> </title>
-    <link rel="icon" type="image/x-icon" href="assets/image/icon.ico">
-    <link rel="stylesheet" href="./assets/style/header_and_footer.css">
+    <link rel="icon" type="image/x-icon" href="../assets/image/icon.ico">
+    <link rel="stylesheet" href="../assets/style/header_and_footer.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <?php
     //stylesheet
@@ -33,7 +33,7 @@ function startPage($title, $css_name, $js_script){
 
 <div class="header">
     <div class="header-left">
-        <a href="#default"><img src="./assets/image/icon_black_small.png " alt="logo" width="90em"></a>
+        <a href="#default"><img src="../assets/image/icon_black_small.png " alt="logo" width="90em"></a>
     </div>
     <div class="header-right">
         <div>
