@@ -19,7 +19,7 @@ SAE S3 IUT Informatique Aix
   
 Les commit se font sous cette forme :
 <pre>
-<b><a href="#types">&lt;type&gt;</a></b></font>: <b><a href="#sujet">&lt;sujet&gt;</a></b>
+<b><a href="#types">&lt;type&gt;(task)</a></b></font>: <b><a href="#sujet">&lt;sujet&gt;</a></b>
 </pre>
 
 ### Types
@@ -39,3 +39,7 @@ Les commit se font sous cette forme :
 Le `sujet` contient une description du changement.
 * Pas de majuscule à la première lettre
 * Pas de point à la fin
+
+## Normes sur les fichiers
+
+Les fichiers sont a nommer selon la Snake_Case
