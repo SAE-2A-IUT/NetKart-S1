@@ -16,7 +16,6 @@ body, html {
     text-align: center;
     position: relative;
     overflow: hidden;
-
     display: flex;
     flex-direction: column;
     justify-content: center;

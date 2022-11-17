@@ -1,0 +1,54 @@
+.connection-select{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10%;
+}
+
+#button-box{
+    background-color: var(--light-grey);
+    padding: 0.2em 1.5em 0.2em 1.5em;
+}
+
+.connection-button{
+    border: none;
+    background-color: var(--light-grey);
+    font-size: 1.3em;
+}
+
+.connection-button :hover{
+    opacity: 0.6;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+
+}
+
+#firstname-lastname{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+#firstname-lastname div input, #firstname-lastname div button{
+    width: 90%;
+    padding: 4% 0 4% 2%;
+}
+
+.submit-connection, .submit-register{
+    line-height: 200%;
+}
+
+.form-input{
+    border: 1px solid var(--light-grey);
+    margin-top: 0.3em;
+    padding: 2% 0 2% 1%;
+}
+
+#username-connection, #password-connection{
+    width: 32em;
+}
+
