@@ -6,7 +6,7 @@ function openConnection(selectedButton) {
     }
     document.getElementById(selectedButton).style.display = "flex";
 
-    if (selectedButton.EQUAL("connection")){
+    if (selectedButton == "connection"){
         document.getElementById("button-connection").style.color = "var(--black)";
         document.getElementById("button-register").style.color = "var(--grey)";
     }
