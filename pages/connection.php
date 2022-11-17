@@ -4,8 +4,8 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
 ?>
 <div class="connection-select">
     <div id="button-box">
-        <button id="button-connection" class="connection-button" onclick="openConnection('connection')"><h2>Connexion</h2></button>
-        <button id="button-register" class="connection-button" onclick="openConnection('register')"><h2>Inscription</h2></button>
+        <button id="button-connection" class="connection-button" onclick="openConnection('connection')"><b>Connexion</b></button>
+        <button id="button-register" class="connection-button" onclick="openConnection('register')"><b>Inscription</b></button>
     </div>
     <br>
 
@@ -20,13 +20,12 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
     </form>
 
     <form id="register" class="connection-form" style="display:none">
-
         <div id="firstname-lastname">
             <div>
                 <label for="firstname">Prénom</label>
                 <input type="text" placeholder="Prénom" id="firstname" name="firstname" class="form-input" required>
             </div>
-            <div
+            <div>
                 <label for="lastname">Nom</label>
                 <input type="text" placeholder="Nom" id="lastname" name="lastname" class="form-input" required>
             </div>

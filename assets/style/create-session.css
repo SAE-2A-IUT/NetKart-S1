@@ -1,0 +1,32 @@
+#create-session{
+    display: flex;
+    justify-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+#page-description{
+    text-align: center;
+    margin: 0 10% 3% 10%;
+}
+
+.form-input{
+    border: 1px solid var(--light-grey);
+    margin-top: 0.5em;
+    padding: 0.5% 0.25% 0.5% 0.25%;
+    width: 25em;
+}
+
+#submit{
+    background-color: var(--dark-blue);
+    color: var(--white);
+    border: none;
+    height: 2.5em;
+}
+
+.form-session{
+    margin-bottom: 10%;
+}
+
+
