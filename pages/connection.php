@@ -20,13 +20,12 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
     </form>
 
     <form id="register" class="connection-form" style="display:none">
-
         <div id="firstname-lastname">
             <div>
                 <label for="firstname">Prénom</label>
                 <input type="text" placeholder="Prénom" id="firstname" name="firstname" class="form-input" required>
             </div>
-            <div
+            <div>
                 <label for="lastname">Nom</label>
                 <input type="text" placeholder="Nom" id="lastname" name="lastname" class="form-input" required>
             </div>
