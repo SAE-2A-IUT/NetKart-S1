@@ -23,14 +23,14 @@ startPage("Création une session",["../assets/style/main", "../assets/style/crea
 
     <label for="session-theme">Thème de la session</label>
     <select name="session-theme" id="session-theme" class="form-input" required>
-        <option value="">Choisir le thème de la session</option>
+        <option value="">Choisir le thème</option>
         <option value="1">Thème 1</option>
         <option value="2">Thème 2</option>
         <option value="3">Thème 3</option>
         <option value="4">Thème 4</option>
     </select><br>
 
-    <input type="submit" value="Crée la session" id="submit" class="form-label-input">
+    <input type="submit" value="Créer la session" id="submit" class="form-label-input">
 </form>
 
 <?php
