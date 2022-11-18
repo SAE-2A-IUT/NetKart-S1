@@ -1,6 +1,6 @@
 <?php
 include '../pages/header.php';
-startPage("Contact",["../assets/style/main", "../assets/style/rules.css"],[]);
+startPage("Contact",["../assets/style/main", "../assets/style/rules"],[]);
 ?>
 <script>
     function change_language_check_box(checkbox)
