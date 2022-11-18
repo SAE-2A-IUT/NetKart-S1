@@ -1,6 +1,6 @@
 <?php
 require 'constants.php';
-function startPage($title, $css_name, $js_script){
+function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT){
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
@@ -10,19 +10,19 @@ function startPage($title, $css_name, $js_script){
     <meta name="keywords" content="serious game network">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title> <?php echo $title;?> </title>
+    <title> <?php echo $A_TITLE;?> </title>
     <link rel="icon" type="image/x-icon" href="<?php echo K_IMAGE?>icon.ico">
     <link rel="stylesheet" href="<?php echo K_STYLE?>header_and_footer.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <?php
     //stylesheet
-    foreach($css_name as $stylesheet){?>
-        <link rel="stylesheet" href="<?php echo $stylesheet; ?>.css" type="text/css">
+    foreach($A_CSS_NAME as $l_stylesheet){?>
+        <link rel="stylesheet" href="<?php echo $l_stylesheet; ?>.css" type="text/css">
         <?php
     }
     //script
-    foreach($js_script as $script){?>
-        <script src="<?php echo $script; ?>.js"></script>
+    foreach($A_JS_SCRIPT as $l_script){?>
+        <script src="<?php echo $l_script; ?>.js"></script>
         <?php
     }
     ?>
