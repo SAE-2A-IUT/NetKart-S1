@@ -1,6 +1,6 @@
 <?php
 include '../pages/header.php';
-startPage("Contact",["../assets/style/main"],[]);
+startPage("Contact",["../assets/style/main", "../assets/style/rules.css"],[]);
 ?>
 <script>
     function change_language_check_box(checkbox)
@@ -23,13 +23,6 @@ startPage("Contact",["../assets/style/main"],[]);
         location.reload();
     }
 </script>
-<!DOCTYPE html>
-<html lang="fr-FR">
-<header>
-    <link rel="stylesheet" href="../assets/style/rules.css">
-</header>
-<body>
-
 <div class="change_lang">
     <h6>English</h6>
     <label class="switch">
@@ -96,10 +89,6 @@ startPage("Contact",["../assets/style/main"],[]);
         }
     }
 </script>
-</body>
-
-</html>
-
 <?php
 include '../pages/footer.php';
 endPage();
