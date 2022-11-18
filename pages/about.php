@@ -13,14 +13,14 @@ startPage("A propos",[K_STYLE."main",K_STYLE."about"],[]);
         <h3>2022</h3>
         <div class="text inline-text">
             <span class="left">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget euismod erat. Praesent euismod
-                tincidunt risus, non efficitur ipsum malesuada porta. Nullam porttitor tortor et ante posuere, a luctus
-                sapien eleifend. Morbi sit amet ligula eu sem pulvinar gravida.
+                Ce projet NetKart a été imaginé par un groupe de 4 étudiants en deuxième année de B.U.T. (Bachelor Universitaire et Technologique).
+                Il s'agissait de réaliser un serious game sous forme d'un site web. Nous avons ainsi pensé à proposer un serious game autour
+                de nos cours de réseau de première année.
             </span>
             <span class="right">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget euismod erat. Praesent euismod
-                tincidunt risus, non efficitur ipsum malesuada porta. Nullam porttitor tortor et ante posuere, a luctus
-                sapien eleifend. Morbi sit amet ligula eu sem pulvinar gravida.
+                Nous avons travaillé essentiellement en HTML, CSS, PHP et JS en lien avec une base de données pendant 120 heures.
+                Le projet a été géré grâce à GitHub. Nous avons travaillé la responsivité et l'accessibilité du site. Il s'agissait de proposer
+                un site accessible à tous les niveaux.
             </span>
         </div>
         <h2>Plus d'infos sur le projet</h2>
