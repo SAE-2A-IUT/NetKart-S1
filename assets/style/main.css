@@ -46,3 +46,8 @@ h4 {
 div h4 a{
     color: var(--grey)
 }
+
+/* class used to write the name of the author under an image */
+.image-author{
+    color: var(--grey);
+}
