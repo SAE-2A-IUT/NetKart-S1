@@ -34,17 +34,17 @@ function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT){
 
 <div class="header">
     <div class="header-left">
-        <a href="#default"><img src="<?php echo K_IMAGE?>icon_black_small.png" alt="logo" width="90em"></a>
+        <a href="homepage.php"><img src="<?php echo K_IMAGE?>icon_black_small.png" alt="logo" width="90em"></a>
     </div>
     <div class="header-right">
         <div>
-        <a class="active" href="#home">ACCUEIL</a>
+        <a class="active" href="homepage.php">ACCUEIL</a>
         </div>
         <div>
-        <a href="#contact">THÈMES</a>
+        <a href="#theme">THÈMES</a>
         </div>
         <div>
-        <a href="#about">RÈGLES DU JEU</a>
+        <a href="rules.php">RÈGLES DU JEU</a>
         </div>
         <div>
         <form method="post" action="#" enctype="text/plain" style="display: flex; flex-direction: row">
@@ -53,12 +53,10 @@ function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT){
         </form>
         </div>
         <div>
-        <a href="#connection" class="hbutton">CONNEXION</a>
+        <a href="connection.php" class="hbutton">CONNEXION</a>
         </div>
     </div>
 </div>
 
-
-<!-- TODO : add a button go back on top of the page-->
 <?php
 }?>
