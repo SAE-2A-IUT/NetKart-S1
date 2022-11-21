@@ -50,4 +50,5 @@ div h4 a{
 /* class used to write the name of the author under an image */
 .image-author{
     color: var(--grey);
+    font-size: 0.8em;
 }
