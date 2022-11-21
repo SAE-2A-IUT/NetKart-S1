@@ -19,7 +19,7 @@ startPage("Accueil",["../assets/style/main"],[]);
 <div class="description">
     <div>
         <p>Pour commencer, qu'est-ce qu'un <b>serious game</b> ?</p>
-        <p>Un serious gale peut se présenter sous la forme d'une application informatique ayant pour but de transmettre une connaissance par un moyen ludique. Ainsi, en participant à des serious game, il est possible de développer des connaissances, son sens logique, sa culture...</p>
+        <p>Un serious game peut se présenter sous la forme d'une application informatique ayant pour but de transmettre une connaissance par un moyen ludique. Ainsi, en participant à des serious game, il est possible de développer des connaissances, son sens logique, sa culture...</p>
         <img src="../assets/image/serious_game_definition.png" width="40%" alt="book and dices" style="opacity: 1">
     </div>
     <div>
