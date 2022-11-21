@@ -42,7 +42,7 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
 
         <div>
             <input type="checkbox" id="term-of-use" name="term-of-use" required>
-            <label for="term-of-use">J'accepte les conditions d'utilisation</label>
+            <label for="term-of-use">J'accepte les <a href="terms-of-use.php">conditions d'utilisation</a></label>
         </div><br>
 
         <input type="submit" value="INSCRIPTION" class="submit-register black-button form-label-input">
