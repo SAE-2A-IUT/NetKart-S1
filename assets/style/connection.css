@@ -14,6 +14,7 @@
     border: none;
     background-color: var(--light-grey);
     font-size: 1.3em;
+    padding: 0.3em 0.3em 0.3em 0.3em;
 }
 
 .connection-button :hover{
