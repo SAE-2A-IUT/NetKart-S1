@@ -70,44 +70,45 @@ $l_nb_max_question_images = 3;
         <?php
         for ($l_nb_question = 0; $l_nb_question<$l_nb_max_question; ++$l_nb_question){
         ?>
-        <label>Question n°<?php echo $l_nb_question+1;?></label>
-        <input name="question_title_<?php echo $l_nb_question+1;?>" type="text" placeholder="Intitulé de la question" required>
-        <label>Consigne</label>
-        <textarea name="question_rules_<?php echo $l_nb_question+1;?>" placeholder="Consigne de la question" aria-atomic="true" required></textarea>
-        <label>Réponse</label>
-        <input name="question_answer_<?php echo $l_nb_question+1;?>" type="text" placeholder="Réponse de la question" required>
-        <h1>Ressources</h1>
-        <h2>Il y a une limite de 3 images par question.</h2>
-        <div class="medias">
+        <label class="question"><span>Question n°<?php echo $l_nb_question+1;?></span><span class="arrow close"></span></label>
+        <div class="hidden question_content">
+            <input name="question_title_<?php echo $l_nb_question+1;?>" type="text" placeholder="Intitulé de la question" required>
+            <label>Consigne</label>
+            <textarea name="question_rules_<?php echo $l_nb_question+1;?>" placeholder="Consigne de la question" aria-atomic="true" required></textarea>
+            <label>Réponse</label>
+            <input name="question_answer_<?php echo $l_nb_question+1;?>" type="text" placeholder="Réponse de la question" required>
+            <h1>Ressources</h1>
+            <h2>Il y a une limite de 3 images par question.</h2>
+            <div class="medias">
 
-            <div class="left">
-                <label class="file_label" for="question_files_<?php echo $l_nb_question+1;?>">Images</label>
-                <input type="hidden" value="<?php echo $l_nb_question;?>">
+                <div class="left">
+                    <label class="file_label" for="question_files_<?php echo $l_nb_question+1;?>">Images</label>
+                    <input type="hidden" value="<?php echo $l_nb_question;?>">
 
-                <input class="img_store" id="question_files_<?php echo $l_nb_question+1;?>" name="question_files_<?php echo $l_nb_question+1;?>" type="file" accept="image/*" multiple>
-                <?php
-                for ($l_nb_question_image = 0; $l_nb_question_image<$l_nb_max_question_images; ++$l_nb_question_image){?>
-                    <div>
-                        <img class="question_img original_img" alt="question_image_<?php echo $l_nb_question+1;?>_<?php echo $l_nb_question_image+1;?>" src="">
-                        <img class="question_img hover_img" alt="question_image_<?php echo $l_nb_question+1;?>_<?php echo $l_nb_question_image+1;?>" src="">
-                        <span class="question_img remove hidden">x</span>
-                        <input type="hidden" value="<?php echo $l_nb_question_image;?>">
-                    </div>
+                    <input class="img_store" id="question_files_<?php echo $l_nb_question+1;?>" name="question_files_<?php echo $l_nb_question+1;?>" type="file" accept="image/*" multiple>
                     <?php
-                }
-                ?>
-            </div>
-            <div class="right">
-                <?php
-                for ($l_nb_question_link = 0; $l_nb_question_link<$l_nb_max_question_images; ++$l_nb_question_link){?>
-                    <input class="question_link" type="text" name="question_link_<?php echo $l_nb_question+1;?>_<?php echo $l_nb_question_link+1;?>"
-                           placeholder="">
+                    for ($l_nb_question_image = 0; $l_nb_question_image<$l_nb_max_question_images; ++$l_nb_question_image){?>
+                        <div>
+                            <img class="question_img original_img" alt="question_image_<?php echo $l_nb_question+1;?>_<?php echo $l_nb_question_image+1;?>" src="">
+                            <img class="question_img hover_img" alt="question_image_<?php echo $l_nb_question+1;?>_<?php echo $l_nb_question_image+1;?>" src="">
+                            <span class="question_img remove hidden">x</span>
+                            <input type="hidden" value="<?php echo $l_nb_question_image;?>">
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+                <div class="right">
                     <?php
-                }
-                ?>
+                    for ($l_nb_question_link = 0; $l_nb_question_link<$l_nb_max_question_images; ++$l_nb_question_link){?>
+                        <input class="question_link" type="text" name="question_link_<?php echo $l_nb_question+1;?>_<?php echo $l_nb_question_link+1;?>"
+                               placeholder="Lien">
+                        <?php
+                    }
+                    ?>
+                </div>
             </div>
         </div>
-
         <?php
         }
         ?>
