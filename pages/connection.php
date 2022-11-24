@@ -11,7 +11,7 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
 
     <form id="connection" class="connection-form">
         <label for="username-connection">Pseudo</label>
-        <input type="text" placeholder="Nom d'utilisateur" id="username-connection" name="username-connection" class="form-input" required><br>
+        <input type="text" placeholder="Nom d'utilisateur" maxlength="50" id="username-connection" name="username-connection" class="form-input" required><br>
 
         <label for="password-connection">Mot de passe</label>
         <input type="password" placeholder="Mot de passe" id="password-connection" name="password-connection" class="form-input" required><br>
@@ -31,8 +31,11 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
             </div>
         </div><br>
 
+        <label for="mail-register">Adresse E-Mail</label>
+        <input type="text" placeholder="E-Mail" id="mail-register" maxlength="150" name="mail-register" class="form-input" required><br>
+
         <label for="username-register">Pseudo</label>
-        <input type="text" placeholder="Pseudo" id="username-register" name="username-register" class="form-input" required><br>
+        <input type="text" placeholder="Pseudo" id="username-register" maxlength="50" name="username-register" class="form-input" required><br>
 
         <label for="password-register">Mot de passe</label>
         <input type="password" placeholder="Mot de passe" id="password-register" name="password-register" class="form-input" required><br>
