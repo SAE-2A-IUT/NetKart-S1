@@ -54,3 +54,13 @@
     width: 2em;
     margin-right: 0.2em;
 }
+
+
+@media (max-width: 920px) {
+    .body{
+        flex-direction: column;
+    }
+    .body>.right,.body>.left{
+        width: 95%;
+    }
+}
