@@ -33,6 +33,7 @@ h4 {
 .description{
     display: flex;
     flex-direction: row;
+    margin-bottom: 10%;
 }
 
 .description div{
@@ -51,4 +52,8 @@ div h4 a{
 .image-author{
     color: var(--grey);
     font-size: 0.8em;
+}
+
+.body-page{
+    min-height: 65vh;
 }
