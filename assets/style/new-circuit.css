@@ -202,3 +202,12 @@ h2{
     border-top: 0.5em solid var(--dark-blue);
     border-bottom: 0 solid transparent;
 }
+
+@media (max-width: 920px) {
+    .body{
+        flex-direction: column;
+    }
+    .body .right,.body .left{
+        width: 95%;
+    }
+}
