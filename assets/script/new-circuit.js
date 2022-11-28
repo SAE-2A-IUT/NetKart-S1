@@ -1,6 +1,7 @@
 /**
  * Déclaration des évènements créés par les interactions clients
- *
+ * @name new_circuit.js
+ * @author Groupe 2 alternant
  */
 
 window.addEventListener("load", (event) => {
