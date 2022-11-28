@@ -13,8 +13,8 @@ $l_image_three = ['alt' => 'Circuit trois'];
 $l_image_four = ['alt' => 'Circuit quatre'];
 $l_images = [$l_image_one,$l_image_two,$l_image_three,$l_image_four];
 
-$l_nb_max_question = 3;
-$l_nb_max_question_images = 3;
+$l_nb_max_question = K_MAX_QUESTIONS;
+$l_nb_max_question_images = K_MAX_IMAGES;
 ?>
 
 <form method="post" class="new_circuit_form body">
@@ -78,7 +78,7 @@ $l_nb_max_question_images = 3;
             <label>Réponse</label>
             <input name="question_answer_<?php echo $l_nb_question+1;?>" type="text" placeholder="Réponse de la question" required>
             <h1>Ressources</h1>
-            <h2>Il y a une limite de 3 images par question.</h2>
+            <h2>Il y a une limite de <?php echo K_MAX_IMAGES;?> images par question. Il faut les envoyer d'une seule traite.</h2>
             <div class="medias">
 
                 <div class="left">
