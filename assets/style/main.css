@@ -57,3 +57,26 @@ div h4 a{
 .body-page{
     min-height: 65vh;
 }
+
+.preview-game{
+    position:absolute;
+    top: 20%;
+    left: 5%;
+}
+
+
+@media screen and (max-width: 900px) {
+    .preview-game{
+        top: 20%;
+        left: 5%;
+        font-size: 90%;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .preview-game{
+        top: 15%;
+        left: 5%;
+        font-size: 70%;
+    }
+}

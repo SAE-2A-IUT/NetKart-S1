@@ -4,7 +4,7 @@ startPage("Accueil",["../assets/style/main"],[]);
 ?>
 
 <div class="body-page">
-    <div style="position:absolute; top: 15%; left: 5%">
+    <div class="preview-game">
         <h1>Répondez aux questions pour arriver premier !</h1>
         <h4>Un serious game pour tester vos connaissances en réseau !</h4>
         <a href="connection.php" class="black-button">C'EST PARTI</a>
