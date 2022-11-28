@@ -38,22 +38,26 @@ function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT){
     </div>
     <div class="header-right">
         <div>
-        <a class="active" href="#home">ACCUEIL</a>
+            <div>
+                <a class="active" href="#home">ACCUEIL</a>
+            </div>
+            <div>
+                <a href="#contact">THÈMES</a>
+            </div>
+            <div>
+                <a href="#about">RÈGLES DU JEU</a>
+            </div>
         </div>
         <div>
-        <a href="#contact">THÈMES</a>
-        </div>
-        <div>
-        <a href="#about">RÈGLES DU JEU</a>
-        </div>
-        <div>
-        <form method="post" action="#" enctype="text/plain" style="display: flex; flex-direction: row">
-            <input type="text" placeholder="Code multijoueur" required class="input-header">
-            <input type="submit" value="OK" class="submit-header">
-        </form>
-        </div>
-        <div>
-        <a href="#connection" class="hbutton">CONNEXION</a>
+            <div>
+            <form method="post" action="#" enctype="text/plain" style="display: flex; flex-direction: row">
+                <input type="text" placeholder="Code multijoueur" required class="input-header">
+                <input type="submit" value="OK" class="submit-header">
+            </form>
+            </div>
+            <div>
+                <a href="#connection" class="hbutton">CONNEXION</a>
+            </div>
         </div>
     </div>
 </div>
