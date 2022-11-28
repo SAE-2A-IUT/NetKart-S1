@@ -59,8 +59,12 @@
 @media (max-width: 920px) {
     .body{
         flex-direction: column;
+        font-size: 1.5em;
     }
     .body>.right,.body>.left{
         width: 95%;
+    }
+    .body h1{
+        font-size: 2em;
     }
 }
