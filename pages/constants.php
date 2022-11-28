@@ -16,6 +16,12 @@ define('K_IMAGE','../assets/image/');
 define('K_STYLE','../assets/style/');
 
 /**
+ * Constante du répertoire des scripts javaScript
+ * @const K_SCRIPT
+ */
+define('K_SCRIPT','../assets/script/');
+
+/**
  * Constante du nombre maximal de questions par circuit
  * @const K_MAX_QUESTIONS
  */
