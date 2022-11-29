@@ -21,7 +21,7 @@ $l_nb_max_question_images = K_MAX_IMAGES;
     <input type="hidden" id="image_limit" value="<?php echo $l_nb_max_question_images ?>">
     <div class="left">
         <label>Nom du circuit</label>
-        <input name="circuit_name" type="text" placeholder="Nom du circuit" required>
+        <input name="circuit_name" type="text" placeholder="Nom du circuit (Limite : 100 charactères)" maxlength="100" required>
         <label>Thèmes du circuit</label>
         <select name="circuit_theme" required>
             <option value="">Choisir un thème</option>
@@ -37,7 +37,7 @@ $l_nb_max_question_images = K_MAX_IMAGES;
 
         <div class="other_theme">
             <label class="hidden">Si autre, précisez</label>
-            <input class="hidden" name="other_theme" type="text" placeholder="Nom du theme" disabled>
+            <input class="hidden" name="other_theme" type="text" placeholder="Nom du theme" maxlength="100" disabled>
         </div>
         <label>Choisir l'image du circuit</label>
         <select name="circuit_image" id="circuit_image" required>
@@ -72,11 +72,11 @@ $l_nb_max_question_images = K_MAX_IMAGES;
         ?>
         <label class="question"><span>Question n°<?php echo $l_nb_question+1;?></span><span class="arrow close"></span></label>
         <div class="hidden question_content">
-            <input name="question_title_<?php echo $l_nb_question+1;?>" type="text" placeholder="Intitulé de la question" required>
+            <input name="question_title_<?php echo $l_nb_question+1;?>" type="text" placeholder="Intitulé de la question" maxlength="200" required>
             <label>Consigne</label>
             <textarea name="question_rules_<?php echo $l_nb_question+1;?>" placeholder="Consigne de la question" aria-atomic="true" required></textarea>
             <label>Réponse</label>
-            <input name="question_answer_<?php echo $l_nb_question+1;?>" type="text" placeholder="Réponse de la question" required>
+            <input name="question_answer_<?php echo $l_nb_question+1;?>" type="text" placeholder="Réponse de la question" maxlength="200" required>
             <h1>Ressources</h1>
             <h2>Il y a une limite de <?php echo K_MAX_IMAGES;?> images par question. Il faut les envoyer d'une seule traite.</h2>
             <div class="medias">
@@ -102,7 +102,7 @@ $l_nb_max_question_images = K_MAX_IMAGES;
                     <?php
                     for ($l_nb_question_link = 0; $l_nb_question_link<$l_nb_max_question_images; ++$l_nb_question_link){?>
                         <input class="question_link" type="text" name="question_link_<?php echo $l_nb_question+1;?>_<?php echo $l_nb_question_link+1;?>"
-                               placeholder="Lien">
+                               placeholder="Lien" maxlength="255">
                         <?php
                     }
                     ?>
