@@ -22,6 +22,9 @@ startPage("Contact",["../assets/style/main", "../assets/style/rules"],[]);
         location.hash = lang;
         location.reload();
     }
+    if (location.hash === "") {
+        change_language("fr")
+    }
 </script>
 <div class="change_lang">
     <h6>English</h6>
