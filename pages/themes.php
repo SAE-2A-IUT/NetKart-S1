@@ -2,8 +2,8 @@
 include './header.php';
 startPage("Themes",["../assets/style/main", "../assets/style/themes"],["../assets/script/theme"]);
 ?>
-
-<div id="theme_choice" class="item_choice">
+<div class="body-page">
+   <div id="theme_choice" class="item_choice">
     <button id="reseau" class="button_theme" onclick="show_theme('reseau')"><b>Reseau</b></button>
     <button id="adressage" class="button_theme" onclick="show_theme('adressage')"><b>Adressage</b></button>
 </div>
@@ -38,7 +38,6 @@ startPage("Themes",["../assets/style/main", "../assets/style/themes"],["../asset
         <p>Adressage: adresse IP, adresse</p>
     </div>
 </div>
-
 
 <?php
 include './footer.php';
