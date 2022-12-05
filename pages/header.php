@@ -50,7 +50,7 @@ function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT){
         <a class="active" href="homepage.php">ACCUEIL</a>
         </div>
         <div>
-        <a href="#theme">THÈMES</a>
+        <a href="themes.php">THÈMES</a>
         </div>
         <div>
         <a href="rules.php">RÈGLES DU JEU</a>
