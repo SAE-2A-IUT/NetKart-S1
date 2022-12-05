@@ -20,7 +20,7 @@ body, html {
 
 .div_form {
     flex-wrap:wrap;
-    width: 100vh;
+    width: 75vw;
     flex-direction: column;
     justify-content: center;
     align-content: center;
