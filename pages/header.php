@@ -1,5 +1,14 @@
 <?php
 require 'constants.php';
+
+
+/**
+ * Construit un header personnalisé en plus de lier des pages styles et javascript personnalisés
+ * @param $A_TITLE
+ * @param $A_CSS_NAME
+ * @param $A_JS_SCRIPT
+ * @return void
+ */
 function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT){
 ?>
 <!DOCTYPE html>
