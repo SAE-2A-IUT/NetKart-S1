@@ -1,30 +1,26 @@
 body, html {
     margin: 10px;
     padding: 0;
-    width: 100%;
-    height: 100%;
-
 }
 
 .all_theme {
     height: 75%;
     display: flex;
     flex-direction: row;
-
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 95vw;
+    margin-bottom: 10%;
 }
-
-
 
 .all_theme > div {
     padding-left: 1%;
     padding-right: 1%;
-    height: 100%;
+    height: 80vh;
     width: fit-content;
     text-align: center;
     display: none;
-
 }
-
 
 .tour{
     height: 70%;
@@ -55,7 +51,6 @@ body, html {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-
 }
 
 .button_theme{
@@ -74,4 +69,8 @@ h1 {
     text-align: center;
     color: #151515;
     font-size: 2em;
+}
+
+@media screen and (max-width: 570px) {
+
 }
