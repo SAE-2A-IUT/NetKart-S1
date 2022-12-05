@@ -1,3 +1,9 @@
+/**
+ * Déclaration des évènements créés par les interactions clients
+ * @name new_circuit.js
+ * @author Groupe 2 alternant
+ */
+
 window.addEventListener("load", (event) => {
     const l_select = document.querySelector('select[name="circuit_theme"]');
     const l_files = document.querySelectorAll('input[type="file"]');
@@ -70,6 +76,13 @@ window.addEventListener("load", (event) => {
         });
     });
 
+    /**
+     * Affiche les miniatures d'images et permet l'affichage de leur aperçu
+     * @param l_base_number
+     * @param l_first_limit
+     * @param l_last_limit
+     * @param l_input_files
+     */
     function display_miniatures(l_base_number,l_first_limit,l_last_limit,l_input_files) {
         for (let i = l_base_number; i < l_first_limit; i+=2 ){
 
