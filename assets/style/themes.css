@@ -26,10 +26,6 @@ body, html {
     height: 70%;
 }
 
-.difficulty {
-    height: 5%;
-}
-
 .progress_bar {
     background-color: #dfe6e9;
     color: white;
