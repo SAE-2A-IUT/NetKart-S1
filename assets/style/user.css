@@ -1,0 +1,58 @@
+.body, .body div, .body form{
+    display: flex;
+}
+
+.body{
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.left, .new_password, .new_password form{
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+.left{
+    width: 50%;
+}
+
+.left *{
+    margin-top: 1em;
+}
+.left h1{
+    margin-top: 0;
+}
+.right{
+    width: 12%;
+}
+.right img{
+    width: 100%;
+    border: solid;
+}
+.new_psw_form, .new_password, .new_psw_form input[type = 'password']{
+    width: 100%;
+}
+
+.new_password{
+    padding: 1em 0 1em 0;
+}
+
+.new_psw_form label{
+    text-transform: uppercase;
+    font-size: 0.8em;
+}
+
+.new_psw_form input[type = 'password']{
+    border : 0.1em solid  var(--light-grey);
+    border-radius: 5px ;
+    line-height: 2;
+}
+.new_psw_form input[type = 'submit']{
+    background-color: var(--dark-blue);
+    color: var(--white);
+    border: none;
+    padding: 0.5em;
+}

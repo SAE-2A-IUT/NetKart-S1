@@ -33,6 +33,7 @@ h4 {
 .description{
     display: flex;
     flex-direction: row;
+    margin-bottom: 10%;
 }
 
 .description div{
@@ -45,4 +46,37 @@ h4 {
 
 div h4 a{
     color: var(--grey)
+}
+
+/* class used to write the name of the author under an image */
+.image-author{
+    color: var(--grey);
+    font-size: 0.8em;
+}
+
+.body-page{
+    min-height: 65vh;
+}
+
+.preview-game{
+    position:absolute;
+    top: 20%;
+    left: 5%;
+}
+
+
+@media screen and (max-width: 900px) {
+    .preview-game{
+        top: 20%;
+        left: 5%;
+        font-size: 90%;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .preview-game{
+        top: 15%;
+        left: 5%;
+        font-size: 70%;
+    }
 }
