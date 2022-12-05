@@ -64,6 +64,11 @@ div h4 a{
     left: 5%;
 }
 
+.description div img{
+    width: 40%;
+    opacity: 1;
+}
+
 
 @media screen and (max-width: 900px) {
     .preview-game{
