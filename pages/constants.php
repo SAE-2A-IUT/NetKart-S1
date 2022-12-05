@@ -1,34 +1,37 @@
 <?php
-/**
- * Constantes utiles pour optimiser le site.
+/** @file /pages/constants.php
+ *
+ * File that defines all the website constants
+ *
+ * @author SAE S3 NetKart
  */
 
 /**
- * Constante du répertoire des images
+ * Images directory link constant
  * @const K_IMAGE
  */
 define('K_IMAGE','../assets/image/');
 
 /**
- * Constante du répertoire des scripts styles
+ * Styles directory link constant
  * @const K_STYLE
  */
 define('K_STYLE','../assets/style/');
 
 /**
- * Constante du répertoire des scripts javaScript
+ * Scripts javaScript directory link constant
  * @const K_SCRIPT
  */
 define('K_SCRIPT','../assets/script/');
 
 /**
- * Constante du nombre maximal de questions par circuit
+ * Maximal number questions constant
  * @const K_MAX_QUESTIONS
  */
 define('K_MAX_QUESTIONS', 3);
 
 /**
- * Constante du nombre maximal d'images par question
+ * Maximal number images per questions constant
  * @const K_MAX_IMAGES
  */
 define('K_MAX_IMAGES', 3);
