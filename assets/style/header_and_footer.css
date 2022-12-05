@@ -15,12 +15,16 @@
     padding: 0.5em;
 }
 
+.header-left a img{
+    width: 61%;
+}
+
 /* Style the header links */
 .header a {
     font-family: var(--main-font);
     color: var(--grey);
     text-align: center;
-    padding: 0em 0.5em 0em 0.5em;
+    padding: 0 0.5em 0 0.5em;
     line-height: 3em;
     text-decoration: none;
     font-size: 0.7em;
@@ -107,6 +111,10 @@
 
 .footer-one{
     flex: 2 1 auto;
+}
+
+.footer-one img{
+    width: 16%;
 }
 
 .footer-two{

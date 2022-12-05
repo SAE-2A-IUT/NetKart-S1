@@ -1,14 +1,5 @@
 <?php
 require 'constants.php';
-
-
-/**
- * Construit un header personnalisé en plus de lier des pages styles et javascript personnalisés
- * @param $A_TITLE
- * @param $A_CSS_NAME
- * @param $A_JS_SCRIPT
- * @return void
- */
 function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT){
 ?>
 <!DOCTYPE html>
@@ -43,29 +34,35 @@ function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT){
 
 <div class="header">
     <div class="header-left">
-        <a href="homepage.php"><img src="<?php echo K_IMAGE?>icon_black_small.png" alt="logo" width="90em"></a>
+        <a href="#default"><img src="<?php echo K_IMAGE?>icon_black_small.png" alt="logo"></a>
     </div>
     <div class="header-right">
         <div>
-        <a class="active" href="homepage.php">ACCUEIL</a>
+            <div>
+                <a class="active" href="#home">ACCUEIL</a>
+            </div>
+            <div>
+                <a href="#contact">THÈMES</a>
+            </div>
+            <div>
+                <a href="#about">RÈGLES DU JEU</a>
+            </div>
         </div>
         <div>
-        <a href="themes.php">THÈMES</a>
-        </div>
-        <div>
-        <a href="rules.php">RÈGLES DU JEU</a>
-        </div>
-        <div>
-        <form method="post" action="#" enctype="text/plain" style="display: flex; flex-direction: row">
-            <input type="text" placeholder="Code multijoueur" required class="input-header">
-            <input type="submit" value="OK" class="submit-header">
-        </form>
-        </div>
-        <div>
-        <a href="connection.php" class="hbutton">CONNEXION</a>
+            <div>
+            <form method="post" action="#" enctype="text/plain" style="display: flex; flex-direction: row">
+                <input type="text" placeholder="Code multijoueur" required class="input-header">
+                <input type="submit" value="OK" class="submit-header">
+            </form>
+            </div>
+            <div>
+                <a href="#connection" class="hbutton">CONNEXION</a>
+            </div>
         </div>
     </div>
 </div>
 
+
+<!-- TODO : add a button go back on top of the page-->
 <?php
 }?>
