@@ -6,8 +6,7 @@ function endPage(){
         <div class="footer-two">
             PAGES<br/>
             <a href="homepage.php">Accueil</a>
-            <br/><a href="#themes">Thèmes</a>
-            <br/><a href="rules.php">Règles du jeu</a>
+            <br/><a href="themes.php">Thèmes</a>
         </div>
         <div class="footer-three">
             DOCUMENTS<br/>
