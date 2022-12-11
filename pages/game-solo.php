@@ -19,12 +19,12 @@ startPage("Jeu-solo",["../assets/style/main", "../assets/style/game-solo"],[]);
 
             </div>
             <div>
-                <p id="terminal">Ici il y aura le terminal mais bon pour l'instant on en a pas donc voila quoien a pas donc voila quoi...en a pas donc voila quoi...en a pas donc voila quoi...en a pas donc voila quoi..as donc voila quoi...en a pas donc voila quoi...en a pas donc voila quoi...eas donc voila quoi...en a pas donc voila quoi...en a pas donc voila quoi...eas donc voila quoi...en a pas donc voila quoi...en a pas donc voila quoi...eas donc voila quoi...en a pas donc voila quoi...en a pas donc voila quoi...eas donc voila quoi...en a pas donc voila quoi...en a pas donc voila quoi...e.en a pas donc voila quoi...en a pas donc voila quoi.......</>
+                <p id="terminal">Ici il y aura le terminal mais bon pour l'instant on en a pas donc voila quoien a pas donc voila quoi...en a pas donc voila quoi...en a pas donc voila quoi...en a pas donc voila quoi..as donc voila quoi...en a pas donc voila quoi...en a pas donc voila quoi...eas donc voila quoi...en a pas donc voila quoi...en a pas donc voila quoi...eas donc voila quoi...en a pas donc voila quoi...en a pas donc voila quoi...eas donc voila quoi...en a pas donc voila quoi...en a pas donc voila quoi...eas donc voila quoi...en a pas donc voila quoi...en a pas donc voila quoi...e.en a pas donc voila quoi...en a pas donc voila quoi.......</p>
             </div>
         </div>
 
         <div id="right-game">
-            <img id="map" src="../assets/image/circuit1.jpg">
+            <img id="map" alt="circuit" src="../assets/image/circuit1.jpg">
         </div>
     </div>
 </div>

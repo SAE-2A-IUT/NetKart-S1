@@ -19,7 +19,7 @@ startPage("Utilisateur",[K_STYLE."main",K_STYLE."user"],[]);
                 </div>
             </div>
             <div class="right">
-                <img src="<?php echo K_IMAGE; ?>default_avatar.jpg">
+                <img alt="avatar" src="<?php echo K_IMAGE; ?>default_avatar.jpg">
             </div>
         </div>
     </div>
