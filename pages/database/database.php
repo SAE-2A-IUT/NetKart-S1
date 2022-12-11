@@ -2,7 +2,7 @@
 
 /** @file /pages/database/database.php
  *
- * File to manage database
+ * @details File to manage database
  *
  * @author SAE S3 NetKart
  */
@@ -50,11 +50,12 @@ class database{
      *
      * @param $A_QUERY (String) the sql query that will be run
      */
-    function query($A_QUERY){
+    function f_query($A_QUERY){
         if (!$this->l_conn -> query($A_QUERY)) {
             echo("Error description: " . $this->l_conn-> error);
             exit();
         }
+        return $this->l_conn-> query($A_QUERY)->fetch_all(MYSQLI_ASSOC);
     }
 
     /*
@@ -63,11 +64,13 @@ class database{
      * @param $A_TABLE (String) the table to insert data
      * @param $A_KEYS (String) column where data will be added
      * @param $A_VALUES (String) data to insert
+     *
+     * @return rows returned by query
      */
-    function insert($A_TABLE, $A_KEYS, $A_VALUES){
-        $l_sql = "INSERT INTO ". $A_TABLE . " ". implode(",",$A_KEYS) . " VALUES (" . implode(",",$A_VALUES) . ")";
-        if(! $this->l_conn->query($l_sql)){
-            echo("Error description: " . $this->l_conn-> error);
+    function f_insert_strings($A_TABLE, $A_KEYS, $A_VALUES){
+        $l_sql = "INSERT INTO ". $A_TABLE . " (". implode(",",$A_KEYS) . ") VALUES ('" . implode("','",$A_VALUES) . "')";
+        if(! $this->l_conn->query($l_sql)) {
+            echo("Error description: " . $this->l_conn->error);
             exit();
         }
     }
@@ -78,7 +81,7 @@ class database{
      * @param $A_TABLE (String) the table of the rows to delete
      * @param $A_WHERE (String) [** Optional **] the rows that will fit this condition will be deleted
      */
-    function delete($A_TABLE, $A_WHERE=""){
+    function f_delete($A_TABLE, $A_WHERE=""){
         $l_sql = "DELETE ". $A_TABLE . ($A_WHERE!="" ? " WHERE " . $A_WHERE : "");
         if(! $this->l_conn->query($l_sql)) {
             echo("Error description: " . $this->l_conn->error);
@@ -92,6 +95,38 @@ class database{
     function close(){
         $this->l_conn->close();
     }
-}
 
+    function get_password($A_USERNAME){
+        $l_query = "SELECT mot_de_passe FROM Joueur WHERE pseudo='".$A_USERNAME."';";
+
+        $l_result = $this->l_conn -> query($l_query);
+
+        if (!$l_result) {
+            echo("Error description: " . $this->l_conn-> error);
+            exit();
+        }
+        return $l_result->fetch_all(MYSQLI_ASSOC)[0]["mot_de_passe"];
+    }
+
+    /*
+     * @brief this function will check if a given element from a given column exists or not
+     *
+     * @param $A_COLUMN (String) the column of the element
+     * @param $A_ELEMENT (String) the value of the column to search
+     *
+     * @return (Boolean) : True if element already in table, False other way
+     */
+    function check_if_element_already_used($A_COLUMN, $A_ELEMENT){
+        $l_query = "SELECT * FROM Joueur WHERE ".$A_COLUMN."='".$A_ELEMENT."';";
+
+        $l_result = $this->l_conn -> query($l_query);
+
+        if (!$l_result) {
+            echo("Error description: " . $this->l_conn-> error);
+            exit();
+        }
+        return $l_result->num_rows > 0;
+    }
+}
+//TODO : voir pour de la composition
 ?>

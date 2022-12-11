@@ -10,7 +10,7 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
         </div>
         <br>
 
-        <form id="connection" class="connection-form">
+        <form id="connection" class="connection-form" action="connection-post.php" method="post">
             <label for="username-connection">Pseudo</label>
             <input type="text" placeholder="Nom d'utilisateur" maxlength="50" id="username-connection" name="username-connection" class="form-input" required><br>
 
@@ -20,7 +20,7 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
             <input type="submit" value="CONNEXION" class="submit-connection black-button">
         </form>
 
-        <form id="register" class="connection-form" style="display:none">
+        <form id="register" class="connection-form" style="display:none" action="connection-post.php" method="post">
             <div id="firstname-lastname">
                 <div>
                     <label for="firstname">Prénom</label>
