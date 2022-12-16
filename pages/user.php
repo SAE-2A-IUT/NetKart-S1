@@ -9,7 +9,7 @@ startPage("Utilisateur",[K_STYLE."main",K_STYLE."user"],[]);
                 <div class="new_password">
                     <span>Changer son mot de passe :</span>
                     <!-- ajouter un message d'alerte en php -->
-                    <form class="new_psw_form" method="post" action="#">
+                    <form class="new_psw_form" method="post" action="user_post.php">
                         <label>Nouveau mot de passe</label>
                         <input name="new_password" type="password">
                         <label>Confirmation</label>

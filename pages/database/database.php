@@ -65,14 +65,15 @@ class database{
      * @param $A_KEYS (String) column where data will be added
      * @param $A_VALUES (String) data to insert
      *
-     * @return rows returned by query
+     * @return (Boolean) : True if insert successful, False if an error occured
      */
     function f_insert_strings($A_TABLE, $A_KEYS, $A_VALUES){
         $l_sql = "INSERT INTO ". $A_TABLE . " (". implode(",",$A_KEYS) . ") VALUES ('" . implode("','",$A_VALUES) . "')";
         if(! $this->l_conn->query($l_sql)) {
             echo("Error description: " . $this->l_conn->error);
-            exit();
+            return False;
         }
+        return True;
     }
 
     /*
@@ -80,13 +81,16 @@ class database{
      *
      * @param $A_TABLE (String) the table of the rows to delete
      * @param $A_WHERE (String) [** Optional **] the rows that will fit this condition will be deleted
+     *
+     * @return (Boolean) : True if delete successful, False if an error occured
      */
     function f_delete($A_TABLE, $A_WHERE=""){
         $l_sql = "DELETE ". $A_TABLE . ($A_WHERE!="" ? " WHERE " . $A_WHERE : "");
         if(! $this->l_conn->query($l_sql)) {
             echo("Error description: " . $this->l_conn->error);
-            exit();
+            return False;
         }
+        return True;
     }
 
     /*
@@ -96,6 +100,13 @@ class database{
         $this->l_conn->close();
     }
 
+    /*
+     * @brief this function will return the password of a given user
+     *
+     * @param $A_USERNAME (String) the username to get the password from
+     *
+     * @return (String) : Password of given user
+     */
     function get_password($A_USERNAME){
         $l_query = "SELECT mot_de_passe FROM Joueur WHERE pseudo='".$A_USERNAME."';";
 
@@ -109,15 +120,33 @@ class database{
     }
 
     /*
+     * @brief this function will update the password from a given user by replacing it with a given new password
+     *
+     * @param $A_USERNAME (String) user that password will be updated
+     * @param $A_NEW_PASSWORD (String) new password to update in database
+     *
+     * @return (Boolean) : True if update successful, False if an error occured
+     */
+    function update_password($A_USERNAME, $A_NEW_PASSWORD){
+        $l_sql = "UPDATE Joueur SET mot_de_passe = ". $A_NEW_PASSWORD ." WHERE pseudo = " . $A_USERNAME ;
+        if(! $this->l_conn->query($l_sql)) {
+            echo("Error description: " . $this->l_conn->error);
+            return False;
+        }
+        return True;
+    }
+
+    /*
      * @brief this function will check if a given element from a given column exists or not
      *
+     * @param $A_TABLE (String) the table where to search for the element
      * @param $A_COLUMN (String) the column of the element
      * @param $A_ELEMENT (String) the value of the column to search
      *
      * @return (Boolean) : True if element already in table, False other way
      */
-    function check_if_element_already_used($A_COLUMN, $A_ELEMENT){
-        $l_query = "SELECT * FROM Joueur WHERE ".$A_COLUMN."='".$A_ELEMENT."';";
+    function check_if_element_already_used($A_TABLE, $A_COLUMN, $A_ELEMENT){
+        $l_query = "SELECT * FROM ".$A_TABLE." WHERE ".$A_COLUMN."='".$A_ELEMENT."';";
 
         $l_result = $this->l_conn -> query($l_query);
 
@@ -129,4 +158,4 @@ class database{
     }
 }
 //TODO : voir pour de la composition
-?>
+
