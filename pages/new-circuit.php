@@ -28,7 +28,8 @@ $l_nb_max_question_images = K_MAX_IMAGES;
             <?php
             $l_nb_option = 1;
             foreach ($l_themes as $l_theme){?>
-                <option value="<?php echo $l_nb_option; ?>"><?php echo $l_theme['name']; ?></option>
+                <label for="theme>
+                <option value="<?php echo $l_nb_option; ?>"><?php echo $l_theme['name']; ?>
                 <?php
                 ++$l_nb_option;
             } ?>
@@ -45,7 +46,7 @@ $l_nb_max_question_images = K_MAX_IMAGES;
             <?php
             $l_nb_option = 1;
             foreach ($l_images as $l_image){?>
-                <option value="<?php echo $l_nb_option; ?>"><?php echo $l_image['alt']; ?></option>
+                <option value="<?php echo $l_nb_option; ?>"><?php echo $l_image['alt']; ?>
                 <?php
                 ++$l_nb_option;
             } ?>

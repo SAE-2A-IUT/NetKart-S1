@@ -14,5 +14,4 @@ function openConnection(selectedButton) {
         document.getElementById("button-register").style.color = "var(--black)";
         document.getElementById("button-connection").style.color = "var(--grey)";
     }
-
 }
