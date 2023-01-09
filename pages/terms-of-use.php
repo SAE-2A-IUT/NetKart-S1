@@ -6,7 +6,7 @@ startPage("Conditions d'utilisation",["../assets/style/main"],[]);
     <div style="margin: 5%">
         <div style="text-align: center">
             <h1>Conditions d'utilisation de NetKart</h1>
-            <img class="thumb_img" src="../assets/image/terms-of-use.webp" alt="terms of use illustration">
+            <img class="thumb_img image" src="../assets/image/terms-of-use.webp" alt="terms of use illustration">
             <br/>
             <i class="image-author">Image by vectorjuice on Freepik</i>
         </div>
