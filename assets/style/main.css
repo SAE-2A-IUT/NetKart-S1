@@ -54,6 +54,10 @@ div h4 a{
     font-size: 0.8em;
 }
 
+.image{
+    width: 25%;
+}
+
 .body-page{
     min-height: 65vh;
 }
