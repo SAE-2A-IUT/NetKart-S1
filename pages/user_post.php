@@ -1,6 +1,6 @@
 <?php
 /*
- * @file /pages/connection-post.php
+ * @file /pages/user_post.php
  *
  * @details File to manage data from connection/register form. Save data into database if registering / check if password correct if connecting.
  *
@@ -21,8 +21,6 @@ if(isset($_POST["new_password"]) and isset($_POST["new_password_conf"])){
     $l_db = new database();
 
     $l_db->connection();
-
-    //TODO : check if password is the same as the one in db => use php_hash
 
     // Check if password and its confirmation are the same
     if (strcmp($_POST["new_password"], $_POST["new_password_conf"]) == 0) {
