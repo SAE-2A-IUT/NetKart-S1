@@ -1,6 +1,6 @@
 <?php
 require './header.php';
-startPage("Accueil",["../assets/style/main"],[]);
+startPage("Accueil",["../assets/style/main"],[], false);
 ?>
 
 <div class="body-page">
