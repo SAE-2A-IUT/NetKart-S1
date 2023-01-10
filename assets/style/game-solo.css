@@ -1,10 +1,10 @@
-#game{
+#game {
     display: flex;
     justify-content: center;
     margin-bottom: 10%;
 }
 
-#terminal{
+#terminal {
     background-color: var(--black);
     color: var(--white);
     max-height: 73%;
@@ -14,66 +14,66 @@
 
 }
 
-#map{
+#map {
     background-color: var(--light-grey);
     max-height: 80%;
     max-width: 70%;
-
 }
 
-#left-game{
+#left-game {
     margin-left: 4%;
     max-width: 46%;
 }
 
-#right-game{
+#right-game {
     margin-left: 4%;
     max-width: 46%;
     display: flex;
     flex-direction: column-reverse;
 }
 
-#question-statement{
+#question-statement {
     width: 93%;
 }
 
-.question-image, .question-image-origin{
+.question-image, .question-image-origin {
     width: 30%;
 }
 
-.question-image-origin:hover +.question-image, .question-image:hover{
+.question-image-origin:hover + .question-image, .question-image:hover {
     display: block;
 }
 
-.question-image{
+.question-image {
     display: none;
     position: fixed;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     width: 50%;
     box-shadow: var(--dark-blue) 0 0 1.5em;
 }
 
 @media screen and (max-width: 900px) {
-    #game{
+    #game {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
 
-    #right-game{
+    #right-game {
         margin-left: 0;
         margin-top: 5%;
         display: flex;
         align-items: center;
     }
 
-    #left-game{
+    #left-game {
         max-width: 90%;
         margin-left: 0;
     }
-    .question-image:hover{
+
+    .question-image:hover {
         scale: 2;
     }
 }
