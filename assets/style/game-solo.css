@@ -7,10 +7,44 @@
 #terminal {
     background-color: var(--black);
     color: var(--white);
-    max-height: 73%;
-    width: 86%;
+    height: 100%;
+    max-height: 42vh;
+    max-width: 83vh;
     padding: 1em;
     margin: 0;
+}
+
+#terminal-input{
+    color: white;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    left: 7em;
+}
+
+#terminal-input-text{
+    color: white;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    position: absolute;
+    bottom: -3.9em;
+    margin: 0;
+}
+
+#terminal-output{
+    position: absolute;
+    overflow-y: scroll;
+    max-height: 19em;
+    top: 30em;
+    width: 39.99em;
+}
+
+#terminal-output::-webkit-scrollbar {
+    background-color: black;
 }
 
 #left-game, #right-game {
@@ -25,7 +59,7 @@
     height: 77vh;
     width: 26vw;
     background-size: cover;
-    margin-top: 2vh;
+    margin-top: 19vh;
 }
 
 #question-statement {

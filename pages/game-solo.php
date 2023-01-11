@@ -17,16 +17,16 @@ startPage("Jeu-solo",["../assets/style/main", "../assets/style/game-solo"],["../
                 <p id="question-statement">Consigne de la question c'est pas la carte igne de la questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la questio</p>
 
             </div>
-            <div>
-                <label for="terminal-input"></label>
-                <input id="terminal-input">
+            <div id="terminal">
                 <div id="terminal-output"></div>
+                <label for="terminal-input"></label>
+                <span id="terminal-input-text">NetKart:~$<input id="terminal-input"></span>
             </div>
             <script>
             </script>
         </div>
 
-        <div id="right-game" style="background-image: url('../assets/image/circuit1.jpg')";>
+        <div id="right-game" style="background-image: url('../assets/image/circuit1.jpg');">
             <img src="../assets/image/gentil.webp" alt="player-kart" id="enemy_kart">
             <img src="../assets/image/mechant.webp" alt="enemy-kart" id="player_kart">
         </div>
@@ -37,8 +37,6 @@ startPage("Jeu-solo",["../assets/style/main", "../assets/style/game-solo"],["../
     let player_coordinates = [[246.6, 47.2], [133.6, 62.2], [101.73, 124.05]];
     player_coordinates = populateArray(player_coordinates);
 </script>
-
-<button onclick="moveImage('player_kart', player_coordinates,'ally')">Hello</button>
 
 
 <?php
