@@ -90,8 +90,8 @@ $l_nb_max_question_images = K_MAX_IMAGES;
                     <?php
                     for ($l_nb_question_image = 0; $l_nb_question_image<$l_nb_max_question_images; ++$l_nb_question_image){?>
                         <div>
-                            <img class="question_img original_img" alt="question_image_<?php echo $l_nb_question+1;?>_<?php echo $l_nb_question_image+1;?>" src="">
-                            <img class="question_img hover_img" alt="question_image_<?php echo $l_nb_question+1;?>_<?php echo $l_nb_question_image+1;?>" src="">
+                            <img class="question_img original_img" alt="question_image_<?php echo $l_nb_question+1;?>_<?php echo $l_nb_question_image+1;?>" src="no_src">
+                            <img class="question_img hover_img" alt="question_image_<?php echo $l_nb_question+1;?>_<?php echo $l_nb_question_image+1;?>" src="no_src">
                             <span class="question_img remove hidden">x</span>
                             <input type="hidden" value="<?php echo $l_nb_question_image;?>">
                         </div>

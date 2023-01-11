@@ -163,7 +163,7 @@ h2{
     border-radius: 10%;
 }
 
-.medias img.question_img[src=''], .question_img.remove.hidden{
+.medias img.question_img[src='no_src'], .question_img.remove.hidden{
     display: none;
 }
 
