@@ -120,11 +120,15 @@ class database
 
         $l_result = $this->l_conn->query($l_query);
 
+        $l_fetch = $l_result->fetch_all(MYSQLI_ASSOC);
         if (!$l_result) {
             echo("Error description: " . $this->l_conn->error);
             exit();
         }
-        return $l_result->fetch_all(MYSQLI_ASSOC)[0]["mot_de_passe"];
+        if (sizeof($l_fetch)==0){
+            return '';
+        }
+        return $l_fetch[0]["mot_de_passe"];
     }
 
     /*

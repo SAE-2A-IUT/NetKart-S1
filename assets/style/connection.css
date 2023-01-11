@@ -54,3 +54,10 @@ form{
     width: 45vw;
 }
 
+.error{
+    color: var(--red);
+}
+.success{
+    color: #008B47;
+    font-weight: bold;
+}
