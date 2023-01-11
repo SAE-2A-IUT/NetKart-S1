@@ -10,7 +10,7 @@ require 'constants.php';
  * @param $A_CONNECTED
  * @return void
  */
-function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT, $A_CONNECTED){
+function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT, $A_CONNECTED=false){
 ?>
 
 <!-- Header connected -->
