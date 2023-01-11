@@ -33,6 +33,7 @@ h4 {
 .description{
     display: flex;
     flex-direction: row;
+    margin-bottom: 10%;
 }
 
 .description div{
@@ -51,4 +52,40 @@ div h4 a{
 .image-author{
     color: var(--grey);
     font-size: 0.8em;
+}
+
+.image{
+    width: 25%;
+}
+
+.body-page{
+    min-height: 65vh;
+}
+
+.preview-game{
+    position:absolute;
+    top: 20%;
+    left: 5%;
+}
+
+.description div img{
+    width: 40%;
+    opacity: 1;
+}
+
+
+@media screen and (max-width: 900px) {
+    .preview-game{
+        top: 20%;
+        left: 5%;
+        font-size: 90%;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .preview-game{
+        top: 15%;
+        left: 5%;
+        font-size: 70%;
+    }
 }

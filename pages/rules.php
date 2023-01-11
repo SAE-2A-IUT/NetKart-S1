@@ -1,6 +1,6 @@
 <?php
 include '../pages/header.php';
-startPage("Règles du jeu",["../assets/style/main", "../assets/style/rules"],[]);
+startPage("Contact",["../assets/style/main", "../assets/style/rules"],[]);
 ?>
 <script>
     function change_language_check_box(checkbox)
@@ -21,6 +21,9 @@ startPage("Règles du jeu",["../assets/style/main", "../assets/style/rules"],[])
     function change_language(lang) {
         location.hash = lang;
         location.reload();
+    }
+    if (location.hash === "") {
+        change_language("fr")
     }
 </script>
 <div class="change_lang">

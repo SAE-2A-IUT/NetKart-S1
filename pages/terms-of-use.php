@@ -2,10 +2,11 @@
 include '../pages/header.php';
 startPage("Conditions d'utilisation",["../assets/style/main"],[]);
 ?>
+<div class="body-page">
     <div style="margin: 5%">
         <div style="text-align: center">
             <h1>Conditions d'utilisation de NetKart</h1>
-            <img class="thumb_img" src="../assets/image/terms-of-use.webp" alt="terms of use illustration" width="20%">
+            <img class="thumb_img image" src="../assets/image/terms-of-use.webp" alt="terms of use illustration">
             <br/>
             <i class="image-author">Image by vectorjuice on Freepik</i>
         </div>
@@ -113,7 +114,7 @@ startPage("Conditions d'utilisation",["../assets/style/main"],[]);
             En cas de litige non résolu à l’amiable entre l’Utilisateur et l’Éditeur, les tribunaux de Aix-en-Provence sont compétents pour régler le contentieux.
         </p>
     </div>
-
+</div>
 
 <?php
 include '../pages/footer.php';

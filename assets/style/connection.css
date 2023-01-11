@@ -6,14 +6,16 @@
 }
 
 #button-box{
-    background-color: var(--light-grey);
     padding: 0.2em 1.5em 0.2em 1.5em;
+    display: flex;
+    align-items: center;
 }
 
 .connection-button{
     border: none;
     background-color: var(--light-grey);
     font-size: 1.3em;
+    padding: 0.5em 0.5em 0.5em 0.5em;
 }
 
 .connection-button :hover{
@@ -49,6 +51,6 @@ form{
 }
 
 #username-connection, #password-connection{
-    width: 32em;
+    width: 45vw;
 }
 
