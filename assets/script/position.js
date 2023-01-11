@@ -30,8 +30,9 @@ function generateCoordinates(startX, startY, endX, endY) {
 function populateArray(coordinates) {
     let arrayCoordinates = [];
     for (let i = 0; i < coordinates.length - 1; i++) {
-        arrayCoordinates.push(generateCoordinates(player_coordinates[i][0], player_coordinates[i][1], player_coordinates[i + 1][0], player_coordinates[i + 1][1]))
+        arrayCoordinates.push(generateCoordinates(player_coordinates[i][0], player_coordinates[i][1], player_coordinates[i + 1][0], player_coordinates[i + 1][1]));
     }
+    console.log(arrayCoordinates);
     return arrayCoordinates;
 }
 
@@ -55,7 +56,6 @@ function processCommand(input) {
             return ["Bonjour!", "limegreen"];
 
         case "help":
-            console.log("Liste des commandes disponibles : hello");
             return ["Liste des commandes disponibles : hello", "yellow"];
 
         case "avancerJ":
@@ -64,10 +64,13 @@ function processCommand(input) {
 
         case "avancerE":
             moveImage('enemy_kart', player_coordinates, 'enemy');
-            return ["L'adversaire avance :(", "limegreen"];
+            return ["L'adversaire avance :(", "red"];
 
         case "clear" :
             return  ["clear","null"];
+
+        case "déçou" :
+            return  ["DESSOUS, DESSUS, DES SOUS","blue"];
 
         default:
             return ["Commande non reconnue","red"];
@@ -84,7 +87,7 @@ window.onload = () => {
         if (event.key === "Enter") {
             sendCommand();
             scroll(terminal);
-        } else console.log('oupsi');
+        }
     });
 }
 

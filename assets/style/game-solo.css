@@ -22,7 +22,13 @@
     position: absolute;
     bottom: 0;
     margin: 0;
-    left: 7em;
+    left: 6em;
+    width: 15em;
+    font-size: initial;
+}
+
+#terminal-input:focus-visible {
+    outline: 0;
 }
 
 #terminal-input-text{

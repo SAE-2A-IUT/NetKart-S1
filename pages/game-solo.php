@@ -20,7 +20,7 @@ startPage("Jeu-solo",["../assets/style/main", "../assets/style/game-solo"],["../
             <div id="terminal">
                 <div id="terminal-output"></div>
                 <label for="terminal-input"></label>
-                <span id="terminal-input-text">NetKart:~$<input id="terminal-input"></span>
+                <span id="terminal-input-text">NetKart:~$<input id="terminal-input" placeholder="tapez votre commande ici"></span>
             </div>
             <script>
             </script>
@@ -34,8 +34,11 @@ startPage("Jeu-solo",["../assets/style/main", "../assets/style/game-solo"],["../
 </div>
 
 <script>
-    let player_coordinates = [[246.6, 47.2], [133.6, 62.2], [101.73, 124.05]];
+    let player_coordinates = [[246.6, 47.2], [133.6, 62.2], [101.73, 124.05], [143.049, 91.431], [255.049, 190.431], [139.049, 228.431], [74.209, 311.051], [165.209, 405.051], [286.209, 180.051], [246.6, 47.2]];
+    let enemy_coordinates = player_coordinates;
     player_coordinates = populateArray(player_coordinates);
+    console.log(player_coordinates);
+    enemy_coordinates = populateArray(enemy_coordinates);
 </script>
 
 
