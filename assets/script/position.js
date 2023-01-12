@@ -44,6 +44,7 @@ function sendCommand() {
         output.innerHTML += '<span style="color: cornflowerblue">NetKart:~$</span>  ' + input.value + "<br>";
         output.innerHTML += "<span style=\"color: " + response[1] + "\">" + response[0] + "</span>" + "<br>";
         input.value = "";
+        scroll(output);
     }else if ( response[0] === "clear"){
         output.innerHTML = '';
         input.value = "";
@@ -78,7 +79,7 @@ function processCommand(input) {
 }
 
 function scroll(item) {
-    item.scrollTop = 1000;
+    item.scrollTop = item.scrollHeight - item.clientHeight;
 }
 
 window.onload = () => {
@@ -86,7 +87,6 @@ window.onload = () => {
     terminal.addEventListener("keydown", function (event) {
         if (event.key === "Enter") {
             sendCommand();
-            scroll(terminal);
         }
     });
 }
