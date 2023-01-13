@@ -6,11 +6,23 @@ startPage("Utilisateur",[K_STYLE."main",K_STYLE."user"],[]);
     <div class="body">
         <div class="left">
             <h1>User1207</h1>
+            <?php
+                if (isset($_GET['success']))
+                {
+                    if ($_GET['success'] == "TwT"){
+                        ?><h2 class="error">Une erreur est survenue et la mise a jour du mot de passe n'a pas fonctionné</h2><?php
+                    }
+                    else {
+                        ?><h2 class="success">Mot de passe modifié</h2><?php
+                    }
+
+                }
+            ?>
             <div class="new_password">
                 <span>Changer son mot de passe :</span>
-                <form class="new_psw_form" method="post" action="#">
+                <form class="new_psw_form" method="post" action="user_post_2.php">
                     <label>Nouveau mot de passe</label>
-                    <input name="new_password" type="password">
+                    <input name="new_password" type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!*µ$£¤=+°@_~#]).{8,72}$" >
                     <label>Confirmation</label>
                     <input name="new_password_conf" type="password">
                     <input name="new_psw_form" type="submit" value="Changer">

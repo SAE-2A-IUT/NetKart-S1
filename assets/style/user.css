@@ -85,6 +85,16 @@
     flex-direction: row;
 }
 
+.error {
+    color: var(--red);
+    margin-bottom: 1%;
+}
+
+.success {
+    color: #008B47;
+    margin-bottom: 1%;
+}
+
 .new_psw_form, .new_password, .new_psw_form input[type = 'password']{
     width: 100%;
 }
