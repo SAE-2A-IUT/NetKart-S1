@@ -34,7 +34,7 @@ startPage("Jeu-solo",["../assets/style/main", "../assets/style/game-solo"],["../
 </div>
 
 <script>
-    let player_coordinates = [[246.6, 47.2], [133.6, 62.2], [101.73, 124.05], [143.049, 91.431], [255.049, 190.431], [139.049, 228.431], [74.209, 311.051], [165.209, 405.051], [286.209, 180.051], [246.6, 47.2]];
+    let player_coordinates = [[58, 10], [28, 13], [57, 41], [17, 70], [38.8, 94], [65, 57], [58, 10]];
     let enemy_coordinates = player_coordinates;
     player_coordinates = populateArray(player_coordinates);
     console.log(player_coordinates);

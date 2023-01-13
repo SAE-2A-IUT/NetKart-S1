@@ -4,22 +4,22 @@ function moveImage(imageId, coordinates, status) {
     }
 
     let image = document.getElementById(imageId);
-    let delay = status === "enemy" ? 1000 : 100;
+    let delay = status === "enemy" ? 500 : 100;
     coordinates[0].forEach(([x, y], i) => {
         setTimeout(() => {
-            image.style.marginLeft = x + "px";
-            image.style.marginTop = y + "px";
-        }, i * delay);
+            image.style.marginLeft = x + "%";
+            image.style.marginTop = y + "%";
+        }, delay);
     });
     coordinates.shift();
 }
 
 function generateCoordinates(startX, startY, endX, endY) {
     const coordinates = [];
-    const xStep = (endX - startX) / 100;
-    const yStep = (endY - startY) / 100;
+    const xStep = (endX - startX) / 200;
+    const yStep = (endY - startY) / 200;
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 200; i++) {
         const x = startX + i * xStep;
         const y = startY + i * yStep;
         coordinates.push([x, y]);

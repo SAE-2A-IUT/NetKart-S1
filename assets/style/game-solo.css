@@ -14,7 +14,7 @@
     margin: 0;
 }
 
-#terminal-input{
+#terminal-input {
     color: white;
     border: none;
     background-color: transparent;
@@ -31,17 +31,17 @@
     outline: 0;
 }
 
-#terminal-input-text{
+#terminal-input-text {
     color: white;
     border: none;
     background-color: transparent;
     padding: 0;
     position: relative;
-    bottom: 0em;
+    bottom: 0;
     margin: 0;
 }
 
-#terminal-output{
+#terminal-output {
     position: relative;
     overflow-y: scroll;
     max-height: 98.5%;
@@ -90,7 +90,7 @@
     z-index: 2;
 }
 
-#player_kart, #enemy_kart{
+#player_kart, #enemy_kart {
     position: absolute;
     width: 4.5em;
 }
@@ -102,8 +102,46 @@
         align-items: center;
     }
 
-    .question-image:hover {
-        transform: scale(2);
+    .question-image-origin:hover + .question-image, .question-image:hover {
+        transform: scale(2.5);
+    }
+
+    .question-image, .question-image-origin {
+        width: 40%;
+    }
+
+    #left-game {
+        max-width: 100%;
+        width: 100%;
+        text-align: center;
+    }
+
+    #right-game {
+        width: 58%;
+        margin-top: 6%;
+    }
+
+    #terminal {
+        min-height: 20em;
+        max-height: 20em;
+        max-width: 47em;
+    }
+
+    #terminal-output {
+        max-height: 20em;
+        top: -0.4em;
+        width: 102.2%;
+        text-align: initial;
+    }
+
+    #terminal-input-text {
+        float: left;
+    }
+
+    #circuit-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
 
