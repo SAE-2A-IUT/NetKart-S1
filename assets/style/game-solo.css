@@ -1,7 +1,7 @@
 #game {
     display: flex;
     justify-content: center;
-    margin-bottom: 10%;
+    margin-bottom: 5%;
 }
 
 #terminal {
@@ -36,25 +36,21 @@
     border: none;
     background-color: transparent;
     padding: 0;
-    position: absolute;
-    bottom: -3.9em;
+    position: relative;
+    bottom: 0em;
     margin: 0;
 }
 
 #terminal-output{
-    position: absolute;
+    position: relative;
     overflow-y: scroll;
-    max-height: 19em;
-    top: 30em;
-    width: 39.99em;
+    max-height: 98.5%;
+    top: -0.2em;
+    width: 102.4%;
 }
 
 #terminal-output::-webkit-scrollbar {
     background-color: black;
-}
-
-#left-game, #right-game {
-    margin: 0 4%;
 }
 
 #left-game {
@@ -62,10 +58,13 @@
 }
 
 #right-game {
-    height: 77vh;
-    width: 26vw;
-    background-size: cover;
-    margin-top: 19vh;
+    background-size: 100% auto;
+    background-repeat-y: no-repeat;
+    width: 22%;
+    margin-top: 15.2%;
+    min-height: 65vh;
+    position: relative;
+    margin-left: 3%;
 }
 
 #question-statement {
@@ -91,20 +90,16 @@
     z-index: 2;
 }
 
+#player_kart, #enemy_kart{
+    position: absolute;
+    width: 4.5em;
+}
+
+
 @media screen and (max-width: 900px) {
     #game {
         flex-direction: column;
         align-items: center;
-    }
-
-    #right-game {
-        margin-left: 0;
-        margin-top: 5%;
-        align-items: center;
-    }
-
-    #left-game {
-        max-width: 90%;
     }
 
     .question-image:hover {
@@ -112,7 +107,3 @@
     }
 }
 
-#player_kart, #enemy_kart{
-    position: absolute;
-    width: 4.5em;
-}
