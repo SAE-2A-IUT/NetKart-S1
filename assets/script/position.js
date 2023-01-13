@@ -30,7 +30,7 @@ function generateCoordinates(startX, startY, endX, endY) {
 function populateArray(coordinates) {
     let arrayCoordinates = [];
     for (let i = 0; i < coordinates.length - 1; i++) {
-        arrayCoordinates.push(generateCoordinates(player_coordinates[i][0], player_coordinates[i][1], player_coordinates[i + 1][0], player_coordinates[i + 1][1]));
+        arrayCoordinates.push(generateCoordinates(coordinates[i][0], coordinates[i][1], coordinates[i + 1][0], coordinates[i + 1][1]));
     }
     console.log(arrayCoordinates);
     return arrayCoordinates;
@@ -59,12 +59,12 @@ function processCommand(input) {
         case "help":
             return ["Liste des commandes disponibles : hello", "yellow"];
 
-        case "avancerJ":
-            moveImage('player_kart', player_coordinates, 'ally')
+        case "a" :
+            moveImage('player_kart', player_coordinates_, 'ally')
             return ["Le joueur avance :)", "limegreen"];
 
         case "avancerE":
-            moveImage('enemy_kart', player_coordinates, 'enemy');
+            moveImage('enemy_kart', player_coordinates_, 'enemy');
             return ["L'adversaire avance :(", "red"];
 
         case "clear" :
