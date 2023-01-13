@@ -112,7 +112,7 @@ class database
      *
      * @param $A_USERNAME (String) the username to get the password from
      *
-     * @return (String) : Password of given user
+     * @return (String) : Password of given user or empty string if an error occured
      */
     function get_password($A_USERNAME)
     {
@@ -122,7 +122,7 @@ class database
 
         if (!$l_result) {
             echo("Error description: " . $this->l_conn->error);
-            exit();
+            return "";
         }
         return $l_result->fetch_all(MYSQLI_ASSOC)[0]["mot_de_passe"];
     }
@@ -271,7 +271,17 @@ class database
         return self::f_delete("Circuit","id_circuit=".$A_CIRCUIT_ID);
     }
 
+    function insert_circuit(){
 
+    }
+
+    function get_all_themes(){
+        return self::f_query("SELECT id_theme, nom_theme FROM Theme");
+    }
+
+    function get_all_images_circuit(){
+        return self::f_query("SELECT id_circuitimage,image FROM Circuit_Image");
+    }
 }
 //TODO : voir pour de la composition
 
