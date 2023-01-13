@@ -4,12 +4,12 @@ function moveImage(imageId, coordinates, status) {
     }
 
     let image = document.getElementById(imageId);
-    let delay = status === "enemy" ? 500 : 100;
+    let delay = status === "enemy" ? 10 : 10;
     coordinates[0].forEach(([x, y], i) => {
         setTimeout(() => {
             image.style.marginLeft = x + "%";
             image.style.marginTop = y + "%";
-        }, delay);
+        }, i * delay);
     });
     coordinates.shift();
 }
@@ -64,7 +64,7 @@ function processCommand(input) {
             return ["Le joueur avance :)", "limegreen"];
 
         case "avancerE":
-            moveImage('enemy_kart', player_coordinates_, 'enemy');
+            moveImage('enemy_kart', enemy_coordinates, 'enemy');
             return ["L'adversaire avance :(", "red"];
 
         case "clear" :
