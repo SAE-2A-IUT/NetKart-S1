@@ -1,6 +1,6 @@
 <?php
 require './header.php';
-startPage("Jeu-solo",["../assets/style/main", "../assets/style/game-solo"],[]);
+startPage("Jeu-solo",["../assets/style/main", "../assets/style/game-solo"],["../assets/script/position"]);
 ?>
 <div class="body-page">
     <div id="game">
@@ -14,22 +14,31 @@ startPage("Jeu-solo",["../assets/style/main", "../assets/style/game-solo"],[]);
                 <img alt="image2" class="question-image" src="https://i.ytimg.com/vi/NBMuB-iVQ2U/maxresdefault.jpg">
                 <img alt="image3-origin" class="question-image-origin" src="https://i.ytimg.com/vi/G8yMRnM2Ymw/maxresdefault.jpg">
                 <img alt="image3" class="question-image" src="https://i.ytimg.com/vi/G8yMRnM2Ymw/maxresdefault.jpg">
-                <!-- image si il y en a une quoi -->
                 <p id="question-statement">Consigne de la question c'est pas la carte igne de la questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la questio</p>
 
             </div>
             <div>
-                <p id="terminal">Ici il y aura le terminal mais bon pour l'instant on en a pas donc voila quoien a pas donc voila quoi...en a pas donc voila quoi...en a pas donc voila quoi...en a pas donc voila quoi..as donc voila quoi...en a pas donc voila quoi...en a pas donc voila quoi...eas donc voila quoi...en a pas donc voila quoi...en a pas donc voila quoi...eas donc voila quoi...en a pas donc voila quoi...en a pas donc voila quoi...eas donc voila quoi...en a pas donc voila quoi...en a pas donc voila quoi...eas donc voila quoi...en a pas donc voila quoi...en a pas donc voila quoi...e.en a pas donc voila quoi...en a pas donc voila quoi.......</p>
+                <label for="terminal-input"></label>
+                <input id="terminal-input">
+                <div id="terminal-output"></div>
             </div>
+            <script>
+            </script>
         </div>
 
-        <div id="right-game">
-            <img id="map" alt="circuit" src="../assets/image/circuit1.jpg">
+        <div id="right-game" style="background-image: url('../assets/image/circuit1.jpg')";>
+            <img src="../assets/image/gentil.webp" alt="player-kart" id="enemy_kart">
+            <img src="../assets/image/mechant.webp" alt="enemy-kart" id="player_kart">
         </div>
     </div>
 </div>
 
+<script>
+    let player_coordinates = [[246.6, 47.2], [133.6, 62.2], [101.73, 124.05]];
+    player_coordinates = populateArray(player_coordinates);
+</script>
 
+<button onclick="moveImage('player_kart', player_coordinates,'ally')">Hello</button>
 
 
 <?php

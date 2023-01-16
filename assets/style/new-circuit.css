@@ -83,7 +83,7 @@
     width: 100%;
 
 }
-.left .original_img:hover +.hover_img{
+.left .original_img:hover +.hover_img, .left .hover_img:hover{
     display: block;
 }
 
@@ -93,11 +93,9 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
-    height: 60%;
+    height: 70%;
     box-shadow: var(--dark-blue) 0 0 1.5em;
 }
-
-
 
 .images{
     justify-content: space-between;
@@ -165,7 +163,7 @@ h2{
     border-radius: 10%;
 }
 
-.medias img.question_img[src=''], .question_img.remove.hidden{
+.medias img.question_img[src='no_src'], .question_img.remove.hidden{
     display: none;
 }
 

@@ -24,7 +24,7 @@ if(isset($_POST["username-connection"]) and isset($_POST["password-connection"])
 
     $l_db->close();
 
-    //TODO : check if password is the same as the one in db => use php_hash
+    //TODO : check if password is the same as the one in db => use php_hash/password_check, password_hash ?
 }
 /*
  * Insert data if new person
@@ -37,8 +37,8 @@ elseif (isset($_POST["firstname"]) and isset($_POST["lastname"])
     $l_lastname = $_POST["lastname"];
     $l_email = $_POST["mail-register"];
     $l_username_register = $_POST["username-register"];
-    //TODO : check if password and its confirmation are the same
 
+    // Check if password and confirmation are the same
     if (strcmp($_POST["password-register"], $_POST["password-verify"]) == 0) {
         $l_password_register = $_POST["password-register"];
     } else {
@@ -46,6 +46,8 @@ elseif (isset($_POST["firstname"]) and isset($_POST["lastname"])
         //TODO : ajouter un renvoit vers la page pour afficher l'erreur
         exit();
     }
+
+    // TODO : vérifier la complexité du password (regex) => le faire directement dans le HTML si possible
 
     $l_db = new database();
 
@@ -63,6 +65,8 @@ elseif (isset($_POST["firstname"]) and isset($_POST["lastname"])
         //TODO : ajouter un renvoit vers la page pour afficher l'erreur
     } // If pseudo and email not already used, insert data
     else {
+        // TODO : hash password with password_hash ?
+
         $l_is_insert_ok = $l_db->f_insert_strings("Joueur", ["nom", "prenom", "pseudo", "email", "mot_de_passe"],
             [$l_lastname, $l_firstname, $l_username_register, $l_email, $l_password_register]);
 

@@ -92,8 +92,8 @@ window.addEventListener("load", (event) => {
             l_remove_images[i/2].style.display = 'block';
         }
         for (let i = l_first_limit; i < l_last_limit; i+=2 ){
-            l_medias_img[i].src = '';
-            l_medias_img[i+1].src = '';
+            l_medias_img[i].src = 'no_src';
+            l_medias_img[i+1].src = 'no_src';
             l_remove_images[i/2].style.display = 'none';
         }
     }
