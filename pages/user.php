@@ -31,8 +31,10 @@ $l_score= 999;
             </div>
         </div>
         <div class="right">
-            <img src="<?php echo K_IMAGE; ?>default_avatar.jpg">
-            <p>Score : <?php echo $l_score ;?></p>
+            <div class="top">
+                <img src="<?php echo K_IMAGE; ?>default_avatar.jpg">
+                <div class="score">Score<span><?php echo $l_score ;?></span></div>
+            </div>
             <button id="delete_account" class="delete">Supprimer compte</button>
             <div id="horizontal" class="horizontal">
                 <form>

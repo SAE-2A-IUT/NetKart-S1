@@ -31,9 +31,14 @@
     flex-direction: column;
 }
 .right img{
-    width: 30%;
+    width: 100%;
     border: solid;
-    margin-bottom: 3%;
+}
+.right .top{
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .right .delete{
@@ -118,4 +123,17 @@
     color: var(--white);
     border: none;
     padding: 0.5em;
+}
+
+.score{
+    color: var(--black);
+    padding: 1em 0;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    flex-direction: column;
+}
+
+.score span{
+    font-weight: bold;
 }
