@@ -90,9 +90,15 @@
     z-index: 2;
 }
 
-#player_kart, #enemy_kart {
+#player_kart, #enemy_kart{
     position: absolute;
     width: 3.5em;
+    z-index: 1;
+}
+
+#flag{
+    width: 2.5em;
+    z-index: 0;
 }
 
 

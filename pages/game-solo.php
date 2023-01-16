@@ -27,8 +27,9 @@ startPage("Jeu-solo",["../assets/style/main", "../assets/style/game-solo"],["../
         </div>
 
         <div id="right-game" style="background-image: url('../assets/image/circuit2.jpg');">
-            <img src="../assets/image/gentil.webp" alt="player-kart" id="enemy_kart">
-            <img src="../assets/image/mechant.webp" alt="enemy-kart" id="player_kart">
+            <img src="../assets/image/gentil.webp" alt="player-kart" id="player_kart">
+            <img src="../assets/image/mechant.webp" alt="enemy-kart" id="enemy_kart">
+            <img src="../assets/image/flag-start.webp" alt="flag" id="flag">
         </div>
     </div>
 </div>
@@ -41,7 +42,7 @@ startPage("Jeu-solo",["../assets/style/main", "../assets/style/game-solo"],["../
 
 
     let player_coordinates_ = populateArray(circuit_2_coordinates);
-    let enemy_coordinates = populateArray(circuit_4_coordinates)
+    let enemy_coordinates = populateArray(circuit_2_coordinates)
 
 </script>
 

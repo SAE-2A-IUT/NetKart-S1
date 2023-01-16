@@ -2,16 +2,34 @@ function moveImage(imageId, coordinates, status) {
     if (coordinates.length === 0) {
         return;
     }
-
     let image = document.getElementById(imageId);
-    let delay = status === "enemy" ? 10 : 10;
+    let delay = status === "enemy" ? 100 : 10;
+    let count = 0
     coordinates[0].forEach(([x, y], i) => {
         setTimeout(() => {
             image.style.marginLeft = x + "%";
             image.style.marginTop = y + "%";
+            count++;
+            if (count === coordinates[0].length) {
+                coordinates.shift();
+                if (status === "enemy") {
+                    setTimeout(() => {
+                        moveImage(imageId, coordinates, status);
+                    }, delay);
+                }
+            }
         }, i * delay);
     });
-    coordinates.shift();
+}
+
+function setFlag(imageId, coordinates) {
+    if (coordinates.length === 0) {
+        return;
+    }
+    let image = document.getElementById(imageId);
+    image.style.marginLeft = coordinates[0][0] + "%";
+    image.style.marginTop = coordinates[0][1] + "%";
+    console.log(coordinates[0][0] + ' ' + coordinates[0][1]);
 }
 
 function generateCoordinates(startX, startY, endX, endY) {
@@ -32,7 +50,6 @@ function populateArray(coordinates) {
     for (let i = 0; i < coordinates.length - 1; i++) {
         arrayCoordinates.push(generateCoordinates(coordinates[i][0], coordinates[i][1], coordinates[i + 1][0], coordinates[i + 1][1]));
     }
-    console.log(arrayCoordinates);
     return arrayCoordinates;
 }
 
@@ -45,7 +62,7 @@ function sendCommand() {
         output.innerHTML += "<span style=\"color: " + response[1] + "\">" + response[0] + "</span>" + "<br>";
         input.value = "";
         scroll(output);
-    }else if ( response[0] === "clear"){
+    } else if (response[0] === "clear") {
         output.innerHTML = '';
         input.value = "";
     }
@@ -68,13 +85,13 @@ function processCommand(input) {
             return ["L'adversaire avance :(", "red"];
 
         case "clear" :
-            return  ["clear","null"];
+            return ["clear", "null"];
 
         case "déçou" :
-            return  ["DESSOUS, DESSUS, DES SOUS","blue"];
+            return ["DESSOUS, DESSUS, DES SOUS", "blue"];
 
         default:
-            return ["Commande non reconnue","red"];
+            return ["Commande non reconnue", "red"];
     }
 }
 
@@ -89,5 +106,7 @@ window.onload = () => {
             sendCommand();
         }
     });
+    moveImage('enemy_kart', enemy_coordinates, 'enemy');
+    setFlag("flag", circuit_2_coordinates)
 }
 
