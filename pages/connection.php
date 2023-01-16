@@ -73,7 +73,7 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
             </div><br>
 
             <label for="mail-register">Adresse E-Mail</label>
-            <input type="text" placeholder="E-Mail" id="mail-register" maxlength="150" name="mail-register" class="form-input" required><br>
+            <input type="email" placeholder="E-Mail" id="mail-register" maxlength="150" name="mail-register" class="form-input" required><br>
 
             <label for="username-register">Pseudo</label>
             <input type="text" placeholder="Pseudo" id="username-register" maxlength="50" name="username-register" class="form-input" required><br>
