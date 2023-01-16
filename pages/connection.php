@@ -29,7 +29,7 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
                 ?>L'enregistrement du compte a rencontré une erreur, veuillez réessayer.
             <?php }
             if ($l_code_err == 6){
-                ?>Merci de verifié votre email avant de vous connecter.
+                ?>Merci de verifier votre email avant de vous connecter.
             <?php }
             if ($l_code_err == 7){
                 ?>Ce lien de confirmation n'est plus valide.
@@ -42,10 +42,10 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
             <div class="success">
                 <?php
                 if ($l_code_success == 1){
-                ?>Le compte est bel et bien créé, veillez verifié votre boite mail.
+                ?>Le compte est bel et bien créé, veillez verifier votre boite mail.
                 <?php }
                 if ($l_code_success == 2){
-                ?>email verifié, vous pouvez désormé vous connecter.
+                ?>email verifié, vous pouvez désormais vous connecter.
                 <?php }?>
 
             </div>
