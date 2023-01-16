@@ -29,6 +29,13 @@ startPage("A propos",[K_STYLE."main",K_STYLE."about"],[]);
                 <br>
                 <a href="https://github.com/SAE-2A-IUT/NetKart-S1">https://github.com/SAE-2A-IUT/NetKart-S1</a>
             </span>
+            <h2>Credit</h2>
+            <h3 class="credit-title"><a href="https://fr.freepik.com/">Image sur Freepik</a></h3>
+            <span class="text">
+                <p>jcomp</p>
+                <p>pch.vector</p>
+                <p>vectorjuice</p>
+            </span>
 
         </div>
     </div>

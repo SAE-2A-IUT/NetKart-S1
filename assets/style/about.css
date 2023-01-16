@@ -59,12 +59,16 @@ h3{
 
 /* lien */
 
-.text a{
+.text a, h3 a{
     text-decoration: none;
     color: var(--dark-grey);
 }
 
-.text a:hover{
+.text a:hover, h3 a:hover{
     font-size: 1.1em;
     color: var(--black);
+}
+
+.credit-title{
+    text-align: center;
 }
