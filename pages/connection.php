@@ -27,13 +27,27 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
             <?php }
             if ($l_code_err == 5){
                 ?>L'enregistrement du compte a rencontré une erreur, veuillez réessayer.
+            <?php }
+            if ($l_code_err == 6){
+                ?>Merci de verifié votre email avant de vous connecter.
+            <?php }
+            if ($l_code_err == 7){
+                ?>Ce lien de confirmation n'est plus valide.
             <?php }?>
 
         </div>
         <?php }?>
-        <?php if (isset($_GET['success'])){?>
+        <?php if (isset($_GET['success'])){
+            $l_code_success = $_GET['success'];?>
             <div class="success">
-                Le compte est bel et bien créé, vous pouvez maintenant vous connecter.
+                <?php
+                if ($l_code_success == 1){
+                ?>Le compte est bel et bien créé, veillez verifié votre boite mail.
+                <?php }
+                if ($l_code_success == 2){
+                ?>email verifié, vous pouvez désormé vous connecter.
+                <?php }?>
+
             </div>
         <?php }?>
         <form id="connection" class="connection-form" action="connection-post.php" method="post">

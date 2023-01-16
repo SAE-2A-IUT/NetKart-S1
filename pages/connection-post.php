@@ -22,6 +22,12 @@ if(isset($_POST["username-connection"]) and isset($_POST["password-connection"])
     $l_db->connection();
 
     $l_password = $l_db->get_password($l_username_connection);
+
+    //TODO call database to get if verif
+    $l_is_verif = false;
+    if (!$l_is_verif) {
+        header('Location: connection.php?error=6');
+    }
     if($l_password == '' || !password_verify($l_password_connection,$l_password)){
         header('Location: connection.php?error=1');
     }
@@ -71,6 +77,12 @@ elseif (isset($_POST["firstname"]) and isset($_POST["lastname"])
         if(!$l_is_insert_ok){
             header('Location: connection.php?error=5');
         }else{
+            $l_digits = 10;
+            $l_code_verification = rand(pow(10, $l_digits-1), pow(10, $l_digits)-1);
+            $l_page = "https://netkart.alwaysdata.net/pages/mail-confirm.php?user=" . $l_username_register . "&code=" . $l_code_verification;
+            echo $l_page;
+            $l_message = "Bonjour " . $l_username_register . ", merci de cliquer sur ce lien pour verifié votre email: " . $l_page;
+            mail($l_email,'Confirmation de mail pour Netkart', $l_message);
             header('Location: connection.php?success=1');
         }
     }
