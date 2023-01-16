@@ -90,15 +90,69 @@
     z-index: 2;
 }
 
-#player_kart, #enemy_kart{
+#modal {
+    position: fixed;
+    left: 32.5%;
+    top: 30%;
+    height: 40%;
+    width: 35%;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 2px;
+}
+
+#modal-close {
+    left: 2%;
+    font-size: 3em;
+    position: relative;
+}
+
+#modal-body {
+    text-align: center;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+#modal-return, #modal-restart{
+    color: var(--white);
+    border: none;
+    font-size: 1.2em;
+    height: 2.3em;
+    margin: 0.6em;
+}
+
+#modal-return{
+    background-color: var(--dark-blue);
+}
+
+#modal-restart{
+    background-color: var(--red);
+}
+
+#modal-footer{
+    text-align: center;
+    position: relative;
+    top: 2.5em;
+}
+
+#modal-title {
+    font-size: 1.35em;
+}
+
+#player_kart, #enemy_kart {
     position: absolute;
     width: 3.5em;
     z-index: 1;
 }
 
-#flag{
+#flag {
     width: 2.5em;
     z-index: 0;
+}
+
+#victory, #lose{
+    width: 2em;
+    vertical-align: middle;
+    margin-left: 1em;
 }
 
 

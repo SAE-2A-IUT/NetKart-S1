@@ -32,6 +32,18 @@ startPage("Jeu-solo",["../assets/style/main", "../assets/style/game-solo"],["../
             <img src="../assets/image/flag-start.webp" alt="flag" id="flag">
         </div>
     </div>
+    <div id="modal" style="display: none;">
+        <div id="modal-content">
+            <div id="modal-header">
+                <span id="modal-close">&times;</span>
+            </div>
+            <div id="modal-body">null</div>
+            <div id="modal-footer">
+                <button id="modal-return" type="button">Retour</button>
+                <button id="modal-restart" type="button">Recommencer</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php
