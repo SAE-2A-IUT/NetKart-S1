@@ -1,6 +1,7 @@
 <?php
 require 'header.php';
 startPage("Utilisateur",[K_STYLE."main",K_STYLE."user"],[]);
+$l_score= 999;
 ?>
 
     <div class="body">
@@ -31,6 +32,7 @@ startPage("Utilisateur",[K_STYLE."main",K_STYLE."user"],[]);
         </div>
         <div class="right">
             <img src="<?php echo K_IMAGE; ?>default_avatar.jpg">
+            <p>Score : <?php echo $l_score ;?></p>
             <button id="delete_account" class="delete">Supprimer compte</button>
             <div id="horizontal" class="horizontal">
                 <form>
