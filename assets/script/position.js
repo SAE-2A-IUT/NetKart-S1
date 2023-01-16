@@ -1,15 +1,14 @@
 function moveImage(imageId, coordinates, status) {
     if (coordinates.length === 0) {
-        return; // sortir de la fonction si la liste est vide
+        return;
     }
 
-    // Récupérer l'élément image
     let image = document.getElementById(imageId);
-    let delay = status === "enemy" ? 1000 : 100;
+    let delay = status === "enemy" ? 10 : 10;
     coordinates[0].forEach(([x, y], i) => {
         setTimeout(() => {
-            image.style.marginLeft = x + "px";
-            image.style.marginTop = y + "px";
+            image.style.marginLeft = x + "%";
+            image.style.marginTop = y + "%";
         }, i * delay);
     });
     coordinates.shift();
@@ -17,10 +16,10 @@ function moveImage(imageId, coordinates, status) {
 
 function generateCoordinates(startX, startY, endX, endY) {
     const coordinates = [];
-    const xStep = (endX - startX) / 100;
-    const yStep = (endY - startY) / 100;
+    const xStep = (endX - startX) / 200;
+    const yStep = (endY - startY) / 200;
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 200; i++) {
         const x = startX + i * xStep;
         const y = startY + i * yStep;
         coordinates.push([x, y]);
@@ -31,51 +30,64 @@ function generateCoordinates(startX, startY, endX, endY) {
 function populateArray(coordinates) {
     let arrayCoordinates = [];
     for (let i = 0; i < coordinates.length - 1; i++) {
-        arrayCoordinates.push(generateCoordinates(player_coordinates[i][0], player_coordinates[i][1], player_coordinates[i + 1][0], player_coordinates[i + 1][1]))
+        arrayCoordinates.push(generateCoordinates(coordinates[i][0], coordinates[i][1], coordinates[i + 1][0], coordinates[i + 1][1]));
     }
+    console.log(arrayCoordinates);
     return arrayCoordinates;
 }
 
 function sendCommand() {
-    console.log("POULOULOU");
-    // Récupère la valeur saisie dans le terminal
-    var input = document.getElementById("terminal-input").value;
-    // Vérifie si une commande a été saisie
-    if (input) {
-        // Traitement de la commande saisie
-        var response = processCommand(input);
-        // Affiche la réponse dans le terminal
-        document.getElementById("terminal-output").innerHTML += response + "<br>";
-        // Efface la valeur saisie dans le terminal
-        document.getElementById("terminal-input").value = "";
+    const input = document.getElementById("terminal-input");
+    const output = document.getElementById("terminal-output");
+    const response = processCommand(input.value);
+    if (input.value && response[0] !== 'clear') {
+        output.innerHTML += '<span style="color: cornflowerblue">NetKart:~$</span>  ' + input.value + "<br>";
+        output.innerHTML += "<span style=\"color: " + response[1] + "\">" + response[0] + "</span>" + "<br>";
+        input.value = "";
+        scroll(output);
+    }else if ( response[0] === "clear"){
+        output.innerHTML = '';
+        input.value = "";
     }
 }
 
 function processCommand(input) {
-    // Traitement de la commande saisie
     switch (input) {
-        case (input === "hello") :
-            return "Bonjour!";
+        case "hello":
+            return ["Bonjour!", "limegreen"];
 
-        case (input === "help") :
-            return "Liste des commandes disponibles : hello";
+        case "help":
+            return ["Liste des commandes disponibles : hello", "yellow"];
 
-        case (input === "avancerJ") :
-            return moveImage('player_kart', player_coordinates, 'ally');
+        case "a" :
+            moveImage('player_kart', player_coordinates_, 'ally')
+            return ["Le joueur avance :)", "limegreen"];
 
-        case (input === "avancerE") :
-            return moveImage('enemy_kart', player_coordinates, 'enemy');
+        case "avancerE":
+            moveImage('enemy_kart', enemy_coordinates, 'enemy');
+            return ["L'adversaire avance :(", "red"];
 
-        default :
-            return 'Commande non reconnu'
+        case "clear" :
+            return  ["clear","null"];
+
+        case "déçou" :
+            return  ["DESSOUS, DESSUS, DES SOUS","blue"];
+
+        default:
+            return ["Commande non reconnue","red"];
     }
-
 }
 
-window.onload = (event) => {
-    document.getElementById("terminal-input").addEventListener("keydown", function (event) {
-        if (event.key === "Enter")
-            sendCommand()
-        else console.log('oupsi');
+function scroll(item) {
+    item.scrollTop = item.scrollHeight - item.clientHeight;
+}
+
+window.onload = () => {
+    let terminal = document.getElementById("terminal-input");
+    terminal.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            sendCommand();
+        }
     });
 }
+

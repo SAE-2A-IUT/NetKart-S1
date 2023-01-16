@@ -1,20 +1,56 @@
 #game {
     display: flex;
     justify-content: center;
-    margin-bottom: 10%;
+    margin-bottom: 5%;
 }
 
 #terminal {
     background-color: var(--black);
     color: var(--white);
-    max-height: 73%;
-    width: 86%;
-    padding: 1em;
+    height: 100%;
+    max-height: 42vh;
+    max-width: 83vh;
+    padding: 0.5em 1em 1.5em 0.5em;
     margin: 0;
 }
 
-#left-game, #right-game {
-    margin: 0 4%;
+#terminal-input {
+    color: white;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    left: 6em;
+    width: 15em;
+    font-size: initial;
+}
+
+#terminal-input:focus-visible {
+    outline: 0;
+}
+
+#terminal-input-text {
+    color: white;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    position: relative;
+    bottom: 0;
+    margin: 0;
+}
+
+#terminal-output {
+    position: relative;
+    overflow-y: scroll;
+    max-height: 98.5%;
+    top: -0.2em;
+    width: 102.4%;
+}
+
+#terminal-output::-webkit-scrollbar {
+    background-color: black;
 }
 
 #left-game {
@@ -22,10 +58,13 @@
 }
 
 #right-game {
-    height: 77vh;
-    width: 26vw;
-    background-size: cover;
-    margin-top: 2vh;
+    background-size: 100% auto;
+    background-repeat-y: no-repeat;
+    width: 22%;
+    margin-top: 15.2%;
+    min-height: 65vh;
+    position: relative;
+    margin-left: 3%;
 }
 
 #question-statement {
@@ -51,28 +90,58 @@
     z-index: 2;
 }
 
+#player_kart, #enemy_kart {
+    position: absolute;
+    width: 3.5em;
+}
+
+
 @media screen and (max-width: 900px) {
     #game {
         flex-direction: column;
         align-items: center;
     }
 
-    #right-game {
-        margin-left: 0;
-        margin-top: 5%;
-        align-items: center;
+    .question-image-origin:hover + .question-image, .question-image:hover {
+        transform: scale(2.5);
+    }
+
+    .question-image, .question-image-origin {
+        width: 40%;
     }
 
     #left-game {
-        max-width: 90%;
+        max-width: 100%;
+        width: 100%;
+        text-align: center;
     }
 
-    .question-image:hover {
-        transform: scale(2);
+    #right-game {
+        width: 58%;
+        margin-top: 6%;
+    }
+
+    #terminal {
+        min-height: 20em;
+        max-height: 20em;
+        max-width: 47em;
+    }
+
+    #terminal-output {
+        max-height: 20em;
+        top: -0.4em;
+        width: 102.2%;
+        text-align: initial;
+    }
+
+    #terminal-input-text {
+        float: left;
+    }
+
+    #circuit-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
 
-#player_kart, #enemy_kart{
-    position: absolute;
-    width: 4.5em;
-}
