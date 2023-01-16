@@ -5,7 +5,7 @@ let circuit_4_coordinates = [[63, 2], [30, 52], [8, 101], [36, 107],[59, 80], [7
 let coordinate = circuit_1_coordinates;
 let player_coordinates_ = populateArray(coordinate);
 let enemy_coordinates = populateArray(coordinate)
-let victory = false;
+let game = false;
 
 window.onload = () => {
     let terminal = document.getElementById("terminal-input");
@@ -43,7 +43,7 @@ function displayModal() {
 }
 
 function moveImage(imageId, coordinates, status) {
-    if (!victory){
+    if (!game){
         if (status === "ally")
             console.log(coordinates.length)
         if (coordinates.length === 0) {
@@ -81,7 +81,10 @@ function correctAnswer(imageId, coordinates, status) {
 
 function setVictory(element, status) {
     let modal = document.getElementById(element);
-    modal.innerHTML = status === "enemy" ? "Défaite ... <img src=\"../assets/image/lose.webp\" alt=\"lose\" id=\"lose\">" : "Victoire ! <img src=\"../assets/image/victory.webp\" alt=\"victory\" id=\"victory\">";
+    game = true;
+    console.log("enemy" === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>");
+    console.log("ally" === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>");
+    modal.innerHTML = status === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>";
     displayModal();
 }
 
@@ -147,12 +150,12 @@ function processCommand(input) {
             return ["Le joueur avance :)", "limegreen"];
 
         case "v" :
-            setVictory('modal-body', player_coordinates_, "ally")
+            setVictory('modal-body', "ally")
             return ["Le joueur gagne :)", "limegreen"];
 
         case "d" :
-            setVictory('modal-body', player_coordinates_, "enemy")
-            return ["Le joueur gagne :)", "limegreen"];
+            setVictory('modal-body', "enemy")
+            return ["Le joueur perd :(", "limegreen"];
 
         case "clear" :
             return ["clear", "null"];

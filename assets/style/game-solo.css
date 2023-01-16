@@ -1,7 +1,7 @@
 #game {
     display: flex;
     justify-content: center;
-    margin-bottom: 5%;
+    margin-bottom: 10%;
 }
 
 #terminal {
@@ -69,6 +69,7 @@
 
 #question-statement {
     width: 93%;
+    line-height: 128%;
 }
 
 .question-image, .question-image-origin {
@@ -101,14 +102,14 @@
 }
 
 #modal-close {
-    left: 2%;
+    left: 89%;
     font-size: 3em;
     position: relative;
 }
 
 #modal-body {
     text-align: center;
-    font-size: 2.5em;
+    font-size: 260%;
     font-weight: bold;
 }
 
@@ -131,7 +132,6 @@
 #modal-footer{
     text-align: center;
     position: relative;
-    top: 2.5em;
 }
 
 #modal-title {
@@ -150,7 +150,7 @@
 }
 
 #victory, #lose{
-    width: 2em;
+    width: 14%;
     vertical-align: middle;
     margin-left: 1em;
 }
