@@ -35,6 +35,7 @@ startPage("A propos",[K_STYLE."main",K_STYLE."about"],[]);
                 <p>jcomp</p>
                 <p>pch.vector</p>
                 <p>vectorjuice</p>
+                <p>iconixar</p>
             </span>
 
         </div>
