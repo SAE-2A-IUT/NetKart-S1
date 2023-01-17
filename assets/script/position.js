@@ -45,7 +45,6 @@ function displayModal() {
 function moveImage(imageId, coordinates, status) {
     if (!game) {
         if (status === "ally")
-            console.log(coordinates.length)
         if (coordinates.length === 0) {
             return;
         }
@@ -82,8 +81,6 @@ function correctAnswer(imageId, coordinates, status) {
 function setVictory(element, status) {
     let modal = document.getElementById(element);
     game = true;
-    console.log("enemy" === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>");
-    console.log("ally" === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>");
     modal.innerHTML = status === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>";
     displayModal();
 }
@@ -137,6 +134,10 @@ function scroll(item) {
     item.scrollTop = item.scrollHeight - item.clientHeight;
 }
 
+function changeResponse(new_response){
+    response = new_response;
+}
+
 function processCommand(input) {
     switch (input) {
         case "hello":
@@ -146,6 +147,7 @@ function processCommand(input) {
             return ["Liste des commandes disponibles : hello, a, clear", "yellow"];
 
         case "a" :
+            console.log(document.getElementById("question-verify").innerHTML);
             correctAnswer('player_kart', player_coordinates_, 'ally')
             return ["Le joueur avance :)", "limegreen"];
 
@@ -154,6 +156,13 @@ function processCommand(input) {
             return ["Le joueur gagne :)", "limegreen"];
 
         case "d" :
+            setVictory('modal-body', "enemy")
+            return ["Le joueur perd :(", "limegreen"];
+
+        case 'test' :
+            return ["Le joueur perd :(", "limegreen"];
+
+        case document.getElementById("question-verify").innerHTML :
             setVictory('modal-body', "enemy")
             return ["Le joueur perd :(", "limegreen"];
 

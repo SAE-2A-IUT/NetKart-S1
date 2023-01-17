@@ -233,6 +233,42 @@ class database
     }
 
     /*
+     * @brief this function return each question of a circuit
+     *
+     * @param $A_CIRCUIT_ID (String) : id of the circuit
+     *
+     * @return():
+     */
+    function get_question_circuit($A_CIRCUIT_ID)
+    {
+        $l_sql = "SELECT id_question, consigne, question, reponse  FROM Question WHERE id_circuit=" . $A_CIRCUIT_ID;
+        $l_result = $this->l_conn->query($l_sql);
+        if (!$l_result) {
+            echo("Error description: " . $this->l_conn->error);
+            return "";
+        }
+        return $l_result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    /*
+     * @brief this function return each path of image for a circuit
+     *
+     * @param $A_CIRCUIT_ID (String) : id of the circuit
+     *
+     * @return (String) : path of each image
+     */
+    function get_image_question($A_QUESTION_ID)
+    {
+        $l_sql = "SELECT image_question FROM Question_Image WHERE id_question=" . $A_QUESTION_ID;
+        $l_result = $this->l_conn->query($l_sql);
+        if (!$l_result) {
+            echo("Error description: " . $this->l_conn->error);
+            return "";
+        }
+        return $l_result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    /*
      * @brief this function delete a Circuit with a given ID and all the questions of this circuit
      *
      * @param $A_CIRCUIT_ID (String) : ID of the circuit to delete
