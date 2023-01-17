@@ -5,6 +5,7 @@ let circuit_4_coordinates = [[63, 2], [30, 52], [8, 101], [36, 107],[59, 80], [7
 let coordinate = circuit_1_coordinates;
 let player_coordinates_ = populateArray(coordinate);
 let enemy_coordinates = populateArray(coordinate)
+let game = false;
 
 window.onload = () => {
     let terminal = document.getElementById("terminal-input");
@@ -19,32 +20,72 @@ window.onload = () => {
     setInitialPosition("player_kart", coordinate);
 }
 
-function moveImage(imageId, coordinates, status) {
-    if (coordinates.length === 0) {
-        return;
-    }
-    let image = document.getElementById(imageId);
-    let delay = status === "enemy" ? 100 : 10;
-    let count = 0
-    coordinates[0].forEach(([x, y], i) => {
-        setTimeout(() => {
-            image.style.marginLeft = x + "%";
-            image.style.marginTop = y + "%";
-            count++;
+function displayModal() {
+    const modal = document.getElementById("modal");
+    const close = document.getElementById("modal-close");
+    const returnBtn = document.getElementById("modal-return");
+    const restartBtn = document.getElementById("modal-restart");
 
-            if (count === coordinates[0].length) {
-                coordinates.shift();
-                if (coordinates.length === 0){
-                    console.log(status === "enemy" ? "Défaite" : "Victoire");
+    modal.style.display = "block";
+
+    close.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    returnBtn.onclick = function() {
+        modal.style.display = "none";
+        window.location.assign("themes.php");
+    }
+
+    restartBtn.onclick = function() {
+        window.location.reload();
+    }
+}
+
+function moveImage(imageId, coordinates, status) {
+    if (!game){
+        if (status === "ally")
+            console.log(coordinates.length)
+        if (coordinates.length === 0) {
+            return;
+        }
+        let image = document.getElementById(imageId);
+        let delay = status === "enemy" ? 100 : 10;
+        let count = 0
+        coordinates[0].forEach(([x, y], i) => {
+            setTimeout(() => {
+                image.style.marginLeft = x + "%";
+                image.style.marginTop = y + "%";
+                count++;
+                if (count === coordinates[0].length) {
+                    coordinates.shift();
+                    if (coordinates.length === 0){
+                        setVictory('modal-body', status)
+                    } else if (status === "enemy") {
+                        setTimeout(() => {
+                            moveImage(imageId, coordinates, status);
+                        }, delay);
+                    }
                 }
-                else if (status === "enemy") {
-                    setTimeout(() => {
-                        moveImage(imageId, coordinates, status);
-                    }, delay);
-                }
-            }
-        }, i * delay);
-    });
+            }, i * delay);
+        });
+    }
+}
+
+function correctAnswer(imageId, coordinates, status) {
+    moveImage(imageId, coordinates, status);
+    setTimeout(() => {
+        moveImage(imageId, coordinates, status);
+    }, 400*6);
+}
+
+function setVictory(element, status) {
+    let modal = document.getElementById(element);
+    game = true;
+    console.log("enemy" === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>");
+    console.log("ally" === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>");
+    modal.innerHTML = status === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>";
+    displayModal();
 }
 
 function setInitialPosition(imageId, coordinates) {
@@ -105,8 +146,16 @@ function processCommand(input) {
             return ["Liste des commandes disponibles : hello, a, clear", "yellow"];
 
         case "a" :
-            moveImage('player_kart', player_coordinates_, 'ally')
+            correctAnswer('player_kart', player_coordinates_, 'ally')
             return ["Le joueur avance :)", "limegreen"];
+
+        case "v" :
+            setVictory('modal-body', "ally")
+            return ["Le joueur gagne :)", "limegreen"];
+
+        case "d" :
+            setVictory('modal-body', "enemy")
+            return ["Le joueur perd :(", "limegreen"];
 
         case "clear" :
             return ["clear", "null"];
