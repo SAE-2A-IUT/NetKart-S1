@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<body lang="fr-FR">
-<header>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../assets/style/contact.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-</header>
+<?php
+include '../pages/header.php';
+startPage("Contact",["../assets/style/main","../assets/style/contact"],[]);
+?>
+<div class="body-page">
     <div class="content">
         <h1>Nous contacter</h1>
         <p>Des questions, une suggestion, une erreur?</p>
@@ -49,8 +47,7 @@
             </div>
         </form>
     </div>
-</body>
-
+</div>
 <?php
 include '../pages/footer.php';
 endPage();
