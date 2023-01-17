@@ -52,12 +52,16 @@ class database
      * @brief this function executes a sql query and handle errors
      *
      * @param $A_QUERY (String) the sql query that will be run
+     * @param $A_IS_INSERT (Boolean) true if query is an insert
      */
-    function f_query($A_QUERY)
+    function f_query($A_QUERY, $A_IS_INSERT=false)
     {
         if (!$this->l_conn->query($A_QUERY)) {
             echo("Error description: " . $this->l_conn->error);
-            exit();
+            return "Error";
+        }
+        if($A_IS_INSERT){
+            return "Success";
         }
         return $this->l_conn->query($A_QUERY)->fetch_all(MYSQLI_ASSOC);
     }
@@ -74,6 +78,7 @@ class database
     function f_insert_strings($A_TABLE, $A_KEYS, $A_VALUES)
     {
         $l_sql = "INSERT INTO " . $A_TABLE . " (" . implode(",", $A_KEYS) . ") VALUES ('" . implode("','", $A_VALUES) . "')";
+        echo $l_sql;
         if (!$this->l_conn->query($l_sql)) {
             echo("Error description: " . $this->l_conn->error);
             return False;
@@ -112,7 +117,7 @@ class database
      *
      * @param $A_USERNAME (String) the username to get the password from
      *
-     * @return (String) : Password of given user
+     * @return (String) : Password of given user or empty string if an error occured
      */
     function get_password($A_USERNAME)
     {
@@ -120,11 +125,15 @@ class database
 
         $l_result = $this->l_conn->query($l_query);
 
+        $l_fetch = $l_result->fetch_all(MYSQLI_ASSOC);
         if (!$l_result) {
             echo("Error description: " . $this->l_conn->error);
-            exit();
+            return "";
         }
-        return $l_result->fetch_all(MYSQLI_ASSOC)[0]["mot_de_passe"];
+        if (sizeof($l_fetch)==0){
+            return '';
+        }
+        return $l_fetch[0]["mot_de_passe"];
     }
 
     /*
@@ -223,11 +232,6 @@ class database
         return $l_result->fetch_all(MYSQLI_ASSOC);
     }
 
-    function get_circuit_all_informations()
-    {
-
-    }
-
     /*
      * @brief this function delete a Circuit with a given ID and all the questions of this circuit
      *
@@ -271,7 +275,92 @@ class database
         return self::f_delete("Circuit","id_circuit=".$A_CIRCUIT_ID);
     }
 
+    /*
+     * @brief this function insert a new theme into database
+     *
+     * @param $A_THEME_NAME (String) : name of the new theme
+     * @param $A_THEME_DESC (String) : description of the new theme
+     *
+     * @return (Integer) : the id of the theme created or -1 if an error occurred
+     */
+    function insert_theme($A_THEME_NAME, $A_THEME_DESC){
+        $l_is_insert_ok = self::f_insert_strings("Theme",["nom_theme", "description"],  [$A_THEME_NAME, $A_THEME_DESC]);
+        if($l_is_insert_ok){
+            $l_theme_id = self::f_query("SELECT id_theme FROM Theme WHERE nom_theme ='".$A_THEME_NAME."'");
+            return $l_theme_id[0]["id_theme"];
+        }
+        return -1;
+    }
 
+    /*
+     * @brief this function insert a new circuit into database
+     *
+     * @param $A_NOM_CIRCUIT (String) : name of the new circuit
+     * @param $A_POINTS (Integer) : number of points the user will get after finishing circuit
+     * @param $A_THEME (Integer) : id of the theme the circuit belong to
+     * @param $A_JOUEUR (Integer) : id of the player who created the circuit
+     * @param $A_CIRCUIT_IMAGE (Integer) : id of the image of the circuit
+     *
+     * @return (Integer) : the id of the circuit created or -1 if an error occurred
+     */
+    function insert_circuit($A_NOM_CIRCUIT, $A_POINTS, $A_THEME, $A_JOUEUR, $A_CIRCUIT_IMAGE){
+        $l_is_inert_ok = self::f_query("INSERT INTO Circuit (nom_circuit, points, id_theme, id_joueur, id_circuitimage) VALUES ('$A_NOM_CIRCUIT', $A_POINTS, $A_THEME, $A_JOUEUR, $A_CIRCUIT_IMAGE)",true);
+        if ($l_is_inert_ok=="Success"){
+            $l_circuit_id = self::f_query("SELECT id_circuit FROM Circuit WHERE nom_circuit ='".$A_NOM_CIRCUIT."'");
+            return $l_circuit_id[0]["id_circuit"];
+        }
+        return -1;
+    }
+
+    /*
+     * @brief this function insert a question from a circuit into database
+     *
+     * @param $A_TITRE (String) : title of the question
+     * @param $A_CONSIGNE (String) : detailed question
+     * @param $A_REPONSE (String) : answer of the question
+     * @param $A_CIRCUIT (Integer) : id of the circuit the question belongs to
+     *
+     * @return (Integer) : the id of the question created or -1 if an error occurred
+     */
+    function insert_question($A_TITRE, $A_CONSIGNE, $A_REPONSE, $A_CIRCUIT){
+        $l_is_insert_ok = self::f_query("INSERT INTO Question (consigne, question, reponse, id_circuit) VALUES ('".$A_CONSIGNE."', '".$A_TITRE."', '".$A_REPONSE."',".$A_CIRCUIT.")",true);
+        if ($l_is_insert_ok=="Success"){
+            $l_question_id = self::f_query("SELECT id_question FROM Question WHERE question ='".$A_TITRE."' AND id_circuit=".$A_CIRCUIT);
+            return $l_question_id[0]["id_question"];
+        }
+        return -1;
+    }
+
+    /*
+     * @brief this function insert the links given with a specified question
+     *
+     * @param $A_LINK (String) : link to help answer the question
+     * @param $A_QUESTION (Integer) : id of the question the link refers to
+     *
+     * @return (Boolean) : True if insert successful, False otherwise
+     */
+    function insert_links($A_LINK, $A_QUESTION){
+        $l_is_insert_ok = self::f_query("INSERT INTO Question_Lien (lien, id_question) VALUES ('".$A_LINK."', ".$A_QUESTION.")",true);
+        return $l_is_insert_ok=="Success";
+    }
+
+    /*
+     * @brief this function returns all the themes in database
+     *
+     * @return (Array) : array that contains the id and name of all themes
+     */
+    function get_all_themes(){
+        return self::f_query("SELECT id_theme, nom_theme FROM Theme");
+    }
+
+    /*
+     * @brief this function returns all the images of circuits in database
+     *
+     * @return (Array) : id and name of all the possible images for a circuit
+     */
+    function get_all_images_circuit(){
+        return self::f_query("SELECT id_circuitimage,image FROM Circuit_Image");
+    }
 }
 //TODO : voir pour de la composition
 

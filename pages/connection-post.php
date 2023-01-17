@@ -1,4 +1,5 @@
 <?php
+session_start();
 /*
  * @file /pages/connection-post.php
  *
@@ -22,9 +23,18 @@ if(isset($_POST["username-connection"]) and isset($_POST["password-connection"])
 
     $l_password = $l_db->get_password($l_username_connection);
 
+    $l_is_verif = $l_db->f_query("SELECT verification FROM Joueur WHERE pseudo='".$l_username_connection."'")[0]['verification'];
+    if (!$l_is_verif) {
+        header('Location: connection.php?error=6');
+    }
+    else if($l_password == '' || !password_verify($l_password_connection,$l_password)){
+        header('Location: connection.php?error=1');
+    }
+    else {
+        header('Location: ../index.php');
+    }
+    // $_SESSION['username'] = $l_username_connection;
     $l_db->close();
-
-    //TODO : check if password is the same as the one in db => use php_hash/password_check, password_hash ?
 }
 /*
  * Insert data if new person
@@ -39,15 +49,11 @@ elseif (isset($_POST["firstname"]) and isset($_POST["lastname"])
     $l_username_register = $_POST["username-register"];
 
     // Check if password and confirmation are the same
-    if (strcmp($_POST["password-register"], $_POST["password-verify"]) == 0) {
+    if (!strcmp($_POST["password-register"], $_POST["password-verify"])) {
         $l_password_register = $_POST["password-register"];
     } else {
-        echo("Password and confirmation are not the same");
-        //TODO : ajouter un renvoit vers la page pour afficher l'erreur
-        exit();
+        header('Location: connection.php?error=2');
     }
-
-    // TODO : vérifier la complexité du password (regex) => le faire directement dans le HTML si possible
 
     $l_db = new database();
 
@@ -57,28 +63,34 @@ elseif (isset($_POST["firstname"]) and isset($_POST["lastname"])
 
     // Check if email already in database
     if ($l_db->check_if_element_already_used("Joueur","email", $l_email)) {
-        echo("Mail déjà utilisé");
-        //TODO : ajouter un renvoit vers la page pour afficher l'erreur
+        header('Location: connection.php?error=3');
     } // Check if username already in database
     elseif ($l_db->check_if_element_already_used("Joueur","pseudo", $l_username_register)) {
-        echo("Pseudo déjà utilisé");
-        //TODO : ajouter un renvoit vers la page pour afficher l'erreur
+        header('Location: connection.php?error=4');
     } // If pseudo and email not already used, insert data
     else {
-        // TODO : hash password with password_hash ?
+        $l_password_register = password_hash($l_password_register,PASSWORD_DEFAULT );
 
-        $l_is_insert_ok = $l_db->f_insert_strings("Joueur", ["nom", "prenom", "pseudo", "email", "mot_de_passe"],
-            [$l_lastname, $l_firstname, $l_username_register, $l_email, $l_password_register]);
+        $l_digits = 10;
+        $l_code_verification = "".rand(pow(10, $l_digits-1), pow(10, $l_digits)-1);
+        $l_is_insert_ok = $l_db->f_insert_strings("Joueur", ["nom", "prenom", "pseudo", "email", "mot_de_passe", "code_confirmation"],
+            [$l_lastname, $l_firstname, $l_username_register, $l_email, $l_password_register, $l_code_verification]);
 
         // Check if register is successful
         if(!$l_is_insert_ok){
-            //TODO : renvoyer sur la page, afficher qu'un erreur est survenue et que l'inscription n'a pas fonctionné
-        }
+            header('Location: connection.php?error=5');
+        }else{
 
-        //TODO : renvoyer sur la page, afficher que l'inscription est ok et demander de se connecter
+            $l_page = "http://localhost/pages/mail-confirm.php?user=" . $l_username_register . "&code=" . $l_code_verification;
+            //$l_page = "https://netkart.alwaysdata.net/pages/mail-confirm.php?user=" . $l_username_register . "&code=" . $l_code_verification;
+            echo $l_page;
+            $l_message = "Bonjour " . $l_username_register . ", merci de cliquer sur ce lien pour verifié votre email: " . $l_page;
+            mail($l_email,'Confirmation de mail pour Netkart', $l_message);
+            header('Location: connection.php?success=1');
+        }
     }
 
     $l_db->close();
+}else{
+    header('Location: error.html');
 }
-
-//TODO : renvoyer sur la page (redirection automatique VERS LA PAGE D'ERREUR si aucun des champs n'est rempli)

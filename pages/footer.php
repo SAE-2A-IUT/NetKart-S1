@@ -1,4 +1,11 @@
 <?php
+/** @file /pages/footer.php
+ *
+ * File that generate the footer of other pages
+ *
+ * @author SAE S3 NetKart
+ */
+
 function endPage(){
 ?>
     <footer class="footer">
