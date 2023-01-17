@@ -7,8 +7,24 @@ startPage("Contact",["../assets/style/main","../assets/style/contact"],[]);
         <h1>Nous contacter</h1>
         <p>Des questions, une suggestion, une erreur?</p>
         <img class="thumb_img" src="../assets/image/contact_page_image.jpg" alt="zoli madame avec une enveloppe">
+        <?php
+        if(isset($_POST['submit'])){
+            $receiver = "contact.netkart@gmail.com";
+            $sender = $_POST['Email'];
+            $name = $_POST['Name'];
+            $subject = $_POST['Choice'];
+            $subject_sender = "Copie de votre contact NetKart";
+            $message = $name . " a écrit:" . "\n\n" . $_POST['Message'];
+            $message_sender = "Voici une copie de ton mesage " . $name . "\n\n" . $_POST['Message'];
 
-        <form method="post" name="myemailform" action="#">
+            $headers = "From:" . $sender;
+            $headers_sender = "From:" . $receiver;
+            mail($receiver,$subject,$message,$headers);
+            mail($sender,$subject_sender,$message_sender,$headers_sender); // sends a copy of the message to the sender
+            echo "Mail envoyé. Merci " . $name . ", on vous recontactera dès que possible.";
+        }
+        ?>
+        <form method="post" name="myemailform" action="">
             <div class="div_form">
                 <div class="input_zone">
                     <div class="input1"><label for="Name">Nom:</label>
@@ -26,7 +42,7 @@ startPage("Contact",["../assets/style/main","../assets/style/contact"],[]);
                 </select><br>
                 <label for="Message">Contenu</label><br>
                 <textarea id="Message" name="Message" rows="10" placeholder='Message' cols="30"></textarea><br>
-                <input type="submit" value="Envoyer" class="send_from">
+                <input type="submit" value="submit" class="send_from" name="submit">
                 </div>
             </div>
         </form>
