@@ -9,15 +9,20 @@ window.addEventListener("load", (event) => {
     const l_files = document.querySelectorAll('input[type="file"]');
     const l_medias_img = document.querySelectorAll('.medias img.question_img');
     const l_remove_images = document.querySelectorAll('.remove');
-    const l_questions = document.querySelectorAll('.question') ;
+    const l_questions = document.querySelectorAll('.question');
 
     l_select.addEventListener('change', (event) => {
         const l_other_themes = document.querySelector('input[name="other_theme"]');
+        const l_other_themes_desc = document.querySelector('input[name="other_theme_desc"]');
         l_other_themes.removeAttribute('disabled');
         l_other_themes.setAttribute('required','');
+        l_other_themes_desc.removeAttribute('disabled');
+        l_other_themes_desc.setAttribute('required','');
         if (l_select.value != 5 ){
             l_other_themes.setAttribute('disabled','');
             l_other_themes.removeAttribute('required');
+            l_other_themes_desc.setAttribute('disabled','');
+            l_other_themes_desc.removeAttribute('required');
         }
     });
 
