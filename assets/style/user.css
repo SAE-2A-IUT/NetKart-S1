@@ -26,12 +26,80 @@
     margin-top: 0;
 }
 .right{
-    width: 12%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
 }
 .right img{
     width: 100%;
     border: solid;
 }
+.right .top{
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.right .delete{
+    width: 44%;
+    background-color: var(--red);
+    color: var(--white);
+}
+
+.right #alert {
+    position: relative;
+    background-color: var(--red);
+    color: var(--black);
+    font-weight: bolder;
+    max-width: 100%;
+    padding: 2% 5%;
+    font-size: 0.9em;
+    border-radius: 1rem;
+    box-shadow:	0 0.125rem 0.5rem rgba(0, 0, 0, .3), 0 0.0625rem 0.125rem rgba(0, 0, 0, .2);
+}
+
+.right #alert::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 100%;
+    left: 2em;
+    border: .75rem solid transparent;
+    border-top: none;
+    border-bottom-color: var(--red);
+    filter: drop-shadow(0 -0.0625rem 0.0625rem rgba(0, 0, 0, .1));
+}
+
+.horizontal input{
+    width: 100%;
+    background-color: var(--red);
+    color: var(--white);
+}
+
+.horizontal button{
+    margin-left: 5%;
+    width: 20%;
+    background-color: var(--red);
+    color: var(--white);
+}
+
+.horizontal{
+    margin-top: 5%;
+    flex-direction: row;
+}
+
+.error {
+    color: var(--red);
+    margin-bottom: 1%;
+}
+
+.success {
+    color: #008B47;
+    margin-bottom: 1%;
+}
+
 .new_psw_form, .new_password, .new_psw_form input[type = 'password']{
     width: 100%;
 }
@@ -55,4 +123,17 @@
     color: var(--white);
     border: none;
     padding: 0.5em;
+}
+
+.score{
+    color: var(--black);
+    padding: 1em 0;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    flex-direction: column;
+}
+
+.score span{
+    font-weight: bold;
 }
