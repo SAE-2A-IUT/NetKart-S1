@@ -37,7 +37,7 @@ $l_players = [$l_player_one,$l_player_two,$l_player_three,$l_player_four];
             <h1>Temps restant</h1>
             <span>03 : 14 : 15</span>
             <h1>Code session</h1>
-            <span>ARJM3D</span>
+            <span><?php if(isset($_GET['session'])){echo $_GET['session'];}else{ echo 'ARJM3D';}?></span>
         </div>
     </div>
 </div>

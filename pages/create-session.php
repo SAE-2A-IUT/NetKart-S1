@@ -7,8 +7,16 @@ startPage("Création une session",["../assets/style/main", "../assets/style/crea
         <h1>Créer une session</h1>
         <h4>Créer une session permet à des joueurs de s'affronter sur un thème choisi. Pour cela, pas besoin qu'ils se créent un compte ! Il leur suffit de copier le code généré après ce formulaire pour rejoindre la session</h4>
     </div>
+<?php if (isset($_GET['success']) && $_GET['success'] && isset($_GET['session'])){ ?>
+    <form class="session_redirect" method="post" action="host-session.php?session=<?php echo $_GET['session'];?>">
+        <p>Session créée !</p>
+        <p>Cliquez sur la flèche pour gérer la session.</p>
+        <p><?php echo $_GET['session'];?></p>
 
-    <form id="create-session" class="form-session">
+        <button type="submit" style="background-color: <?php if ($_GET['session'] == 'ebebeb'){ echo 'var(--black)';}else{ echo '#'.$_GET['session'];}?>;"><div class="arrow"></div></button>
+    </form>
+<?php }?>
+    <form id="create-session" class="form-session" method="post" action="create-session_post.php">
         <label for="session-name">Nom de la session</label>
         <input type="text" placeholder="Nom" id="session-name" name="session-name" class="form-input" required><br>
 
