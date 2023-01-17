@@ -1,4 +1,11 @@
 <?php
+/** @file /pages/connection.php
+ *
+ * PHP page that allows the user to either register or login by filling in the required fields
+ *
+ * @author SAE S3 NetKart
+ */
+
 include './header.php';
 startPage("Connexion",["../assets/style/main", "../assets/style/connection"],["../assets/script/connection"]);
 ?>

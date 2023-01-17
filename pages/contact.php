@@ -1,4 +1,11 @@
 <?php
+/** @file /pages/contact.php
+ *
+ * PHP page that allows the user to send an email to report an error, a suggestion or other
+ *
+ * @author SAE S3 NetKart
+ */
+
 include '../pages/header.php';
 startPage("Contact",["../assets/style/main","../assets/style/contact"],[]);
 ?>

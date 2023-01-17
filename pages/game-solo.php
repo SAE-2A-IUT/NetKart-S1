@@ -1,4 +1,11 @@
 <?php
+/** @file /pages/game-solo.php
+ *
+ * PHP page that allows the user to learn the network by playing. The player can answer questions about the network in a terminal, this makes the player character move around the circuit. The user has an instructions and potentially up to three images to zoom in on.
+ *
+ * @author SAE S3 NetKart
+ */
+
 require './header.php';
 startPage("Jeu-solo", ["../assets/style/main", "../assets/style/game-solo"], ["../assets/script/position"]);
 ?>
