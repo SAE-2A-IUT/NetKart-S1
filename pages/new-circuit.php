@@ -12,12 +12,12 @@ $l_nb_max_question = K_MAX_QUESTIONS;
 $l_nb_max_question_images = K_MAX_IMAGES;
 ?>
 
-    <form method="post" class="new_circuit_form body">
+    <form method="post" class="new_circuit_form body" action="new-circuit_post.php">
         <input type="hidden" id="image_limit" value="<?php echo $l_nb_max_question_images ?>">
         <div class="left">
             <label>Nom du circuit</label>
             <input name="circuit_name" type="text" placeholder="Nom du circuit (Limite : 100 charactères)" maxlength="100" required>
-            <label>Thèmes du circuit</label>
+            <label>Thème du circuit</label>
             <select name="circuit_theme" required>
                 <option value="">Choisir un thème</option>
                 <?php
@@ -33,8 +33,10 @@ $l_nb_max_question_images = K_MAX_IMAGES;
             <div class="other_theme">
                 <label class="hidden">Si autre, précisez</label>
                 <input class="hidden" name="other_theme" type="text" placeholder="Nom du theme" maxlength="100" disabled>
-                <input class="hidden" name="other_theme_desc" type="text" placeholder="Description du theme" maxlength="200" disabled>
+                <input class="hidden" name="other_theme_desc" type="text" placeholder="Description du theme (minimum : 20 caractères)" min="20" maxlength="200" disabled>
             </div>
+            <label>Nombre de points que rapporte le circuit (entre 10 et 100)</label>
+            <input name="circuit_points" type="number" min="10" max="100" required>
             <label>Choisir l'image du circuit</label>
             <select name="circuit_image" id="circuit_image" required>
                 <option value="">Choisir un circuit</option>
@@ -67,11 +69,11 @@ $l_nb_max_question_images = K_MAX_IMAGES;
                 ?>
                 <label class="question"><span>Question n°<?php echo $l_nb_question;?></span><span class="arrow close"></span></label>
                 <div class="hidden question_content">
-                    <input name="question_title_<?php echo $l_nb_question;?>" type="text" placeholder="Intitulé de la question" maxlength="200" required>
+                    <input name="question[<?php echo $l_nb_question;?>][titre]" type="text" placeholder="Intitulé de la question" maxlength="200" >
                     <label>Consigne</label>
-                    <textarea name="question_rules_<?php echo $l_nb_question;?>" placeholder="Consigne de la question" aria-atomic="true" required></textarea>
+                    <textarea name="question[<?php echo $l_nb_question;?>][consigne]" placeholder="Consigne de la question" aria-atomic="true" ></textarea>
                     <label>Réponse</label>
-                    <input name="question_answer_<?php echo $l_nb_question;?>" type="text" placeholder="Réponse de la question" maxlength="200" required>
+                    <input name="question[<?php echo $l_nb_question;?>][reponse]" type="text" placeholder="Réponse de la question" maxlength="200" >
                     <h1>Ressources</h1>
                     <h2>Il y a une limite de <?php echo K_MAX_IMAGES;?> images par question. Il faut les envoyer d'une seule traite.</h2>
                     <div class="medias">
@@ -95,8 +97,8 @@ $l_nb_max_question_images = K_MAX_IMAGES;
                         </div>
                         <div class="right">
                             <?php
-                            for ($l_nb_question_link = 0; $l_nb_question_link<$l_nb_max_question_images; ++$l_nb_question_link){?>
-                                <input class="question_link" type="text" name="question_link_<?php echo $l_nb_question+1;?>_<?php echo $l_nb_question_link+1;?>"
+                            for ($l_nb_question_link = 1; $l_nb_question_link<=$l_nb_max_question_images; ++$l_nb_question_link){?>
+                                <input class="question_link" type="text" name="question[<?php echo $l_nb_question;?>][lien][<?php echo $l_nb_question_link;?>]"
                                        placeholder="Lien" maxlength="255">
                                 <?php
                             }
