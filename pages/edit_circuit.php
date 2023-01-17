@@ -27,21 +27,27 @@ if(True){ # isset($_SESSION id joueur
 
     // Get the information of circuits created by user
     foreach ($l_id_circuit_user as $item){
-        ?>
-        <form method="post" action="edit_circuit_post.php">
-            <?php
+
         $l_circuit_informations = $l_db->get_circuit_information($item["id_circuit"]);
         foreach ($l_circuit_informations as $item){
             echo "Circuit id : ".$item["id_circuit"].PHP_EOL.
                 "Nom circuit".$item["nom_circuit"].PHP_EOL.
                 "Nombre points".$item["points"].PHP_EOL.
                 $l_img = $l_db->get_image_circuit($item["id_circuitimage"])[0]["image"];
-                "Circuit image".$l_img.PHP_EOL;
-        }?>
-            <input type="hidden" value="<?php echo $item["id_circuit"]; ?>" name="id_circuit_to_delete">
-            <input type="submit" value="Supprimer">
-        </form>
+                "Circuit image".$l_img.PHP_EOL;?>
+            <form method="post" action="edit_circuit_post.php">
+                <input type="hidden" value="<?php echo $item["id_circuit"]; ?>" name="id_circuit_to_delete">
+                <input type="submit" value="Supprimer">
+            </form>
+
+            <form method="post" action="new-circuit_post.php">
+                <input type="hidden" value="<?php echo $item["id_circuit"]; ?>" name="id_circuit_to_modify">
+                <input type="submit" value="Modifier">
+            </form>
+
         <?php
+        }
+
     }
 
     //TODO : afficher les données sous forme d'éléments comme dans la page thèmes

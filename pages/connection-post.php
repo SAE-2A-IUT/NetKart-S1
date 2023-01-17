@@ -1,4 +1,5 @@
 <?php
+session_start();
 /*
  * @file /pages/connection-post.php
  *
@@ -21,10 +22,12 @@ if(isset($_POST["username-connection"]) and isset($_POST["password-connection"])
     $l_db->connection();
 
     $l_password = $l_db->get_password($l_username_connection);
-
+    if($l_password == '' || !password_verify($l_password_connection,$l_password)){
+        header('Location: connection.php?error=1');
+    }
+    // $_SESSION['username'] = $l_username_connection;
+    header('Location: ../index.php');
     $l_db->close();
-
-    //TODO : check if password is the same as the one in db => use php_hash/password_check, password_hash ?
 }
 /*
  * Insert data if new person
@@ -39,15 +42,11 @@ elseif (isset($_POST["firstname"]) and isset($_POST["lastname"])
     $l_username_register = $_POST["username-register"];
 
     // Check if password and confirmation are the same
-    if (strcmp($_POST["password-register"], $_POST["password-verify"]) == 0) {
+    if (!strcmp($_POST["password-register"], $_POST["password-verify"])) {
         $l_password_register = $_POST["password-register"];
     } else {
-        echo("Password and confirmation are not the same");
-        //TODO : ajouter un renvoit vers la page pour afficher l'erreur
-        exit();
+        header('Location: connection.php?error=2');
     }
-
-    // TODO : vérifier la complexité du password (regex) => le faire directement dans le HTML si possible
 
     $l_db = new database();
 
@@ -57,28 +56,26 @@ elseif (isset($_POST["firstname"]) and isset($_POST["lastname"])
 
     // Check if email already in database
     if ($l_db->check_if_element_already_used("Joueur","email", $l_email)) {
-        echo("Mail déjà utilisé");
-        //TODO : ajouter un renvoit vers la page pour afficher l'erreur
+        header('Location: connection.php?error=3');
     } // Check if username already in database
     elseif ($l_db->check_if_element_already_used("Joueur","pseudo", $l_username_register)) {
-        echo("Pseudo déjà utilisé");
-        //TODO : ajouter un renvoit vers la page pour afficher l'erreur
+        header('Location: connection.php?error=4');
     } // If pseudo and email not already used, insert data
     else {
-        // TODO : hash password with password_hash ?
+        $l_password_register = password_hash($l_password_register,PASSWORD_DEFAULT );
 
         $l_is_insert_ok = $l_db->f_insert_strings("Joueur", ["nom", "prenom", "pseudo", "email", "mot_de_passe"],
             [$l_lastname, $l_firstname, $l_username_register, $l_email, $l_password_register]);
 
         // Check if register is successful
         if(!$l_is_insert_ok){
-            //TODO : renvoyer sur la page, afficher qu'un erreur est survenue et que l'inscription n'a pas fonctionné
+            header('Location: connection.php?error=5');
+        }else{
+            header('Location: connection.php?success=1');
         }
-
-        //TODO : renvoyer sur la page, afficher que l'inscription est ok et demander de se connecter
     }
 
     $l_db->close();
+}else{
+    header('Location: error.html');
 }
-
-//TODO : renvoyer sur la page (redirection automatique VERS LA PAGE D'ERREUR si aucun des champs n'est rempli)

@@ -9,13 +9,39 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
             <button id="button-register" class="connection-button" onclick="openConnection('register')"><b>Inscription</b></button>
         </div>
         <br>
+        <?php if (isset($_GET['error'])){
+            $l_code_err = $_GET['error'];?>
+        <div class="error">
+            <?php
+                if ($l_code_err == 1){
+            ?>Le compte n'éxiste pas ou le mot de passe est erroné.
+            <?php }
+            if ($l_code_err == 2){
+                ?>Le mot de passe et la confirmation de mot de passe sont différents.
+            <?php }
+            if ($l_code_err == 3){
+                ?>Cette adresse mail est déjà associé à un compte.
+            <?php }
+            if ($l_code_err == 4){
+                ?>Ce pseudo est déjà associé à un compte.
+            <?php }
+            if ($l_code_err == 5){
+                ?>L'enregistrement du compte a rencontré une erreur, veuillez réessayer.
+            <?php }?>
 
+        </div>
+        <?php }?>
+        <?php if (isset($_GET['success'])){?>
+            <div class="success">
+                Le compte est bel et bien créé, vous pouvez maintenant vous connecter.
+            </div>
+        <?php }?>
         <form id="connection" class="connection-form" action="connection-post.php" method="post">
             <label for="username-connection">Pseudo</label>
             <input type="text" placeholder="Nom d'utilisateur" maxlength="50" id="username-connection" name="username-connection" class="form-input" required><br>
 
             <label for="password-connection">Mot de passe</label>
-            <input type="password" placeholder="Mot de passe" id="password-connection" name="password-connection" class="form-input" required><br>
+            <input type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!*µ$£¤=+°@_~#]).{8,72}$" placeholder="Mot de passe" id="password-connection" name="password-connection" class="form-input" required><br>
 
             <input type="submit" value="CONNEXION" class="submit-connection black-button">
         </form>
@@ -39,10 +65,10 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
             <input type="text" placeholder="Pseudo" id="username-register" maxlength="50" name="username-register" class="form-input" required><br>
 
             <label for="password-register">Mot de passe</label>
-            <input type="password" placeholder="Mot de passe" id="password-register" name="password-register" class="form-input" required><br>
+            <input type="password" placeholder="Mot de passe" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!*µ$£¤=+°@_~#]).{8,72}$"  id="password-register" name="password-register" class="form-input" required><br>
 
             <label for="password-verify">Confirmation du Mot de passe</label>
-            <input type="password" placeholder="Confirmation du  Mot de passe" id="password-verify" name="password-verify" class="form-input" required><br>
+            <input type="password" placeholder="Confirmation du  Mot de passe" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!*µ$£¤=+°@_~#]).{8,72}$"  id="password-verify" name="password-verify" class="form-input" required><br>
 
             <div>
                 <input type="checkbox" id="term-of-use" name="term-of-use" required>

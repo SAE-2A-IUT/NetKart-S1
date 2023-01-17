@@ -16,7 +16,7 @@ if(isset($_POST["new_password"]) and isset($_POST["new_password_conf"])){
     $l_password = $_POST["new_password"];
     $l_password_confirmation = $_POST["new_password_conf"];
 
-    $l_username = None; //TODO : recupérer le pseudo stocké en variable de session
+    $l_username = 1; //TODO : recupérer le pseudo stocké en variable de session
 
     $l_db = new database();
 
