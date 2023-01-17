@@ -1,7 +1,7 @@
 let circuit_1_coordinates = [[58, 10], [28, 13], [57, 41], [17, 70], [38.8, 94], [65, 57], [58, 10]];
-let circuit_2_coordinates = [[62, 21], [25, 30], [20,49], [28, 80], [50, 81], [55,52], [62, 21]];
+let circuit_2_coordinates = [[62, 21], [25, 30], [20, 49], [28, 80], [50, 81], [55, 52], [62, 21]];
 let circuit_3_coordinates = [[6, 54], [29, 56], [51, 85], [70, 83], [45, 72], [32, 44], [6, 54]];
-let circuit_4_coordinates = [[63, 2], [30, 52], [8, 101], [36, 107],[59, 80], [78, 45], [63, 2]];
+let circuit_4_coordinates = [[63, 2], [30, 52], [8, 101], [36, 107], [59, 80], [78, 45], [63, 2]];
 let coordinate = circuit_1_coordinates;
 let player_coordinates_ = populateArray(coordinate);
 let enemy_coordinates = populateArray(coordinate)
@@ -28,22 +28,22 @@ function displayModal() {
 
     modal.style.display = "block";
 
-    close.onclick = function() {
+    close.onclick = function () {
         modal.style.display = "none";
     }
 
-    returnBtn.onclick = function() {
+    returnBtn.onclick = function () {
         modal.style.display = "none";
         window.location.assign("themes.php");
     }
 
-    restartBtn.onclick = function() {
+    restartBtn.onclick = function () {
         window.location.reload();
     }
 }
 
 function moveImage(imageId, coordinates, status) {
-    if (!game){
+    if (!game) {
         if (status === "ally")
             console.log(coordinates.length)
         if (coordinates.length === 0) {
@@ -59,7 +59,7 @@ function moveImage(imageId, coordinates, status) {
                 count++;
                 if (count === coordinates[0].length) {
                     coordinates.shift();
-                    if (coordinates.length === 0){
+                    if (coordinates.length === 0) {
                         setVictory('modal-body', status)
                     } else if (status === "enemy") {
                         setTimeout(() => {
@@ -76,7 +76,7 @@ function correctAnswer(imageId, coordinates, status) {
     moveImage(imageId, coordinates, status);
     setTimeout(() => {
         moveImage(imageId, coordinates, status);
-    }, 400*6);
+    }, 400 * 6);
 }
 
 function setVictory(element, status) {

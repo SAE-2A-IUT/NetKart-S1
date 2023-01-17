@@ -113,7 +113,7 @@
     font-weight: bold;
 }
 
-#modal-return, #modal-restart{
+#modal-return, #modal-restart {
     color: var(--white);
     border: none;
     font-size: 1.2em;
@@ -121,15 +121,15 @@
     margin: 0.6em;
 }
 
-#modal-return{
+#modal-return {
     background-color: var(--dark-blue);
 }
 
-#modal-restart{
+#modal-restart {
     background-color: var(--red);
 }
 
-#modal-footer{
+#modal-footer {
     text-align: center;
     position: relative;
 }
@@ -149,7 +149,7 @@
     z-index: 0;
 }
 
-#victory, #lose{
+#victory, #lose {
     width: 14%;
     vertical-align: middle;
     margin-left: 1em;
