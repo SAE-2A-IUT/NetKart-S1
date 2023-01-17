@@ -1,4 +1,11 @@
 <?php
+/** @file /pages/header.php
+ *
+ * File that generate the header of other pages
+ *
+ * @author SAE S3 NetKart
+ */
+
 require 'constants.php';
 
 
