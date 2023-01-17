@@ -95,8 +95,8 @@
     position: fixed;
     left: 32.5%;
     top: 30%;
-    height: 40%;
-    width: 35%;
+    height: 40vh;
+    width: 35vh;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 2px;
 }
