@@ -15,4 +15,17 @@ function getSessionCode($l_username, $l_date){
 
 
 header('Location: create-session.php?success=true&session='.getSessionCode('Tibo',date('is')));
+require ("./database/database.php");
+
+$l_db = new database();
+
+$l_db->connection();
+
+if(isset(...)){
+
+    $l_db->close();
+}
+
+
+
 ?>
