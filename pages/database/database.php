@@ -54,13 +54,13 @@ class database
      * @param $A_QUERY (String) the sql query that will be run
      * @param $A_IS_INSERT (Boolean) true if query is an insert
      */
-    function f_query($A_QUERY, $A_IS_INSERT=false)
+    function f_query($A_QUERY, $A_IS_INSERT = false)
     {
         if (!$this->l_conn->query($A_QUERY)) {
             echo("Error description: " . $this->l_conn->error);
             return "Error";
         }
-        if($A_IS_INSERT){
+        if ($A_IS_INSERT) {
             return "Success";
         }
         return $this->l_conn->query($A_QUERY)->fetch_all(MYSQLI_ASSOC);
@@ -130,7 +130,7 @@ class database
             echo("Error description: " . $this->l_conn->error);
             return "";
         }
-        if (sizeof($l_fetch)==0){
+        if (sizeof($l_fetch) == 0) {
             return '';
         }
         return $l_fetch[0]["mot_de_passe"];
@@ -223,13 +223,7 @@ class database
      */
     function get_image_circuit($A_IMAGE_ID)
     {
-        $l_sql = "SELECT image  FROM Circuit_Image WHERE id_circuitimage=" . $A_IMAGE_ID;
-        $l_result = $this->l_conn->query($l_sql);
-        if (!$l_result) {
-            echo("Error description: " . $this->l_conn->error);
-            return "";
-        }
-        return $l_result->fetch_all(MYSQLI_ASSOC);
+        return self::f_query("SELECT image  FROM Circuit_Image WHERE id_circuitimage=" . $A_IMAGE_ID);
     }
 
     /*
@@ -241,13 +235,7 @@ class database
      */
     function get_question_circuit($A_CIRCUIT_ID)
     {
-        $l_sql = "SELECT id_question, consigne, question, reponse  FROM Question WHERE id_circuit=" . $A_CIRCUIT_ID;
-        $l_result = $this->l_conn->query($l_sql);
-        if (!$l_result) {
-            echo("Error description: " . $this->l_conn->error);
-            return "";
-        }
-        return $l_result->fetch_all(MYSQLI_ASSOC);
+        return self::f_query("SELECT id_question, consigne, question, reponse  FROM Question WHERE id_circuit=" . $A_CIRCUIT_ID);
     }
 
     /*
@@ -259,13 +247,7 @@ class database
      */
     function get_image_question($A_QUESTION_ID)
     {
-        $l_sql = "SELECT image_question FROM Question_Image WHERE id_question=" . $A_QUESTION_ID;
-        $l_result = $this->l_conn->query($l_sql);
-        if (!$l_result) {
-            echo("Error description: " . $this->l_conn->error);
-            return "";
-        }
-        return $l_result->fetch_all(MYSQLI_ASSOC);
+        return self::f_query("SELECT image_question FROM Question_Image WHERE id_question=" . $A_QUESTION_ID);
     }
 
     /*
@@ -295,7 +277,7 @@ class database
                 }
 
                 $l_all_links = self::f_query("SELECT id_questionlien FROM Question_Lien WHERE id_question=" . $l_question);
-                    if ($l_all_links == NULL) {
+                if ($l_all_links == NULL) {
                     foreach ($l_all_links as $l_links) {
                         foreach ($l_links as $l_link) {
                             self::f_delete("Question_Lien", "id_questionlien=" . $l_link);
@@ -308,7 +290,7 @@ class database
             }
         }
         // Delete circuit
-        return self::f_delete("Circuit","id_circuit=".$A_CIRCUIT_ID);
+        return self::f_delete("Circuit", "id_circuit=" . $A_CIRCUIT_ID);
     }
 
     /*
@@ -319,10 +301,11 @@ class database
      *
      * @return (Integer) : the id of the theme created or -1 if an error occurred
      */
-    function insert_theme($A_THEME_NAME, $A_THEME_DESC){
-        $l_is_insert_ok = self::f_insert_strings("Theme",["nom_theme", "description"],  [$A_THEME_NAME, $A_THEME_DESC]);
-        if($l_is_insert_ok){
-            $l_theme_id = self::f_query("SELECT id_theme FROM Theme WHERE nom_theme ='".$A_THEME_NAME."'");
+    function insert_theme($A_THEME_NAME, $A_THEME_DESC)
+    {
+        $l_is_insert_ok = self::f_insert_strings("Theme", ["nom_theme", "description"], [$A_THEME_NAME, $A_THEME_DESC]);
+        if ($l_is_insert_ok) {
+            $l_theme_id = self::f_query("SELECT id_theme FROM Theme WHERE nom_theme ='" . $A_THEME_NAME . "'");
             return $l_theme_id[0]["id_theme"];
         }
         return -1;
@@ -339,10 +322,11 @@ class database
      *
      * @return (Integer) : the id of the circuit created or -1 if an error occurred
      */
-    function insert_circuit($A_NOM_CIRCUIT, $A_POINTS, $A_THEME, $A_JOUEUR, $A_CIRCUIT_IMAGE){
-        $l_is_inert_ok = self::f_query("INSERT INTO Circuit (nom_circuit, points, id_theme, id_joueur, id_circuitimage) VALUES ('$A_NOM_CIRCUIT', $A_POINTS, $A_THEME, $A_JOUEUR, $A_CIRCUIT_IMAGE)",true);
-        if ($l_is_inert_ok=="Success"){
-            $l_circuit_id = self::f_query("SELECT id_circuit FROM Circuit WHERE nom_circuit ='".$A_NOM_CIRCUIT."'");
+    function insert_circuit($A_NOM_CIRCUIT, $A_POINTS, $A_THEME, $A_JOUEUR, $A_CIRCUIT_IMAGE)
+    {
+        $l_is_inert_ok = self::f_query("INSERT INTO Circuit (nom_circuit, points, id_theme, id_joueur, id_circuitimage) VALUES ('$A_NOM_CIRCUIT', $A_POINTS, $A_THEME, $A_JOUEUR, $A_CIRCUIT_IMAGE)", true);
+        if ($l_is_inert_ok == "Success") {
+            $l_circuit_id = self::f_query("SELECT id_circuit FROM Circuit WHERE nom_circuit ='" . $A_NOM_CIRCUIT . "'");
             return $l_circuit_id[0]["id_circuit"];
         }
         return -1;
@@ -358,10 +342,11 @@ class database
      *
      * @return (Integer) : the id of the question created or -1 if an error occurred
      */
-    function insert_question($A_TITRE, $A_CONSIGNE, $A_REPONSE, $A_CIRCUIT){
-        $l_is_insert_ok = self::f_query("INSERT INTO Question (consigne, question, reponse, id_circuit) VALUES ('".$A_CONSIGNE."', '".$A_TITRE."', '".$A_REPONSE."',".$A_CIRCUIT.")",true);
-        if ($l_is_insert_ok=="Success"){
-            $l_question_id = self::f_query("SELECT id_question FROM Question WHERE question ='".$A_TITRE."' AND id_circuit=".$A_CIRCUIT);
+    function insert_question($A_TITRE, $A_CONSIGNE, $A_REPONSE, $A_CIRCUIT)
+    {
+        $l_is_insert_ok = self::f_query("INSERT INTO Question (consigne, question, reponse, id_circuit) VALUES ('" . $A_CONSIGNE . "', '" . $A_TITRE . "', '" . $A_REPONSE . "'," . $A_CIRCUIT . ")", true);
+        if ($l_is_insert_ok == "Success") {
+            $l_question_id = self::f_query("SELECT id_question FROM Question WHERE question ='" . $A_TITRE . "' AND id_circuit=" . $A_CIRCUIT);
             return $l_question_id[0]["id_question"];
         }
         return -1;
@@ -375,9 +360,10 @@ class database
      *
      * @return (Boolean) : True if insert successful, False otherwise
      */
-    function insert_links($A_LINK, $A_QUESTION){
-        $l_is_insert_ok = self::f_query("INSERT INTO Question_Lien (lien, id_question) VALUES ('".$A_LINK."', ".$A_QUESTION.")",true);
-        return $l_is_insert_ok=="Success";
+    function insert_links($A_LINK, $A_QUESTION)
+    {
+        $l_is_insert_ok = self::f_query("INSERT INTO Question_Lien (lien, id_question) VALUES ('" . $A_LINK . "', " . $A_QUESTION . ")", true);
+        return $l_is_insert_ok == "Success";
     }
 
     /*
@@ -385,7 +371,8 @@ class database
      *
      * @return (Array) : array that contains the id and name of all themes
      */
-    function get_all_themes(){
+    function get_all_themes()
+    {
         return self::f_query("SELECT id_theme, nom_theme FROM Theme");
     }
 
@@ -394,7 +381,8 @@ class database
      *
      * @return (Array) : id and name of all the possible images for a circuit
      */
-    function get_all_images_circuit(){
+    function get_all_images_circuit()
+    {
         return self::f_query("SELECT id_circuitimage,image FROM Circuit_Image");
     }
 }

@@ -134,9 +134,19 @@ function scroll(item) {
     item.scrollTop = item.scrollHeight - item.clientHeight;
 }
 
-function changeResponse(new_response){
-    response = new_response;
+function changeResponse() {
+    fetch('increment.php', {
+        method: 'POST',
+        body: JSON.stringify({
+            questionNumber: 1
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        });
 }
+
 
 function processCommand(input) {
     switch (input) {
@@ -147,7 +157,6 @@ function processCommand(input) {
             return ["Liste des commandes disponibles : hello, a, clear", "yellow"];
 
         case "a" :
-            console.log(document.getElementById("question-verify").innerHTML);
             correctAnswer('player_kart', player_coordinates_, 'ally')
             return ["Le joueur avance :)", "limegreen"];
 
@@ -162,8 +171,9 @@ function processCommand(input) {
         case 'test' :
             return ["Le joueur perd :(", "limegreen"];
 
-        case document.getElementById("question-verify").innerHTML :
-            setVictory('modal-body', "enemy")
+        case response.toString() :
+            correctAnswer('player_kart', player_coordinates_, 'ally')
+            changeResponse();
             return ["Le joueur perd :(", "limegreen"];
 
         case "clear" :
