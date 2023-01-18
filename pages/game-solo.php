@@ -7,10 +7,8 @@ require("./database/database.php");
 $l_db = new database();
 $l_db->connection();
 
-$id_circuit = 2;
-$_SESSION['questionNumber'] = 0;
-$questionNumber = $_SESSION['questionNumber'];
-
+$id_circuit = 5;
+$questionNumber = 0;
 $name_circuit = $l_db->get_circuit_information($id_circuit)[$questionNumber]['nom_circuit'];
 $id_circuit_image = $l_db->get_circuit_information($id_circuit)[$questionNumber]['id_circuitimage'];
 $urlImage = $l_db->get_image_circuit($id_circuit_image)[$questionNumber]['image'];
@@ -21,26 +19,23 @@ $questionQuestion = $questionActual['question'];
 $questionReponse = $questionActual['reponse'];
 $questionId = $questionActual['id_question'];
 $questionImage = $l_db->get_image_question($questionId);
+$l_db->close();
+
 ?>
 <div class="body-page">
     <div id="game">
         <div id="left-game">
             <div id="circuit-info">
-                <h1 id="circuit-name"><?php echo $name_circuit ?> - question <?php echo $questionNumber + 1 ?></h1>
-                <?php
-                if (sizeof($questionImage) > 1) {
-                    foreach ($questionImage as $image) {
-                        ?>
-                        <img alt='question-image' class='question-image-origin'
-                             src='../assets/image/<?php echo $image['image_question']; ?>'>
-                        <img alt="question-image" class="question-image"
-                             src='../assets/image/<?php echo $image['image_question']; ?>'><?php }
-                } elseif (sizeof($questionImage) == 1) {
-                    ?>
-                    <img alt='question-image' class='question-image-origin'
-                         src='../assets/image/<?php echo $questionImage[0]['image_question']; ?>'>
-                    <img alt="question-image" class="question-image"
-                         src='../assets/image/<?php echo $questionImage[0]['image_question']; ?>'><?php } ?>
+                <h1 id='circuit-name'><?php echo $name_circuit ?> - question <?php echo $questionNumber + 1 ?></h1>
+                <div id='circuit-image'>
+                    <?php if (sizeof($questionImage) > 1) {
+                        foreach ($questionImage as $image) {?>
+                            <img alt='question-image' class='question-image-origin' src='../assets/image/<?php echo $image['image_question']; ?>'>
+                            <img alt='question-image' class='question-image'src='../assets/image/<?php echo $image['image_question']; ?>'><?php }
+                    } elseif (sizeof($questionImage) == 1) {?>
+                        <img alt='question-image' class='question-image-origin' src='../assets/image/<?php echo $questionImage[0]['image_question']; ?>'>
+                        <img alt='question-image' class='question-image'src='../assets/image/<?php echo $questionImage[0]['image_question']; ?>'><?php } ?>
+                </div>
                 <p id="question-statement"><?php echo $questionConsigne; ?></p>
                 <p id="question"><?php echo $questionQuestion; ?></p>
             </div>
@@ -50,8 +45,6 @@ $questionImage = $l_db->get_image_question($questionId);
                 <span id="terminal-input-text">NetKart:~$<input id="terminal-input" autocomplete="off"
                                                                 placeholder="tapez votre commande ici"></span>
             </div>
-            <script>
-            </script>
         </div>
 
         <div id="right-game" style="background-image: url('<?php echo K_IMAGE . $urlImage ?>')">
@@ -75,13 +68,65 @@ $questionImage = $l_db->get_image_question($questionId);
 </div>
 
 <script>
-    let response = <?php echo $questionReponse?>;
+    function processCommand(input) {
+        switch (input) {
+            case "hello":
+                return ["Bonjour!", "limegreen"];
+
+            case "help":
+                return ["Liste des commandes disponibles : hello, a, clear", "yellow"];
+
+            case "a" :
+                correctAnswer('player_kart', player_coordinates_, 'ally')
+                return ["Le joueur avance :)", "limegreen"];
+
+            case "v" :
+                setVictory('modal-body', "ally")
+                return ["Le joueur gagne :)", "limegreen"];
+
+            case "d" :
+                setVictory('modal-body', "enemy")
+                return ["Le joueur perd :(", "limegreen"];
+
+            case 'test' :
+                return ["Le joueur perd :(", "limegreen"];
+
+            case (<?php echo $questionReponse?>).toString():
+                correctAnswer('player_kart', player_coordinates_, 'ally');
+
+                <?php $questionNumber += 1;$questionActual = $questionCircuit[$questionNumber];
+                $questionConsigne = $questionActual['consigne'];
+                $questionQuestion = $questionActual['question'];
+                $questionReponse = $questionActual['reponse'];
+                $questionId = $questionActual['id_question'];
+                $l_db = new database();
+                $l_db->connection();
+                $questionImage = $l_db->get_image_question($questionId);
+                $l_db->close();?>
+                document.getElementById("circuit-name").innerHTML = "<?php echo $name_circuit ?> - question <?php echo $questionNumber + 1 ?>";
+                document.getElementById("circuit-image").innerHTML = "<?php if (sizeof($questionImage) > 1) {
+                    foreach ($questionImage as $image) {?>
+                    <img alt='question-image' class='question-image-origin' src='../assets/image/<?php echo $image['image_question']; ?>'>
+                <img alt='question-image' class='question-image'src='../assets/image/<?php echo $image['image_question']; ?>'><?php }
+                } elseif (sizeof($questionImage) == 1) {?>
+                <img alt='question-image' class='question-image-origin' src='../assets/image/<?php echo $questionImage[0]['image_question']; ?>'>
+                <img alt='question-image' class='question-image'src='../assets/image/<?php echo $questionImage[0]['image_question']; ?>'><?php } ?>";
+                document.getElementById("question-statement").innerHTML = "<?php echo $questionConsigne; ?>";
+                document.getElementById("question").innerHTML = "<?php echo $questionQuestion; ?>";
+                return ["Le joueur perd :(", "limegreen"];
+
+            case "clear" :
+                return ["clear", "null"];
+
+            default:
+                return ["Commande non reconnue", "red"];
+        }
+    }
 </script>
-<div id="javascript">
-</div>
 
 <?php
 require './footer.php';
 endPage();
-$l_db->close();
 ?>
+
+
