@@ -27,7 +27,7 @@ class database
                          $A_USERNAME = "netkart_admin",
                          $A_PASSWORD = "NetkartSAES3",
                          $A_DBNAME = "netkart_db_main"
-    )
+                        )
     {
         $this->l_servername = $A_SERVERNAME;
         $this->l_username = $A_USERNAME;
@@ -193,7 +193,7 @@ class database
             return [];
         }
         return $l_result->fetch_all(MYSQLI_ASSOC);
-    } // TODO : Return list of id
+    }
 
     /*
      * @brief this function return the circuits created by an user
@@ -259,7 +259,7 @@ class database
                 }
 
                 $l_all_links = self::f_query("SELECT id_questionlien FROM Question_Lien WHERE id_question=" . $l_question);
-                    if ($l_all_links == NULL) {
+                if ($l_all_links != NULL) {
                     foreach ($l_all_links as $l_links) {
                         foreach ($l_links as $l_link) {
                             self::f_delete("Question_Lien", "id_questionlien=" . $l_link);
