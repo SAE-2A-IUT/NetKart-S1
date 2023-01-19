@@ -77,6 +77,8 @@ if(True){ # isset($_SESSION id joueur
         </div>
         <?php endforeach; ?>
         <?php
+        }
+
     }
     ?></div><?php
     if ($l_count_loop == 0) {

@@ -14,15 +14,11 @@ if(isset($_GET["user"]) and isset($_GET["code"])){
     $l_code = $_GET["code"];
     $l_db = new database();
 
-    //$l_db->connection();
-
-    //TODO call database to verif if an username with this code exist and fill these 3 variable
-    $l_username_match = "pelote";
-    $l_code_match = "1";
-    $l_already_matched = false;
-
-    if ($l_username == $l_username_match and $l_code == $l_code_match and !$l_already_matched) {
-        //TODO modify database to confirm creation
+    $l_db->connection();
+    $l_query = $l_db->f_query("SELECT COUNT(*) FROM Joueur WHERE pseudo='".$l_username."' and code_confirmation='".$l_code."' and verification=0;");
+    print_r($l_query[0]["COUNT(*)"]);
+    if ($l_query[0]["COUNT(*)"] == 1) {
+        $l_db->f_query("UPDATE Joueur SET verification=1 WHERE pseudo='".$l_username."'", true);
         header('Location: connection.php?success=2');
     }
     else {

@@ -1,4 +1,11 @@
 <?php
+/** @file /pages/footer.php
+ *
+ * File that generate the footer of other pages
+ *
+ * @author SAE S3 NetKart
+ */
+
 function endPage(){
 ?>
     <footer class="footer">
@@ -7,11 +14,12 @@ function endPage(){
             PAGES<br/>
             <a href="homepage.php">Accueil</a>
             <br/><a href="themes.php">Thèmes</a>
+            <br/><a href="rules.php">Règles du jeu</a>
         </div>
         <div class="footer-three">
             DOCUMENTS<br/>
             <a href="rules.php">Règles du jeu</a>
-            <br/><a href="terms-of-use.php">Conditions d'utilisation</a>
+            <br/><a href="terms-of-use.php">Mention Légales</a>
         </div>
         <div class="footer-three">
             NETKART<br/>

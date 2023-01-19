@@ -23,16 +23,17 @@ if(isset($_POST["username-connection"]) and isset($_POST["password-connection"])
 
     $l_password = $l_db->get_password($l_username_connection);
 
-    //TODO call database to get if verif
-    $l_is_verif = false;
+    $l_is_verif = $l_db->f_query("SELECT verification FROM Joueur WHERE pseudo='".$l_username_connection."'")[0]['verification'];
     if (!$l_is_verif) {
         header('Location: connection.php?error=6');
     }
-    if($l_password == '' || !password_verify($l_password_connection,$l_password)){
+    else if($l_password == '' || !password_verify($l_password_connection,$l_password)){
         header('Location: connection.php?error=1');
     }
+    else {
+        header('Location: ../index.php');
+    }
     // $_SESSION['username'] = $l_username_connection;
-    header('Location: ../index.php');
     $l_db->close();
 }
 /*
@@ -70,16 +71,18 @@ elseif (isset($_POST["firstname"]) and isset($_POST["lastname"])
     else {
         $l_password_register = password_hash($l_password_register,PASSWORD_DEFAULT );
 
-        $l_is_insert_ok = $l_db->f_insert_strings("Joueur", ["nom", "prenom", "pseudo", "email", "mot_de_passe"],
-            [$l_lastname, $l_firstname, $l_username_register, $l_email, $l_password_register]);
+        $l_digits = 10;
+        $l_code_verification = "".rand(pow(10, $l_digits-1), pow(10, $l_digits)-1);
+        $l_is_insert_ok = $l_db->f_insert_strings("Joueur", ["nom", "prenom", "pseudo", "email", "mot_de_passe", "code_confirmation"],
+            [$l_lastname, $l_firstname, $l_username_register, $l_email, $l_password_register, $l_code_verification]);
 
         // Check if register is successful
         if(!$l_is_insert_ok){
             header('Location: connection.php?error=5');
         }else{
-            $l_digits = 10;
-            $l_code_verification = rand(pow(10, $l_digits-1), pow(10, $l_digits)-1);
-            $l_page = "https://netkart.alwaysdata.net/pages/mail-confirm.php?user=" . $l_username_register . "&code=" . $l_code_verification;
+
+            $l_page = "http://localhost/pages/mail-confirm.php?user=" . $l_username_register . "&code=" . $l_code_verification;
+            //$l_page = "https://netkart.alwaysdata.net/pages/mail-confirm.php?user=" . $l_username_register . "&code=" . $l_code_verification;
             echo $l_page;
             $l_message = "Bonjour " . $l_username_register . ", merci de cliquer sur ce lien pour verifié votre email: " . $l_page;
             mail($l_email,'Confirmation de mail pour Netkart', $l_message);

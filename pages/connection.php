@@ -1,4 +1,11 @@
 <?php
+/** @file /pages/connection.php
+ *
+ * PHP page that allows the user to either register or login by filling in the required fields
+ *
+ * @author SAE S3 NetKart
+ */
+
 include './header.php';
 startPage("Connexion",["../assets/style/main", "../assets/style/connection"],["../assets/script/connection"]);
 ?>
@@ -29,7 +36,7 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
                 ?>L'enregistrement du compte a rencontré une erreur, veuillez réessayer.
             <?php }
             if ($l_code_err == 6){
-                ?>Merci de verifié votre email avant de vous connecter.
+                ?>Merci de verifier votre email avant de vous connecter.
             <?php }
             if ($l_code_err == 7){
                 ?>Ce lien de confirmation n'est plus valide.
@@ -42,10 +49,10 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
             <div class="success">
                 <?php
                 if ($l_code_success == 1){
-                ?>Le compte est bel et bien créé, veillez verifié votre boite mail.
+                ?>Le compte est bel et bien créé, veillez verifier votre boite mail.
                 <?php }
                 if ($l_code_success == 2){
-                ?>email verifié, vous pouvez désormé vous connecter.
+                ?>email verifié, vous pouvez désormais vous connecter.
                 <?php }?>
 
             </div>
@@ -73,7 +80,7 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
             </div><br>
 
             <label for="mail-register">Adresse E-Mail</label>
-            <input type="text" placeholder="E-Mail" id="mail-register" maxlength="150" name="mail-register" class="form-input" required><br>
+            <input type="email" placeholder="E-Mail" id="mail-register" maxlength="150" name="mail-register" class="form-input" required><br>
 
             <label for="username-register">Pseudo</label>
             <input type="text" placeholder="Pseudo" id="username-register" maxlength="50" name="username-register" class="form-input" required><br>

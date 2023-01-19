@@ -2,7 +2,7 @@
 /*
  * @file /pages/edit_circuit_post.php
  *
- * @details
+ * @details File to delete a circuit created by user
  *
  * @author SAE S3 NetKart
  */
