@@ -99,13 +99,14 @@ if (isset($_POST["circuit_name"]) and isset($_POST["circuit_theme"]) and isset($
         print_r($files);
         foreach ($files["tmp_name"] as $key => $tmp_name){
             $imageFileType = strtolower(pathinfo($files["name"][$key],PATHINFO_EXTENSION));
-            $target_file = $target_dir . generateRandomString() . "." . $imageFileType;
+            $target_filename = generateRandomString() . "." . $imageFileType;
+            $target_file = $target_dir . $target_filename;
             if (move_uploaded_file($tmp_name, $target_file)) {
                 echo "The file ". htmlspecialchars( basename( $files["name"][$key])). " has been uploaded.";
             } else {
                 //TODO : redirect vers new-circuit et afficher que l'insertion des données est partielle et demander d'aller sur le formulaire de modification pour terminer l'insertion
             }
-            $l_is_image_insert_ok = $l_db->insert_images_question(generateRandomString() . "." . $imageFileType, $id_question);
+            $l_is_image_insert_ok = $l_db->insert_images_question($target_filename, $id_question);
             if(!$l_is_image_insert_ok){
                 //TODO : redirect vers new-circuit et afficher que l'insertion des données est partielle et demander d'aller sur le formulaire de modification pour terminer l'insertion
             }
