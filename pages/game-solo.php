@@ -6,29 +6,46 @@
  * @author SAE S3 NetKart
  */
 
+session_start();
 require './header.php';
 startPage("Jeu-solo", ["../assets/style/main", "../assets/style/game-solo"], ["../assets/script/position"]);
+
+require("./database/database.php");
+$l_db = new database();
+$l_db->connection();
+
+$id_circuit = 2;
+$questionNumber = 0;
+$name_circuit = $l_db->get_circuit_information($id_circuit)[$questionNumber]['nom_circuit'];
+$id_circuit_image = $l_db->get_circuit_information($id_circuit)[$questionNumber]['id_circuitimage'];
+$urlImage = $l_db->get_image_circuit($id_circuit_image)[$questionNumber]['image'];
+$questionCircuit = $l_db->get_question_circuit($id_circuit);
+$questionActual = $questionCircuit[$questionNumber];
+$questionConsigne = $questionActual['consigne'];
+$questionQuestion = $questionActual['question'];
+$questionReponse = $questionActual['reponse'];
+$questionId = $questionActual['id_question'];
+$questionImage = $l_db->get_image_question($questionId);
+$l_db->close();
 ?>
+<div id="save-response" style="display: none; visibility: hidden;"><?php echo $questionReponse?></div>
+
 <div class="body-page">
     <div id="game">
         <div id="left-game">
             <div id="circuit-info">
-                <h1 id="circuit-name">Nom du circuit</h1>
-                <h5 id="question-number">Numéro de la question :</h5>
-                <img alt="image1-origin" class="question-image-origin"
-                     src="https://i.ytimg.com/vi/PQX-TQDWrlw/maxresdefault.jpg">
-                <img alt="image1" class="question-image" src="https://i.ytimg.com/vi/PQX-TQDWrlw/maxresdefault.jpg">
-                <img alt="image2-origin" class="question-image-origin"
-                     src="https://i.ytimg.com/vi/NBMuB-iVQ2U/maxresdefault.jpg">
-                <img alt="image2" class="question-image" src="https://i.ytimg.com/vi/NBMuB-iVQ2U/maxresdefault.jpg">
-                <img alt="image3-origin" class="question-image-origin"
-                     src="https://i.ytimg.com/vi/G8yMRnM2Ymw/maxresdefault.jpg">
-                <img alt="image3" class="question-image" src="https://i.ytimg.com/vi/G8yMRnM2Ymw/maxresdefault.jpg">
-                <p id="question-statement">Consigne de la question c'est pas la carte igne de la questioigne de la
-                    questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la
-                    questioigne de la questioigne de la questioigne de la questioigne de la questioigne de la
-                    questioigne de la questioigne de la questioigne de la questio</p>
-
+                <h1 id='circuit-name'><?php echo $name_circuit ?> - question <?php echo $questionNumber + 1 ?></h1>
+                <div id='circuit-image'>
+                    <?php if (sizeof($questionImage) > 1) {
+                        foreach ($questionImage as $image) {?>
+                            <img alt='question-image' class='question-image-origin' src='../assets/image/<?php echo $image['image_question']; ?>'>
+                            <img alt='question-image' class='question-image'src='../assets/image/<?php echo $image['image_question']; ?>'><?php }
+                    } elseif (sizeof($questionImage) == 1) {?>
+                        <img alt='question-image' class='question-image-origin' src='../assets/image/<?php echo $questionImage[0]['image_question']; ?>'>
+                        <img alt='question-image' class='question-image'src='../assets/image/<?php echo $questionImage[0]['image_question']; ?>'><?php } ?>
+                </div>
+                <p id="question-statement"><?php echo $questionConsigne; ?></p>
+                <p id="question"><?php echo $questionQuestion; ?></p>
             </div>
             <div id="terminal">
                 <div id="terminal-output"></div>
@@ -36,11 +53,9 @@ startPage("Jeu-solo", ["../assets/style/main", "../assets/style/game-solo"], [".
                 <span id="terminal-input-text">NetKart:~$<input id="terminal-input" autocomplete="off"
                                                                 placeholder="tapez votre commande ici"></span>
             </div>
-            <script>
-            </script>
         </div>
 
-        <div id="right-game" style="background-image: url('../assets/image/circuit1.jpg');">
+        <div id="right-game" style="background-image: url('<?php echo K_IMAGE . $urlImage ?>')">
             <img src="../assets/image/gentil.webp" alt="player-kart" id="player_kart">
             <img src="../assets/image/mechant.webp" alt="enemy-kart" id="enemy_kart">
             <img src="../assets/image/flag-start.webp" alt="flag" id="flag">
@@ -60,7 +75,77 @@ startPage("Jeu-solo", ["../assets/style/main", "../assets/style/game-solo"], [".
     </div>
 </div>
 
+<script>
+    let terminal = document.getElementById("terminal-input");
+    terminal.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            let saveResponse = document.getElementById("save-response").innerHTML;
+            document.getElementById("save-response").innerHTML = "";
+            sendCommand(saveResponse);
+        }
+    });
+
+    let callProcess = 0;
+    function processCommand(input, response) {
+        response = response.toString();
+        switch (input) {
+            case "help":
+                return ["Liste des commandes disponibles : clear", "yellow"];
+
+
+            case response:
+                correctAnswer('player_kart', player_coordinates_, 'ally');
+
+                if (callProcess === 0){
+                    <?php $questionNumber += 1;
+                    $questionActual = $questionCircuit[$questionNumber];
+                    $questionConsigne = $questionActual['consigne'];
+                    $questionQuestion = $questionActual['question'];
+                    $questionReponse = $questionActual['reponse'];
+                    $questionId = $questionActual['id_question'];
+                    $l_db = new database();
+                    $l_db->connection();
+                    $questionImage = $l_db->get_image_question($questionId);
+                    $l_db->close();?>
+                    document.getElementById("circuit-name").innerHTML = "<?php echo $name_circuit ?> - question <?php echo $questionNumber + 1 ?>";
+                    document.getElementById("circuit-image").innerHTML = "<?php if (sizeof($questionImage) > 1) {foreach ($questionImage as $image) {?><img alt='question-image' class='question-image-origin' src='../assets/image/<?php echo $image['image_question']; ?>'><img alt='question-image' class='question-image'src='../assets/image/<?php echo $image['image_question']; ?>'><?php }} elseif (sizeof($questionImage) == 1) {?><img alt='question-image' class='question-image-origin' src='../assets/image/<?php echo $questionImage[0]['image_question']; ?>'><img alt='question-image' class='question-image'src='../assets/image/<?php echo $questionImage[0]['image_question']; ?>'><?php } ?>";
+                    document.getElementById("question-statement").innerHTML = "<?php echo $questionConsigne; ?>";
+                    document.getElementById("question").innerHTML = "<?php echo $questionQuestion; ?>";
+                    document.getElementById("save-response").innerHTML = "<?php echo $questionReponse?>";
+                    callProcess += 1;
+                    return ["Bonne réponse :)", "limegreen"];
+                }else{
+                    <?php $questionNumber += 1;
+                    $questionActual = $questionCircuit[$questionNumber];
+                    $questionConsigne = $questionActual['consigne'];
+                    $questionQuestion = $questionActual['question'];
+                    $questionReponse = $questionActual['reponse'];
+                    $questionId = $questionActual['id_question'];
+                    $l_db = new database();
+                    $l_db->connection();
+                    $questionImage = $l_db->get_image_question($questionId);
+                    $l_db->close();?>
+                    document.getElementById("circuit-name").innerHTML = "<?php echo $name_circuit ?> - question <?php echo $questionNumber + 1 ?>";
+                    document.getElementById("circuit-image").innerHTML = "<?php if (sizeof($questionImage) > 1) {foreach ($questionImage as $image) {?><img alt='question-image' class='question-image-origin' src='../assets/image/<?php echo $image['image_question']; ?>'><img alt='question-image' class='question-image'src='../assets/image/<?php echo $image['image_question']; ?>'><?php }} elseif (sizeof($questionImage) == 1) {?><img alt='question-image' class='question-image-origin' src='../assets/image/<?php echo $questionImage[0]['image_question']; ?>'><img alt='question-image' class='question-image'src='../assets/image/<?php echo $questionImage[0]['image_question']; ?>'><?php } ?>";
+                    document.getElementById("question-statement").innerHTML = "<?php echo $questionConsigne; ?>";
+                    document.getElementById("question").innerHTML = "<?php echo $questionQuestion; ?>";
+                    document.getElementById("save-response").innerHTML = "<?php echo $questionReponse?>";
+                    callProcess += 1;
+                    return ["Bonne réponse :)", "limegreen"];
+                }
+
+            case "clear" :
+                return ["clear", "null"];
+
+            default:
+                return ["Commande non reconnue", "red"];
+        }
+    }
+</script>
+
 <?php
 require './footer.php';
 endPage();
 ?>
+
+

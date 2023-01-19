@@ -8,16 +8,25 @@ let enemy_coordinates = populateArray(coordinate)
 let game = false;
 
 window.onload = () => {
-    let terminal = document.getElementById("terminal-input");
-    terminal.addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
-            sendCommand();
-        }
-    });
     moveImage('enemy_kart', enemy_coordinates, 'enemy');
     setInitialPosition("flag", coordinate);
     setInitialPosition("enemy_kart", coordinate);
     setInitialPosition("player_kart", coordinate);
+}
+
+function sendCommand(questionResponse) {
+    const input = document.getElementById("terminal-input");
+    const output = document.getElementById("terminal-output");
+    const response = processCommand(input.value, questionResponse);
+    if (input.value && response[0] !== 'clear') {
+        output.innerHTML += '<span style="color: cornflowerblue">NetKart:~$</span>  ' + input.value + "<br>";
+        output.innerHTML += "<span style=\"color: " + response[1] + "\">" + response[0] + "</span>" + "<br>";
+        input.value = "";
+        scroll(output);
+    } else if (response[0] === "clear") {
+        output.innerHTML = '';
+        input.value = "";
+    }
 }
 
 function displayModal() {
@@ -45,7 +54,6 @@ function displayModal() {
 function moveImage(imageId, coordinates, status) {
     if (!game) {
         if (status === "ally")
-            console.log(coordinates.length)
         if (coordinates.length === 0) {
             return;
         }
@@ -82,8 +90,6 @@ function correctAnswer(imageId, coordinates, status) {
 function setVictory(element, status) {
     let modal = document.getElementById(element);
     game = true;
-    console.log("enemy" === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>");
-    console.log("ally" === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>");
     modal.innerHTML = status === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>";
     displayModal();
 }
@@ -118,50 +124,6 @@ function populateArray(coordinates) {
     return arrayCoordinates;
 }
 
-function sendCommand() {
-    const input = document.getElementById("terminal-input");
-    const output = document.getElementById("terminal-output");
-    const response = processCommand(input.value);
-    if (input.value && response[0] !== 'clear') {
-        output.innerHTML += '<span style="color: cornflowerblue">NetKart:~$</span>  ' + input.value + "<br>";
-        output.innerHTML += "<span style=\"color: " + response[1] + "\">" + response[0] + "</span>" + "<br>";
-        input.value = "";
-        scroll(output);
-    } else if (response[0] === "clear") {
-        output.innerHTML = '';
-        input.value = "";
-    }
-}
-
 function scroll(item) {
     item.scrollTop = item.scrollHeight - item.clientHeight;
 }
-
-function processCommand(input) {
-    switch (input) {
-        case "hello":
-            return ["Bonjour!", "limegreen"];
-
-        case "help":
-            return ["Liste des commandes disponibles : hello, a, clear", "yellow"];
-
-        case "a" :
-            correctAnswer('player_kart', player_coordinates_, 'ally')
-            return ["Le joueur avance :)", "limegreen"];
-
-        case "v" :
-            setVictory('modal-body', "ally")
-            return ["Le joueur gagne :)", "limegreen"];
-
-        case "d" :
-            setVictory('modal-body', "enemy")
-            return ["Le joueur perd :(", "limegreen"];
-
-        case "clear" :
-            return ["clear", "null"];
-
-        default:
-            return ["Commande non reconnue", "red"];
-    }
-}
-
