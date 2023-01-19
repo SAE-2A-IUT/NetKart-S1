@@ -8,7 +8,7 @@
  */
 require ("./database/database.php");
 include './header.php';
-startPage("Themes",["../assets/style/main", "../assets/style/themes"],["../assets/script/theme"]);
+startPage("Edit",["../assets/style/main", "../assets/style/edit_theme"],["../assets/script/theme"]);
 
 /*
  * Check if password and confirmation are set
@@ -26,29 +26,73 @@ if(True){ # isset($_SESSION id joueur
     $l_id_circuit_user = $l_db->get_circuit_created_by_user($l_user_id);
 
     // Get the information of circuits created by user
-    foreach ($l_id_circuit_user as $item){
+    $l_count_loop = 0;
+    ?>
+    <div class="create_ciruit" id="UwU">
+    <form class="create" method="post" action="new-circuit.php">
+        <input type="submit" value="Créer un circuit">
+    </form>
+    </div>
+    <div class="all_theme">
 
-        $l_circuit_informations = $l_db->get_circuit_information($item["id_circuit"]);
-        foreach ($l_circuit_informations as $item){
-            echo "Circuit id : ".$item["id_circuit"].PHP_EOL.
-                "Nom circuit".$item["nom_circuit"].PHP_EOL.
-                "Nombre points".$item["points"].PHP_EOL.
-                $l_img = $l_db->get_image_circuit($item["id_circuitimage"])[0]["image"];
-                "Circuit image".$l_img.PHP_EOL;?>
-            <form method="post" action="edit_circuit_post.php">
-                <input type="hidden" value="<?php echo $item["id_circuit"]; ?>" name="id_circuit_to_delete">
-                <input type="submit" value="Supprimer">
-            </form>
+    <?php
+    foreach ($l_id_circuit_user as $items){
+        ?>
 
-            <form method="post" action="new-circuit_post.php">
-                <input type="hidden" value="<?php echo $item["id_circuit"]; ?>" name="id_circuit_to_modify">
-                <input type="submit" value="Modifier">
-            </form>
+            <?php
+        $l_circuit_informations = $l_db->get_circuit_information($items["id_circuit"]);
+        foreach ($l_circuit_informations as $item):?>
+            <?php $l_count_loop = $l_count_loop + 1; ?>
+        <script>
+            function Confirm(count) {
+                document.getElementById("first_delete" + count).style.display = "none";
+                document.getElementById("delete" + count).style.display = "block";
+            }
 
+            function redirect(link) {
+                window.open(link);
+            }
+        </script>
+        <div class="modify_delete">
+            <div class="theme">
+                <img class="theme_image" alt="circuit" src=<?=K_IMAGE . $l_db->get_image_circuit($item["id_circuitimage"])[0]["image"].PHP_EOL;?>>
+                <h3><?= $item["nom_circuit"].PHP_EOL;?></h3>
+                <p class="points">Points: <?= $item["points"].PHP_EOL;?></p>
+                <div class="form_div">
+                    <form class="modify" method="post" action="new-circuit_post.php">
+                        <input type="hidden" value="<?php echo $item["id_circuit"]; ?>" name="id_circuit_to_modify">
+                        <input type="submit" value="Modifier">
+                    </form>
+                    <form class="first_delete" id="first_delete<?= $l_count_loop;?>" method="post" action="javascript:Confirm(<?= $l_count_loop;?>)">
+                        <input type="submit" value="Supprimer">
+                    </form>
+                    <form class="delete" id="delete<?= $l_count_loop;?>" method="post" action="edit_circuit_post.php">
+                            <input type="hidden" value="<?php echo $item["id_circuit"]; ?>" name="id_circuit_to_delete">
+                            <input type="submit" value="Confirmer">
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+        <?php endforeach; ?>
         <?php
         }
 
     }
+    ?></div><?php
+    if ($l_count_loop == 0) {
+        ?>
+        <script>document.getElementById("UwU").style.display = "none";</script>
+        <div class="no_circuit">
+            <h1>Aucun circuit n'a encore été crée</h1>
+            <form class="create2" method="post" action="new-circuit.php">
+                <input type="submit" value="Créer un circuit">
+            </form>
+        </div>
+        <?php
+    }
+
 
     //TODO : afficher les données sous forme d'éléments comme dans la page thèmes
 
