@@ -104,7 +104,7 @@ if(True){ # isset($_SESSION id joueur
 
 
     //TODO : renvoyer sur la page, afficher que l'inscription est ok et demander de se connecter
-}
+
 
 //TODO : renvoyer sur la page (redirection automatique VERS LA PAGE D'ERREUR si aucun des champs n'est rempli)<?php
 

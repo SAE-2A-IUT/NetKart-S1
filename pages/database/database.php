@@ -179,7 +179,7 @@ class database
     /*
      * @brief this function return the circuits created by an user
      *
-     * @param $A_PLAYER_ID (String)
+     * @param $A_PLAYER_ID (Integer) : id of the player to get circuits from
      *
      * @return (Array of Integers) : the id of all the circuits created by a given user
      */
@@ -198,9 +198,9 @@ class database
     /*
      * @brief this function return the circuits created by an user
      *
-     * @param $A_CIRCUIT_ID ()
+     * @param $A_CIRCUIT_ID (Integer) : id of the circuit to get informations from
      *
-     * @return () :
+     * @return (Array) : informations as id, name, points and image of circuit
      */
     function get_circuit_information($A_CIRCUIT_ID)
     {
@@ -411,6 +411,10 @@ class database
             return $l_question_id[0]["id_groupe"];
         }
         return -1;
+    }
+
+    function insert_victory(){
+        //$l_is_insert_ok = self::f_query("INSERT INTO <3 UwU")
     }
 }
 //TODO : voir pour de la composition
