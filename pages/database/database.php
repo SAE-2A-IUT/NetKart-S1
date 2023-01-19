@@ -27,7 +27,7 @@ class database
                          $A_USERNAME = "netkart_admin",
                          $A_PASSWORD = "NetkartSAES3",
                          $A_DBNAME = "netkart_db_main"
-    )
+                        )
     {
         $this->l_servername = $A_SERVERNAME;
         $this->l_username = $A_USERNAME;
@@ -193,7 +193,7 @@ class database
             return [];
         }
         return $l_result->fetch_all(MYSQLI_ASSOC);
-    } // TODO : Return list of id
+    }
 
     /*
      * @brief this function return the circuits created by an user
@@ -223,13 +223,31 @@ class database
      */
     function get_image_circuit($A_IMAGE_ID)
     {
-        $l_sql = "SELECT image  FROM Circuit_Image WHERE id_circuitimage=" . $A_IMAGE_ID;
-        $l_result = $this->l_conn->query($l_sql);
-        if (!$l_result) {
-            echo("Error description: " . $this->l_conn->error);
-            return "";
-        }
-        return $l_result->fetch_all(MYSQLI_ASSOC);
+        return self::f_query("SELECT image  FROM Circuit_Image WHERE id_circuitimage=" . $A_IMAGE_ID);
+    }
+
+    /*
+     * @brief this function return each question of a circuit
+     *
+     * @param $A_CIRCUIT_ID (String) : id of the circuit
+     *
+     * @return():
+     */
+    function get_question_circuit($A_CIRCUIT_ID)
+    {
+        return self::f_query("SELECT id_question, consigne, question, reponse  FROM Question WHERE id_circuit=" . $A_CIRCUIT_ID);
+    }
+
+    /*
+     * @brief this function return each path of image for a circuit
+     *
+     * @param $A_CIRCUIT_ID (String) : id of the circuit
+     *
+     * @return (String) : path of each image
+     */
+    function get_image_question($A_QUESTION_ID)
+    {
+        return self::f_query("SELECT image_question FROM Question_Image WHERE id_question=" . $A_QUESTION_ID);
     }
 
     /*
@@ -259,7 +277,7 @@ class database
                 }
 
                 $l_all_links = self::f_query("SELECT id_questionlien FROM Question_Lien WHERE id_question=" . $l_question);
-                    if ($l_all_links == NULL) {
+                if ($l_all_links != NULL) {
                     foreach ($l_all_links as $l_links) {
                         foreach ($l_links as $l_link) {
                             self::f_delete("Question_Lien", "id_questionlien=" . $l_link);
@@ -341,6 +359,19 @@ class database
      */
     function insert_links($A_LINK, $A_QUESTION){
         $l_is_insert_ok = self::f_query("INSERT INTO Question_Lien (lien, id_question) VALUES ('".$A_LINK."', ".$A_QUESTION.")",true);
+        return $l_is_insert_ok=="Success";
+    }
+
+    /*
+     * @brief this function insert the image given with a specified question
+     *
+     * @param $A_IMAGE (String) : name of the image uploaded
+     * @param $A_QUESTION (Integer) : id of the question the link refers to
+     *
+     * @return (Boolean) : True if insert successful, False otherwise
+     */
+    function insert_images_question($A_IMAGE, $A_QUESTION){
+        $l_is_insert_ok = self::f_query("INSERT INTO Question_Image (image_question, id_question) VALUES ('".$A_IMAGE."', ".$A_QUESTION.")",true);
         return $l_is_insert_ok=="Success";
     }
 

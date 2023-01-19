@@ -44,7 +44,8 @@ $l_score= 999;
             </div>
             <button id="delete_account" class="delete">Supprimer compte</button>
             <div id="horizontal" class="horizontal">
-                <form>
+                <form method="post" action="user_post.php">
+                    <input type="hidden" name="delete_account" value="ok">
                     <input type="submit" value="Continuer" class="send_from" id="button_click">
                 </form>
                 <button id="cancel_delete_account">annuler</button>
