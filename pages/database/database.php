@@ -345,6 +345,19 @@ class database
     }
 
     /*
+     * @brief this function insert the image given with a specified question
+     *
+     * @param $A_IMAGE (String) : name of the image uploaded
+     * @param $A_QUESTION (Integer) : id of the question the link refers to
+     *
+     * @return (Boolean) : True if insert successful, False otherwise
+     */
+    function insert_images_question($A_IMAGE, $A_QUESTION){
+        $l_is_insert_ok = self::f_query("INSERT INTO Question_Image (image_question, id_question) VALUES ('".$A_IMAGE."', ".$A_QUESTION.")",true);
+        return $l_is_insert_ok=="Success";
+    }
+
+    /*
      * @brief this function returns all the themes in database
      *
      * @return (Array) : array that contains the id and name of all themes

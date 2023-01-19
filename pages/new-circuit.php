@@ -12,7 +12,7 @@ $l_nb_max_question = K_MAX_QUESTIONS;
 $l_nb_max_question_images = K_MAX_IMAGES;
 ?>
 
-    <form method="post" class="new_circuit_form body" action="new-circuit_post.php">
+    <form method="post" class="new_circuit_form body" action="new-circuit_post.php" enctype="multipart/form-data">
         <input type="hidden" id="image_limit" value="<?php echo $l_nb_max_question_images ?>">
         <div class="left">
             <label>Nom du circuit</label>
@@ -82,7 +82,7 @@ $l_nb_max_question_images = K_MAX_IMAGES;
                             <label class="file_label" for="question_files_<?php echo $l_nb_question;?>">Images</label>
                             <input type="hidden" value="<?php echo $l_nb_question-1;?>">
 
-                            <input class="img_store" id="question_files_<?php echo $l_nb_question;?>" name="question_files_<?php echo $l_nb_question;?>" type="file" accept="image/*" multiple>
+                            <input class="img_store" id="question_files_<?php echo $l_nb_question;?>" name="question_files_<?php echo $l_nb_question;?>[]" type="file" accept="image/*" multiple>
                             <?php
                             for ($l_nb_question_image = 0; $l_nb_question_image<$l_nb_max_question_images; ++$l_nb_question_image){?>
                                 <div>

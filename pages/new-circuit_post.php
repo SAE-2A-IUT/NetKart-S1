@@ -8,6 +8,16 @@
  */
 require("./database/database.php");
 
+function generateRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
 $l_db = new database();
 
 $l_db->connection();
@@ -34,6 +44,33 @@ if (isset($_POST["circuit_name"]) and isset($_POST["circuit_theme"]) and isset($
     } elseif (isset($_POST["other_theme"]) or isset($_POST["other_theme_desc"])) {
         $l_theme_selected = "1";
     }
+    $target_dir = "../assets/image/upload/";
+    foreach ($_FILES as $files) {
+        if ($files["error"][0] == 4) {
+            continue;
+        }
+        foreach ($files["tmp_name"] as $tmp_name) {
+            $check = getimagesize($tmp_name);
+            if ($check === false) {
+                echo "image error !";
+                //exit;
+            }
+        }
+
+        foreach ($files["name"] as $name) {
+            if (file_exists($name)) {
+                echo "already exists";
+                //exit;
+            }
+        }
+
+        foreach ($files["size"] as $size) {
+            if ($size > 5000000) {
+                echo "size exceed";
+                //exit;
+            }
+        }
+    }
 
     //Insert circuit
     $l_new_circuit_id = $l_db->insert_circuit($l_circuit_name, $l_circuit_points, $l_theme_selected, $l_player_id, $l_image_selected);
@@ -56,6 +93,24 @@ if (isset($_POST["circuit_name"]) and isset($_POST["circuit_theme"]) and isset($
             if (!$l_is_link_insert_ok) {
                 //TODO : redirect vers new-circuit et afficher que l'insertion des données est partielle et demander d'aller sur le formulaire de modification pour terminer l'insertion
             }
+        }
+        // Insert images
+        $files=$_FILES["question_files_".$i];
+        print_r($files);
+        foreach ($files["tmp_name"] as $key => $tmp_name){
+            $imageFileType = strtolower(pathinfo($files["name"][$key],PATHINFO_EXTENSION));
+            $target_filename = generateRandomString() . "." . $imageFileType;
+            $target_file = $target_dir . $target_filename;
+            if (move_uploaded_file($tmp_name, $target_file)) {
+                echo "The file ". htmlspecialchars( basename( $files["name"][$key])). " has been uploaded.";
+            } else {
+                //TODO : redirect vers new-circuit et afficher que l'insertion des données est partielle et demander d'aller sur le formulaire de modification pour terminer l'insertion
+            }
+            $l_is_image_insert_ok = $l_db->insert_images_question($target_filename, $id_question);
+            if(!$l_is_image_insert_ok){
+                //TODO : redirect vers new-circuit et afficher que l'insertion des données est partielle et demander d'aller sur le formulaire de modification pour terminer l'insertion
+            }
+
         }
     }
 
