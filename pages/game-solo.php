@@ -38,11 +38,11 @@ $l_db->close();
                 <div id='circuit-image'>
                     <?php if (sizeof($questionImage) > 1) {
                         foreach ($questionImage as $image) {?>
-                            <img alt='question-image' class='question-image-origin' src='../assets/image/<?php echo $image['image_question']; ?>'>
-                            <img alt='question-image' class='question-image'src='../assets/image/<?php echo $image['image_question']; ?>'><?php }
+                            <img alt='question-image' class='question-image-origin' src='../assets/image/upload/<?php echo $image['image_question']; ?>'>
+                            <img alt='question-image' class='question-image'src='../assets/image/upload/<?php echo $image['image_question']; ?>'><?php }
                     } elseif (sizeof($questionImage) == 1) {?>
-                        <img alt='question-image' class='question-image-origin' src='../assets/image/<?php echo $questionImage[0]['image_question']; ?>'>
-                        <img alt='question-image' class='question-image'src='../assets/image/<?php echo $questionImage[0]['image_question']; ?>'><?php } ?>
+                        <img alt='question-image' class='question-image-origin' src='../assets/image/upload/<?php echo $questionImage[0]['image_question']; ?>'>
+                        <img alt='question-image' class='question-image'src='../assets/image/upload/<?php echo $questionImage[0]['image_question']; ?>'><?php } ?>
                 </div>
                 <p id="question-statement"><?php echo $questionConsigne; ?></p>
                 <p id="question"><?php echo $questionQuestion; ?></p>
@@ -108,7 +108,7 @@ $l_db->close();
                     $questionImage = $l_db->get_image_question($questionId);
                     $l_db->close();?>
                     document.getElementById("circuit-name").innerHTML = "<?php echo $name_circuit ?> - question <?php echo $questionNumber + 1 ?>";
-                    document.getElementById("circuit-image").innerHTML = "<?php if (sizeof($questionImage) > 1) {foreach ($questionImage as $image) {?><img alt='question-image' class='question-image-origin' src='../assets/image/<?php echo $image['image_question']; ?>'><img alt='question-image' class='question-image'src='../assets/image/<?php echo $image['image_question']; ?>'><?php }} elseif (sizeof($questionImage) == 1) {?><img alt='question-image' class='question-image-origin' src='../assets/image/<?php echo $questionImage[0]['image_question']; ?>'><img alt='question-image' class='question-image'src='../assets/image/<?php echo $questionImage[0]['image_question']; ?>'><?php } ?>";
+                    document.getElementById("circuit-image").innerHTML = "<?php if (sizeof($questionImage) > 1) {foreach ($questionImage as $image) {?><img alt='question-image' class='question-image-origin' src='../assets/image/upload/<?php echo $image['image_question']; ?>'><img alt='question-image' class='question-image'src='../assets/image/upload/<?php echo $image['image_question']; ?>'><?php }} elseif (sizeof($questionImage) == 1) {?><img alt='question-image' class='question-image-origin' src='../assets/image/upload/<?php echo $questionImage[0]['image_question']; ?>'><img alt='question-image' class='question-image'src='../assets/image/upload/<?php echo $questionImage[0]['image_question']; ?>'><?php } ?>";
                     document.getElementById("question-statement").innerHTML = "<?php echo $questionConsigne; ?>";
                     document.getElementById("question").innerHTML = "<?php echo $questionQuestion; ?>";
                     document.getElementById("save-response").innerHTML = "<?php echo $questionReponse?>";
@@ -126,7 +126,7 @@ $l_db->close();
                     $questionImage = $l_db->get_image_question($questionId);
                     $l_db->close();?>
                     document.getElementById("circuit-name").innerHTML = "<?php echo $name_circuit ?> - question <?php echo $questionNumber + 1 ?>";
-                    document.getElementById("circuit-image").innerHTML = "<?php if (sizeof($questionImage) > 1) {foreach ($questionImage as $image) {?><img alt='question-image' class='question-image-origin' src='../assets/image/<?php echo $image['image_question']; ?>'><img alt='question-image' class='question-image'src='../assets/image/<?php echo $image['image_question']; ?>'><?php }} elseif (sizeof($questionImage) == 1) {?><img alt='question-image' class='question-image-origin' src='../assets/image/<?php echo $questionImage[0]['image_question']; ?>'><img alt='question-image' class='question-image'src='../assets/image/<?php echo $questionImage[0]['image_question']; ?>'><?php } ?>";
+                    document.getElementById("circuit-image").innerHTML = "<?php if (sizeof($questionImage) > 1) {foreach ($questionImage as $image) {?><img alt='question-image' class='question-image-origin' src='../assets/image/upload/<?php echo $image['image_question']; ?>'><img alt='question-image' class='question-image'src='../assets/image/upload/<?php echo $image['image_question']; ?>'><?php }} elseif (sizeof($questionImage) == 1) {?><img alt='question-image' class='question-image-origin' src='../assets/image/upload/<?php echo $questionImage[0]['image_question']; ?>'><img alt='question-image' class='question-image'src='../assets/image/upload/<?php echo $questionImage[0]['image_question']; ?>'><?php } ?>";
                     document.getElementById("question-statement").innerHTML = "<?php echo $questionConsigne; ?>";
                     document.getElementById("question").innerHTML = "<?php echo $questionQuestion; ?>";
                     document.getElementById("save-response").innerHTML = "<?php echo $questionReponse?>";
