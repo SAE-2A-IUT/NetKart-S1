@@ -8,16 +8,25 @@ let enemy_coordinates = populateArray(coordinate)
 let game = false;
 
 window.onload = () => {
-    let terminal = document.getElementById("terminal-input");
-    terminal.addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
-            sendCommand();
-        }
-    });
     moveImage('enemy_kart', enemy_coordinates, 'enemy');
     setInitialPosition("flag", coordinate);
     setInitialPosition("enemy_kart", coordinate);
     setInitialPosition("player_kart", coordinate);
+}
+
+function sendCommand(questionResponse) {
+    const input = document.getElementById("terminal-input");
+    const output = document.getElementById("terminal-output");
+    const response = processCommand(input.value, questionResponse);
+    if (input.value && response[0] !== 'clear') {
+        output.innerHTML += '<span style="color: cornflowerblue">NetKart:~$</span>  ' + input.value + "<br>";
+        output.innerHTML += "<span style=\"color: " + response[1] + "\">" + response[0] + "</span>" + "<br>";
+        input.value = "";
+        scroll(output);
+    } else if (response[0] === "clear") {
+        output.innerHTML = '';
+        input.value = "";
+    }
 }
 
 function displayModal() {
@@ -113,21 +122,6 @@ function populateArray(coordinates) {
         arrayCoordinates.push(generateCoordinates(coordinates[i][0], coordinates[i][1], coordinates[i + 1][0], coordinates[i + 1][1]));
     }
     return arrayCoordinates;
-}
-
-function sendCommand() {
-    const input = document.getElementById("terminal-input");
-    const output = document.getElementById("terminal-output");
-    const response = processCommand(input.value);
-    if (input.value && response[0] !== 'clear') {
-        output.innerHTML += '<span style="color: cornflowerblue">NetKart:~$</span>  ' + input.value + "<br>";
-        output.innerHTML += "<span style=\"color: " + response[1] + "\">" + response[0] + "</span>" + "<br>";
-        input.value = "";
-        scroll(output);
-    } else if (response[0] === "clear") {
-        output.innerHTML = '';
-        input.value = "";
-    }
 }
 
 function scroll(item) {

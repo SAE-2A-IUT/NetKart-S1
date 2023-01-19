@@ -14,14 +14,16 @@ $id_circuit_image = $l_db->get_circuit_information($id_circuit)[$questionNumber]
 $urlImage = $l_db->get_image_circuit($id_circuit_image)[$questionNumber]['image'];
 $questionCircuit = $l_db->get_question_circuit($id_circuit);
 $questionActual = $questionCircuit[$questionNumber];
+print_r($questionCircuit);
 $questionConsigne = $questionActual['consigne'];
 $questionQuestion = $questionActual['question'];
 $questionReponse = $questionActual['reponse'];
 $questionId = $questionActual['id_question'];
 $questionImage = $l_db->get_image_question($questionId);
 $l_db->close();
-
 ?>
+<div id="save-response" style="display: none"><?php echo $questionReponse?></div>
+<div id="save-circuit" style="display: none"><?php echo $questionCircuit?></div>
 <div class="body-page">
     <div id="game">
         <div id="left-game">
@@ -68,7 +70,17 @@ $l_db->close();
 </div>
 
 <script>
-    function processCommand(input) {
+    let terminal = document.getElementById("terminal-input");
+    terminal.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            sendCommand(document.getElementById("save").innerText);
+        }
+    });
+
+    function processCommand(input, response) {
+        response = response.toString();
+        let circuit = document.getElementById("save-circuit").innerHTML;
+
         switch (input) {
             case "hello":
                 return ["Bonjour!", "limegreen"];
@@ -91,10 +103,13 @@ $l_db->close();
             case 'test' :
                 return ["Le joueur perd :(", "limegreen"];
 
-            case (<?php echo $questionReponse?>).toString():
+            case response:
                 correctAnswer('player_kart', player_coordinates_, 'ally');
 
-                <?php $questionNumber += 1;$questionActual = $questionCircuit[$questionNumber];
+
+
+                <?php $questionNumber += 1;
+                $questionActual = $questionCircuit[$questionNumber];
                 $questionConsigne = $questionActual['consigne'];
                 $questionQuestion = $questionActual['question'];
                 $questionReponse = $questionActual['reponse'];
@@ -109,10 +124,11 @@ $l_db->close();
                     <img alt='question-image' class='question-image-origin' src='../assets/image/<?php echo $image['image_question']; ?>'>
                 <img alt='question-image' class='question-image'src='../assets/image/<?php echo $image['image_question']; ?>'><?php }
                 } elseif (sizeof($questionImage) == 1) {?>
-                <img alt='question-image' class='question-image-origin' src='../assets/image/<?php echo $questionImage[0]['image_question']; ?>'>
-                <img alt='question-image' class='question-image'src='../assets/image/<?php echo $questionImage[0]['image_question']; ?>'><?php } ?>";
+                <img alt='question-image' class='question-image-origin' src='../assets/image/<?php echo $questionImage[$questionNumber]['image_question']; ?>'>
+                <img alt='question-image' class='question-image'src='../assets/image/<?php echo $questionImage[$questionNumber]['image_question']; ?>'><?php } ?>";
                 document.getElementById("question-statement").innerHTML = "<?php echo $questionConsigne; ?>";
                 document.getElementById("question").innerHTML = "<?php echo $questionQuestion; ?>";
+                document.getElementById("save").innerHTML = "<?php echo $questionReponse?>";
                 return ["Le joueur perd :(", "limegreen"];
 
             case "clear" :
