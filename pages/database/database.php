@@ -413,8 +413,16 @@ class database
         return -1;
     }
 
-    function insert_victory(){
-        //$l_is_insert_ok = self::f_query("INSERT INTO <3 UwU")
+    /**
+     * @brief : this function insert a victory into database for game-solo
+     *
+     * @param $A_ID_JOUEUR (Integer) : id of the player who won the game
+     * @param $A_ID_CIRCUIT (Integer) : id of the circuit won by player
+     * @return (boolean) : True if insert successful, False otherwise
+     */
+    function insert_victory($A_ID_JOUEUR, $A_ID_CIRCUIT){
+        $l_is_insert_ok = self::f_query("INSERT INTO Statistiques (id_joueurStatistiques, id_circuitStatistiques) VALUES (".$A_ID_JOUEUR.",".$A_ID_CIRCUIT.")", true);
+        return $l_is_insert_ok=="Success";
     }
 }
 //TODO : voir pour de la composition
