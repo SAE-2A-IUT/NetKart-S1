@@ -7,8 +7,16 @@
  */
 
 require 'header.php';
-startPage("Utilisateur",[K_STYLE."main",K_STYLE."user"],[]);
+startPage("Utilisateur",[K_STYLE."main",K_STYLE."user"],[K_SCRIPT."check_connection"]);
+
 $l_score= 999;
+
+?>
+
+    <script>
+        check_connection(<?php isset($_SESSION['id_user'])?>);
+    </script>
+<?php
 ?>
 
     <div class="body">
