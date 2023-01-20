@@ -78,6 +78,19 @@
     color: var(--dark-blue);
 }
 
+#icon {
+    width: 3em;
+    height: 100%;
+    margin-right: 7%;
+}
+
+#url{
+    position: absolute;
+    display: flex;
+    top: -22%;
+    align-items: center;
+}
+
 .question-image, .question-image-origin {
     width: 30%;
 }
@@ -105,6 +118,7 @@
     width: 80vh;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 2px;
+    z-index: 3;
 }
 
 #modal-close {
@@ -142,6 +156,17 @@
 
 #modal-title {
     font-size: 1.35em;
+}
+
+#url{
+    display: flex;
+    align-items: center;
+    width: 96%;
+    background-color: #EBEBEB;
+    padding: 2%;
+    border-radius: 4px;
+    overflow: hidden;
+    line-height: 150%;
 }
 
 #player_kart, #enemy_kart {
