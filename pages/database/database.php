@@ -441,6 +441,14 @@ class database
         $l_is_delete_ok = self::f_delete("Groupe","id_groupe=".$A_ID_SESSION);
         return $l_is_delete_ok;
     }
+
+    function get_score_player_id($A_ID_JOUEUR){
+        $l_score = self::f_query("SELECT SUM(points) FROM Circuit, Statistiques WHERE id_circuit = id_circuitStatistiques AND id_joueurStatistiques=".$A_ID_JOUEUR);
+        if($l_score=="Error"){
+            return -1;
+        }
+        return $l_score[0]["SUM(points)"];
+    }
 }
 //TODO : voir pour de la composition
 

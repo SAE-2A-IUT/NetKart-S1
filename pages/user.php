@@ -6,9 +6,23 @@
  * @author SAE S3 NetKart
  */
 
-require 'header.php';
+require ('header.php');
+require ("./database/database.php");
+
 startPage("Utilisateur",[K_STYLE."main",K_STYLE."user"],[]);
-$l_score= 999;
+
+$l_player_id = 1;
+
+$l_db = new database();
+
+$l_db->connection();
+
+$l_score= $l_db->get_score_player_id($l_player_id);
+
+if($l_score == NULL){
+    $l_score = 0;
+}
+
 ?>
 
     <div class="body">
