@@ -1,6 +1,16 @@
 <?php
 include './header.php';
 startPage("Création une session",["../assets/style/main", "../assets/style/create-session"],[]);
+require 'database/database.php';
+$l_db = new database();
+$l_db->connection();
+
+if(($l_db->verifyPlayerSession(12))&& !(isset($_GET['success']))){
+    header('Location: host-session.php');
+}
+unset($_SESSION['session_hosted']);
+
+$l_db->close();
 ?>
 <div class="body-page">
     <div id="page-description">

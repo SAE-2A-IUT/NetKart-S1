@@ -412,6 +412,32 @@ class database
         }
         return -1;
     }
+
+    /**
+     * Return a boolean to know if the user has a session.
+     *
+     * @param $A_ID_JOUEUR (Int) User id.
+     * @return (Boolean) If the user has a session.
+     */
+    function verifyPlayerSession($A_ID_JOUEUR){
+        return self::f_query("SELECT count(*) FROM Groupe WHERE id_joueur ='".$A_ID_JOUEUR."'")[0]['count(*)'];
+    }
+
+    /**
+     * Return the session data.
+     *
+     * @param $A_ID_JOUEUR (Int) User id.
+     * @return (Array) Session data
+     */
+    function getSessionByHost($A_ID_JOUEUR){
+        if (self::f_query("SELECT * FROM Groupe a, Groupe_Joueur b WHERE a.id_joueur =".$A_ID_JOUEUR." AND a.id_groupe = b.id_groupe")){
+            return self::f_query("SELECT * FROM Groupe a, Groupe_Joueur b WHERE a.id_joueur =".$A_ID_JOUEUR." AND a.id_groupe = b.id_groupe ORDER BY b.score DESC");
+        }
+        if (self::f_query("SELECT * FROM Groupe WHERE id_joueur =".$A_ID_JOUEUR)){
+            return self::f_query("SELECT * FROM Groupe WHERE id_joueur =".$A_ID_JOUEUR)[0];
+        }
+        return [];
+    }
 }
 //TODO : voir pour de la composition
 

@@ -28,7 +28,7 @@ function signed2hex($l_value,$l_nb)
 
 $l_code = getSessionCode('Tibo',date('is'));
 
-$l_id_joueur = 15;
+$l_id_joueur = 12;
 
 $l_db = new database();
 

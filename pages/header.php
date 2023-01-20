@@ -6,6 +6,8 @@
  * @author SAE S3 NetKart
  */
 
+session_start();
+
 require 'constants.php';
 
 
