@@ -81,7 +81,8 @@
 #icon {
     width: 3em;
     height: 100%;
-    margin-right: 7%;
+    margin-right: 15%;
+    margin-left: 11%;
 }
 
 #url{
@@ -91,8 +92,10 @@
     align-items: center;
 }
 
-.question-image, .question-image-origin {
-    width: 30%;
+.question-image-origin {
+    max-width: 30%;
+    max-height: 5.5em;
+    margin-right: 2%;
 }
 
 .question-image-origin:hover + .question-image, .question-image:hover {
@@ -167,6 +170,7 @@
     border-radius: 4px;
     overflow: hidden;
     line-height: 150%;
+    white-space: nowrap;
 }
 
 #player_kart, #enemy_kart {

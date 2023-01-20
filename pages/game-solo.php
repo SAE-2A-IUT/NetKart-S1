@@ -60,15 +60,15 @@ $l_db->close();
             <div id="modal-url">
                 <?php if (sizeof($questionUrl) > 1) {?>
                 <div id="url">
-                <img alt="url-icon" src="../assets/image/link.webp" id="icon"><div><?php
+                <img alt="url-icon" src="../assets/image/clue.webp" id="icon"><div><?php $nbLink = 1;
                     foreach ($questionUrl as $url) {?>
-                            <a href="<?php echo $url['lien']?>" target="_blank"><?php echo $url['lien']?></a>
+                            <a href="<?php echo $url['lien']?>" target="_blank"><li>Indice <?php echo $nbLink; $nbLink++?></li></a>
                         <?php }?>
                     </div></div><?php
                 } elseif (sizeof($questionUrl) == 1) {?>
                     <div id="url">
-                <img alt="url-icon" src="../assets/image/link.webp" id="icon"><div>
-                    <a href="<?php echo $questionUrl[0]['lien']?>" target="_blank"><?php echo $questionUrl[0]['lien']?></a>
+                <img alt="url-icon" src="../assets/image/clue.webp" id="icon"><div>
+                    <a href="<?php echo $questionUrl[0]['lien']?>" target="_blank"><li>Indice 1</li></a>
             </div></div>
                    <?php } ?>
             </div>
@@ -128,7 +128,7 @@ $l_db->close();
                     document.getElementById("circuit-name").innerHTML = "<?php echo $name_circuit ?> - question <?php echo $questionNumber + 1 ?>";
                     document.getElementById("circuit-image").innerHTML = "<?php if (sizeof($questionImage) > 1) {foreach ($questionImage as $image) {?><img alt='question-image' class='question-image-origin' src='../assets/image/upload/<?php echo $image['image_question']; ?>'><img alt='question-image' class='question-image'src='../assets/image/upload/<?php echo $image['image_question']; ?>'><?php }} elseif (sizeof($questionImage) == 1) {?><img alt='question-image' class='question-image-origin' src='../assets/image/upload/<?php echo $questionImage[0]['image_question']; ?>'><img alt='question-image' class='question-image'src='../assets/image/upload/<?php echo $questionImage[0]['image_question']; ?>'><?php } ?>";
                     document.getElementById("question-statement").innerHTML = "<?php echo $questionConsigne; ?>";
-                    document.getElementById("modal-url").innerHTML = "<?php if (sizeof($questionUrl) > 1) {?><div id='url'><img src='../assets/image/link.webp' id='icon'><div><?php foreach ($questionUrl as $url) {?><a href='<?php echo $url['lien']?>' target='_blank'><?php echo $url['lien']?></a><?php }?></div></div><?php } elseif (sizeof($questionUrl) == 1) {?><div id='url'><img src='../assets/image/link.webp' id='icon'></img><div><a href='<?php echo $questionUrl[0]['lien']?>' target='_blank'><?php echo $questionUrl[0]['lien']?></a></div></div><?php } ?>";
+                    document.getElementById("modal-url").innerHTML = "<?php if (sizeof($questionUrl) > 1) {?><div id='url'><img src='../assets/image/clue.webp' id='icon'><div><?php $nbLink=1; foreach ($questionUrl as $url) {?><a href='<?php echo $url['lien']?>' target='_blank'><li>Indice <?php echo $nbLink; $nbLink++?></li></a><?php }?></div></div><?php } elseif (sizeof($questionUrl) == 1) {?><div id='url'><img src='../assets/image/clue.webp' id='icon'></img><div><a href='<?php echo $questionUrl[0]['lien']?>' target='_blank'><li>Indice 1</li></a></div></div><?php } ?>";
                     document.getElementById("question").innerHTML = "<?php echo $questionQuestion; ?>";
                     document.getElementById("save-response").innerHTML = "<?php echo $questionReponse?>";
                     callProcess += 1;
@@ -150,7 +150,7 @@ $l_db->close();
                     document.getElementById("circuit-name").innerHTML = "<?php echo $name_circuit ?> - question <?php echo $questionNumber + 1 ?>";
                     document.getElementById("circuit-image").innerHTML = "<?php if (sizeof($questionImage) > 1) {foreach ($questionImage as $image) {?><img alt='question-image' class='question-image-origin' src='../assets/image/upload/<?php echo $image['image_question']; ?>'><img alt='question-image' class='question-image'src='../assets/image/upload/<?php echo $image['image_question']; ?>'><?php }} elseif (sizeof($questionImage) == 1) {?><img alt='question-image' class='question-image-origin' src='../assets/image/upload/<?php echo $questionImage[0]['image_question']; ?>'><img alt='question-image' class='question-image'src='../assets/image/upload/<?php echo $questionImage[0]['image_question']; ?>'><?php } ?>";
                     document.getElementById("question-statement").innerHTML = "<?php echo $questionConsigne; ?>";
-                    document.getElementById("modal-url").innerHTML = "<?php if (sizeof($questionUrl) > 1) {?><div id='url'><img src='../assets/image/link.webp' id='icon'><div><?php foreach ($questionUrl as $url) {?><a href='<?php echo $url['lien']?>' target='_blank'><?php echo $url['lien']?></a><?php }?></div></div><?php } elseif (sizeof($questionUrl) == 1) {?><div id='url'><img src='../assets/image/link.webp' id='icon'></img><div><a href='<?php echo $questionUrl[0]['lien']?>' target='_blank'><?php echo $questionUrl[0]['lien']?></a></div></div><?php } ?>";
+                    document.getElementById("modal-url").innerHTML = "<?php if (sizeof($questionUrl) > 1) {?><div id='url'><img src='../assets/image/clue.webp' id='icon'><div><?php $nbLink=1; foreach ($questionUrl as $url) {?><a href='<?php echo $url['lien']?>' target='_blank'><li>Indice <?php echo $nbLink; $nbLink++?></li></a><?php }?></div></div><?php } elseif (sizeof($questionUrl) == 1) {?><div id='url'><img src='../assets/image/clue.webp' id='icon'></img><div><a href='<?php echo $questionUrl[0]['lien']?>' target='_blank'><li>Indice 1</li></a></div></div><?php } ?>";
                     document.getElementById("question").innerHTML = "<?php echo $questionQuestion; ?>";
                     document.getElementById("save-response").innerHTML = "<?php echo $questionReponse?>";
                     callProcess += 1;
