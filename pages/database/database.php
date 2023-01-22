@@ -214,6 +214,18 @@ class database
         return $l_result->fetch_all(MYSQLI_ASSOC);
     }
 
+    // TODO : documenter
+    function get_all_circuit(){
+        $l_result = self::f_query(
+            "SELECT id_circuit, nom_circuit, points, image, id_theme 
+                                FROM Circuit c, Circuit_Image i
+                                WHERE i.id_circuitimage = c.id_circuitimage");
+        if($l_result=="Error"){
+            return [];
+        }
+        return $l_result;
+    }
+
     /*
      * @brief this function return the image
      *
