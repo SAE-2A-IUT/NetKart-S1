@@ -24,8 +24,8 @@ if($l_score == NULL){
 }
 
 ?>
-
-    <div class="body">
+    <div class="body-page">
+        <div class="body">
         <div class="left">
             <h1>User1207</h1>
             <?php
@@ -84,6 +84,7 @@ if($l_score == NULL){
                 document.getElementById('cancel_delete_account').addEventListener('click', cancel_delete_account);
             </script>
         </div>
+    </div>
     </div>
 
 <?php
