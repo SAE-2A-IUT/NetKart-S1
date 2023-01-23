@@ -1,7 +1,7 @@
 <?php
 /** @file /pages/user.php
  *
- * File to check and modify user information
+ * @details File to check and modify user information
  *
  * @author SAE S3 NetKart
  */

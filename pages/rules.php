@@ -1,5 +1,12 @@
 <?php
-include '../pages/header.php';
+/** @file /pages/homepage.php
+ *
+ * @details File displaying rules of the game
+ *
+ * @author SAE S3 NetKart
+ */
+
+require '../pages/header.php';
 startPage("Contact",["../assets/style/main", "../assets/style/rules"],[]);
 ?>
 <script>
@@ -93,6 +100,6 @@ startPage("Contact",["../assets/style/main", "../assets/style/rules"],[]);
     }
 </script>
 <?php
-include '../pages/footer.php';
+require '../pages/footer.php';
 endPage();
 ?>

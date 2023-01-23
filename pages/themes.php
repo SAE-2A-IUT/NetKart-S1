@@ -1,4 +1,11 @@
 <?php
+/** @file /pages/homepage.php
+ *
+ * @details File displaying existing circuits to play to the game
+ *
+ * @author SAE S3 NetKart
+ */
+
 require ('./header.php');
 require ("./database/database.php");
 
@@ -38,6 +45,6 @@ $l_themes = $l_db->get_all_themes();
 
 $l_db->close();
 
-include './footer.php';
+require './footer.php';
 endPage();
 ?>

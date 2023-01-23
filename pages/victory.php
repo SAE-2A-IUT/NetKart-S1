@@ -1,4 +1,11 @@
 <?php
+/** @file /pages/homepage.php
+ *
+ * @details File verifying if the player has already made a victory of this circuit and if not
+ *
+ * @author SAE S3 NetKart
+ */
+
 require("./database/database.php");
 
 function checkAlreadyVictory($id_user, $id_circuit){

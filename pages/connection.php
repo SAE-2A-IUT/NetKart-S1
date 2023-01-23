@@ -1,12 +1,12 @@
 <?php
 /** @file /pages/connection.php
  *
- * PHP page that allows the user to either register or login by filling in the required fields
+ *  @details PHP page that allows the user to either register or login by filling in the required fields
  *
  * @author SAE S3 NetKart
  */
 
-include './header.php';
+require './header.php';
 startPage("Connexion",["../assets/style/main", "../assets/style/connection"],["../assets/script/connection"]);
 ?>
 <div class="body-page">
@@ -102,6 +102,6 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
 </div>
 
 <?php
-include './footer.php';
+require './footer.php';
 endPage();
 ?>

@@ -1,4 +1,11 @@
 <?php
+/**
+ * @file /pages/about.php
+ *
+ * @details File to show site's details
+ *
+ * @author SAE S3 NetKart
+ */
 require 'header.php';
 startPage("A propos",[K_STYLE."main",K_STYLE."about"],[]);
 ?>

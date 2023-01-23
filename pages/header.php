@@ -1,7 +1,7 @@
 <?php
 /** @file /pages/header.php
  *
- * File that generate the header of other pages
+ * @details File that generate the header of other pages
  *
  * @author SAE S3 NetKart
  */
