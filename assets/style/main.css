@@ -60,7 +60,11 @@ div h4 a {
 }
 
 .body-page{
-    min-height: 57.9vh;
+    min-height: 0vh;
+}
+
+#homepage-banner{
+    width: 98vw;
 }
 
 .preview-game {
