@@ -62,7 +62,7 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
             <input type="text" placeholder="Nom d'utilisateur" maxlength="50" id="username-connection" name="username-connection" class="form-input" required><br>
 
             <label for="password-connection">Mot de passe</label>
-            <input type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!*µ$£¤=+°@_~#]).{8,72}$" placeholder="Mot de passe" id="password-connection" name="password-connection" class="form-input" required><br>
+            <input type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!*µ$£¤=+°@_~#]).{8,72}$" placeholder="Mot de passe" id="password-connection" name="password-connection" class="form-input" title="Mot de passe d'au moins 8 caractères, avec au moins une majuscule, une minuscule, un chiffre et un caractère spécial parmi cette liste : ? ! * µ $ £ ¤ = + ° @ _ ~ #" required><br>
 
             <input type="submit" value="CONNEXION" class="submit-connection black-button">
         </form>
@@ -86,7 +86,7 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
             <input type="text" placeholder="Pseudo" id="username-register" maxlength="50" name="username-register" class="form-input" required><br>
 
             <label for="password-register">Mot de passe</label>
-            <input type="password" placeholder="Mot de passe" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!*µ$£¤=+°@_~#]).{8,72}$"  id="password-register" name="password-register" class="form-input" required><br>
+            <input type="password" placeholder="Mot de passe" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!*µ$£¤=+°@_~#]).{8,72}$" title="Mot de passe d'au moins 8 caractères, avec au moins une majuscule, une minuscule, un chiffre et un caractère spécial parmi cette liste : ? ! * µ $ £ ¤ = + ° @ _ ~ #" id="password-register" name="password-register" class="form-input" required><br>
 
             <label for="password-verify">Confirmation du Mot de passe</label>
             <input type="password" placeholder="Confirmation du  Mot de passe" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!*µ$£¤=+°@_~#]).{8,72}$"  id="password-verify" name="password-verify" class="form-input" required><br>
