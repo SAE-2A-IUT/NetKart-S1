@@ -60,18 +60,17 @@ div h4 a {
 }
 
 .body-page{
-    min-height: 135%;
-    width: auto;
+    min-height: 65%;
 }
 
 html{
-    height: 96%;
+    height: 100%;
     margin: 10px;
     padding: 0;
 }
 
 body {
-    height: 50%;
+    height: 98%;
     margin: 0;
     padding: 0;
 }
