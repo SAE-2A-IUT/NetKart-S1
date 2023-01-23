@@ -263,6 +263,18 @@ class database
     }
 
     /*
+     * @brief this function return each url of question for a circuit
+     *
+     * @param $A_QUESTION_ID (String) : id of the question
+     *
+     * @return (String) : url of each question
+     */
+    function get_url_question($A_QUESTION_ID)
+    {
+        return self::f_query("SELECT lien FROM Question_Lien WHERE id_question=" . $A_QUESTION_ID);
+    }
+
+    /*
      * @brief this function delete a Circuit with a given ID and all the questions of this circuit
      *
      * @param $A_CIRCUIT_ID (String) : ID of the circuit to delete
