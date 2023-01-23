@@ -14,7 +14,7 @@ require("./database/database.php");
 $l_db = new database();
 $l_db->connection();
 
-$id_circuit = 2;
+$id_circuit = 59;
 $questionNumber = 0;
 $name_circuit = $l_db->get_circuit_information($id_circuit)[$questionNumber]['nom_circuit'];
 $id_circuit_image = $l_db->get_circuit_information($id_circuit)[$questionNumber]['id_circuitimage'];
@@ -26,6 +26,7 @@ $questionQuestion = $questionActual['question'];
 $questionReponse = $questionActual['reponse'];
 $questionId = $questionActual['id_question'];
 $questionImage = $l_db->get_image_question($questionId);
+$questionUrl = $l_db->get_url_question($questionId);
 $l_db->close();
 ?>
 <div id="save-response" style="display: none; visibility: hidden;"><?php echo $questionReponse?></div>
@@ -39,10 +40,10 @@ $l_db->close();
                     <?php if (sizeof($questionImage) > 1) {
                         foreach ($questionImage as $image) {?>
                             <img alt='question-image' class='question-image-origin' src='../assets/image/upload/<?php echo $image['image_question']; ?>'>
-                            <img alt='question-image' class='question-image'src='../assets/image/upload/<?php echo $image['image_question']; ?>'><?php }
+                            <img alt='question-image' class='question-image' src='../assets/image/upload/<?php echo $image['image_question']; ?>'><?php }
                     } elseif (sizeof($questionImage) == 1) {?>
                         <img alt='question-image' class='question-image-origin' src='../assets/image/upload/<?php echo $questionImage[0]['image_question']; ?>'>
-                        <img alt='question-image' class='question-image'src='../assets/image/upload/<?php echo $questionImage[0]['image_question']; ?>'><?php } ?>
+                        <img alt='question-image' class='question-image' src='../assets/image/upload/<?php echo $questionImage[0]['image_question']; ?>'><?php } ?>
                 </div>
                 <p id="question-statement"><?php echo $questionConsigne; ?></p>
                 <p id="question"><?php echo $questionQuestion; ?></p>
@@ -56,10 +57,28 @@ $l_db->close();
         </div>
 
         <div id="right-game" style="background-image: url('<?php echo K_IMAGE . $urlImage ?>')">
-            <img src="../assets/image/gentil.webp" alt="player-kart" id="player_kart">
-            <img src="../assets/image/mechant.webp" alt="enemy-kart" id="enemy_kart">
-            <img src="../assets/image/flag-start.webp" alt="flag" id="flag">
+            <div id="modal-url">
+                <?php if (sizeof($questionUrl) > 1) {?>
+                <div id="url">
+                <img alt="url-icon" src="../assets/image/clue.webp" id="icon"><div><?php $nbLink = 1;
+                    foreach ($questionUrl as $url) {?>
+                            <a href="<?php echo $url['lien']?>" target="_blank"><li>Indice <?php echo $nbLink; $nbLink++?></li></a>
+                        <?php }?>
+                    </div></div><?php
+                } elseif (sizeof($questionUrl) == 1) {?>
+                    <div id="url">
+                <img alt="url-icon" src="../assets/image/clue.webp" id="icon"><div>
+                    <a href="<?php echo $questionUrl[0]['lien']?>" target="_blank"><li>Indice 1</li></a>
+            </div></div>
+                   <?php } ?>
+            </div>
+            <div id="circuit">
+                <img src="../assets/image/gentil.webp" alt="player-kart" id="player_kart">
+                <img src="../assets/image/mechant.webp" alt="enemy-kart" id="enemy_kart">
+                <img src="../assets/image/flag-start.webp" alt="flag" id="flag">
+            </div>
         </div>
+
     </div>
     <div id="modal" style="display: none;">
         <div id="modal-content">
@@ -79,9 +98,7 @@ $l_db->close();
     let terminal = document.getElementById("terminal-input");
     terminal.addEventListener("keydown", function (event) {
         if (event.key === "Enter") {
-            let saveResponse = document.getElementById("save-response").innerHTML;
-            document.getElementById("save-response").innerHTML = "";
-            sendCommand(saveResponse);
+            sendCommand(document.getElementById("save-response").innerHTML.toString());
         }
     });
 
@@ -105,11 +122,13 @@ $l_db->close();
                     $questionId = $questionActual['id_question'];
                     $l_db = new database();
                     $l_db->connection();
+                    $questionUrl = $l_db->get_url_question($questionId);
                     $questionImage = $l_db->get_image_question($questionId);
                     $l_db->close();?>
                     document.getElementById("circuit-name").innerHTML = "<?php echo $name_circuit ?> - question <?php echo $questionNumber + 1 ?>";
                     document.getElementById("circuit-image").innerHTML = "<?php if (sizeof($questionImage) > 1) {foreach ($questionImage as $image) {?><img alt='question-image' class='question-image-origin' src='../assets/image/upload/<?php echo $image['image_question']; ?>'><img alt='question-image' class='question-image'src='../assets/image/upload/<?php echo $image['image_question']; ?>'><?php }} elseif (sizeof($questionImage) == 1) {?><img alt='question-image' class='question-image-origin' src='../assets/image/upload/<?php echo $questionImage[0]['image_question']; ?>'><img alt='question-image' class='question-image'src='../assets/image/upload/<?php echo $questionImage[0]['image_question']; ?>'><?php } ?>";
                     document.getElementById("question-statement").innerHTML = "<?php echo $questionConsigne; ?>";
+                    document.getElementById("modal-url").innerHTML = "<?php if (sizeof($questionUrl) > 1) {?><div id='url'><img src='../assets/image/clue.webp' id='icon'><div><?php $nbLink=1; foreach ($questionUrl as $url) {?><a href='<?php echo $url['lien']?>' target='_blank'><li>Indice <?php echo $nbLink; $nbLink++?></li></a><?php }?></div></div><?php } elseif (sizeof($questionUrl) == 1) {?><div id='url'><img src='../assets/image/clue.webp' id='icon'></img><div><a href='<?php echo $questionUrl[0]['lien']?>' target='_blank'><li>Indice 1</li></a></div></div><?php } ?>";
                     document.getElementById("question").innerHTML = "<?php echo $questionQuestion; ?>";
                     document.getElementById("save-response").innerHTML = "<?php echo $questionReponse?>";
                     callProcess += 1;
@@ -123,11 +142,15 @@ $l_db->close();
                     $questionId = $questionActual['id_question'];
                     $l_db = new database();
                     $l_db->connection();
+                    $questionUrl = $l_db->get_url_question($questionId);
                     $questionImage = $l_db->get_image_question($questionId);
+                    ?>
+                    <?php
                     $l_db->close();?>
                     document.getElementById("circuit-name").innerHTML = "<?php echo $name_circuit ?> - question <?php echo $questionNumber + 1 ?>";
                     document.getElementById("circuit-image").innerHTML = "<?php if (sizeof($questionImage) > 1) {foreach ($questionImage as $image) {?><img alt='question-image' class='question-image-origin' src='../assets/image/upload/<?php echo $image['image_question']; ?>'><img alt='question-image' class='question-image'src='../assets/image/upload/<?php echo $image['image_question']; ?>'><?php }} elseif (sizeof($questionImage) == 1) {?><img alt='question-image' class='question-image-origin' src='../assets/image/upload/<?php echo $questionImage[0]['image_question']; ?>'><img alt='question-image' class='question-image'src='../assets/image/upload/<?php echo $questionImage[0]['image_question']; ?>'><?php } ?>";
                     document.getElementById("question-statement").innerHTML = "<?php echo $questionConsigne; ?>";
+                    document.getElementById("modal-url").innerHTML = "<?php if (sizeof($questionUrl) > 1) {?><div id='url'><img src='../assets/image/clue.webp' id='icon'><div><?php $nbLink=1; foreach ($questionUrl as $url) {?><a href='<?php echo $url['lien']?>' target='_blank'><li>Indice <?php echo $nbLink; $nbLink++?></li></a><?php }?></div></div><?php } elseif (sizeof($questionUrl) == 1) {?><div id='url'><img src='../assets/image/clue.webp' id='icon'></img><div><a href='<?php echo $questionUrl[0]['lien']?>' target='_blank'><li>Indice 1</li></a></div></div><?php } ?>";
                     document.getElementById("question").innerHTML = "<?php echo $questionQuestion; ?>";
                     document.getElementById("save-response").innerHTML = "<?php echo $questionReponse?>";
                     callProcess += 1;
