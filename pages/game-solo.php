@@ -15,8 +15,10 @@ $l_db = new database();
 $l_db->connection();
 
 $id_circuit = 59;
+$id_user = 1;
 $questionNumber = 0;
 $name_circuit = $l_db->get_circuit_information($id_circuit)[$questionNumber]['nom_circuit'];
+$score_circuit =  $l_db->get_circuit_information($id_circuit)[$questionNumber]['points'];
 $id_circuit_image = $l_db->get_circuit_information($id_circuit)[$questionNumber]['id_circuitimage'];
 $urlImage = $l_db->get_image_circuit($id_circuit_image)[$questionNumber]['image'];
 $questionCircuit = $l_db->get_question_circuit($id_circuit);
@@ -162,6 +164,40 @@ $l_db->close();
 
             default:
                 return ["Commande non reconnue", "red"];
+        }
+    }
+
+    function setVictoryDB(id_user, id_circuit, element) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "./victory.php", true);
+        const formData = new FormData();
+        formData.append("id_user", id_user);
+        formData.append("id_circuit", id_circuit);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    if (xhr.responseText === 'add') {
+                        document.getElementById(element).innerHTML += "<br><span id='score'>vous avez gagné : " + <?php echo $score_circuit?> + "points</span>";
+                        displayModal();
+                    }else if (xhr.responseText === 'already') {
+                        document.getElementById(element).innerHTML += "<br><span id='score'>vos points ont déjà été enregistrés </span>";
+                        displayModal();
+                    }
+                } else {
+                    console.error(xhr.status + " " + xhr.statusText);
+                }
+            }
+        }
+        xhr.send(formData);
+    }
+
+
+    function setVictory(element, status) {
+        let modal = document.getElementById(element);
+        game = true;
+        modal.innerHTML = status === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>";
+        if (status === "ally"){
+            setVictoryDB(<?php echo $id_user?>, <?php echo $id_circuit?>, element);
         }
     }
 </script>
