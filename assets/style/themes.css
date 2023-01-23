@@ -38,22 +38,6 @@ body, html {
     height : 100%;
 }
 
-.progress_bar {
-    background-color: #dfe6e9;
-    color: white;
-    border-radius: 15px;
-    width: 100%;
-}
-
-.progress{
-    background-color: var(--light-blue);
-    color: white;
-    text-align: center;
-    font-size: 15px;
-    border-radius: 15px;
-    margin-top: 1em;
-}
-
 .item_choice {
     margin-bottom: 2%;
     margin-left: 1%;

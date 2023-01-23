@@ -7,37 +7,9 @@ startPage("Themes",["../assets/style/main", "../assets/style/themes"],["../asset
 $l_db = new database();
 
 $l_db->connection();
-
+// Get all circuits from database
 $l_circuits = $l_db->get_all_circuit();
-
-//print_r($l_circuits);
-
-$l_circuits = [
-    [   'id' => 1,
-        'name' => 'Adressage: adresse IP, adresse 1',
-        'theme' => 'adressag test e',
-        'progress' => '50',
-        'circuit-image' => '2',
-        'id_theme' => 1],
-    [   'id' => 2,
-        'name' => 'Adressage: adresse IP, adresse 2',
-        'theme' => 'reseau',
-        'progress' => '25',
-        'circuit-image' => '3',
-        'id_theme' => 2],
-    [   'id' => 3,
-        'name' => 'Adressage: adresse IP, adresse 3',
-        'theme' => 'adressage',
-        'progress' => '15',
-        'circuit-image' => '1',
-        'id_theme' => 2],
-    [   'id' => 4,
-        'name' => 'Adressage: adresse IP, adresse 4',
-        'theme' => 'reseau',
-        'progress' => '75',
-        'circuit-image' => '1',
-        'id_theme' => 3],
-];
+// Get all themes from database
 $l_themes = $l_db->get_all_themes();
 ?>
 <div class="body-page">
@@ -51,15 +23,12 @@ $l_themes = $l_db->get_all_themes();
     <form id="circuit_form" class="all_theme" action="game-solo.php" method="post">
         <h1 id="waiting">Merci de sélectionner au minimum un thème</h1>
         <?php foreach ($l_circuits as $l_circuit){?>
-            <button type="submit" class="circuit" name="circuit_id_<?php echo $l_circuit['id_theme']; ?>" value="<?php echo $l_circuit['id']; ?>">
+            <button type="submit" class="circuit" name="circuit_id_<?php echo $l_circuit['id_theme']; ?>" value="<?php echo $l_circuit['id_circuit']; ?>">
                 <div class="circuit-image">
                     <span class="play">Jouer</span>
-                    <img class="tour" src="../assets/image/circuit<?php echo $l_circuit['circuit-image']; ?>.jpg" alt="circuit">
+                    <img class="tour" src="../assets/image/<?php echo $l_circuit['image']; ?>" alt="circuit">
                 </div>
-                <div type="submit" class="progress_bar">
-                    <div class="progress" style="width:<?php echo $l_circuit['progress']; ?>%" ><?php echo $l_circuit['progress']; ?>%</div>
-                </div>
-                <p><?php echo $l_circuit['name']; ?></p>
+                <p><?php echo $l_circuit['nom_circuit']; ?> : <?php echo $l_circuit['points']; ?> points</p>
             </button>
         <?php } ?>
     </form>
