@@ -426,6 +426,19 @@ class database
     }
 
     /**
+     * @brief : this function will check if player has already won the circuit
+     *
+     * @param $A_ID_JOUEUR (Integer) : id of the player who won the game
+     * @param $A_ID_CIRCUIT (Integer) : id of the circuit won by player
+     *
+     * @return (boolean) : True if victory already in database, False otherwise
+     */
+    function check_if_victory_already($A_ID_JOUEUR, $A_ID_CIRCUIT){
+        $l_victory = self::f_query("SELECT id_joueurStatistiques, id_circuitStatistiques FROM Statistiques WHERE id_joueurStatistiques=".$A_ID_JOUEUR." AND id_circuitStatistiques=".$A_ID_CIRCUIT);
+        return sizeof($l_victory) == 0;
+    }
+
+    /**
      * @brief : this function insert a victory into database for game-solo
      *
      * @param $A_ID_JOUEUR (Integer) : id of the player who won the game
@@ -454,6 +467,7 @@ class database
         return $l_is_delete_ok;
     }
 
+    // TODO : Commenter
     function get_score_player_id($A_ID_JOUEUR){
         $l_score = self::f_query("SELECT SUM(points) FROM Circuit, Statistiques WHERE id_circuit = id_circuitStatistiques AND id_joueurStatistiques=".$A_ID_JOUEUR);
         if($l_score=="Error"){
