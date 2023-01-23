@@ -102,11 +102,11 @@
 }
 
 .footer{
-    padding: 1em;
+    padding: 1%;
     background-color: var(--light-grey);
     display: flex;
     font-size: 0.8em;
-    line-height: 2em;
+    line-height: 150%;
 }
 
 .footer-one{

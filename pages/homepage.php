@@ -16,7 +16,7 @@ startPage("Accueil",["../assets/style/main"],[], false);
         <h4>Un serious game pour tester vos connaissances en réseau !</h4>
         <a href="connection.php" class="black-button">C'EST PARTI</a>
     </div>
-    <img src="../assets/image/index_background.webp" alt="racing car image" style="opacity: 1">
+    <img src="../assets/image/index_background.webp" alt="racing car image" id="homepage-banner" style="opacity: 1">
     <br/>
 
     <div>

@@ -15,7 +15,7 @@ startPage("Edit",["../assets/style/main", "../assets/style/edit_theme"],["../ass
  */
 if(True){ # isset($_SESSION id joueur
 
-    $l_user_id = 1; //TODO : recupérer le pseudo stocké en variable de session
+    $l_user_id = 5; //TODO : recupérer le pseudo stocké en variable de session
 
     $l_db = new database();
 
@@ -28,6 +28,7 @@ if(True){ # isset($_SESSION id joueur
     // Get the information of circuits created by user
     $l_count_loop = 0;
     ?>
+<div class="body-page">
     <div class="create_ciruit" id="UwU">
     <form class="create" method="post" action="new-circuit.php">
         <input type="submit" value="Créer un circuit">
@@ -91,8 +92,9 @@ if(True){ # isset($_SESSION id joueur
             </form>
         </div>
         <?php
-    }
-
+    }?>
+    </div>
+    <?php
 
     //TODO : afficher les données sous forme d'éléments comme dans la page thèmes
 
@@ -111,4 +113,4 @@ if(True){ # isset($_SESSION id joueur
 include './footer.php';
 endPage();
 
-?>
+    ?>
