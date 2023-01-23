@@ -60,7 +60,20 @@ div h4 a {
 }
 
 .body-page{
-    min-height: 0vh;
+    min-height: 135%;
+    width: auto;
+}
+
+html{
+    height: 96%;
+    margin: 10px;
+    padding: 0;
+}
+
+body {
+    height: 50%;
+    margin: 0;
+    padding: 0;
 }
 
 #homepage-banner{

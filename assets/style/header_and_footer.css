@@ -107,10 +107,6 @@
     display: flex;
     font-size: 0.8em;
     line-height: 150%;
-    bottom: 0;
-    position: absolute;
-    width: 97%;
-}
 }
 
 .footer-one{
