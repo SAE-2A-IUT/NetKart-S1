@@ -39,7 +39,7 @@ if(isset($_POST['session-time']) && isset($_POST['session-name'])){
     if ($_POST['session-time']==60) {
         $l_duree = '01:00:00';
     }
-    $l_db->insert_session($_POST['session-name'],$l_code,date('Y-m-d H:i:s'),$l_duree,$l_id_joueur);
+    $l_db->insert_session($_POST['session-name'],$l_code,date('Y-m-d H:i:s'),$l_duree,$l_id_joueur,$_POST['session-theme']);
     $l_db->close();
 }
 

@@ -9,7 +9,7 @@ if(($l_db->verifyPlayerSession(12))&& !(isset($_GET['success']))){
     header('Location: host-session.php');
 }
 unset($_SESSION['session_hosted']);
-
+$l_themes = $l_db->get_all_themes();
 $l_db->close();
 ?>
 <div class="body-page">
@@ -42,10 +42,11 @@ $l_db->close();
         <label for="session-theme">Thème de la session</label>
         <select name="session-theme" id="session-theme" class="form-input" required>
             <option value="">Choisir le thème</option>
-            <option value="1">Thème 1</option>
-            <option value="2">Thème 2</option>
-            <option value="3">Thème 3</option>
-            <option value="4">Thème 4</option>
+            <?php
+            foreach ($l_themes as $l_theme){?>
+            <label for="theme">
+                <option value="<?php echo $l_theme["id_theme"]; ?>"><?php echo $l_theme["nom_theme"];
+            } ?>
         </select><br>
 
         <input type="submit" value="Créer la session" id="submit" class="form-label-input">
