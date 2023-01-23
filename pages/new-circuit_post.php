@@ -38,6 +38,10 @@ if (isset($_POST["circuit_name"]) and isset($_POST["circuit_theme"]) and isset($
 
     // Checking if we need to create a new theme
     if (isset($_POST["other_theme"]) and isset($_POST["other_theme_desc"])) {
+        // Check if theme already in database
+        if ($l_db->check_if_element_already_used("Theme","nom_theme", $_POST["other_theme"])) {
+            // TODO : Redirect vers formulaire et dire que le thème existe déjà
+        }
         $l_new_theme = $_POST["other_theme"];
         $l_new_theme_desc = $_POST["other_theme_desc"];
         $l_theme_selected = $l_db->insert_theme($l_new_theme, $l_new_theme_desc);
@@ -70,6 +74,11 @@ if (isset($_POST["circuit_name"]) and isset($_POST["circuit_theme"]) and isset($
                 //exit;
             }
         }
+    }
+
+    // Check if theme already in database
+    if ($l_db->check_if_element_already_used("Circuit","nom_circuit", $l_circuit_name)) {
+        // TODO : Redirect vers formulaire et dire que le circuit existe déjà
     }
 
     //Insert circuit
