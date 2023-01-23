@@ -138,12 +138,6 @@ footer > div > a {
     text-decoration: none;
 }
 
-.footer {
-    display: flex;
-    justify-content: space-around;
-    flex-direction: row;
-}
-
 p{
     color: var(--grey);
     line-height: 1.5em;
