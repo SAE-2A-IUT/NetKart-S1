@@ -57,6 +57,7 @@
 
 #left-game {
     max-width: 46%;
+    min-width: 46%;
 }
 
 #right-game {
@@ -83,13 +84,6 @@
     height: 100%;
     margin-right: 15%;
     margin-left: 11%;
-}
-
-#url{
-    position: absolute;
-    display: flex;
-    top: -22%;
-    align-items: center;
 }
 
 .question-image-origin {
@@ -171,6 +165,9 @@
     overflow: hidden;
     line-height: 150%;
     white-space: nowrap;
+    min-height: 19%;
+    position: absolute;
+    top: -25%;
 }
 
 #player_kart, #enemy_kart {
@@ -209,11 +206,11 @@
         max-width: 100%;
         width: 100%;
         text-align: center;
+        margin-bottom: 27%;
     }
 
     #right-game {
         width: 58%;
-        margin-top: 6%;
     }
 
     #terminal {
@@ -239,4 +236,3 @@
         align-items: center;
     }
 }
-
