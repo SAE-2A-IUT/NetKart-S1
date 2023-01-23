@@ -87,13 +87,6 @@ function correctAnswer(imageId, coordinates, status) {
     }, 400 * 6);
 }
 
-function setVictory(element, status) {
-    let modal = document.getElementById(element);
-    game = true;
-    modal.innerHTML = status === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>";
-    displayModal();
-}
-
 function setInitialPosition(imageId, coordinates) {
     if (coordinates.length === 0) {
         return;
