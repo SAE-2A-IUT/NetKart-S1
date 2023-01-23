@@ -14,7 +14,13 @@ require("./database/database.php");
 $l_db = new database();
 $l_db->connection();
 
-$id_circuit = 59;
+if(isset($_POST["id_circuit_to_play"])){
+    $id_circuit = $_POST["id_circuit_to_play"];
+
+}
+else {
+    header('Location: ./error.html');
+}
 $id_user = 1;
 $questionNumber = 0;
 $name_circuit = $l_db->get_circuit_information($id_circuit)[$questionNumber]['nom_circuit'];
