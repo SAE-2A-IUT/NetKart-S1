@@ -137,8 +137,8 @@ else {
             <a href="rules.php">RÈGLES DU JEU</a>
         </div>
         <div>
-            <form method="post" action="#" enctype="text/plain" style="display: flex; flex-direction: row">
-                <input type="text" placeholder="Code multijoueur" required class="input-header">
+            <form method="post" action="#" " style="display: flex; flex-direction: row">
+                <input type="text" name="session_code" placeholder="Code multijoueur" required class="input-header">
                 <input type="submit" value="OK" class="submit-header">
             </form>
         </div>
@@ -148,6 +148,9 @@ else {
     </div>
 </div>
 <?php
+    if (isset($_POST['session_code'])){
+        require 'join_session.php';
+    }
 }}
 ?>
 
