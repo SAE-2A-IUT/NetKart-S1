@@ -142,6 +142,7 @@ if (isset($_POST["circuit_name"]) and isset($_POST["circuit_theme"]) and isset($
 
     //DONE : renvoyer sur la page new-circuit et afficher que l'insertion a fonctionné
     header('Location: new-circuit.php?success=1');
+    exit();
 }
 //DONE : renvoyer sur la page (redirection automatique VERS LA PAGE D'ERREUR)
 header('Location: error.html');

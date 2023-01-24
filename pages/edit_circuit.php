@@ -15,7 +15,7 @@ startPage("Edit",["../assets/style/main", "../assets/style/edit_theme"],["../ass
  */
 if(True){ # isset($_SESSION id joueur
 
-    $l_user_id = 5; //TODO : recupérer le pseudo stocké en variable de session
+    $l_user_id = 1; //TODO : recupérer le pseudo stocké en variable de session
 
     $l_db = new database();
 
@@ -34,6 +34,16 @@ if(True){ # isset($_SESSION id joueur
         <input type="submit" value="Créer un circuit">
     </form>
     </div>
+    <?php  if (isset($_GET['error']) && $_GET['error']){?>
+    <div class="error">
+        Une erreur est survenue et la suppression ne s'est pas réalisée.
+    </div>
+    <?php }
+    if (isset($_GET['success']) && $_GET['success']){?>
+    <div class="success">
+        La suppression s'est réalisée correctement.
+    </div>
+<?php }?>
     <div class="all_theme">
 
     <?php
