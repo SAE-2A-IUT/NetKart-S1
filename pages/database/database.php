@@ -428,8 +428,8 @@ class database
      *
      * @return (Integer) : id of the created session
      */
-    function insert_session($A_NOM, $A_CODE, $A_DEBUT, $A_DUREE, $A_JOUEUR){
-        $l_is_insert_ok = self::f_query("INSERT INTO Groupe (nom_groupe, code, debut, duree, id_joueur) VALUES ('".$A_NOM."', '".$A_CODE."', '".$A_DEBUT."', '".$A_DUREE."',".$A_JOUEUR.")",true);
+    function insert_session($A_NOM, $A_CODE, $A_DEBUT, $A_DUREE, $A_JOUEUR, $A_THEME){
+        $l_is_insert_ok = self::f_query("INSERT INTO Groupe (nom_groupe, code, debut, duree, id_joueur, id_theme) VALUES ('".$A_NOM."', '".$A_CODE."', '".$A_DEBUT."', '".$A_DUREE."',".$A_JOUEUR.",".$A_THEME.")",true);
         if ($l_is_insert_ok=="Success"){
             $l_question_id = self::f_query("SELECT id_groupe FROM Groupe WHERE nom_groupe ='".$A_NOM."' AND code='".$A_CODE."'");
             return $l_question_id[0]["id_groupe"];
@@ -438,6 +438,30 @@ class database
     }
 
     /**
+     * Return a boolean to know if the user has a session.
+     *
+     * @param $A_ID_JOUEUR (Int) User id.
+     * @return (Boolean) If the user has a session.
+     */
+    function verifyPlayerSession($A_ID_JOUEUR){
+        return self::f_query("SELECT count(*) FROM Groupe WHERE id_joueur ='".$A_ID_JOUEUR."'")[0]['count(*)'];
+    }
+
+    /**
+     * Return the session data.
+     *
+     * @param $A_ID_JOUEUR (Int) User id.
+     * @return (Array) Session data
+     */
+    function getSessionByHost($A_ID_JOUEUR){
+        if (self::f_query("SELECT * FROM Groupe a, Groupe_Joueur b WHERE a.id_joueur =".$A_ID_JOUEUR." AND a.id_groupe = b.id_groupe")){
+            return self::f_query("SELECT * FROM Groupe a, Groupe_Joueur b WHERE a.id_joueur =".$A_ID_JOUEUR." AND a.id_groupe = b.id_groupe ORDER BY b.score DESC");
+        }
+        if (self::f_query("SELECT * FROM Groupe WHERE id_joueur =".$A_ID_JOUEUR)){
+            return self::f_query("SELECT * FROM Groupe WHERE id_joueur =".$A_ID_JOUEUR)[0];
+        }
+        return [];
+
      * @brief : this function will check if player has already won the circuit
      *
      * @param $A_ID_JOUEUR (Integer) : id of the player who won the game
