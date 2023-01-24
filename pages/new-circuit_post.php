@@ -40,7 +40,9 @@ if (isset($_POST["circuit_name"]) and isset($_POST["circuit_theme"]) and isset($
     if (isset($_POST["other_theme"]) and isset($_POST["other_theme_desc"])) {
         // Check if theme already in database
         if ($l_db->check_if_element_already_used("Theme","nom_theme", $_POST["other_theme"])) {
-            // TODO : Redirect vers formulaire et dire que le thème existe déjà
+            // DONE : Redirect vers formulaire et dire que le thème existe déjà
+            header('Location: new-circuit.php?error=1');
+            exit();
         }
         $l_new_theme = $_POST["other_theme"];
         $l_new_theme_desc = $_POST["other_theme_desc"];
@@ -78,13 +80,17 @@ if (isset($_POST["circuit_name"]) and isset($_POST["circuit_theme"]) and isset($
 
     // Check if theme already in database
     if ($l_db->check_if_element_already_used("Circuit","nom_circuit", $l_circuit_name)) {
-        // TODO : Redirect vers formulaire et dire que le circuit existe déjà
+        // DONE : Redirect vers formulaire et dire que le circuit existe déjà
+        header('Location: new-circuit.php?error=2');
+        exit();
     }
 
     //Insert circuit
     $l_new_circuit_id = $l_db->insert_circuit($l_circuit_name, $l_circuit_points, $l_theme_selected, $l_player_id, $l_image_selected);
     if ($l_new_circuit_id == -1) {
-        // TODO : afficher erreur pour dire que l'insertion n'a pas fonction + redirect vers new-circuit
+        // DONE : afficher erreur pour dire que l'insertion n'a pas fonction + redirect vers new-circuit
+        header('Location: new-circuit.php?error=3');
+        exit();
     }
 
     // Insert each question
@@ -92,7 +98,9 @@ if (isset($_POST["circuit_name"]) and isset($_POST["circuit_theme"]) and isset($
         //Insert data into Question table
         $id_question = $l_db->insert_question($l_all_questions[$i]["titre"], $l_all_questions[$i]["consigne"], $l_all_questions[$i]["reponse"], $l_new_circuit_id);
         if ($id_question == -1) {
-            //TODO : redirect vers new-circuit et afficher que l'insertion des données est partielle et demander d'aller sur le formulaire de modification pour terminer l'insertion
+            //DONE : redirect vers new-circuit et afficher que l'insertion des données est partielle et demander d'aller sur le formulaire de modification pour terminer l'insertion
+            header('Location: new-circuit.php?error=4');
+            exit();
         }
         foreach ($l_all_questions[$i]["lien"] as $link) {
             if(empty($link)){
@@ -100,7 +108,9 @@ if (isset($_POST["circuit_name"]) and isset($_POST["circuit_theme"]) and isset($
             }
             $l_is_link_insert_ok = $l_db->insert_links($link, $id_question);
             if (!$l_is_link_insert_ok) {
-                //TODO : redirect vers new-circuit et afficher que l'insertion des données est partielle et demander d'aller sur le formulaire de modification pour terminer l'insertion
+                //DONE : redirect vers new-circuit et afficher que l'insertion des données est partielle et demander d'aller sur le formulaire de modification pour terminer l'insertion
+                header('Location: new-circuit.php?error=5');
+                exit();
             }
         }
         // Insert images
@@ -113,11 +123,15 @@ if (isset($_POST["circuit_name"]) and isset($_POST["circuit_theme"]) and isset($
             if (move_uploaded_file($tmp_name, $target_file)) {
                 echo "The file ". htmlspecialchars( basename( $files["name"][$key])). " has been uploaded.";
             } else {
-                //TODO : redirect vers new-circuit et afficher que l'insertion des données est partielle et demander d'aller sur le formulaire de modification pour terminer l'insertion
+                //DONE : redirect vers new-circuit et afficher que l'insertion des données est partielle et demander d'aller sur le formulaire de modification pour terminer l'insertion
+                header('Location: new-circuit.php?error=5');
+                exit();
             }
             $l_is_image_insert_ok = $l_db->insert_images_question($target_filename, $id_question);
             if(!$l_is_image_insert_ok){
-                //TODO : redirect vers new-circuit et afficher que l'insertion des données est partielle et demander d'aller sur le formulaire de modification pour terminer l'insertion
+                //DONE : redirect vers new-circuit et afficher que l'insertion des données est partielle et demander d'aller sur le formulaire de modification pour terminer l'insertion
+                header('Location: new-circuit.php?error=5');
+                exit();
             }
 
         }
@@ -126,6 +140,9 @@ if (isset($_POST["circuit_name"]) and isset($_POST["circuit_theme"]) and isset($
     $l_db->close();
 
 
-    //TODO : renvoyer sur la page new-circuit et afficher que l'insertion a fonctionné
+    //DONE : renvoyer sur la page new-circuit et afficher que l'insertion a fonctionné
+    header('Location: new-circuit.php?success=1');
 }
-//TODO : renvoyer sur la page (redirection automatique VERS LA PAGE D'ERREUR)
+//DONE : renvoyer sur la page (redirection automatique VERS LA PAGE D'ERREUR)
+header('Location: error.html');
+exit();
