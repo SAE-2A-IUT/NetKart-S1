@@ -1,7 +1,9 @@
 .all_theme {
     display: flex;
+    align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .modify_delete {
@@ -107,6 +109,7 @@ h3 {
     top: 20%;
     height: 10%;
     font-weight: 700;
+    overflow: hidden;
     font-size: 2vw;
     text-align: center;
     text-transform: uppercase;

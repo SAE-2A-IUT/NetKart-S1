@@ -15,7 +15,7 @@ startPage("Edit",["../assets/style/main", "../assets/style/edit_theme"],["../ass
  */
 if(True){ # isset($_SESSION id joueur
 
-    $l_user_id = 5; //TODO : recupérer le pseudo stocké en variable de session
+    $l_user_id = 1; //TODO : recupérer le pseudo stocké en variable de session
 
     $l_db = new database();
 
