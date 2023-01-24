@@ -8,19 +8,14 @@
  */
 require ("./database/database.php");
 include './header.php';
-startPage("Edit",["../assets/style/main", "../assets/style/edit_theme"],["../assets/script/theme", K_SCRIPT."check_connection"]);
-?>
+startPage("Edit",["../assets/style/main", "../assets/style/edit_theme"],["../assets/script/theme"]);
 
-    <script>
-        check_connection(<?php isset($_SESSION['id_user'])?>);
-    </script>
-<?php
 /*
  * Check if password and confirmation are set
  */
-if(isset($_SESSION['id_user'])){ # isset($_SESSION id joueur
+if(True){ # isset($_SESSION id joueur
 
-    $l_user_id = $_SESSION['id_user']; //TODO : recupérer le pseudo stocké en variable de session
+    $l_user_id = 5; //TODO : recupérer le pseudo stocké en variable de session
 
     $l_db = new database();
 
@@ -33,6 +28,7 @@ if(isset($_SESSION['id_user'])){ # isset($_SESSION id joueur
     // Get the information of circuits created by user
     $l_count_loop = 0;
     ?>
+<div class="body-page">
     <div class="create_ciruit" id="UwU">
     <form class="create" method="post" action="new-circuit.php">
         <input type="submit" value="Créer un circuit">
@@ -96,8 +92,9 @@ if(isset($_SESSION['id_user'])){ # isset($_SESSION id joueur
             </form>
         </div>
         <?php
-    }
-
+    }?>
+    </div>
+    <?php
 
     //TODO : afficher les données sous forme d'éléments comme dans la page thèmes
 
@@ -116,4 +113,4 @@ if(isset($_SESSION['id_user'])){ # isset($_SESSION id joueur
 include './footer.php';
 endPage();
 
-?>
+    ?>
