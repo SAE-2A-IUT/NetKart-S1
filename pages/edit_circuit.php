@@ -33,6 +33,7 @@ if(isset($_SESSION['id_user'])){ # isset($_SESSION id joueur
     // Get the information of circuits created by user
     $l_count_loop = 0;
     ?>
+<div class="body-page">
     <div class="create_ciruit" id="UwU">
     <form class="create" method="post" action="new-circuit.php">
         <input type="submit" value="Créer un circuit">
@@ -96,8 +97,9 @@ if(isset($_SESSION['id_user'])){ # isset($_SESSION id joueur
             </form>
         </div>
         <?php
-    }
-
+    }?>
+    </div>
+    <?php
 
     //TODO : afficher les données sous forme d'éléments comme dans la page thèmes
 
@@ -116,4 +118,4 @@ if(isset($_SESSION['id_user'])){ # isset($_SESSION id joueur
 include './footer.php';
 endPage();
 
-?>
+    ?>

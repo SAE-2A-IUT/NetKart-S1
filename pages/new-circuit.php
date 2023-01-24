@@ -69,11 +69,11 @@ $l_nb_max_question_images = K_MAX_IMAGES;
                 ?>
                 <label class="question"><span>Question n°<?php echo $l_nb_question;?></span><span class="arrow close"></span></label>
                 <div class="hidden question_content">
-                    <input name="question[<?php echo $l_nb_question;?>][titre]" type="text" placeholder="Intitulé de la question" maxlength="200" >
+                    <input name="question[<?php echo $l_nb_question;?>][titre]" type="text" placeholder="Intitulé de la question" maxlength="200" required>
                     <label>Consigne</label>
-                    <textarea name="question[<?php echo $l_nb_question;?>][consigne]" placeholder="Consigne de la question" aria-atomic="true" ></textarea>
+                    <textarea name="question[<?php echo $l_nb_question;?>][consigne]" placeholder="Consigne de la question" aria-atomic="true" required></textarea>
                     <label>Réponse</label>
-                    <input name="question[<?php echo $l_nb_question;?>][reponse]" type="text" placeholder="Réponse de la question" maxlength="200" >
+                    <input name="question[<?php echo $l_nb_question;?>][reponse]" type="text" placeholder="Réponse de la question" maxlength="200" required>
                     <h1>Ressources</h1>
                     <h2>Il y a une limite de <?php echo K_MAX_IMAGES;?> images par question. Il faut les envoyer d'une seule traite.</h2>
                     <div class="medias">

@@ -102,11 +102,11 @@
 }
 
 .footer{
-    padding: 1em;
+    padding: 1%;
     background-color: var(--light-grey);
     display: flex;
     font-size: 0.8em;
-    line-height: 2em;
+    line-height: 150%;
 }
 
 .footer-one{
@@ -136,12 +136,6 @@ footer > div > a {
     font-weight: normal;
     color: var(--black);
     text-decoration: none;
-}
-
-.footer {
-    display: flex;
-    justify-content: space-around;
-    flex-direction: row;
 }
 
 p{

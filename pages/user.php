@@ -19,7 +19,21 @@ $l_score= 999;
 <?php
 ?>
 
-    <div class="body">
+$l_player_id = 1;
+
+$l_db = new database();
+
+$l_db->connection();
+
+$l_score= $l_db->get_score_player_id($l_player_id);
+
+if($l_score == NULL){
+    $l_score = 0;
+}
+
+?>
+    <div class="body-page">
+        <div class="body">
         <div class="left">
             <h1>User1207</h1>
             <?php
@@ -78,6 +92,7 @@ $l_score= 999;
                 document.getElementById('cancel_delete_account').addEventListener('click', cancel_delete_account);
             </script>
         </div>
+    </div>
     </div>
 
 <?php

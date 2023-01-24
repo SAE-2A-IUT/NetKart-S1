@@ -6,7 +6,7 @@
     --black: #151515;
     --black-transparent: #151515AD;
     --green: #008B47;
-    --main-font : 'Montserrat';
+    --main-font: 'Montserrat';
 
 }
 
@@ -31,52 +31,68 @@ h4 {
     color: var(--red);
 }
 
-.description{
+.description {
     display: flex;
     flex-direction: row;
     margin-bottom: 10%;
 }
 
-.description div{
+.description div {
     width: 45%;
     margin: 1em;
 }
 
-.description div img{
+.description div img {
 }
 
-div h4 a{
+div h4 a {
     color: var(--grey)
 }
 
 /* class used to write the name of the author under an image */
-.image-author{
+.image-author {
     color: var(--grey);
     font-size: 0.8em;
 }
 
-.image{
+.image {
     width: 25%;
 }
 
 .body-page{
-    min-height: 57.9vh;
+    min-height: 69%;
 }
 
-.preview-game{
-    position:absolute;
+html{
+    height: 96%;
+    margin: 10px;
+    padding: 0;
+}
+
+body {
+    height: 98%;
+    margin: 0;
+    padding: 0;
+}
+
+#homepage-banner{
+    width: 98vw;
+}
+
+.preview-game {
+    position: absolute;
     top: 20%;
     left: 5%;
 }
 
-.description div img{
+.description div img {
     width: 40%;
     opacity: 1;
 }
 
 
 @media screen and (max-width: 900px) {
-    .preview-game{
+    .preview-game {
         top: 20%;
         left: 5%;
         font-size: 90%;
@@ -84,7 +100,7 @@ div h4 a{
 }
 
 @media screen and (max-width: 750px) {
-    .preview-game{
+    .preview-game {
         top: 15%;
         left: 5%;
         font-size: 70%;

@@ -51,6 +51,20 @@
     border-radius: 5px ;
     line-height: 2;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.new_circuit_form input[type = 'number']{
+    border : 0.1em solid  var(--light-grey);
+    border-radius: 5px ;
+    line-height: 2;
+    -moz-appearance: textfield;
+}
+
 .new_circuit_form select{
     height: 2.3em;
 }
