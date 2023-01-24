@@ -1,3 +1,9 @@
+/**
+ * Display the form selected in the connection.php page
+ *
+ * @param selectedButton (String) name of
+ * @return void
+ */
 function openConnection(selectedButton) {
     var i;
     var x = document.getElementsByClassName("connection-form");

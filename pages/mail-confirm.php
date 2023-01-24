@@ -1,12 +1,13 @@
 <?php
 session_start();
-/*
+/**
  * @file /pages/mail-confirm.php
  *
  * @details File to confirm an email when registering in the website.
  *
  * @author SAE S3 NetKart
  */
+
 require ("./database/database.php");
 if(isset($_GET["user"]) and isset($_GET["code"])){
 

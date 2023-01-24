@@ -1,5 +1,12 @@
 <?php
-include '../pages/header.php';
+/** @file /pages/homepage.php
+ *
+ * @details File displaying the terms of use of the site
+ *
+ * @author SAE S3 NetKart
+ */
+
+require '../pages/header.php';
 startPage("Conditions d'utilisation",["../assets/style/main"],[]);
 ?>
 <div class="body-page">
@@ -117,6 +124,6 @@ startPage("Conditions d'utilisation",["../assets/style/main"],[]);
 </div>
 
 <?php
-include '../pages/footer.php';
+require '../pages/footer.php';
 endPage();
 ?>

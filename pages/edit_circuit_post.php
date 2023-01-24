@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * @file /pages/edit_circuit_post.php
  *
  * @details File to delete a circuit created by user
@@ -8,7 +8,7 @@
  */
 require ("./database/database.php");
 
-/*
+/**
  * Check if id of circuit to delete is set
  */
 
