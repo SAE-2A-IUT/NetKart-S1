@@ -2,7 +2,7 @@
 require ('./header.php');
 require ("./database/database.php");
 
-startPage("Themes",["../assets/style/main", "../assets/style/themes"],["../assets/script/theme"]);
+startPage("Themes",["../assets/style/main", "../assets/style/themes", "../assets/style/edit_theme"],["../assets/script/theme"]);
 
 $l_db = new database();
 
@@ -12,6 +12,7 @@ $l_circuits = $l_db->get_all_circuit();
 // Get all themes from database
 $l_themes = $l_db->get_all_themes();
 ?>
+
 <div class="body-page">
     <div id="theme_choice" class="item_choice">
         <?php
@@ -20,18 +21,23 @@ $l_themes = $l_db->get_all_themes();
         <button type="button" id="circuit_<?php echo $l_theme["id_theme"]; ?>" class="button_theme" onclick="show_theme(this)"><b> <?php echo $l_theme["nom_theme"]; ?></b></button>
         <?php } ?>
     </div>
-    <form id="circuit_form" class="all_theme" action="game-solo.php" method="post">
+    <div class="all_theme">
         <h1 id="waiting">Merci de sélectionner au minimum un thème</h1>
         <?php foreach ($l_circuits as $l_circuit){?>
-            <button type="submit" class="circuit" name="circuit_id_<?php echo $l_circuit['id_theme']; ?>" value="<?php echo $l_circuit['id_circuit']; ?>">
-                <div class="circuit-image">
-                    <span class="play">Jouer</span>
-                    <img class="tour" src="../assets/image/<?php echo $l_circuit['image']; ?>" alt="circuit">
+        <div class="joue_div" id="circuit_id_<?php echo $l_circuit['id_theme']; ?>">
+            <div class="theme">
+                <img class="theme_image" alt="circuit" src="../assets/image/<?php echo $l_circuit['image']; ?>">
+                <h3><?php echo $l_circuit['nom_circuit'];?></h3>
+                <p class="points">Points: <?php echo $l_circuit['points']; ?></p>
+                <div class="form_div2">
+                    <form class="joue" method="post" action="game-solo.php">
+                        <input type="hidden" value="<?php echo $l_circuit['id_circuit']; ?>" name="id_circuit_to_play">
+                        <input type="submit" value="Jouer">
+                    </form>
                 </div>
-                <p><?php echo $l_circuit['nom_circuit']; ?> : <?php echo $l_circuit['points']; ?> points</p>
-            </button>
+            </div>
+        </div>
         <?php } ?>
-    </form>
 </div>
 
 <?php
