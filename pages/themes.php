@@ -46,6 +46,7 @@ $l_themes = $l_db->get_all_themes();
         </div>
         <?php } ?>
 </div>
+</div>
 
 <?php
 
