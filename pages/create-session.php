@@ -1,7 +1,10 @@
 <?php
 include './header.php';
-startPage("Création une session",["../assets/style/main", "../assets/style/create-session"],[]);
+startPage("Création une session",["../assets/style/main", "../assets/style/create-session"],[K_SCRIPT."check_connection"]);
 ?>
+<script>
+    check_connection(<?php isset($_SESSION['id_user'])?>);
+</script>
 <div class="body-page">
     <div id="page-description">
         <h1>Créer une session</h1>
