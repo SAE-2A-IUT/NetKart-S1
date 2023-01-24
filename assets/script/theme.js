@@ -6,21 +6,24 @@ var l_number_theme_showed = 0;
  * @param theme (String) Theme name.
  */
 function show_theme(theme) {
+    //remove the "circuit_" from the theme name
     const theme_id = theme.id.slice(8);
-    const form = document.getElementById("circuit_form");
-    const buttons_form = form.getElementsByTagName("button");
-    for(const button of buttons_form){
-        if(button.name.slice(11) == theme_id) {
-            if (button.style.display == "block") {
-                button.style.display = "none";
+    const form = document.getElementsByClassName("joue_div");
+    for(const element of form){
+        //remove the "circuit_id_" from the theme name
+        if(element.id.slice(11) === theme_id) {
+            if (element.style.display === "block") {
+                element.style.display = "none";
+                theme.style.background = "var(--light-grey)";
+                theme.style.border = "none";
                 l_number_theme_showed--;
             } else {
-                button.style.display = "block";
+                element.style.display = "block";
+                theme.style.background = "var(--half-light-grey)";
                 l_number_theme_showed++;
             }
         }
     }
-
     if (l_number_theme_showed===0) {
         document.getElementById('waiting').style.display = 'block';
     }

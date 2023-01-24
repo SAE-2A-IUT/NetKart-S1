@@ -17,8 +17,32 @@ $l_db->connection();
 
 $l_nb_max_question = K_MAX_QUESTIONS;
 $l_nb_max_question_images = K_MAX_IMAGES;
-?>
-
+ if (isset($_GET['error'])){
+    $l_code_err = $_GET['error'];?>
+    <div class="error">
+    <?php
+    if ($l_code_err == 1){
+        ?>Le nouveau thème existe déjà.
+    <?php }
+    if ($l_code_err == 2){
+        ?>Un circuit existe déjà sous ce nom.
+    <?php }
+    if ($l_code_err == 3){
+        ?>L'enregistrement n'a pas fonctionné.
+    <?php }
+    if ($l_code_err == 4){
+        ?>Les questions se sont enregistrées partiellement (titre, consigne ou réponse). Consulter la page de <a href="edit_circuit.php">modification de circuit</a>.
+    <?php }
+    if ($l_code_err == 5){
+        ?>Les questions se sont enregistrées partiellement (ressources). Consulter la page de <a href="edit_circuit.php">modification de circuit</a>.
+    <?php }?>
+    </div>
+     <?php } ?>
+<?php  if (isset($_GET['success'])){?>
+    <div class="success">
+        Le circuit a bien été créé ! Vous pouvez le modifier <a href="edit_circuit.php" target="_blank">maintenant</a> ou plus tard.
+    </div>
+<?php }?>
     <form method="post" class="new_circuit_form body" action="new-circuit_post.php" enctype="multipart/form-data">
         <input type="hidden" id="image_limit" value="<?php echo $l_nb_max_question_images ?>">
         <div class="left">

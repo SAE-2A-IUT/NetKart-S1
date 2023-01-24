@@ -9,8 +9,13 @@
 require ('header.php');
 require ("./database/database.php");
 
-startPage("Utilisateur",[K_STYLE."main",K_STYLE."user"],[]);
+startPage("Utilisateur",[K_STYLE."main",K_STYLE."user"],[K_SCRIPT."check_connection"]);
+?>
 
+    <script>
+        check_connection(<?php isset($_SESSION['id_user'])?>);
+    </script>
+<?php
 $l_player_id = 1;
 
 $l_db = new database();
