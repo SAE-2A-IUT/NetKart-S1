@@ -1,7 +1,7 @@
 <?php
 /** @file /pages/header.php
  *
- * File that generate the header of other pages
+ * @details File that generate the header of other pages
  *
  * @author SAE S3 NetKart
  */
@@ -19,11 +19,11 @@ require 'constants.php';
  * @param $A_CONNECTED
  * @return void
  */
-function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT, $A_CONNECTED=false){
+function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT){
+session_start();
 ?>
-
 <!-- Header connected -->
-<?php if ($A_CONNECTED){?>
+<?php if (isset($_SESSION['id_user'])){?>
 <!DOCTYPE html>
 <html lang="fr-FR">
 <head>

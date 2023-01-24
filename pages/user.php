@@ -1,17 +1,36 @@
 <?php
 /** @file /pages/user.php
  *
- * File to check and modify user information
+ * @details File to check and modify user information
  *
  * @author SAE S3 NetKart
  */
 
-require 'header.php';
-startPage("Utilisateur",[K_STYLE."main",K_STYLE."user"],[]);
-$l_score= 999;
+require ('header.php');
+require ("./database/database.php");
+
+startPage("Utilisateur",[K_STYLE."main",K_STYLE."user"],[K_SCRIPT."check_connection"]);
 ?>
 
-    <div class="body">
+    <script>
+        check_connection(<?php isset($_SESSION['id_user'])?>);
+    </script>
+<?php
+$l_player_id = 1;
+
+$l_db = new database();
+
+$l_db->connection();
+
+$l_score= $l_db->get_score_player_id($l_player_id);
+
+if($l_score == NULL){
+    $l_score = 0;
+}
+
+?>
+    <div class="body-page">
+        <div class="body">
         <div class="left">
             <h1>User1207</h1>
             <?php
@@ -70,6 +89,7 @@ $l_score= 999;
                 document.getElementById('cancel_delete_account').addEventListener('click', cancel_delete_account);
             </script>
         </div>
+    </div>
     </div>
 
 <?php

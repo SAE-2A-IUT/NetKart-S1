@@ -1,6 +1,6 @@
 <?php
 session_start();
-/*
+/**
  * @file /pages/connection-post.php
  *
  * @details File to manage data from connection/register form. Save data into database if registering / check if password correct if connecting.
@@ -9,7 +9,7 @@ session_start();
  */
 require ("./database/database.php");
 
-/*
+/**
  * Check if password/username are correct
  */
 if(isset($_POST["username-connection"]) and isset($_POST["password-connection"])){
@@ -31,12 +31,14 @@ if(isset($_POST["username-connection"]) and isset($_POST["password-connection"])
         header('Location: connection.php?error=1');
     }
     else {
+        $_SESSION['username'] = $l_username_connection;
+        $_SESSION['id_user'] = $l_db->f_query("SELECT id_joueur FROM `Joueur` WHERE pseudo='".$l_username_connection."'")[0]['id_joueur'];
         header('Location: ../index.php');
     }
     // $_SESSION['username'] = $l_username_connection;
     $l_db->close();
 }
-/*
+/**
  * Insert data if new person
  */
 elseif (isset($_POST["firstname"]) and isset($_POST["lastname"])

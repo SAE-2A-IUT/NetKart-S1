@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * @file /pages/user_post.php
  *
  * @details File to manage data from connection/register form. Save data into database if registering / check if password correct if connecting.

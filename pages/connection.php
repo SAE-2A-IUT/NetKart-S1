@@ -1,13 +1,18 @@
 <?php
 /** @file /pages/connection.php
  *
- * PHP page that allows the user to either register or login by filling in the required fields
+ *  @details PHP page that allows the user to either register or login by filling in the required fields
  *
  * @author SAE S3 NetKart
  */
 
-include './header.php';
+require './header.php';
 startPage("Connexion",["../assets/style/main", "../assets/style/connection"],["../assets/script/connection"]);
+if (isset($_SESSION['id_user'])) {
+    session_destroy();
+    print_r($_SESSION['id_user']);
+    header('Location: connection.php?success=3');
+}
 ?>
 <div class="body-page">
     <div class="connection-select">
@@ -21,7 +26,7 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
         <div class="error">
             <?php
                 if ($l_code_err == 1){
-            ?>Le compte n'éxiste pas ou le mot de passe est erroné.
+            ?>Le compte n'existe pas ou le mot de passe est erroné.
             <?php }
             if ($l_code_err == 2){
                 ?>Le mot de passe et la confirmation de mot de passe sont différents.
@@ -40,6 +45,9 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
             <?php }
             if ($l_code_err == 7){
                 ?>Ce lien de confirmation n'est plus valide.
+            <?php }
+            if ($l_code_err == 8){
+                ?>veuillez vous connecter pour accéder a cette page.
             <?php }?>
 
         </div>
@@ -52,7 +60,10 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
                 ?>Le compte est bel et bien créé, veillez verifier votre boite mail.
                 <?php }
                 if ($l_code_success == 2){
-                ?>email verifié, vous pouvez désormais vous connecter.
+                    ?>email verifier, vous pouvez désormais vous connecter.
+                <?php }
+                if ($l_code_success == 3){
+                    ?>Déconnexion réussie
                 <?php }?>
 
             </div>
@@ -102,6 +113,6 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
 </div>
 
 <?php
-include './footer.php';
+require './footer.php';
 endPage();
 ?>

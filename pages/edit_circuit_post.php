@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * @file /pages/edit_circuit_post.php
  *
  * @details File to delete a circuit created by user
@@ -8,7 +8,7 @@
  */
 require ("./database/database.php");
 
-/*
+/**
  * Check if id of circuit to delete is set
  */
 
@@ -26,12 +26,18 @@ if(isset($_POST["id_circuit_to_delete"])){
 
     // Check if delete is successful
     if (!$l_is_delete_ok){
-        // TODO : renvoyer sur la page, afficher qu'une erreur est survenue et que la suppression du circuit n'a pas fonctionné
+        // DONE : renvoyer sur la page, afficher qu'une erreur est survenue et que la suppression du circuit n'a pas fonctionné
+        header('Location: edit_circuit.php?error=1');
+        exit();
     }
 
     $l_db->close();
 
 
-    //TODO : renvoyer sur la page, afficher que la suppression a fonctionné
+    //DONE : renvoyer sur la page, afficher que la suppression a fonctionné
+    header('Location: edit_circuit.php?success=1');
+    exit();
 }
-//TODO : renvoyer sur la page (redirection automatique VERS LA PAGE D'ERREUR si )
+//DONE : renvoyer sur la page (redirection automatique VERS LA PAGE D'ERREUR si )
+header('Location: error.html');
+exit();

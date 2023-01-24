@@ -1,6 +1,13 @@
 <?php
-include './header.php';
-startPage("Création une session",["../assets/style/main", "../assets/style/create-session"],[]);
+/**
+ * @file /pages/create-session.php
+ *
+ * @details File to create circuits
+ *
+ * @author SAE S3 NetKart
+ */
+require './header.php';
+startPage("Création une session",["../assets/style/main", "../assets/style/create-session"],[K_SCRIPT."check_connection"]);
 require 'database/database.php';
 $l_db = new database();
 $l_db->connection();
@@ -11,7 +18,12 @@ if(($l_db->verifyPlayerSession(12))&& !(isset($_GET['success']))){
 unset($_SESSION['session_hosted']);
 $l_themes = $l_db->get_all_themes();
 $l_db->close();
+
+
 ?>
+<script>
+    check_connection(<?php isset($_SESSION['id_user'])?>);
+</script>
 <div class="body-page">
     <div id="page-description">
         <h1>Créer une session</h1>
@@ -53,6 +65,6 @@ $l_db->close();
     </form>
 </div>
 <?php
-include './footer.php';
+require './footer.php';
 endPage();
 ?>
