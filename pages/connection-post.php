@@ -31,9 +31,10 @@ if(isset($_POST["username-connection"]) and isset($_POST["password-connection"])
         header('Location: connection.php?error=1');
     }
     else {
+        $_SESSION['username'] = $l_username_connection;
+        $_SESSION['id_user'] = $l_db->f_query("SELECT id_joueur FROM `Joueur` WHERE pseudo='".$l_username_connection."'")[0]['id_joueur'];
         header('Location: ../index.php');
     }
-    // $_SESSION['username'] = $l_username_connection;
     $l_db->close();
 }
 /*
