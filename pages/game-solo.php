@@ -6,7 +6,6 @@
  * @author SAE S3 NetKart
  */
 
-session_start();
 require './header.php';
 startPage("Jeu-solo", ["../assets/style/main", "../assets/style/game-solo"], ["../assets/script/position"]);
 startPage("Jeu-solo", ["../assets/style/main", "../assets/style/game-solo"], ["../assets/script/position", K_SCRIPT."check_connection"]);

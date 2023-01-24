@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 /**
  * @file /pages/connection-post.php
  *

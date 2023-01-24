@@ -6,7 +6,6 @@
  * @author SAE S3 NetKart
  */
 
-session_start();
 
 require 'constants.php';
 
@@ -69,10 +68,10 @@ session_start();
         <a href="rules.php">RÈGLES DU JEU</a>
         </div>
         <div>
-            <a href="#mes-circuits">NOUVELLE SESSION</a>
+            <a href="create-session.php">NOUVELLE SESSION</a>
         </div>
         <div>
-            <a href="#mes-circuits">MES CIRCUITS</a>
+            <a href="edit_circuit.php">MES CIRCUITS</a>
         </div>
         <div>
             <a href="user.php">PROFIL</a>
