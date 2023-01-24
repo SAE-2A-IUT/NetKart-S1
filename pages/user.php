@@ -6,18 +6,10 @@
  * @author SAE S3 NetKart
  */
 
-require 'header.php';
-startPage("Utilisateur",[K_STYLE."main",K_STYLE."user"],[K_SCRIPT."check_connection"]);
+require ('header.php');
+require ("./database/database.php");
 
-$l_score= 999;
-
-?>
-
-    <script>
-        check_connection(<?php isset($_SESSION['id_user'])?>);
-    </script>
-<?php
-?>
+startPage("Utilisateur",[K_STYLE."main",K_STYLE."user"],[]);
 
 $l_player_id = 1;
 

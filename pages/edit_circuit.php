@@ -8,19 +8,14 @@
  */
 require ("./database/database.php");
 include './header.php';
-startPage("Edit",["../assets/style/main", "../assets/style/edit_theme"],["../assets/script/theme", K_SCRIPT."check_connection"]);
-?>
+startPage("Edit",["../assets/style/main", "../assets/style/edit_theme"],["../assets/script/theme"]);
 
-    <script>
-        check_connection(<?php isset($_SESSION['id_user'])?>);
-    </script>
-<?php
 /*
  * Check if password and confirmation are set
  */
-if(isset($_SESSION['id_user'])){ # isset($_SESSION id joueur
+if(True){ # isset($_SESSION id joueur
 
-    $l_user_id = $_SESSION['id_user']; //TODO : recupérer le pseudo stocké en variable de session
+    $l_user_id = 5; //TODO : recupérer le pseudo stocké en variable de session
 
     $l_db = new database();
 
