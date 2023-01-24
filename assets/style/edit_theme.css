@@ -254,3 +254,10 @@ h3 {
 .delete {
     display: none;
 }
+
+.error{
+    color: var(--red);
+}
+.success{
+    color: var(--green);
+}

@@ -22,6 +22,7 @@ if(isset($_SESSION['id_user'])){ # isset($_SESSION id joueur
 
     $l_user_id = $_SESSION['id_user'];
 
+
     $l_db = new database();
 
     $l_db->connection();
@@ -39,6 +40,16 @@ if(isset($_SESSION['id_user'])){ # isset($_SESSION id joueur
         <input type="submit" value="Créer un circuit">
     </form>
     </div>
+    <?php  if (isset($_GET['error']) && $_GET['error']){?>
+    <div class="error">
+        Une erreur est survenue et la suppression ne s'est pas réalisée.
+    </div>
+    <?php }
+    if (isset($_GET['success']) && $_GET['success']){?>
+    <div class="success">
+        La suppression s'est réalisée correctement.
+    </div>
+<?php }?>
     <div class="all_theme">
 
     <?php

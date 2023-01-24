@@ -223,3 +223,10 @@ h2{
         width: 95%;
     }
 }
+
+.error{
+    color: var(--red);
+}
+.success{
+    color: var(--green);
+}
