@@ -52,7 +52,6 @@ $l_nb_max_question_images = K_MAX_IMAGES;
             <select name="circuit_theme" required>
                 <option value="">Choisir un thème</option>
                 <?php
-                $l_nb_option = 1;
                 $l_themes = $l_db->get_all_themes();
                 foreach ($l_themes as $l_theme){?>
                     <label for="theme">
