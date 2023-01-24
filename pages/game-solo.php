@@ -8,12 +8,8 @@
 
 session_start();
 require './header.php';
-startPage("Jeu-solo", ["../assets/style/main", "../assets/style/game-solo"], ["../assets/script/position", K_SCRIPT."check_connection"]);
-?>
-<script>
-check_connection(<?php isset($_SESSION['id_user'])?>);
-</script>
-<?php
+startPage("Jeu-solo", ["../assets/style/main", "../assets/style/game-solo"], ["../assets/script/position"]);
+
 require("./database/database.php");
 $l_db = new database();
 $l_db->connection();

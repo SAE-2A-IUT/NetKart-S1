@@ -17,12 +17,11 @@ require 'constants.php';
  * @param $A_CONNECTED
  * @return void
  */
-
-function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT){
-session_start();
+function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT, $A_CONNECTED=false){
 ?>
+
 <!-- Header connected -->
-<?php if (isset($_SESSION['id_user'])){?>
+<?php if ($A_CONNECTED){?>
 <!DOCTYPE html>
 <html lang="fr-FR">
 <head>
