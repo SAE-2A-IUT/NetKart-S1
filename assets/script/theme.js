@@ -1,4 +1,10 @@
 var l_number_theme_showed = 0;
+
+/**
+ * Display or hide the selected themes circuits.
+ *
+ * @param theme (String) Theme name.
+ */
 function show_theme(theme) {
     //remove the "circuit_" from the theme name
     const theme_id = theme.id.slice(8);

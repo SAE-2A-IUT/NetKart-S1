@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * @file /pages/new-circuit.php
  *
  * @details File to show circuits created by user
@@ -7,7 +7,7 @@
  * @author SAE S3 NetKart
  */
 require ("./database/database.php");
-include './header.php';
+require './header.php';
 startPage("Edit",["../assets/style/main", "../assets/style/edit_theme"],["../assets/script/theme", K_SCRIPT."check_connection"]);
 ?>
 
@@ -16,6 +16,7 @@ startPage("Edit",["../assets/style/main", "../assets/style/edit_theme"],["../ass
     </script>
 <?php
 /*
+
  * Check if password and confirmation are set
  */
 if(isset($_SESSION['id_user'])){ # isset($_SESSION id joueur

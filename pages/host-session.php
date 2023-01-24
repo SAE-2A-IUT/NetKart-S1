@@ -1,4 +1,11 @@
 <?php
+/** @file /pages/host-session.php
+ *
+ * @details File displaying session info to the host.
+ *
+ * @author SAE S3 NetKart
+ */
+
 require 'header.php';
 startPage("Détails de la session",[K_STYLE."main",K_STYLE."host-session"],[]);
 

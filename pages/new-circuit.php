@@ -1,4 +1,11 @@
 <?php
+/** @file /pages/homepage.php
+ *
+ * @details File to create a new circuit
+ *
+ * @author SAE S3 NetKart
+ */
+
 require ('header.php');
 require ("./database/database.php");
 

@@ -1,5 +1,13 @@
 <?php
-include './header.php';
+
+/**
+ * @file /pages/create-session.php
+ *
+ * @details File to create circuits
+ *
+ * @author SAE S3 NetKart
+ */
+require './header.php';
 startPage("Création une session",["../assets/style/main", "../assets/style/create-session"],[K_SCRIPT."check_connection"]);
 ?>
 <script>
@@ -37,6 +45,6 @@ startPage("Création une session",["../assets/style/main", "../assets/style/crea
     </form>
 </div>
 <?php
-include './footer.php';
+require './footer.php';
 endPage();
 ?>

@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * @file /pages/new-circuit_post.php
  *
  * @details File to insert or update data of circuit created by user
