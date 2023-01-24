@@ -1,7 +1,7 @@
 <?php
 /** @file /pages/game-solo.php
  *
- * PHP page that allows the user to learn the network by playing. The player can answer questions about the network in a terminal, this makes the player character move around the circuit. The user has an instructions and potentially up to three images to zoom in on.
+ * @details PHP page that allows the user to learn the network by playing. The player can answer questions about the network in a terminal, this makes the player character move around the circuit. The user has an instructions and potentially up to three images to zoom in on.
  *
  * @author SAE S3 NetKart
  */
@@ -9,12 +9,23 @@
 session_start();
 require './header.php';
 startPage("Jeu-solo", ["../assets/style/main", "../assets/style/game-solo"], ["../assets/script/position"]);
-
+startPage("Jeu-solo", ["../assets/style/main", "../assets/style/game-solo"], ["../assets/script/position", K_SCRIPT."check_connection"]);
+?>
+<script>
+    check_connection(<?php isset($_SESSION['id_user'])?>);
+</script>
+<?php
 require("./database/database.php");
 $l_db = new database();
 $l_db->connection();
 
-$id_circuit = 59;
+if(isset($_POST["id_circuit_to_play"])){
+    $id_circuit = $_POST["id_circuit_to_play"];
+
+}
+else {
+    header('Location: ./error.html');
+}
 $id_user = 1;
 $questionNumber = 0;
 $name_circuit = $l_db->get_circuit_information($id_circuit)[$questionNumber]['nom_circuit'];

@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * @file /pages/new-circuit.php
  *
  * @details File to show circuits created by user
@@ -7,15 +7,22 @@
  * @author SAE S3 NetKart
  */
 require ("./database/database.php");
-include './header.php';
-startPage("Edit",["../assets/style/main", "../assets/style/edit_theme"],["../assets/script/theme"]);
+require './header.php';
+startPage("Edit",["../assets/style/main", "../assets/style/edit_theme"],["../assets/script/theme", K_SCRIPT."check_connection"]);
+?>
 
+    <script>
+        check_connection(<?php isset($_SESSION['id_user'])?>);
+    </script>
+<?php
 /*
+
  * Check if password and confirmation are set
  */
-if(True){ # isset($_SESSION id joueur
+if(isset($_SESSION['id_user'])){ # isset($_SESSION id joueur
 
-    $l_user_id = 5; //TODO : recupérer le pseudo stocké en variable de session
+    $l_user_id = $_SESSION['id_user'];
+
 
     $l_db = new database();
 
@@ -34,6 +41,16 @@ if(True){ # isset($_SESSION id joueur
         <input type="submit" value="Créer un circuit">
     </form>
     </div>
+    <?php  if (isset($_GET['error']) && $_GET['error']){?>
+    <div class="error">
+        Une erreur est survenue et la suppression ne s'est pas réalisée.
+    </div>
+    <?php }
+    if (isset($_GET['success']) && $_GET['success']){?>
+    <div class="success">
+        La suppression s'est réalisée correctement.
+    </div>
+<?php }?>
     <div class="all_theme">
 
     <?php
