@@ -12,6 +12,7 @@ if (isset($_POST['delete_session']) && $_POST['delete_session'] == 'ok'){
     $l_db->connection();
     if ($l_db->delete_session_multi($_POST['id_session'])) {
         header('Location: create-session.php?deleted=1');
+        exit();
     }
     $l_db->close();
     exit();

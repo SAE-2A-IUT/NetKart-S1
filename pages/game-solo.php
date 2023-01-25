@@ -27,6 +27,7 @@ if(isset($_POST["id_circuit_to_play"])){
 }
 else {
     header('Location: ./error.html');
+    exit();
 }
 $id_user = 1;
 $questionNumber = 0;
