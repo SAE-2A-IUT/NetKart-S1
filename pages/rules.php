@@ -105,7 +105,7 @@ startPage("Contact",["../assets/style/main", "../assets/style/rules"],[]);
             interface_title4: "Augmentez votre score en arrivant premier !",
             interface_text4: "Lorsque le joueur atteint la ligne d'arrivée, il remporte la partie et son score augmente.<br>Il est possible de retourner au choix des thèmes en appuyant sur le bouton retour. Le bouton recommencer permet de recommencer le circuit actuel.<br>Vous ne remportez les points que lors de la première victoire sur chaque circuit.",
             interface_title5: "Il existe d'autres commandes",
-            interface_text5: "Il existe aussi d'autres commandes tel que « clear » et « help ».<br>La commande clear permet de vider entièrement l'historique de commande saisies auparavant.<br>La commande help permet de connaitre les commandes existantes ainsi que leurs utilités."
+            interface_text5: "Il existe aussi d'autres commandes tel que « clear » et « help ». La commande clear permet de vider entièrement l'historique de commande saisies auparavant. La commande help permet de connaitre les commandes existantes ainsi que leurs utilités.",
         },
         eng: {
             main_title: "Game Rules",
@@ -119,7 +119,7 @@ startPage("Contact",["../assets/style/main", "../assets/style/rules"],[]);
             interface_title4: "Augmentez votre score en arrivant premier !",
             interface_text4: "Lorsque le joueur atteint la ligne d'arrivée, il remporte la partie et son score augmente.<br>Il est possible de retourner au choix des thèmes en appuyant sur le bouton retour. Le bouton recommencer permet de recommencer le circuit actuel.<br>Vous ne remportez les points que lors de la première victoire sur chaque circuit.",
             interface_title5: "Il existe d'autres commandes",
-            interface_text5: "Il existe aussi d'autres commandes tel que « clear » et « help ».<br>La commande clear permet de vider entièrement l'historique de commande saisies auparavant.<br>La commande help permet de connaitre les commandes existantes ainsi que leurs utilités."
+            interface_text5: "Il existe aussi d'autres commandes tel que « clear » et « help ». La commande clear permet de vider entièrement l'historique de commande saisies auparavant. La commande help permet de connaitre les commandes existantes ainsi que leurs utilités.",
         },
     };
 
@@ -137,7 +137,7 @@ startPage("Contact",["../assets/style/main", "../assets/style/rules"],[]);
             interface_title4.innerHTML = language.fr.interface_title4;
             interface_text4.innerHTML = language.fr.interface_text4;
             interface_title5.innerHTML = language.fr.interface_title5;
-            interface_text5.innerHTML = language.fr.interface_text5;
+            interface_text5.textContent = language.fr.interface_text5;
         }
         else if (window.location.hash === "#eng") {
             Title.textContent = language.eng.main_title;
@@ -151,7 +151,7 @@ startPage("Contact",["../assets/style/main", "../assets/style/rules"],[]);
             interface_title4.textContent = language.eng.interface_title4;
             interface_text4.textContent = language.eng.interface_text4;
             interface_title5.textContent = language.eng.interface_title5;
-            interface_text5.textContent = language.eng.interface_text5;
+            interface_text5.innerHTML = language.eng.interface_text5;
 
         }
     }
