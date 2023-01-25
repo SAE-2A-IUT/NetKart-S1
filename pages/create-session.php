@@ -15,6 +15,7 @@ $l_db->connection();
 
 if(($l_db->verifyPlayerSession(12))&& !(isset($_GET['success']))){
     header('Location: host-session.php');
+    exit();
 }
 unset($_SESSION['session_hosted']);
 $l_themes = $l_db->get_all_themes();

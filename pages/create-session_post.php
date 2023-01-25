@@ -44,5 +44,6 @@ if(isset($_POST['session-time']) && isset($_POST['session-name'])){
 }
 
 header('Location: create-session.php?success=true&session='.$l_code);
+exit();
 
 ?>

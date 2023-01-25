@@ -58,6 +58,7 @@ elseif (isset($_POST["firstname"]) and isset($_POST["lastname"])
         $l_password_register = $_POST["password-register"];
     } else {
         header('Location: connection.php?error=2');
+        exit();
     }
 
     $l_db = new database();
@@ -69,9 +70,11 @@ elseif (isset($_POST["firstname"]) and isset($_POST["lastname"])
     // Check if email already in database
     if ($l_db->check_if_element_already_used("Joueur","email", $l_email)) {
         header('Location: connection.php?error=3');
+        exit();
     } // Check if username already in database
     elseif ($l_db->check_if_element_already_used("Joueur","pseudo", $l_username_register)) {
         header('Location: connection.php?error=4');
+        exit();
     } // If pseudo and email not already used, insert data
     else {
         $l_password_register = password_hash($l_password_register,PASSWORD_DEFAULT );
@@ -84,6 +87,7 @@ elseif (isset($_POST["firstname"]) and isset($_POST["lastname"])
         // Check if register is successful
         if(!$l_is_insert_ok){
             header('Location: connection.php?error=5');
+            exit();
         }else{
 
             $l_page = "http://localhost/pages/mail-confirm.php?user=" . $l_username_register . "&code=" . $l_code_verification;
@@ -92,10 +96,12 @@ elseif (isset($_POST["firstname"]) and isset($_POST["lastname"])
             $l_message = "Bonjour " . $l_username_register . ", merci de cliquer sur ce lien pour verifié votre email: " . $l_page;
             mail($l_email,'Confirmation de mail pour Netkart', $l_message);
             header('Location: connection.php?success=1');
+            exit();
         }
     }
 
     $l_db->close();
 }else{
     header('Location: error.html');
+    exit();
 }
