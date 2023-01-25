@@ -117,6 +117,9 @@ if (isset($_POST["circuit_name"]) and isset($_POST["circuit_theme"]) and isset($
         $files=$_FILES["question_files_".$i];
         print_r($files);
         foreach ($files["tmp_name"] as $key => $tmp_name){
+            if ($files["error"][0] != 0) {
+                continue;
+            }
             $imageFileType = strtolower(pathinfo($files["name"][$key],PATHINFO_EXTENSION));
             $target_filename = generateRandomString() . "." . $imageFileType;
             $target_file = $target_dir . $target_filename;
