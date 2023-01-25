@@ -6,7 +6,8 @@
  * @author SAE S3 NetKart
  */
 
-require 'header.php';
+require ('header.php');
+session_start();
 startPage("Détails de la session",[K_STYLE."main",K_STYLE."host-session"],[]);
 require 'database/database.php';
 

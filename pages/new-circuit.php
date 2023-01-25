@@ -7,6 +7,7 @@
  */
 
 require ('header.php');
+session_start();
 require ("./database/database.php");
 
 startPage("Nouveau circuit", [K_STYLE . "main", K_STYLE . "new-circuit"], ['../assets/script/new-circuit']);

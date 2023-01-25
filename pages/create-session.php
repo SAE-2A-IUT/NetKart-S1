@@ -6,7 +6,8 @@
  *
  * @author SAE S3 NetKart
  */
-require './header.php';
+require ('header.php');
+session_start();
 startPage("Création une session",["../assets/style/main", "../assets/style/create-session"],[K_SCRIPT."check_connection"]);
 require 'database/database.php';
 $l_db = new database();
@@ -20,10 +21,14 @@ $l_themes = $l_db->get_all_themes();
 $l_db->close();
 
 
+if (!isset($_SESSION['id_user'])) {
+    ?>
+    <script>
+        check_connection(false);
+    </script>
+    <?php
+}
 ?>
-<script>
-    check_connection(<?php isset($_SESSION['id_user'])?>);
-</script>
 <div class="body-page">
     <div id="page-description">
         <h1>Créer une session</h1>

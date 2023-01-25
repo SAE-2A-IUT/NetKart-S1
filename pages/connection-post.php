@@ -8,7 +8,7 @@
  * @author SAE S3 NetKart
  */
 require ("./database/database.php");
-
+session_start();
 /**
  * Check if password/username are correct
  */
@@ -26,16 +26,19 @@ if(isset($_POST["username-connection"]) and isset($_POST["password-connection"])
     $l_is_verif = $l_db->f_query("SELECT verification FROM Joueur WHERE pseudo='".$l_username_connection."'")[0]['verification'];
     if (!$l_is_verif) {
         header('Location: connection.php?error=6');
+        exit();
     }
     else if($l_password == '' || !password_verify($l_password_connection,$l_password)){
         header('Location: connection.php?error=1');
+        exit();
     }
     else {
         $_SESSION['username'] = $l_username_connection;
         $_SESSION['id_user'] = $l_db->f_query("SELECT id_joueur FROM `Joueur` WHERE pseudo='".$l_username_connection."'")[0]['id_joueur'];
-        header('Location: ../index.php');
+        ?>
+        <script>window.open("../index.php","_self");</script>
+        <?php
     }
-    // $_SESSION['username'] = $l_username_connection;
     $l_db->close();
 }
 /**

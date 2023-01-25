@@ -5,8 +5,8 @@
  *
  * @author SAE S3 NetKart
  */
-
-require './header.php';
+require ('header.php');
+session_start();
 startPage("Accueil",["../assets/style/main"],[], false);
 ?>
 

@@ -6,7 +6,8 @@
  * @author SAE S3 NetKart
  */
 
-require ('./header.php');
+require ('header.php');
+session_start();
 require ("./database/database.php");
 
 startPage("Themes",["../assets/style/main", "../assets/style/themes", "../assets/style/edit_theme"],["../assets/script/theme"]);

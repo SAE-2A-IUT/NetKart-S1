@@ -7,14 +7,16 @@
  * @author SAE S3 NetKart
  */
 require ("./database/database.php");
-require './header.php';
+require ('header.php');
+session_start();
 startPage("Edit",["../assets/style/main", "../assets/style/edit_theme"],["../assets/script/theme", K_SCRIPT."check_connection"]);
-?>
-
+if (!isset($_SESSION['id_user'])) {
+    ?>
     <script>
-        check_connection(<?php isset($_SESSION['id_user'])?>);
+        check_connection(false);
     </script>
-<?php
+    <?php
+}
 /*
 
  * Check if password and confirmation are set

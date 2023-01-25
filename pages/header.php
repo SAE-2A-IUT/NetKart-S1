@@ -19,9 +19,9 @@ require 'constants.php';
  * @return void
  */
 function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT){
-session_start();
-?>
+    ?>
 <!-- Header connected -->
+
 <?php if (isset($_SESSION['id_user'])){?>
 <!DOCTYPE html>
 <html lang="fr-FR">

@@ -6,7 +6,8 @@
  * @author SAE S3 NetKart
  */
 
-require '../pages/header.php';
+require ('header.php');
+session_start();
 startPage("Conditions d'utilisation",["../assets/style/main"],[]);
 ?>
 <div class="body-page">

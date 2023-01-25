@@ -6,7 +6,8 @@
  * @author SAE S3 NetKart
  */
 
-require './header.php';
+require ('header.php');
+session_start();
 startPage("Connexion",["../assets/style/main", "../assets/style/connection"],["../assets/script/connection"]);
 if (isset($_SESSION['id_user'])) {
     session_destroy();

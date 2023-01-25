@@ -6,7 +6,8 @@
  *
  * @author SAE S3 NetKart
  */
-require 'header.php';
+require ('header.php');
+session_start();
 startPage("A propos",[K_STYLE."main",K_STYLE."about"],[]);
 ?>
     <div class="body-page">

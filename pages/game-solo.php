@@ -5,16 +5,19 @@
  *
  * @author SAE S3 NetKart
  */
-
-require './header.php';
-startPage("Jeu-solo", ["../assets/style/main", "../assets/style/game-solo"], ["../assets/script/position"]);
-startPage("Jeu-solo", ["../assets/style/main", "../assets/style/game-solo"], ["../assets/script/position", K_SCRIPT."check_connection"]);
-?>
-<script>
-    check_connection(<?php isset($_SESSION['id_user'])?>);
-</script>
-<?php
+require ('header.php');
+session_start();
 require("./database/database.php");
+startPage("Jeu-solo", ["../assets/style/main", "../assets/style/game-solo"], ["../assets/script/position", K_SCRIPT."check_connection"]);
+if (!isset($_SESSION['id_user'])) {
+    ?>
+    <script>
+        check_connection(false);
+    </script>
+    <?php
+}
+
+
 $l_db = new database();
 $l_db->connection();
 

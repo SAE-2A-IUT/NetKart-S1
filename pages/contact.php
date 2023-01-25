@@ -6,7 +6,8 @@
  * @author SAE S3 NetKart
  */
 
-require '../pages/header.php';
+require ('header.php');
+session_start();
 startPage("Contact",["../assets/style/main","../assets/style/contact"],[]);
 ?>
 <div class="body-page">
