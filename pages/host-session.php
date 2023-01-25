@@ -63,9 +63,6 @@ if (isset($l_session[0]['id_groupejoueur'])){
         ];
     }
 }
-
-
-
 ?>
 <script type="text/javascript">
     setTimeout(() =>{location.reload();} ,30000);
@@ -115,6 +112,36 @@ if (isset($l_session[0]['id_groupejoueur'])){
             <span><?php if (!($l_session_expired)){ echo $l_time_diff.' minutes';}else{echo '@TODO : supprimer session';}?></span>
             <h1>Code session</h1>
             <span><?php if($l_session["code"]){echo $l_session["code"];}else{ echo 'ARJM3D';}?></span>
+            <?php if($l_session["id_groupe"]){?>
+            <button id="delete_session" class="delete">Supprimer la session</button>
+            <div id="horizontal" class="horizontal">
+                <form method="post" action="host-session_post.php">
+                    <input type="hidden" name="delete_session" value="ok">
+                    <input type="hidden" name="id_session" value="<?php echo $l_session["id_groupe"]?>">
+                    <input type="submit" value="Continuer" class="send_from" id="button_click">
+                </form>
+                <button id="cancel_delete_session">annuler</button>
+            </div>
+            <?php }?>
+
+            <p id="alert">Êtes vous sûr? </p>
+            <script>
+                document.getElementById("horizontal").style.display ="none";
+                document.getElementById("alert").style.display ="none";
+
+                function delete_session() {
+                    document.getElementById("horizontal").style.display = "flex";
+                    document.getElementById("alert").style.display = "flex";
+                }
+
+                function cancel_delete_session() {
+                    document.getElementById("horizontal").style.display = "none";
+                    document.getElementById("alert").style.display = "none";
+                }
+
+                document.getElementById('delete_session').addEventListener('click', delete_session);
+                document.getElementById('cancel_delete_session').addEventListener('click', cancel_delete_session);
+            </script>
         </div>
     </div>
 </div>
