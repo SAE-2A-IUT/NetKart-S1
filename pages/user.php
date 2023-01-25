@@ -51,9 +51,8 @@ if($l_score == NULL){
                 <span>Changer son mot de passe :</span>
                 <form class="new_psw_form" method="post" action="user_post_2.php">
                     <label>Nouveau mot de passe</label>
-                    <input name="new_password" type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!*µ$£¤=+°@_~#]).{8,72}$" >
-                    <label>Confirmation</label>
-                    <input name="new_password_conf" type="password">
+                    <input name="new_password" type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!*µ$£¤=+°@_~#]).{8,72}$" title="Mot de passe d'au moins 8 caractères, avec au moins une majuscule, une minuscule, un chiffre et un caractère spécial parmi cette liste : ? ! * µ $ £ ¤ = + ° @ _ ~ #">                    <label>Confirmation</label>
+                    <input name="new_password_conf" type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!*µ$£¤=+°@_~#]).{8,72}$" aria-label="Mot de passe d'au moins 8 caractères, avec au moins une majuscule, une minuscule, un chiffre et un caractère spécial parmi cette liste : ? ! * µ $ £ ¤ = + ° @ _ ~ #">
                     <input name="new_psw_form" type="submit" value="Changer">
                 </form>
             </div>
