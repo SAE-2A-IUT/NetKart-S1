@@ -513,6 +513,26 @@ class database
         }
         return $l_score[0]["SUM(points)"];
     }
+
+    /**
+     * Adding player to the player list of a multiplayer session
+     *
+     * @param $A_PLAYER (String) : player nickname
+     * @param $A_SESSION_CODE (String) : session to join code
+     * @return bool|int
+     */
+    function insert_player_to_multiplayer_session($A_PLAYER, $A_SESSION_CODE){
+        if ($l_id_groupe = self::f_query("SELECT id_groupe FROM Groupe WHERE code='".$A_SESSION_CODE."'")) {
+            if (sizeof($l_id_groupe) == 1) {
+                $l_is_insert_ok = self::f_query("INSERT INTO Groupe_Joueur (pseudo_groupe,score,id_groupe) VALUES ('" . $A_PLAYER . "',0," . $l_id_groupe[0]["id_groupe"] . ")", true);
+                var_dump($l_is_insert_ok);
+
+                return $l_is_insert_ok == "Success";
+            }
+            return -1;
+        }
+        return -1;
+    }
 }
 //TODO : voir pour de la composition
 
