@@ -126,3 +126,23 @@ p {
     margin-bottom: 1%;
     margin-top: 1%;
 }
+
+#image-rules1, #image-rules2{
+    width: 43%;
+}
+
+#image-rules3{
+    width: 35.5%;
+}
+
+#image-rules4{
+    width: 26%;
+}
+
+#image-rules5, #image-rules6{
+    width: 35%;
+}
+
+#image-rules7{
+    width: 40%;
+}
