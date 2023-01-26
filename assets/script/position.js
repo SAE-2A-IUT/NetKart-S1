@@ -15,8 +15,7 @@ window.onload = () => {
 }
 
 /**
- *  Send value of the terminal to the process and display previous
- *  user input and their comparaison with the answer of their question.
+ *  @brief Send value of the terminal to the process and display previous user input and their comparaison with the answer of their question.
  *
  * @param questionResponse (String) answer of the current question.
  */
@@ -36,7 +35,7 @@ function sendCommand(questionResponse) {
 }
 
 /**
- * Display the modal when the player win or lose.
+ * @brief Display the modal when the player win or lose.
  *
  * @return void
  */
@@ -63,7 +62,7 @@ function displayModal() {
 }
 
 /**
- *  Move image to next coordinates.
+ * @brief Move image to next coordinates.
  *
  * @param imageId (String) Image id.
  * @param coordinates (Array) Coordinates of the circuit left.
@@ -99,7 +98,7 @@ function moveImage(imageId, coordinates, status) {
 }
 
 /**
- * Move the player image when the player answer is correct.
+ * @brief Move the player image when the player answer is correct.
  *
  * @param imageId (String) Image id.
  * @param coordinates (Array) Coordinates of the circuit left.
@@ -113,20 +112,7 @@ function correctAnswer(imageId, coordinates, status) {
 }
 
 /**
- * Display the victory modal when player win.
- *
- * @param element (String) Modal id.
- * @param status (String) Determine if the image is the player or the enemy one.
- */
-function setVictory(element, status) {
-    let modal = document.getElementById(element);
-    game = true;
-    modal.innerHTML = status === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>";
-    displayModal();
-}
-
-/**
- * Set image to the initial position of the circuit.
+ * @brief Set image to the initial position of the circuit.
  *
  * @param imageId (String) Image id.
  * @param coordinates (Array) Initial position of the circuit.
@@ -141,7 +127,7 @@ function setInitialPosition(imageId, coordinates) {
 }
 
 /**
- * Generates coordinates between starting and ending ones.
+ * @brief Generates coordinates between starting and ending ones.
  *
  * @param startX (Int) X starting coordinate.
  * @param startY (Int) Y starting coordinate.
@@ -163,7 +149,7 @@ function generateCoordinates(startX, startY, endX, endY) {
 }
 
 /**
- * Generate coordinate of an entity like the player or the enemy.
+ * @brief Generate coordinate of an entity like the player or the enemy.
  *
  * @param coordinates (Array) Coordinates of the selected circuit.
  * @return {*[]} Generated coordinates of an entity.
@@ -177,7 +163,7 @@ function populateArray(coordinates) {
 }
 
 /**
- * Scroll to the last line of the terminal
+ * @brief Scroll to the last line of the terminal
  *
  * @param item (HTMLDivElement) Game Terminal.
  */

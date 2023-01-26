@@ -119,16 +119,21 @@ $l_db->close();
     });
 
     let callProcess = 0;
+
+    /**
+     * @brief This function retrieves the answer to the question and the command entered by the user. It allows to set up commands like clear and help but also to go to the next question.
+     *
+     * @param input (String) user command.
+     * @param response (String) response of the question.
+     */
     function processCommand(input, response) {
         response = response.toString();
         switch (input) {
             case "help":
                 return ["Liste des commandes disponibles : clear", "yellow"];
 
-
             case response:
                 correctAnswer('player_kart', player_coordinates_, 'ally');
-
                 if (callProcess === 0){
                     <?php $questionNumber += 1;
                     $questionActual = $questionCircuit[$questionNumber];
@@ -181,6 +186,13 @@ $l_db->close();
         }
     }
 
+    /**
+     * @brief Adding the points won by the player in the database if he didn't already have them
+     *
+     * @param element (String) Modal id.
+     * @param id_circuit (Integer) ID of the actual circuit.
+     * @param id_user (String) ID of the player.
+     */
     function setVictoryDB(id_user, id_circuit, element) {
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "./victory.php", true);
@@ -205,11 +217,17 @@ $l_db->close();
         xhr.send(formData);
     }
 
-
+    /**
+     * @brief Display the victory modal when player win.
+     *
+     * @param element (String) Modal id.
+     * @param status (String) Determine if the image is the player or the enemy one.
+     */
     function setVictory(element, status) {
         let modal = document.getElementById(element);
         game = true;
         modal.innerHTML = status === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>";
+        displayModal();
         if (status === "ally"){
             setVictoryDB(<?php echo $id_user?>, <?php echo $id_circuit?>, element);
         }
