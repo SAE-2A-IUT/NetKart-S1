@@ -45,6 +45,7 @@ function timeDiff($A_CODE_SESSION, $A_db)
 
 if(!($l_db->verifyPlayerSession($l_id_joueur))){
     header('Location: create-session.php');
+    exit();
 }
 
 $l_session = $l_db->getSessionByHost($l_id_joueur);

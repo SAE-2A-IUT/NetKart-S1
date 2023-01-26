@@ -35,7 +35,14 @@ $l_themes = $l_db->get_all_themes();
         <div class="joue_div" id="circuit_id_<?php echo $l_circuit['id_theme']; ?>">
             <div class="theme">
                 <img class="theme_image" alt="circuit" src="../assets/image/<?php echo $l_circuit['image']; ?>">
-                <h3><?php echo $l_circuit['nom_circuit'];?></h3>
+                <?php
+                $l_title = $l_circuit['nom_circuit'];
+                if (strlen($l_title) > 20) {
+                    $l_title = substr("$l_title", 0, 20)."...";
+                }
+
+                ?>
+                <h3><?php echo $l_title?></h3>
                 <p class="points">Points: <?php echo $l_circuit['points']; ?></p>
                 <div class="form_div2">
                     <form class="joue" method="post" action="game-solo.php">

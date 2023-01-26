@@ -41,10 +41,12 @@ if(isset($_POST["new_password"]) and isset($_POST["new_password_conf"])){
     if(!$l_is_update_ok){
         $l_db->close();
         header("Location:user.php?success=TwT");
+        exit();
     }
     else {
         $l_db->close();
         header("Location:connection.php?success=UwU");
+        exit();
     }
     $l_db->close();
 }
@@ -76,4 +78,5 @@ elseif (isset($_POST["delete_account"])){
 else {
     $l_db->close();
     header("Location:error.html");
+    exit();
 }

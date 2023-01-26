@@ -13,6 +13,7 @@ if (isset($_SESSION['id_user'])) {
     session_destroy();
     print_r($_SESSION['id_user']);
     header('Location: connection.php?success=3');
+    exit();
 }
 ?>
 <div class="body-page">

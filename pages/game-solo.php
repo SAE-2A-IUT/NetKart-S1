@@ -27,6 +27,7 @@ if(isset($_POST["id_circuit_to_play"])){
 }
 else {
     header('Location: ./error.html');
+    exit();
 }
 $id_user = 1;
 $questionNumber = 0;
@@ -110,6 +111,17 @@ $l_db->close();
 </div>
 
 <script>
+    let circuit_1_coordinates = [[58, 10], [28, 13], [57, 41], [17, 70], [38.8, 94], [65, 57], [58, 10]];
+    let circuit_2_coordinates = [[62, 21], [25, 30], [20, 49], [28, 80], [50, 81], [55, 52], [62, 21]];
+    let circuit_3_coordinates = [[6, 54], [29, 56], [51, 85], [70, 83], [45, 72], [32, 44], [6, 54]];
+    let circuit_4_coordinates = [[63, 2], [30, 52], [8, 101], [36, 107], [59, 80], [78, 45], [63, 2]];
+
+    let coordinate = circuit_<?php echo $urlImage[7]?>_coordinates;
+
+    let game = false;
+    let player_coordinates_ = populateArray(coordinate);
+    let enemy_coordinates = populateArray(coordinate)
+
     let terminal = document.getElementById("terminal-input");
     terminal.addEventListener("keydown", function (event) {
         if (event.key === "Enter") {
@@ -118,16 +130,21 @@ $l_db->close();
     });
 
     let callProcess = 0;
+
+    /**
+     * @brief This function retrieves the answer to the question and the command entered by the user. It allows to set up commands like clear and help but also to go to the next question.
+     *
+     * @param input (String) user command.
+     * @param response (String) response of the question.
+     */
     function processCommand(input, response) {
         response = response.toString();
         switch (input) {
             case "help":
                 return ["Liste des commandes disponibles : clear", "yellow"];
 
-
             case response:
                 correctAnswer('player_kart', player_coordinates_, 'ally');
-
                 if (callProcess === 0){
                     <?php $questionNumber += 1;
                     $questionActual = $questionCircuit[$questionNumber];
@@ -180,6 +197,13 @@ $l_db->close();
         }
     }
 
+    /**
+     * @brief Adding the points won by the player in the database if he didn't already have them
+     *
+     * @param element (String) Modal id.
+     * @param id_circuit (Integer) ID of the actual circuit.
+     * @param id_user (String) ID of the player.
+     */
     function setVictoryDB(id_user, id_circuit, element) {
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "./victory.php", true);
@@ -204,11 +228,17 @@ $l_db->close();
         xhr.send(formData);
     }
 
-
+    /**
+     * @brief Display the victory modal when player win.
+     *
+     * @param element (String) Modal id.
+     * @param status (String) Determine if the image is the player or the enemy one.
+     */
     function setVictory(element, status) {
         let modal = document.getElementById(element);
         game = true;
         modal.innerHTML = status === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>";
+        displayModal();
         if (status === "ally"){
             setVictoryDB(<?php echo $id_user?>, <?php echo $id_circuit?>, element);
         }
