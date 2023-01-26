@@ -76,7 +76,19 @@ if(isset($_SESSION['id_user'])){ # isset($_SESSION id joueur
         <div class="modify_delete">
             <div class="theme">
                 <img class="theme_image" alt="circuit" src=<?=K_IMAGE . $l_db->get_image_circuit($item["id_circuitimage"])[0]["image"].PHP_EOL;?>>
-                <h3><?= $item["nom_circuit"].PHP_EOL;?></h3>
+                <?php
+                    $l_title = $item["nom_circuit"];
+                    if (strlen($l_title) > 30) {
+                        $l_title = substr("$l_title", 0, 30)."...";
+                    }
+                    if (strlen($l_title) > 15)
+                    {
+                        $l_title = substr("$l_title", 0, 15).PHP_EOL.substr("$l_title", 15, 30);
+
+                    }
+
+                ?>
+                <h3><?php echo $l_title?></h3>
                 <p class="points">Points: <?= $item["points"].PHP_EOL;?></p>
                 <div class="form_div">
                     <form class="modify" method="post" action="new-circuit_post.php">
