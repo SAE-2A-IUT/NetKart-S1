@@ -77,9 +77,13 @@ class database
      */
     function f_insert_strings($A_TABLE, $A_KEYS, $A_VALUES)
     {
-        $l_sql = "INSERT INTO " . $A_TABLE . " (" . implode(",", $A_KEYS) . ") VALUES ('" . implode("','", $A_VALUES) . "')";
-        echo $l_sql;
-        if (!$this->l_conn->query($l_sql)) {
+        $l_sql = "INSERT INTO %s (" . implode(",", $A_KEYS) . ") VALUES ('" . implode("','", $A_VALUES) . "')";
+
+        $l_result = sprintf($l_sql,
+            mysqli_real_escape_string($this->l_conn, $A_TABLE));
+        echo $l_result;
+        if (!sprintf($l_sql,
+            mysqli_real_escape_string($this->l_conn, $A_TABLE))) {
             echo("Error description: " . $this->l_conn->error);
             return False;
         }
@@ -165,9 +169,12 @@ class database
      */
     function check_if_element_already_used($A_TABLE, $A_COLUMN, $A_ELEMENT)
     {
-        $l_query = "SELECT * FROM " . $A_TABLE . " WHERE " . $A_COLUMN . "='" . $A_ELEMENT . "';";
+        $l_query = "SELECT * FROM %s  WHERE %s = %s";
 
-        $l_result = $this->l_conn->query($l_query);
+        $l_result = sprintf($l_query,
+                            mysqli_real_escape_string($this->l_conn, $A_TABLE),
+                            mysqli_real_escape_string($this->l_conn, $A_TABLE),
+                            mysqli_real_escape_string($this->l_conn, $A_TABLE));
 
         if (!$l_result) {
             echo("Error description: " . $this->l_conn->error);
