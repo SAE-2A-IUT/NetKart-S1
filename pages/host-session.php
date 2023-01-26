@@ -8,13 +8,19 @@
 
 require ('header.php');
 session_start();
-startPage("Détails de la session",[K_STYLE."main",K_STYLE."host-session"],[]);
+startPage("Détails de la session",[K_STYLE."main",K_STYLE."host-session"],[K_SCRIPT."check_connection"]);
 require 'database/database.php';
-
+if (!isset($_SESSION['id_user'])) {
+    ?>
+    <script>
+        check_connection(false);
+    </script>
+    <?php
+}
 $l_db = new database();
 $l_db->connection();
 
-$l_id_joueur = 12;
+$l_id_joueur = $_SESSION['id_user'];
 
 /**
  * Function to give the time before the end of the session and alert if this one is expired or near it end.
@@ -44,6 +50,7 @@ function timeDiff($A_CODE_SESSION, $A_db)
 }
 
 if(!($l_db->verifyPlayerSession($l_id_joueur))){
+    $l_db->close();
     header('Location: create-session.php');
     exit();
 }
@@ -76,7 +83,7 @@ if (isset($l_session[0]['id_groupejoueur'])){
     if (($l_time_diff<5) || $l_session_expired || $l_delete_error){?>
         <div class="alert">
             <?php if ($l_session_expired){
-                echo 'La partie a expirée';
+                echo 'La partie a expiré';
             }elseif($l_delete_error){
                 echo 'La suppression n\'a pas eu lieu';
             }else{
