@@ -203,7 +203,7 @@ get_score_player_id
                     <td><?php
                     if($test["valid"]){
                         ?>
-                        <img src="../../../assets/image/check.jpg"></img>
+                        <img src="../../../assets/image/check.png"></img>
                         <?php
                     }else{
                         ?>
