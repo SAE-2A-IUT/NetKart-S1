@@ -37,13 +37,8 @@ $l_themes = $l_db->get_all_themes();
                 <img class="theme_image" alt="circuit" src="../assets/image/<?php echo $l_circuit['image']; ?>">
                 <?php
                 $l_title = $l_circuit['nom_circuit'];
-                if (strlen($l_title) > 30) {
-                    $l_title = substr("$l_title", 0, 30)."...";
-                }
-                if (strlen($l_title) > 15)
-                {
-                    $l_title = substr("$l_title", 0, 15).PHP_EOL.substr("$l_title", 15, 30);
-
+                if (strlen($l_title) > 20) {
+                    $l_title = substr("$l_title", 0, 20)."...";
                 }
 
                 ?>
