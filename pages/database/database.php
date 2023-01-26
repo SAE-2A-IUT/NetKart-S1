@@ -533,6 +533,14 @@ class database
         }
         return -1;
     }
+
+    function getSessionByCode($A_SESSION_CODE){
+        return self::f_query("SELECT * FROM Groupe a, Groupe_Joueur b WHERE a.code =" . $A_SESSION_CODE . " AND a.id_groupe = b.id_groupe ORDER BY b.score DESC");;
+    }
+
+    function getCircuitsByTheme($A_THEME_ID){
+        return self::f_query("SELECT id_circuit FROM Circuit WHERE id_theme =" . $A_THEME_ID);
+    }
 }
 //TODO : voir pour de la composition
 
