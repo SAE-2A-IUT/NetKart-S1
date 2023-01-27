@@ -1,12 +1,13 @@
 
     let l_is_leaderboard_displayed = 0;
 
-    function refreshLeaderboard(session_code) {
+    function refreshLeaderboard(session_code,player_name) {
 
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "./leaderboard.php", true);
         const formData = new FormData();
         formData.append("session_code", session_code);
+        formData.append("player_name", player_name);
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {

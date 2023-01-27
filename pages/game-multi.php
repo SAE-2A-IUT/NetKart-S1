@@ -63,7 +63,7 @@ $l_db->close();
 ?>
 
 <div class="body-page">
-    <div class="leaderboard button" onclick="refreshLeaderboard('<?=$_SESSION['session_code']?>');displayLeaderboard();">
+    <div class="leaderboard button" onclick="refreshLeaderboard('<?=$_SESSION['session_code']?>','<?=$_SESSION['session_pseudo']?>');displayLeaderboard();">
         <div class="leaderboard_image">
             <img src="<?php echo K_IMAGE ;?>leaderboard.png" alt="leaderboard">
         </div>
@@ -136,6 +136,17 @@ $l_db->close();
 </div>
 
 <script>
+    let circuit_1_coordinates = [[58, 10], [28, 13], [57, 41], [17, 70], [38.8, 94], [65, 57], [58, 10]];
+    let circuit_2_coordinates = [[62, 21], [25, 30], [20, 49], [28, 80], [50, 81], [55, 52], [62, 21]];
+    let circuit_3_coordinates = [[6, 54], [29, 56], [51, 85], [70, 83], [45, 72], [32, 44], [6, 54]];
+    let circuit_4_coordinates = [[63, 2], [30, 52], [8, 101], [36, 107], [59, 80], [78, 45], [63, 2]];
+
+    let coordinate = circuit_<?php echo $urlImage[7]?>_coordinates;
+
+    let game = false;
+    let player_coordinates_ = populateArray(coordinate);
+    let enemy_coordinates = populateArray(coordinate)
+
     let terminal = document.getElementById("terminal-input");
     terminal.addEventListener("keydown", function (event) {
         if (event.key === "Enter") {

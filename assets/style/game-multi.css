@@ -205,10 +205,12 @@
     flex-direction: row;
     justify-content: space-between;
 }
+.player.me{
+    background-color: var(--red);
+}
 .player.even{
     background-color: var(--dark-blue);
 }
-
 
 .leaderboard_image{
     display: flex;
@@ -318,6 +320,7 @@
         min-height: 20em;
         max-height: 20em;
         max-width: 47em;
+        min-width: 83vw;
     }
 
     #terminal-output {
@@ -335,5 +338,14 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+    .leaderboard.button{
+        position: relative;
+        justify-content: center;
+        left: unset;
+    }
+
+    .leaderboard.popup .disclaimer{
+        text-align: center;
     }
 }
