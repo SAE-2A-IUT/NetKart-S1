@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require ("./database/database.php");
 /**
  *
@@ -25,25 +25,34 @@ function signed2hex($l_value,$l_nb)
     return $l_out;
 }
 
-
-$l_code = getSessionCode('Tibo',date('is'));
-
-$l_id_joueur = 12;
-
 $l_db = new database();
 
 $l_db->connection();
 
-if(isset($_POST['session-time']) && isset($_POST['session-name'])){
+if(isset($_POST['session-time']) && isset($_POST['session-name']) && isset($_SESSION['id_user'])){
+
+    $l_id_joueur = $_SESSION['id_user'];
+    echo $l_id_joueur;
+
+    $l_username = $l_db->get_username_from_id($l_id_joueur);
+    print_r($l_username);
+
+    $l_code = getSessionCode($l_username,date('is'));
+
     $l_duree = '00:'.$_POST['session-time'].':00';
     if ($_POST['session-time']==60) {
         $l_duree = '01:00:00';
     }
-    $l_db->insert_session($_POST['session-name'],$l_code,date('Y-m-d H:i:s'),$l_duree,$l_id_joueur,$_POST['session-theme']);
+    $l_is_insert_ok = $l_db->insert_session($_POST['session-name'],$l_code,date('Y-m-d H:i:s'),$l_duree,$l_id_joueur,$_POST['session-theme']);
     $l_db->close();
+    if(!$l_is_insert_ok){
+        //TODO : redirect to page and print that an error occured while inserting session
+    }
+    header('Location: create-session.php?success=true&session='.$l_code);
+    exit();
 }
-
-header('Location: create-session.php?success=true&session='.$l_code);
+header('Location: create-session.php');
 exit();
+
 
 ?>
