@@ -23,14 +23,43 @@ $l_themes = $l_db->get_all_themes();
 
 <div class="body-page">
     <div id="theme_choice" class="item_choice">
-        <?php
+        <?php $circuit_position = 0;
         foreach ($l_themes as $l_theme) {
             ?>
-        <button type="button" id="circuit_<?php echo $l_theme["id_theme"]; ?>" class="button_theme" onclick="show_theme(this)"><b> <?php echo $l_theme["nom_theme"]; ?></b></button>
-        <?php } ?>
+            <button type="button" id="circuit_<?php echo $l_theme["id_theme"]; ?>" class="button_theme <?php
+            switch($circuit_position % 7){
+                case 0:
+                    echo "button_theme_red";
+                    break;
+                case 1:
+                    echo "button_theme_orange";
+                    break;
+                case 2:
+                    echo "button_theme_yellow";
+                    break;
+                case 3:
+                    echo "button_theme_green";
+                    break;
+                case 4:
+                    echo "button_theme_blue";
+                    break;
+
+                case 5:
+                    echo "button_theme_pink";
+                    break;
+
+                case 6:
+                    echo "button_theme_purple";
+                    break;
+            }
+            ?>" onclick="show_theme(this)"><b> <?php echo $l_theme["nom_theme"]; ?></b></button>
+            <?php $circuit_position++; } ?>
+
     </div>
     <div class="all_theme">
         <h1 id="waiting">Merci de sélectionner au minimum un thème</h1>
+
+
         <?php foreach ($l_circuits as $l_circuit){?>
         <div class="joue_div" id="circuit_id_<?php echo $l_circuit['id_theme']; ?>">
             <div class="theme">
