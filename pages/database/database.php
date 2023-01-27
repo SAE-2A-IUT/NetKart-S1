@@ -541,6 +541,19 @@ class database
     function getCircuitsByTheme($A_THEME_ID){
         return self::f_query("SELECT id_circuit FROM Circuit WHERE id_theme =" . $A_THEME_ID);
     }
+
+    /**
+     * @param $A_ID_PLAYER (Integer) : id of the player to get username
+     *
+     * @return
+     */
+    function get_username_from_id($A_ID_PLAYER){
+        $l_username = self::f_query("SELECT pseudo FROM Joueur WHERE id_joueur='".$A_ID_PLAYER."'");
+        if($l_username=="Error"){
+            return -1;
+        }
+        return $l_username[0]["pseudo"];
+    }
 }
 //TODO : voir pour de la composition
 
