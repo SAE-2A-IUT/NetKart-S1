@@ -8,7 +8,7 @@
 
 require('header.php');
 session_start();
-startPage("Détails de la session", [K_STYLE . "main", K_STYLE . "host-session"], [K_SCRIPT . "check_connection"]);
+startPage("Détails de la session", [K_STYLE . "main", K_STYLE . "host-session"], [K_SCRIPT . "check_connection",K_SCRIPT . "leaderboard"]);
 require 'database/database.php';
 if (!isset($_SESSION['id_user'])) {
     ?>
@@ -73,8 +73,8 @@ if (isset($l_session[0]['id_groupejoueur'])) {
 ?>
 <script type="text/javascript">
     setTimeout(() => {
-        location.reload();
-    }, 30000);
+        refreshLeaderboard('<?=$l_session ["code"];?>','null',true);
+    }, 5000);
 </script>
 <div class="body-page">
     <?php
@@ -100,30 +100,32 @@ if (isset($l_session[0]['id_groupejoueur'])) {
             echo date('d-m-Y H:i:s');?></p>
             <div class="left" class="print-section">
                 <h1>Participants</h1>
-                <?php
-                if (sizeof($l_players) > 0) {
-                    $l_player_position = 0;
-                    foreach ($l_players as $l_player) {
-                        ?>
-                        <div class="player<?php if ($l_player_position % 2 == 0) {
-                            echo ' even';
-                        } ?>">
-                            <span class="left"><?php echo $l_player['nickname']; ?></span>
-                            <div class="right"><?php
-                                if ($l_player_position == 0) {
-                                    ?><img id="crown" src="<?php echo K_IMAGE ?>crown.png"><?php
-                                }
-                                echo $l_player['score']; ?>
+                <div class="classement">
+                    <?php
+                    if (sizeof($l_players) > 0) {
+                        $l_player_position = 0;
+                        foreach ($l_players as $l_player) {
+                            ?>
+                            <div class="player<?php if ($l_player_position % 2 == 0) {
+                                echo ' even';
+                            } ?>">
+                                <span class="left"><?php echo $l_player['nickname']; ?></span>
+                                <div class="right"><?php
+                                    if ($l_player_position == 0) {
+                                        ?><img id="crown" src="<?php echo K_IMAGE ?>crown.png"><?php
+                                    }
+                                    echo $l_player['score']; ?>
+                                </div>
                             </div>
-                        </div>
-                        <?php
-                        ++$l_player_position;
+                            <?php
+                            ++$l_player_position;
+                        }
+                    } else {
+                        echo 'Aucun joueur n\'a rejoint la partie.';
                     }
-                } else {
-                    echo 'Aucun joueur n\'a rejoint la partie.';
-                }
 
-                ?>
+                    ?>
+                </div>
             </div>
             <div class="right">
                 <h1 class="not-print-section">Temps restant</h1>
