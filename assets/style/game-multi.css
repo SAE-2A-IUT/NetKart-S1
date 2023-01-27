@@ -198,18 +198,95 @@
 
 .player{
     background-color: var(--purple);
-    width: 80%;
+    width: 100%;
     color: var(--white);
-    padding: 0.5em;
     margin-bottom: 0.25em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 .player.even{
     background-color: var(--dark-blue);
 }
 
+
+.leaderboard_image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4.5em;
+    height: 4.5em;
+    border-radius: 5px;
+    position: relative;
+    right: 0;
+
+}
+.leaderboard_image img{
+    width: 90%;
+    height: auto;
+}
+
+.player .right{
+    display: flex;
+    text-align: right;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.player .right, .player .left{
+    line-height: 2em;
+    padding: 0.5em;
+}
+
 #crown{
     width: 2em;
     margin-right: 0.2em;
+}
+
+.leaderboard.popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background-color: var(--black-transparent);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.leaderboard.popup .disclaimer{
+    color: var(--white);
+    text-shadow: var(--black) 0px 0px 1em;
+}
+.leaderboard.button .disclaimer{
+    display: none;
+}
+
+.leaderboard.popup .leaderboard_image{
+    display: none;
+}
+
+.leaderboard.popup .classement{
+    width: 80%;
+    height: 70%;
+    border-radius: 5px;
+    overflow: auto;
+    background-color: var(--white);
+}
+.leaderboard_image:hover{
+    background-color: var(--white);
+}
+.leaderboard.button{
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    left: 57%;
+}
+
+.leaderboard.button .classement{
+    display: none;
 }
 
 @media screen and (max-width: 900px) {

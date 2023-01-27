@@ -8,7 +8,7 @@
 require ('header.php');
 session_start();
 require("./database/database.php");
-startPage("Jeu-multi", ["../assets/style/main", "../assets/style/game-multi"], ["../assets/script/position", K_SCRIPT."check_connection"]);
+startPage("Jeu-multi", ["../assets/style/main", "../assets/style/game-multi"], ["../assets/script/position", K_SCRIPT."check_connection", K_SCRIPT."leaderboard"]);
 if (!isset($_SESSION['id_user_session'])) {
     ?>
     <script>
@@ -63,24 +63,13 @@ $l_db->close();
 ?>
 
 <div class="body-page">
-    <div class="leaderboard">
-        <img src="<?php echo K_IMAGE ;?>leaderboard.png" alt="leaderboard" class="leaderboard_image">
+    <div class="leaderboard button" onclick="refreshLeaderboard('<?=$_SESSION['session_code']?>');displayLeaderboard();">
+        <div class="leaderboard_image">
+            <img src="<?php echo K_IMAGE ;?>leaderboard.png" alt="leaderboard">
+        </div>
+        <span class="disclaimer">&lsaquo; cliquez n'importe où sur l'écran pour fermer le classement &rsaquo;</span>
         <div class="classement">
-            <?php $l_player_position = 0;
-                foreach ($l_players as $l_player){
-                    ?>
-                    <div class="player<?php if ($l_player_position % 2 == 0) {echo ' even';} ?>">
-                        <span class="left"><?php echo $l_player['nickname'] ;?></span>
-                        <div class="right"><?php
-                            if ($l_player_position == 0) {
-                                ?><img id="crown" src="<?php echo K_IMAGE?>crown.png"><?php
-                            }
-                            echo $l_player['score'] ;?>
-                        </div>
-                    </div>
-                    <?php
-                    ++$l_player_position;
-                }?>
+
         </div>
     </div>
     <div id="game">
