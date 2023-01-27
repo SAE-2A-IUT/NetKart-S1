@@ -14,7 +14,7 @@ startPage("Contact",["../assets/style/main","../assets/style/contact"],[]);
     <div class="content">
         <h1>Nous contacter</h1>
         <p>Des questions, une suggestion, une erreur?</p>
-        <img class="thumb_img" src="../assets/image/contact_page_image.jpg" alt="zoli madame avec une enveloppe">
+        <img class="thumb_img" src="../assets/image/contact_page_image.webp" alt="zoli madame avec une enveloppe">
         <?php
         if(isset($_POST['submit'])){
             $receiver = "contact.netkart@gmail.com";

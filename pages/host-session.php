@@ -94,7 +94,7 @@ if (isset($l_session[0]['id_groupejoueur'])){
                         <span class="left"><?php echo $l_player['nickname'] ;?></span>
                         <div class="right"><?php
                             if ($l_player_position == 0) {
-                                ?><img id="crown" src="<?php echo K_IMAGE?>crown.png"><?php
+                                ?><img id="crown" src="<?php echo K_IMAGE?>crown.webp"><?php
                             }
                             echo $l_player['score'] ;?>
                         </div>

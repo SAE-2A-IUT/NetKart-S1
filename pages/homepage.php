@@ -28,12 +28,12 @@ startPage("Accueil",["../assets/style/main"],[], false);
         <div>
             <p>Pour commencer, qu'est-ce qu'un <b>serious game</b> ?</p>
             <p>Un serious game peut se présenter sous la forme d'une application informatique ayant pour but de transmettre une connaissance par un moyen ludique. Ainsi, en participant à des serious game, il est possible de développer des connaissances, son sens logique, sa culture...</p>
-            <img src="../assets/image/serious_game_definition.png" alt="book and dices">
+            <img src="../assets/image/serious_game_definition.webp" alt="book and dices">
         </div>
         <div>
             <p>Quel est l'intérêt de <b>NetKart</b> ?</p>
             <p>NetKart propose une variante aux serious game en explorant un domaine de connaissance peu mis en avant dans les serious game actuellement. Il s'agit d'acquérir des connaissances en réseaux informatiques. Pour cela, il vous faudra répondre aux questions afin de terminer le circuit dans les temps !</p>
-            <img src="../assets/image/netkart_definition.png" alt="racing car and network">
+            <img src="../assets/image/netkart_definition.webp" alt="racing car and network">
         </div>
     </div>
 </div>

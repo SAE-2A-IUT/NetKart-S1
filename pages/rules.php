@@ -59,33 +59,33 @@ startPage("Contact",["../assets/style/main", "../assets/style/rules"],[]);
 
     <h3 id="interface_title"></h3>
     <div class="images">
-        <img src="../assets/image/rules1.png" id="image-rules1" alt="zoli imaze">
+        <img src="../assets/image/rules1.webp" id="image-rules1" alt="zoli imaze">
     </div>
     <p id="interface_text"></p>
 
     <h3 id="interface_title2"></h3>
     <div class="images">
-        <img src="../assets/image/rules2.png" id="image-rules2" alt="zoli imaze">
+        <img src="../assets/image/rules2.webp" id="image-rules2" alt="zoli imaze">
     </div>
     <p id="interface_text2"></p>
 
     <h3 id="interface_title3"></h3>
     <div class="images">
-        <img src="../assets/image/rules3.png" id="image-rules3" alt="zoli imaze">
-        <img src="../assets/image/rules4.png" id="image-rules4" alt="zoli imaze">
+        <img src="../assets/image/rules3.webp" id="image-rules3" alt="zoli imaze">
+        <img src="../assets/image/rules4.webp" id="image-rules4" alt="zoli imaze">
     </div>
     <p id="interface_text3"></p>
 
     <h3 id="interface_title4"></h3>
     <div class="images">
-        <img src="../assets/image/rules.png" id="image-rules5" alt="zoli imaze">
-        <img src="../assets/image/rules6.png" id="image-rules6" alt="zoli imaze">
+        <img src="../assets/image/rules.webp" id="image-rules5" alt="zoli imaze">
+        <img src="../assets/image/rules6.webp" id="image-rules6" alt="zoli imaze">
     </div>
     <p id="interface_text4"></p>
 
     <h3 id="interface_title5"></h3>
     <div class="images">
-        <img src="../assets/image/rules5.png" id="image-rules7" alt="zoli imaze">
+        <img src="../assets/image/rules5.webp" id="image-rules7" alt="zoli imaze">
     </div>
     <p id="interface_text5"></p>
 </div>
