@@ -7,6 +7,7 @@
  * @author SAE S3 NetKart
  */
 require ("./database/database.php");
+session_start();
 
 /**
  * Check if id of circuit to delete is set
@@ -15,8 +16,6 @@ require ("./database/database.php");
 if(isset($_POST["id_circuit_to_delete"])){
 
     $l_id_circuit = $_POST["id_circuit_to_delete"];
-
-    echo $l_id_circuit;
 
     $l_db = new database();
 

@@ -14,12 +14,12 @@ function show_theme(theme) {
         if(element.id.slice(11) === theme_id) {
             if (element.style.display === "block") {
                 element.style.display = "none";
-                theme.style.background = "var(--light-grey)";
                 theme.style.border = "none";
+
                 l_number_theme_showed--;
             } else {
                 element.style.display = "block";
-                theme.style.background = "var(--half-light-grey)";
+                theme.style.border = "1px solid";
                 l_number_theme_showed++;
             }
         }

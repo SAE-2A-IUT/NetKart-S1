@@ -1,12 +1,3 @@
-let circuit_1_coordinates = [[58, 10], [28, 13], [57, 41], [17, 70], [38.8, 94], [65, 57], [58, 10]];
-let circuit_2_coordinates = [[62, 21], [25, 30], [20, 49], [28, 80], [50, 81], [55, 52], [62, 21]];
-let circuit_3_coordinates = [[6, 54], [29, 56], [51, 85], [70, 83], [45, 72], [32, 44], [6, 54]];
-let circuit_4_coordinates = [[63, 2], [30, 52], [8, 101], [36, 107], [59, 80], [78, 45], [63, 2]];
-let coordinate = circuit_1_coordinates;
-let player_coordinates_ = populateArray(coordinate);
-let enemy_coordinates = populateArray(coordinate)
-let game = false;
-
 window.onload = () => {
     moveImage('enemy_kart', enemy_coordinates, 'enemy');
     setInitialPosition("flag", coordinate);

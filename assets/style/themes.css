@@ -43,11 +43,37 @@
 
 .button_theme{
     border: none;
-    background-color: var(--light-grey);
     font-size: 1em;
-    color: var(--dark-grey);
     padding: 1% 2% 1% 2%;
     text-transform: capitalize;
+}
+
+.button_theme_red{
+    background-color: lightcoral;
+}
+
+.button_theme_orange{
+    background-color: lightsalmon;
+}
+
+.button_theme_yellow{
+    background-color: lightgoldenrodyellow;
+}
+
+.button_theme_green{
+    background-color: lightgreen;
+}
+
+.button_theme_blue{
+    background-color: lightblue;
+}
+
+.button_theme_pink{
+    background-color: pink;
+}
+
+.button_theme_purple{
+    background-color: violet;
 }
 
 .button_theme :hover{
