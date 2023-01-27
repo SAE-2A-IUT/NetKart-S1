@@ -77,12 +77,6 @@ function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT){
             <a href="user.php">PROFIL</a>
         </div>
         <div>
-        <form method="post" action="#" enctype="text/plain" style="display: flex; flex-direction: row">
-            <input type="text" placeholder="Code multijoueur" required class="input-header">
-            <input type="submit" value="OK" class="submit-header">
-        </form>
-        </div>
-        <div>
         <a href="connection.php" class="hbutton">DECONNEXION</a>
         </div>
     </div>

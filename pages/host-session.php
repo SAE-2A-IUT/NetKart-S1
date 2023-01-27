@@ -8,13 +8,19 @@
 
 require ('header.php');
 session_start();
-startPage("Détails de la session",[K_STYLE."main",K_STYLE."host-session"],[]);
+startPage("Détails de la session",[K_STYLE."main",K_STYLE."host-session"],[K_SCRIPT."check_connection"]);
 require 'database/database.php';
-
+if (!isset($_SESSION['id_user'])) {
+    ?>
+    <script>
+        check_connection(false);
+    </script>
+    <?php
+}
 $l_db = new database();
 $l_db->connection();
 
-$l_id_joueur = 12;
+$l_id_joueur = $_SESSION['id_user'];
 
 /**
  * Function to give the time before the end of the session and alert if this one is expired or near it end.
@@ -44,6 +50,7 @@ function timeDiff($A_CODE_SESSION, $A_db)
 }
 
 if(!($l_db->verifyPlayerSession($l_id_joueur))){
+    $l_db->close();
     header('Location: create-session.php');
     exit();
 }
@@ -72,10 +79,13 @@ if (isset($l_session[0]['id_groupejoueur'])){
     <?php
     $l_time_diff = timeDiff($l_session ["code"],$l_db)['timeDiff'];
     $l_session_expired = timeDiff($l_session ["code"],$l_db)['finished'];
-    if (($l_time_diff<5) || $l_session_expired){?>
+    $l_delete_error = (isset($_GET['deleted']) && !$_GET['deleted']);
+    if (($l_time_diff<5) || $l_session_expired || $l_delete_error){?>
         <div class="alert">
             <?php if ($l_session_expired){
-                echo 'La partie a expirée';
+                echo 'La partie a expiré';
+            }elseif($l_delete_error){
+                echo 'La suppression n\'a pas eu lieu';
             }else{
                 echo 'Il reste moins de '.($l_time_diff+1).' minutes !';
             }?>
@@ -114,34 +124,21 @@ if (isset($l_session[0]['id_groupejoueur'])){
             <h1>Code session</h1>
             <span><?php if($l_session["code"]){echo $l_session["code"];}else{ echo 'ARJM3D';}?></span>
             <?php if($l_session["id_groupe"]){?>
-            <button id="delete_session" class="delete">Supprimer la session</button>
-            <div id="horizontal" class="horizontal">
-                <form method="post" action="host-session_post.php">
-                    <input type="hidden" name="delete_session" value="ok">
-                    <input type="hidden" name="id_session" value="<?php echo $l_session["id_groupe"]?>">
-                    <input type="submit" value="Continuer" class="send_from" id="button_click">
+                <form class="first_delete" id="first_delete" method="post" action="javascript:Confirm()">
+                    <input type="submit" value="Supprimer">
                 </form>
-                <button id="cancel_delete_session">annuler</button>
-            </div>
+                <form class="delete" id="delete" method="post" action="host-session_post.php">
+                    <input type="hidden" value="ok" name="delete_session">
+                    <input type="hidden" value="<?= $l_session['id_groupe']; ?>" name="id_session">
+                    <input type="submit" value="Confirmer">
+                </form>
             <?php }?>
 
-            <p id="alert">Êtes vous sûr? </p>
             <script>
-                document.getElementById("horizontal").style.display ="none";
-                document.getElementById("alert").style.display ="none";
-
-                function delete_session() {
-                    document.getElementById("horizontal").style.display = "flex";
-                    document.getElementById("alert").style.display = "flex";
+                function Confirm() {
+                    document.getElementById("first_delete").style.display = "none";
+                    document.getElementById("delete").style.display = "block";
                 }
-
-                function cancel_delete_session() {
-                    document.getElementById("horizontal").style.display = "none";
-                    document.getElementById("alert").style.display = "none";
-                }
-
-                document.getElementById('delete_session').addEventListener('click', delete_session);
-                document.getElementById('cancel_delete_session').addEventListener('click', cancel_delete_session);
             </script>
         </div>
     </div>

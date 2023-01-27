@@ -14,7 +14,8 @@ if (isset($_POST['delete_session']) && $_POST['delete_session'] == 'ok'){
         header('Location: create-session.php?deleted=1');
         exit();
     }
-    $l_db->close();
+    header('Location: host-session.php?deleted=0');
     exit();
+    $l_db->close();
 }
 
