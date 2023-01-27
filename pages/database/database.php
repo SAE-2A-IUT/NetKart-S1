@@ -48,6 +48,19 @@ class database
         }
     }
 
+    function remove_apostrophe($A_QUERY)
+    {
+        $pattern = '/[a-zA-Z0-9]\'[a-zA-Z0-9]/';
+        $pattern2 = '/\'/';
+        $replacement = " ";
+        preg_match_all($pattern, $A_QUERY, $matches);
+        foreach ($matches[0] as $match) {
+            $final = preg_replace($pattern2, $replacement, $match);
+            $A_QUERY = str_replace($match,$final,$A_QUERY);
+        }
+        return $A_QUERY;
+    }
+
     /**
      * @brief this function executes a sql query and handle errors
      *
@@ -56,14 +69,15 @@ class database
      */
     function f_query($A_QUERY, $A_IS_INSERT=false)
     {
-        if (!$this->l_conn->query($A_QUERY)) {
+        $l_QUERY = self::remove_apostrophe($A_QUERY);
+        if (!$this->l_conn->query($l_QUERY)) {
             echo("Error description: " . $this->l_conn->error);
             return "Error";
         }
         if($A_IS_INSERT){
             return "Success";
         }
-        return $this->l_conn->query($A_QUERY)->fetch_all(MYSQLI_ASSOC);
+        return $this->l_conn->query($l_QUERY)->fetch_all(MYSQLI_ASSOC);
     }
 
     /**
