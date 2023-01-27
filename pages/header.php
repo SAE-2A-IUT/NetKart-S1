@@ -53,7 +53,7 @@ function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT){
 <header>
 </header>
 
-<div class="header">
+<div class="header not-print-section">
     <div class="header-left">
         <a href="homepage.php"><img src="<?php echo K_IMAGE?>icon_black_small.png" alt="logo" width="90em"></a>
     </div>
