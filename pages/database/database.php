@@ -48,6 +48,19 @@ class database
         }
     }
 
+    function remove_apostrophe($A_QUERY)
+    {
+        $pattern = '/[a-zA-Z0-9]\'[a-zA-Z0-9]/';
+        $pattern2 = '/\'/';
+        $replacement = " ";
+        preg_match_all($pattern, $A_QUERY, $matches);
+        foreach ($matches[0] as $match) {
+            $final = preg_replace($pattern2, $replacement, $match);
+            $A_QUERY = str_replace($match,$final,$A_QUERY);
+        }
+        return $A_QUERY;
+    }
+
     /**
      * @brief this function executes a sql query and handle errors
      *
@@ -56,14 +69,15 @@ class database
      */
     function f_query($A_QUERY, $A_IS_INSERT=false)
     {
-        if (!$this->l_conn->query($A_QUERY)) {
+        $l_QUERY = self::remove_apostrophe($A_QUERY);
+        if (!$this->l_conn->query($l_QUERY)) {
             echo("Error description: " . $this->l_conn->error);
             return "Error";
         }
         if($A_IS_INSERT){
             return "Success";
         }
-        return $this->l_conn->query($A_QUERY)->fetch_all(MYSQLI_ASSOC);
+        return $this->l_conn->query($l_QUERY)->fetch_all(MYSQLI_ASSOC);
     }
 
     /**
@@ -77,9 +91,13 @@ class database
      */
     function f_insert_strings($A_TABLE, $A_KEYS, $A_VALUES)
     {
-        $l_sql = "INSERT INTO " . $A_TABLE . " (" . implode(",", $A_KEYS) . ") VALUES ('" . implode("','", $A_VALUES) . "')";
-        echo $l_sql;
-        if (!$this->l_conn->query($l_sql)) {
+        $l_sql = "INSERT INTO %s (" . implode(",", $A_KEYS) . ") VALUES ('" . implode("','", $A_VALUES) . "')";
+
+        $l_result = sprintf($l_sql,
+            mysqli_real_escape_string($this->l_conn, $A_TABLE));
+        echo $l_result;
+        if (!sprintf($l_sql,
+            mysqli_real_escape_string($this->l_conn, $A_TABLE))) {
             echo("Error description: " . $this->l_conn->error);
             return False;
         }
@@ -165,9 +183,12 @@ class database
      */
     function check_if_element_already_used($A_TABLE, $A_COLUMN, $A_ELEMENT)
     {
-        $l_query = "SELECT * FROM " . $A_TABLE . " WHERE " . $A_COLUMN . "='" . $A_ELEMENT . "';";
+        $l_query = "SELECT * FROM %s  WHERE %s = %s";
 
-        $l_result = $this->l_conn->query($l_query);
+        $l_result = sprintf($l_query,
+                            mysqli_real_escape_string($this->l_conn, $A_TABLE),
+                            mysqli_real_escape_string($this->l_conn, $A_TABLE),
+                            mysqli_real_escape_string($this->l_conn, $A_TABLE));
 
         if (!$l_result) {
             echo("Error description: " . $this->l_conn->error);
