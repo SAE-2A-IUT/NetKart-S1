@@ -122,16 +122,40 @@ if (isset($_POST["circuit_name"]) and isset($_POST["circuit_theme"]) and isset($
                 continue;
             }
             $imageFileType = strtolower(pathinfo($files["name"][$key],PATHINFO_EXTENSION));
-            $target_filename = generateRandomString() . "." . $imageFileType;
+            $string = generateRandomString();
+            $target_filename = $string . "." .$imageFileType;
+            $target_new_filename = $string . ".webp";
             $target_file = $target_dir . $target_filename;
+            $target_new_file = $target_dir . $target_new_filename;
+
             if (move_uploaded_file($tmp_name, $target_file)) {
+                print_r("test" . $imageFileType);
+                switch ($imageFileType) {
+                    case "png":
+                        ?><script>alert(<?=$target_file?>)</script><?php
+                        $original_image = imagecreatefrompng($target_file);
+                        imagepalettetotruecolor($original_image);
+                        imagewebp($original_image, $target_new_file, 80);
+                        unlink($target_file);
+                        break;
+                    case "jpg" or 'jpeg':
+                        //duplicate jpeg
+                        $original_image = imagecreatefromjpeg($target_file);
+                        imagepalettetotruecolor($original_image);
+                        imagewebp($original_image, $target_new_file, 80);
+                        unlink($target_file);
+                        break;
+                    case "webp":
+                        break;
+                }
                 echo "The file ". htmlspecialchars( basename( $files["name"][$key])). " has been uploaded.";
+
             } else {
                 //DONE : redirect vers new-circuit et afficher que l'insertion des données est partielle et demander d'aller sur le formulaire de modification pour terminer l'insertion
                 header('Location: new-circuit.php?error=5');
                 exit();
             }
-            $l_is_image_insert_ok = $l_db->insert_images_question($target_filename, $id_question);
+            $l_is_image_insert_ok = $l_db->insert_images_question($target_new_filename, $id_question);
             if(!$l_is_image_insert_ok){
                 //DONE : redirect vers new-circuit et afficher que l'insertion des données est partielle et demander d'aller sur le formulaire de modification pour terminer l'insertion
                 header('Location: new-circuit.php?error=5');

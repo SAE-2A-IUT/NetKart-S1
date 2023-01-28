@@ -59,7 +59,7 @@ if($l_score == NULL){
         </div>
         <div class="right">
             <div class="top">
-                <img src="<?php echo K_IMAGE; ?>default_avatar.jpg">
+                <img src="<?php echo K_IMAGE; ?>default_avatar.webp">
                 <div class="score">Score<span><?php echo $l_score ;?></span></div>
             </div>
             <button id="delete_account" class="delete">Supprimer compte</button>
