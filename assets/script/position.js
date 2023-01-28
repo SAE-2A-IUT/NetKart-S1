@@ -1,12 +1,3 @@
-let circuit_1_coordinates = [[58, 10], [28, 13], [57, 41], [17, 70], [38.8, 94], [65, 57], [58, 10]];
-let circuit_2_coordinates = [[62, 21], [25, 30], [20, 49], [28, 80], [50, 81], [55, 52], [62, 21]];
-let circuit_3_coordinates = [[6, 54], [29, 56], [51, 85], [70, 83], [45, 72], [32, 44], [6, 54]];
-let circuit_4_coordinates = [[63, 2], [30, 52], [8, 101], [36, 107], [59, 80], [78, 45], [63, 2]];
-let coordinate = circuit_1_coordinates;
-let player_coordinates_ = populateArray(coordinate);
-let enemy_coordinates = populateArray(coordinate)
-let game = false;
-
 window.onload = () => {
     moveImage('enemy_kart', enemy_coordinates, 'enemy');
     setInitialPosition("flag", coordinate);
@@ -14,6 +5,11 @@ window.onload = () => {
     setInitialPosition("player_kart", coordinate);
 }
 
+/**
+ *  @brief Send value of the terminal to the process and display previous user input and their comparaison with the answer of their question.
+ *
+ * @param questionResponse (String) answer of the current question.
+ */
 function sendCommand(questionResponse) {
     const input = document.getElementById("terminal-input");
     const output = document.getElementById("terminal-output");
@@ -29,6 +25,11 @@ function sendCommand(questionResponse) {
     }
 }
 
+/**
+ * @brief Display the modal when the player win or lose.
+ *
+ * @return void
+ */
 function displayModal() {
     const modal = document.getElementById("modal");
     const close = document.getElementById("modal-close");
@@ -51,6 +52,13 @@ function displayModal() {
     }
 }
 
+/**
+ * @brief Move image to next coordinates.
+ *
+ * @param imageId (String) Image id.
+ * @param coordinates (Array) Coordinates of the circuit left.
+ * @param status (String) Determine if the image is the player or the enemy one.
+ */
 function moveImage(imageId, coordinates, status) {
     if (!game) {
         if (status === "ally")
@@ -80,6 +88,13 @@ function moveImage(imageId, coordinates, status) {
     }
 }
 
+/**
+ * @brief Move the player image when the player answer is correct.
+ *
+ * @param imageId (String) Image id.
+ * @param coordinates (Array) Coordinates of the circuit left.
+ * @param status (String) Determine if the image is the player or the enemy one.
+ */
 function correctAnswer(imageId, coordinates, status) {
     moveImage(imageId, coordinates, status);
     setTimeout(() => {
@@ -87,6 +102,12 @@ function correctAnswer(imageId, coordinates, status) {
     }, 400 * 6);
 }
 
+/**
+ * @brief Set image to the initial position of the circuit.
+ *
+ * @param imageId (String) Image id.
+ * @param coordinates (Array) Initial position of the circuit.
+ */
 function setInitialPosition(imageId, coordinates) {
     if (coordinates.length === 0) {
         return;
@@ -96,6 +117,15 @@ function setInitialPosition(imageId, coordinates) {
     image.style.marginTop = coordinates[0][1] + "%";
 }
 
+/**
+ * @brief Generates coordinates between starting and ending ones.
+ *
+ * @param startX (Int) X starting coordinate.
+ * @param startY (Int) Y starting coordinate.
+ * @param endX (Int) X ending coordinate.
+ * @param endY (Int) X ending coordinate.
+ * @return {*[]} Generated coordinates.
+ */
 function generateCoordinates(startX, startY, endX, endY) {
     const coordinates = [];
     const xStep = (endX - startX) / 200;
@@ -109,6 +139,12 @@ function generateCoordinates(startX, startY, endX, endY) {
     return coordinates;
 }
 
+/**
+ * @brief Generate coordinate of an entity like the player or the enemy.
+ *
+ * @param coordinates (Array) Coordinates of the selected circuit.
+ * @return {*[]} Generated coordinates of an entity.
+ */
 function populateArray(coordinates) {
     let arrayCoordinates = [];
     for (let i = 0; i < coordinates.length - 1; i++) {
@@ -117,6 +153,11 @@ function populateArray(coordinates) {
     return arrayCoordinates;
 }
 
+/**
+ * @brief Scroll to the last line of the terminal
+ *
+ * @param item (HTMLDivElement) Game Terminal.
+ */
 function scroll(item) {
     item.scrollTop = item.scrollHeight - item.clientHeight;
 }

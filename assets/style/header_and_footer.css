@@ -143,6 +143,66 @@ p{
     line-height: 1.5em;
 }
 
+.join_session_shadow{
+    z-index: 9998;
+    background-color: var(--black-transparent);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.join_session_form{
+    z-index: 9999;
+    background-color: var(--white);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 60%;
+    box-shadow: var(--dark-blue) 0 0 1.5em;
+    border-radius: 5px;
+}
+
+.form_container{
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);    height: 55%;
+    width: 100%;
+}
+
+.session_cross{
+    text-decoration: none;
+    font-weight: bold;
+    position: absolute;
+    top: 4%;
+    right: 4%;
+}
+
+.join_session_form .form-input{
+    border: 1px solid var(--light-grey);
+    margin-top: 0.3em;
+    padding: 2% 0 2% 1%;
+    width: 80%;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.purple-button{
+    background-color: var(--dark-blue);
+    text-transform: uppercase;
+    color: var(--white);
+    width: 80%;
+    line-height: 3em;
+}
+
 @media screen and (max-width: 740px) {
     .header-left a img{
         display: none;

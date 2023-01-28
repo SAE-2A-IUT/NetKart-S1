@@ -1,12 +1,12 @@
 <?php
 /** @file /pages/homepage.php
  *
- * PHP page that is displayed when the website is opened. It is used to present the serious game and to redirect to the other available pages
+ * @details PHP page that is displayed when the website is opened. It is used to present the serious game and to redirect to the other available pages
  *
  * @author SAE S3 NetKart
  */
-
-require './header.php';
+require ('header.php');
+session_start();
 startPage("Accueil",["../assets/style/main"],[], false);
 ?>
 

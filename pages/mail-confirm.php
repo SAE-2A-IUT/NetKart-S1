@@ -1,12 +1,13 @@
 <?php
-session_start();
-/*
+
+/**
  * @file /pages/mail-confirm.php
  *
  * @details File to confirm an email when registering in the website.
  *
  * @author SAE S3 NetKart
  */
+
 require ("./database/database.php");
 if(isset($_GET["user"]) and isset($_GET["code"])){
 
@@ -20,8 +21,10 @@ if(isset($_GET["user"]) and isset($_GET["code"])){
     if ($l_query[0]["COUNT(*)"] == 1) {
         $l_db->f_query("UPDATE Joueur SET verification=1 WHERE pseudo='".$l_username."'", true);
         header('Location: connection.php?success=2');
+        exit();
     }
     else {
         header('Location: connection.php?error=7');
+        exit();
     }
 }
