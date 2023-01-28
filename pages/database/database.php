@@ -166,7 +166,6 @@ class database
     function check_if_element_already_used($A_TABLE, $A_COLUMN, $A_ELEMENT)
     {
         $l_query = "SELECT * FROM " . $A_TABLE . " WHERE " . $A_COLUMN . "='" . $A_ELEMENT . "';";
-
         $l_result = $this->l_conn->query($l_query);
 
         if (!$l_result) {
