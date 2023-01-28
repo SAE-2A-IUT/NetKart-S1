@@ -554,6 +554,37 @@ class database
         }
         return -1;
     }
+    function select_player_session_id($A_PLAYER, $A_SESSION_CODE){
+        if ($l_id_groupe = self::f_query("SELECT id_groupe FROM Groupe WHERE code='".$A_SESSION_CODE."'")) {
+            if (sizeof($l_id_groupe) == 1) {
+                $l_player_id = self::f_query("SELECT id_groupejoueur FROM Groupe_Joueur a, Groupe b WHERE pseudo_groupe='".$A_PLAYER."' AND a.id_groupe = b.id_groupe AND code='".$A_SESSION_CODE."'");
+                return $l_player_id[0]['id_groupejoueur'];
+            }
+            return -1;
+        }
+        return -1;
+    }
+
+    function getSessionByCode($A_SESSION_CODE){
+        return self::f_query("SELECT * FROM Groupe a, Groupe_Joueur b WHERE a.code ='" . $A_SESSION_CODE . "' AND a.id_groupe = b.id_groupe ORDER BY b.score DESC");;
+    }
+
+    function getCircuitsByTheme($A_THEME_ID){
+        return self::f_query("SELECT id_circuit FROM Circuit WHERE id_theme =" . $A_THEME_ID);
+    }
+
+    /**
+     * @param $A_ID_PLAYER (Integer) : id of the player to get username
+     *
+     * @return
+     */
+    function get_username_from_id($A_ID_PLAYER){
+        $l_username = self::f_query("SELECT pseudo FROM Joueur WHERE id_joueur='".$A_ID_PLAYER."'");
+        if($l_username=="Error"){
+            return -1;
+        }
+        return $l_username[0]["pseudo"];
+    }
 }
 //TODO : voir pour de la composition
 

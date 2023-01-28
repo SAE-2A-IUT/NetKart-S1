@@ -7,6 +7,7 @@
  * @author SAE S3 NetKart
  */
 require("./database/database.php");
+session_start();
 
 function generateRandomString($length = 10) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -26,7 +27,7 @@ $l_db->connection();
  * Check if required fields of form are set
  */
 
-$l_player_id = 1;
+$l_player_id = $_SESSION['id_user'];
 
 if (isset($_POST["circuit_name"]) and isset($_POST["circuit_theme"]) and isset($_POST["circuit_image"]) and isset($_POST["circuit_points"]) and isset($_POST["question"])) {
 

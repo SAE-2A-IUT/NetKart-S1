@@ -8,8 +8,8 @@
 require ('header.php');
 session_start();
 require("./database/database.php");
-startPage("Jeu-solo", ["../assets/style/main", "../assets/style/game-solo"], ["../assets/script/position", K_SCRIPT."check_connection"]);
-if (!isset($_SESSION['id_user'])) {
+startPage("Jeu-multi", ["../assets/style/main", "../assets/style/game-multi"], ["../assets/script/position", K_SCRIPT."check_connection", K_SCRIPT."leaderboard"]);
+if (!isset($_SESSION['id_user_session'])) {
     ?>
     <script>
         check_connection(false);
@@ -21,14 +21,30 @@ if (!isset($_SESSION['id_user'])) {
 $l_db = new database();
 $l_db->connection();
 
-if(isset($_POST["id_circuit_to_play"])){
-    $id_circuit = $_POST["id_circuit_to_play"];
+if(isset($_SESSION['session_code'])){
+    $l_session_code = $_SESSION['session_code'];
+    $l_session = $l_db->getSessionByCode($_SESSION['session_code'])[0];
+    if (isset($l_session['id_groupejoueur'])){
+        $l_players = [];
+        foreach ($l_db->getSessionByCode($_SESSION['session_code']) as $l_player){
+            $l_players[]=[
+                'score'     => $l_player['score'],
+                'nickname'  => $l_player['pseudo_groupe'],
+            ];
+        }
+    }
+    $l_all_circuit = $l_db->getCircuitsByTheme($l_session['id_theme']) ;
+    if (isset($_SESSION['session_circuit'])){
+        $id_circuit = $l_all_circuit[$_SESSION['session_circuit']]['id_circuit'];
+    }
+
 
 }
 else {
-    header('Location: ./error.html');
-    exit();
+    header('Location: error.html');
 }
+
+
 $id_user = 1;
 $questionNumber = 0;
 $name_circuit = $l_db->get_circuit_information($id_circuit)[$questionNumber]['nom_circuit'];
@@ -47,6 +63,15 @@ $l_db->close();
 ?>
 
 <div class="body-page">
+    <div class="leaderboard button" onclick="refreshLeaderboard('<?=$_SESSION['session_code']?>','<?=$_SESSION['session_pseudo']?>');displayLeaderboard();">
+        <div class="leaderboard_image">
+            <img src="<?php echo K_IMAGE ;?>leaderboard.png" alt="leaderboard">
+        </div>
+        <span class="disclaimer">&lsaquo; cliquez n'importe où sur l'écran pour fermer le classement &rsaquo;</span>
+        <div class="classement">
+
+        </div>
+    </div>
     <div id="game">
         <div id="left-game">
             <div id="circuit-info">
@@ -130,21 +155,16 @@ $l_db->close();
     });
 
     let callProcess = 0;
-
-    /**
-     * @brief This function retrieves the answer to the question and the command entered by the user. It allows to set up commands like clear and help but also to go to the next question.
-     *
-     * @param input (String) user command.
-     * @param response (String) response of the question.
-     */
     function processCommand(input, response) {
         response = response.toString();
         switch (input) {
             case "help":
                 return ["Liste des commandes disponibles : clear", "yellow"];
 
+
             case response:
                 correctAnswer('player_kart', player_coordinates_, 'ally');
+
                 if (callProcess === 0){
                     <?php $questionNumber += 1;
                     $questionActual = $questionCircuit[$questionNumber];
@@ -197,13 +217,6 @@ $l_db->close();
         }
     }
 
-    /**
-     * @brief Adding the points won by the player in the database if he didn't already have them
-     *
-     * @param element (String) Modal id.
-     * @param id_circuit (Integer) ID of the actual circuit.
-     * @param id_user (String) ID of the player.
-     */
     function setVictoryDB(id_user, id_circuit, element) {
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "./victory.php", true);
@@ -228,17 +241,11 @@ $l_db->close();
         xhr.send(formData);
     }
 
-    /**
-     * @brief Display the victory modal when player win.
-     *
-     * @param element (String) Modal id.
-     * @param status (String) Determine if the image is the player or the enemy one.
-     */
+
     function setVictory(element, status) {
         let modal = document.getElementById(element);
         game = true;
         modal.innerHTML = status === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>";
-        displayModal();
         if (status === "ally"){
             setVictoryDB(<?php echo $id_user?>, <?php echo $id_circuit?>, element);
         }

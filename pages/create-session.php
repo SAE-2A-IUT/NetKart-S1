@@ -13,7 +13,15 @@ require 'database/database.php';
 $l_db = new database();
 $l_db->connection();
 
-if(($l_db->verifyPlayerSession(12))&& !(isset($_GET['success']))){
+if (!isset($_SESSION['id_user'])) {
+    ?>
+    <script>
+        check_connection(false);
+    </script>
+    <?php
+}
+
+if(($l_db->verifyPlayerSession($_SESSION['id_user']))&& !(isset($_GET['success']))){
     header('Location: host-session.php');
     exit();
 }
@@ -22,13 +30,7 @@ $l_themes = $l_db->get_all_themes();
 $l_db->close();
 
 
-if (!isset($_SESSION['id_user'])) {
-    ?>
-    <script>
-        check_connection(false);
-    </script>
-    <?php
-}
+
 ?>
 <div class="body-page">
     <div id="page-description">
