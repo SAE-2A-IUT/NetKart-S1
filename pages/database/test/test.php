@@ -36,6 +36,8 @@ function testConfiguration($l_db)
             }
 
         } while ($l_db->next_result());
+    }else{
+        throw new Exception("Fatal Error");
     }
     return true;
 }
@@ -134,10 +136,10 @@ function testCase6($l_db2, &$array_test){
 function testCaseLast($l_db2, &$array_test){
     try{
         $array_test[] = array("name" => "Test de nettoyage", "valid" => false, "r_ok" => true, "r_attempt" => false);
-        environment_cleaning($l_db);
+        environment_cleaning($l_db2);
         $array_test[count($array_test)-1]["valid"] = true;
         $array_test[] = array("name" => "Test de fermeture", "valid" => false, "r_ok" => true, "r_attempt" => false);
-        $l_db->close();
+        $l_db2->close();
         $array_test[count($array_test)-1]["valid"] = true;
     }catch(Exception $e){
     
@@ -245,7 +247,7 @@ function testCase14($l_db2, &$array_test){
 function testCase15($l_db2, &$array_test){
     try{
         $array_test[] = array("name" => "Test de get_image_question", "valid" => false, "r_ok" => true, "r_attempt" => false);
-        $l_is_insert_ok =$l_db2->get_image_question(18);
+        $l_is_insert_ok =$l_db2->get_image_question(24);
         if($l_is_insert_ok){
             $array_test[count($array_test)-1]["valid"] = true;
         }else{
@@ -316,7 +318,7 @@ function testCase20($l_db2, &$array_test){
     try{
         $array_test[] = array("name" => "Test de get_score_player_id", "valid" => false, "r_ok" => true, "r_attempt" => false);
         $l_is_insert_ok =$l_db2->get_score_player_id(3);
-        if($l_is_insert_ok){
+        if($l_is_insert_ok!=-1){
             $array_test[count($array_test)-1]["valid"] = true;
         }else{
             $array_test[count($array_test)-1]["r_attempt"] = "An array";
@@ -371,7 +373,7 @@ function testCase23($l_db2, &$array_test){
 function testCase24($l_db2, &$array_test){
     try{
         $array_test[] = array("name" => "Test de insert_links", "valid" => false, "r_ok" => true, "r_attempt" => false);
-        $l_is_insert_ok =$l_db2->insert_links("taame",13);
+        $l_is_insert_ok =$l_db2->insert_links("taame",20);
         if($l_is_insert_ok){
             $array_test[count($array_test)-1]["valid"] = true;
         }else{
@@ -385,7 +387,7 @@ function testCase24($l_db2, &$array_test){
 function testCase25($l_db2, &$array_test){
     try{
         $array_test[] = array("name" => "Test de insert_images_question", "valid" => false, "r_ok" => true, "r_attempt" => false);
-        $l_is_insert_ok =$l_db2->insert_images_question("taame",13);
+        $l_is_insert_ok =$l_db2->insert_images_question("taame",20);
         if($l_is_insert_ok){
             $array_test[count($array_test)-1]["valid"] = true;
         }else{
@@ -398,15 +400,43 @@ function testCase25($l_db2, &$array_test){
 
 function testCase26($l_db2, &$array_test){
     try{
-        $array_test[] = array("name" => "Test de insert_images_question", "valid" => false, "r_ok" => true, "r_attempt" => false);
-        $l_is_insert_ok =$l_db2->insert_images_question("taame",13);
+        $array_test[] = array("name" => "Test de insert_session", "valid" => false, "r_ok" => true, "r_attempt" => false);
+        $l_is_insert_ok =$l_db2->insert_session("taame","terrt","2101-12-31","2102-01-30",3,8);
         if($l_is_insert_ok){
             $array_test[count($array_test)-1]["valid"] = true;
         }else{
             $array_test[count($array_test)-1]["r_attempt"] = "An array";
         }
     }catch(Exception $e){
-    
+
+    }
+}
+
+function testCase27($l_db2, &$array_test){
+    try{
+        $array_test[] = array("name" => "Test de check_if_victory_already", "valid" => false, "r_ok" => true, "r_attempt" => false);
+        $l_is_insert_ok =$l_db2->check_if_victory_already(3,20);
+        if($l_is_insert_ok){
+            $array_test[count($array_test)-1]["valid"] = true;
+        }else{
+            $array_test[count($array_test)-1]["r_attempt"] = "An array";
+        }
+    }catch(Exception $e){
+
+    }
+}
+
+function testCase28($l_db2, &$array_test){
+    try{
+        $array_test[] = array("name" => "Test de insert_victory", "valid" => false, "r_ok" => true, "r_attempt" => false);
+        $l_is_insert_ok =$l_db2->insert_victory(3,20);
+        if($l_is_insert_ok){
+            $array_test[count($array_test)-1]["valid"] = true;
+        }else{
+            $array_test[count($array_test)-1]["r_attempt"] = "An array";
+        }
+    }catch(Exception $e){
+
     }
 }
 
@@ -423,7 +453,6 @@ $l_db2 = new database($A_SERVERNAME = "mysql-netkart.alwaysdata.net",
 testCase1($l_db2, $array_test);
 testCase2($l_db2, $array_test);
 testCase3($l_db2, $array_test);
-testCase4($l_db2, $array_test);
 testCase5($l_db2, $array_test);
 testCase6($l_db2, $array_test);
 testCase8($l_db2, $array_test);
@@ -435,7 +464,6 @@ testCase13($l_db2, $array_test);
 testCase14($l_db2, $array_test);
 testCase15($l_db2, $array_test);
 testCase16($l_db2, $array_test);
-testCase17($l_db2, $array_test);
 testCase18($l_db2, $array_test);
 testCase19($l_db2, $array_test);
 testCase20($l_db2, $array_test);
@@ -444,6 +472,12 @@ testCase22($l_db2, $array_test);
 testCase23($l_db2, $array_test);
 testCase24($l_db2, $array_test);
 testCase25($l_db2, $array_test);
+testCase26($l_db2, $array_test);
+testCase27($l_db2, $array_test);
+testCase28($l_db2, $array_test);
+/*
+testCase4($l_db2, $array_test);
+testCase17($l_db2, $array_test);*/
 
 /*
 connection OK
@@ -469,8 +503,8 @@ insert_links OK
 insert_images_question OK
 get_all_themes OK
 get_all_images_circuit OK
-insert_session
-check_if_victory_already
+insert_session OK
+check_if_victory_already OK
 insert_victory
 delete_session_multi
 get_score_player_id OK

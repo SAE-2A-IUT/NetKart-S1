@@ -93,11 +93,10 @@ class database
     {
         $l_sql = "INSERT INTO %s (" . implode(",", $A_KEYS) . ") VALUES ('" . implode("','", $A_VALUES) . "')";
 
-        $l_result = sprintf($l_sql,
-            mysqli_real_escape_string($this->l_conn, $A_TABLE));
+        $l_result = $this->l_conn->query(sprintf($l_sql,
+            mysqli_real_escape_string($this->l_conn, $A_TABLE)));
         echo $l_result;
-        if (!sprintf($l_sql,
-            mysqli_real_escape_string($this->l_conn, $A_TABLE))) {
+        if (!$l_result) {
             echo("Error description: " . $this->l_conn->error);
             return False;
         }
@@ -164,7 +163,7 @@ class database
      */
     function update_password($A_USERNAME, $A_NEW_PASSWORD)
     {
-        $l_sql = "UPDATE Joueur SET mot_de_passe = " . $A_NEW_PASSWORD . " WHERE pseudo = '" . $A_USERNAME."'";
+        $l_sql = "UPDATE Joueur SET mot_de_passe = '" . $A_NEW_PASSWORD . "' WHERE pseudo = '" . $A_USERNAME."'";
         if (!$this->l_conn->query($l_sql)) {
             echo("Error description: " . $this->l_conn->error);
             return False;
@@ -183,12 +182,16 @@ class database
      */
     function check_if_element_already_used($A_TABLE, $A_COLUMN, $A_ELEMENT)
     {
-        $l_query = "SELECT * FROM %s  WHERE %s = %s";
+        $typed_param = "%s";
+        if(gettype($A_ELEMENT)=="string"){
+            $typed_param = "'%s'";
+        }
+        $l_query = "SELECT * FROM %s  WHERE %s =  ".$typed_param;
 
-        $l_result = sprintf($l_query,
+        $l_result = $this->l_conn->query(sprintf($l_query,
                             mysqli_real_escape_string($this->l_conn, $A_TABLE),
-                            mysqli_real_escape_string($this->l_conn, $A_TABLE),
-                            mysqli_real_escape_string($this->l_conn, $A_TABLE));
+                            mysqli_real_escape_string($this->l_conn, $A_COLUMN),
+                            mysqli_real_escape_string($this->l_conn, $A_ELEMENT)));
 
         if (!$l_result) {
             echo("Error description: " . $this->l_conn->error);
