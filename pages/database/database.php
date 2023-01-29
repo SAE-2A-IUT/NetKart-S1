@@ -7,7 +7,7 @@
  * @author SAE S3 NetKart
  */
 
-/*
+/**
  * class to manage database
  */
 
@@ -20,7 +20,7 @@ class database
 
     protected $l_conn;
 
-    /*
+    /**
      * constructor of database class, initialise variables to connect to database
      */
     function __construct($A_SERVERNAME = "mysql-netkart.alwaysdata.net",
@@ -35,7 +35,7 @@ class database
         $this->l_dbname = $A_DBNAME;
     }
 
-    /*
+    /**
      * @brief this function initialises the connection with database
      */
     function connection()
@@ -48,7 +48,20 @@ class database
         }
     }
 
-    /*
+    function remove_apostrophe($A_QUERY)
+    {
+        $pattern = '/[a-zA-Z0-9]\'[a-zA-Z0-9]/';
+        $pattern2 = '/\'/';
+        $replacement = " ";
+        preg_match_all($pattern, $A_QUERY, $matches);
+        foreach ($matches[0] as $match) {
+            $final = preg_replace($pattern2, $replacement, $match);
+            $A_QUERY = str_replace($match,$final,$A_QUERY);
+        }
+        return $A_QUERY;
+    }
+
+    /**
      * @brief this function executes a sql query and handle errors
      *
      * @param $A_QUERY (String) the sql query that will be run
@@ -56,17 +69,18 @@ class database
      */
     function f_query($A_QUERY, $A_IS_INSERT=false)
     {
-        if (!$this->l_conn->query($A_QUERY)) {
+        $l_QUERY = self::remove_apostrophe($A_QUERY);
+        if (!$this->l_conn->query($l_QUERY)) {
             echo("Error description: " . $this->l_conn->error);
             return "Error";
         }
         if($A_IS_INSERT){
             return "Success";
         }
-        return $this->l_conn->query($A_QUERY)->fetch_all(MYSQLI_ASSOC);
+        return $this->l_conn->query($l_QUERY)->fetch_all(MYSQLI_ASSOC);
     }
 
-    /*
+    /**
      * @biref this function inserts the given data into the table
      *
      * @param $A_TABLE (String) the table to insert data
@@ -77,16 +91,19 @@ class database
      */
     function f_insert_strings($A_TABLE, $A_KEYS, $A_VALUES)
     {
-        $l_sql = "INSERT INTO " . $A_TABLE . " (" . implode(",", $A_KEYS) . ") VALUES ('" . implode("','", $A_VALUES) . "')";
-        echo $l_sql;
-        if (!$this->l_conn->query($l_sql)) {
+        $l_sql = "INSERT INTO %s (" . implode(",", $A_KEYS) . ") VALUES ('" . implode("','", $A_VALUES) . "')";
+
+        $l_result = $this->l_conn->query(sprintf($l_sql,
+            mysqli_real_escape_string($this->l_conn, $A_TABLE)));
+        echo $l_result;
+        if (!$l_result) {
             echo("Error description: " . $this->l_conn->error);
             return False;
         }
         return True;
     }
 
-    /*
+    /**
      * @brief this function will delete some rows from database
      *
      * @param $A_TABLE (String) the table of the rows to delete
@@ -104,7 +121,7 @@ class database
         return True;
     }
 
-    /*
+    /**
      * @brief this function closes the connection with the database
      */
     function close()
@@ -112,7 +129,7 @@ class database
         $this->l_conn->close();
     }
 
-    /*
+    /**
      * @brief this function will return the password of a given user
      *
      * @param $A_USERNAME (String) the username to get the password from
@@ -136,7 +153,7 @@ class database
         return $l_fetch[0]["mot_de_passe"];
     }
 
-    /*
+    /**
      * @brief this function will update the password from a given user by replacing it with a given new password
      *
      * @param $A_USERNAME (String) user that password will be updated
@@ -146,7 +163,7 @@ class database
      */
     function update_password($A_USERNAME, $A_NEW_PASSWORD)
     {
-        $l_sql = "UPDATE Joueur SET mot_de_passe = " . $A_NEW_PASSWORD . " WHERE pseudo = " . $A_USERNAME;
+        $l_sql = "UPDATE Joueur SET mot_de_passe = " . $A_NEW_PASSWORD . " WHERE pseudo = '" . $A_USERNAME."'";
         if (!$this->l_conn->query($l_sql)) {
             echo("Error description: " . $this->l_conn->error);
             return False;
@@ -154,7 +171,7 @@ class database
         return True;
     }
 
-    /*
+    /**
      * @brief this function will check if a given element from a given column exists or not
      *
      * @param $A_TABLE (String) the table where to search for the element
@@ -165,8 +182,12 @@ class database
      */
     function check_if_element_already_used($A_TABLE, $A_COLUMN, $A_ELEMENT)
     {
-        $l_query = "SELECT * FROM " . $A_TABLE . " WHERE " . $A_COLUMN . "='" . $A_ELEMENT . "';";
-        $l_result = $this->l_conn->query($l_query);
+        $l_query = "SELECT * FROM %s  WHERE %s = '%s'";
+
+        $l_result = $this->l_conn->query(sprintf($l_query,
+                            mysqli_real_escape_string($this->l_conn, $A_TABLE),
+                            mysqli_real_escape_string($this->l_conn, $A_COLUMN),
+                            mysqli_real_escape_string($this->l_conn, $A_ELEMENT)));
 
         if (!$l_result) {
             echo("Error description: " . $this->l_conn->error);
@@ -175,7 +196,7 @@ class database
         return $l_result->num_rows > 0;
     }
 
-    /*
+    /**
      * @brief this function return the circuits created by an user
      *
      * @param $A_PLAYER_ID (Integer) : id of the player to get circuits from
@@ -194,7 +215,7 @@ class database
         return $l_result->fetch_all(MYSQLI_ASSOC);
     }
 
-    /*
+    /**
      * @brief this function return the circuits created by an user
      *
      * @param $A_CIRCUIT_ID (Integer) : id of the circuit to get informations from
@@ -203,7 +224,7 @@ class database
      */
     function get_circuit_information($A_CIRCUIT_ID)
     {
-        $l_sql = "SELECT id_circuit, nom_circuit, points, id_circuitimage FROM Circuit WHERE id_circuit=" . $A_CIRCUIT_ID;
+        $l_sql = "SELECT id_circuit, nom_circuit, points, id_circuitimage, id_theme FROM Circuit WHERE id_circuit=" . $A_CIRCUIT_ID;
         $l_result = $this->l_conn->query($l_sql);
 
         if (!$l_result) {
@@ -213,7 +234,9 @@ class database
         return $l_result->fetch_all(MYSQLI_ASSOC);
     }
 
-    // TODO : documenter
+    /**
+     * @return (Array) : array that contains all circuits informations
+     */
     function get_all_circuit(){
         $l_result = self::f_query(
             "SELECT id_circuit, nom_circuit, points, image, id_theme 
@@ -225,7 +248,7 @@ class database
         return $l_result;
     }
 
-    /*
+    /**
      * @brief this function return the image
      *
      * @param $A_IMAGE_ID (String) : id of the image
@@ -237,7 +260,7 @@ class database
         return self::f_query("SELECT image  FROM Circuit_Image WHERE id_circuitimage=" . $A_IMAGE_ID);
     }
 
-    /*
+    /**
      * @brief this function return each question of a circuit
      *
      * @param $A_CIRCUIT_ID (String) : id of the circuit
@@ -249,7 +272,7 @@ class database
         return self::f_query("SELECT id_question, consigne, question, reponse  FROM Question WHERE id_circuit=" . $A_CIRCUIT_ID);
     }
 
-    /*
+    /**
      * @brief this function return each path of image for a circuit
      *
      * @param $A_CIRCUIT_ID (String) : id of the circuit
@@ -261,7 +284,7 @@ class database
         return self::f_query("SELECT image_question FROM Question_Image WHERE id_question=" . $A_QUESTION_ID);
     }
 
-    /*
+    /**
      * @brief this function return each url of question for a circuit
      *
      * @param $A_QUESTION_ID (String) : id of the question
@@ -273,7 +296,7 @@ class database
         return self::f_query("SELECT lien FROM Question_Lien WHERE id_question=" . $A_QUESTION_ID);
     }
 
-    /*
+    /**
      * @brief this function delete a Circuit with a given ID and all the questions of this circuit
      *
      * @param $A_CIRCUIT_ID (String) : ID of the circuit to delete
@@ -316,7 +339,7 @@ class database
         return self::f_delete("Circuit","id_circuit=".$A_CIRCUIT_ID);
     }
 
-    /*
+    /**
      * @brief this function insert a new theme into database
      *
      * @param $A_THEME_NAME (String) : name of the new theme
@@ -333,7 +356,7 @@ class database
         return -1;
     }
 
-    /*
+    /**
      * @brief this function insert a new circuit into database
      *
      * @param $A_NOM_CIRCUIT (String) : name of the new circuit
@@ -345,34 +368,62 @@ class database
      * @return (Integer) : the id of the circuit created or -1 if an error occurred
      */
     function insert_circuit($A_NOM_CIRCUIT, $A_POINTS, $A_THEME, $A_JOUEUR, $A_CIRCUIT_IMAGE){
-        $l_is_inert_ok = self::f_query("INSERT INTO Circuit (nom_circuit, points, id_theme, id_joueur, id_circuitimage) VALUES ('$A_NOM_CIRCUIT', $A_POINTS, $A_THEME, $A_JOUEUR, $A_CIRCUIT_IMAGE)",true);
-        if ($l_is_inert_ok=="Success"){
+        $l_is_insert_ok = self::f_query("INSERT INTO Circuit (nom_circuit, points, id_theme, id_joueur, id_circuitimage) VALUES ('$A_NOM_CIRCUIT', $A_POINTS, $A_THEME, $A_JOUEUR, $A_CIRCUIT_IMAGE)",true);
+        if ($l_is_insert_ok=="Success"){
             $l_circuit_id = self::f_query("SELECT id_circuit FROM Circuit WHERE nom_circuit ='".$A_NOM_CIRCUIT."'");
             return $l_circuit_id[0]["id_circuit"];
         }
         return -1;
     }
 
-    /*
+    /**
+     * @param $A_ID_CIRCUIT : id of the circuit to update
+     * @param $A_NOM_CIRCUIT (String) : name of the updated circuit
+     * @param $A_POINTS (Integer) : number of points the user will get after finishing circuit
+     * @param $A_THEME (Integer) : id of the theme the circuit belong to
+     * @param $A_JOUEUR (Integer) : id of the player who created the circuit
+     * @param $A_CIRCUIT_IMAGE (Integer) : id of the image of the circuit
+     *
+     * @return (boolean) : True if update successful, False otherwise
+     */
+    function update_circuit($A_ID_CIRCUIT, $A_NOM_CIRCUIT, $A_POINTS, $A_THEME, $A_JOUEUR, $A_CIRCUIT_IMAGE){
+        $l_is_update_ok = self::f_query("UPDATE Circuit SET nom_circuit='".$A_NOM_CIRCUIT."', points=".$A_POINTS.", id_theme=".$A_THEME.", id_joueur=".$A_JOUEUR.", id_circuitimage=".$A_CIRCUIT_IMAGE." WHERE id_circuit=".$A_ID_CIRCUIT,true);
+        return $l_is_update_ok=="Success";
+    }
+
+    /**
      * @brief this function insert a question from a circuit into database
      *
-     * @param $A_TITRE (String) : title of the question
      * @param $A_CONSIGNE (String) : detailed question
+     * @param $A_QUESTION (String) : question
      * @param $A_REPONSE (String) : answer of the question
      * @param $A_CIRCUIT (Integer) : id of the circuit the question belongs to
      *
      * @return (Integer) : the id of the question created or -1 if an error occurred
      */
-    function insert_question($A_TITRE, $A_CONSIGNE, $A_REPONSE, $A_CIRCUIT){
-        $l_is_insert_ok = self::f_query("INSERT INTO Question (consigne, question, reponse, id_circuit) VALUES ('".$A_CONSIGNE."', '".$A_TITRE."', '".$A_REPONSE."',".$A_CIRCUIT.")",true);
+    function insert_question($A_CONSIGNE, $A_QUESTION, $A_REPONSE, $A_CIRCUIT){
+        $l_is_insert_ok = self::f_query("INSERT INTO Question (consigne, question, reponse, id_circuit) VALUES ('".$A_CONSIGNE."','".$A_QUESTION."', '".$A_REPONSE."',".$A_CIRCUIT.")",true);
         if ($l_is_insert_ok=="Success"){
-            $l_question_id = self::f_query("SELECT id_question FROM Question WHERE question ='".$A_TITRE."' AND id_circuit=".$A_CIRCUIT);
+            $l_question_id = self::f_query("SELECT id_question FROM Question WHERE question ='".$A_QUESTION."' AND id_circuit=".$A_CIRCUIT);
             return $l_question_id[0]["id_question"];
         }
         return -1;
     }
 
-    /*
+    /**
+     * @param $A_ID_QUESTION (Integer) : id of the question
+     * @param $A_CONSIGNE (String) : detailed question
+     * @param $A_QUESTION (String) : question
+     * @param $A_REPONSE (String) : answer of the question
+     *
+     * @return (boolean) : True if update successful, False otherwise
+     */
+    function update_question($A_ID_QUESTION, $A_QUESTION, $A_CONSIGNE, $A_REPONSE){
+        $l_is_update_ok = self::f_query("UPDATE Question SET question='".$A_QUESTION."', consigne='".$A_CONSIGNE."', reponse='".$A_REPONSE."' WHERE id_question=".$A_ID_QUESTION, true);
+        return $l_is_update_ok=="Success";
+    }
+
+    /**
      * @brief this function insert the links given with a specified question
      *
      * @param $A_LINK (String) : link to help answer the question
@@ -385,7 +436,7 @@ class database
         return $l_is_insert_ok=="Success";
     }
 
-    /*
+    /**
      * @brief this function insert the image given with a specified question
      *
      * @param $A_IMAGE (String) : name of the image uploaded
@@ -398,7 +449,7 @@ class database
         return $l_is_insert_ok=="Success";
     }
 
-    /*
+    /**
      * @brief this function returns all the themes in database
      *
      * @return (Array) : array that contains the id and name of all themes
@@ -407,7 +458,7 @@ class database
         return self::f_query("SELECT id_theme, nom_theme FROM Theme");
     }
 
-    /*
+    /**
      * @brief this function returns all the images of circuits in database
      *
      * @return (Array) : id and name of all the possible images for a circuit
@@ -416,7 +467,7 @@ class database
         return self::f_query("SELECT id_circuitimage,image FROM Circuit_Image");
     }
 
-    /*
+    /**
      * @brief this function insert a new multiplayer session in database
      *
      * @param $A_NOM (String) : link to help answer the question
@@ -427,8 +478,8 @@ class database
      *
      * @return (Integer) : id of the created session
      */
-    function insert_session($A_NOM, $A_CODE, $A_DEBUT, $A_DUREE, $A_JOUEUR){
-        $l_is_insert_ok = self::f_query("INSERT INTO Groupe (nom_groupe, code, debut, duree, id_joueur) VALUES ('".$A_NOM."', '".$A_CODE."', '".$A_DEBUT."', '".$A_DUREE."',".$A_JOUEUR.")",true);
+    function insert_session($A_NOM, $A_CODE, $A_DEBUT, $A_DUREE, $A_JOUEUR, $A_THEME){
+        $l_is_insert_ok = self::f_query("INSERT INTO Groupe (nom_groupe, code, debut, duree, id_joueur, id_theme) VALUES ('".$A_NOM."', '".$A_CODE."', '".$A_DEBUT."', '".$A_DUREE."',".$A_JOUEUR.",".$A_THEME.")",true);
         if ($l_is_insert_ok=="Success"){
             $l_question_id = self::f_query("SELECT id_groupe FROM Groupe WHERE nom_groupe ='".$A_NOM."' AND code='".$A_CODE."'");
             return $l_question_id[0]["id_groupe"];
@@ -437,7 +488,33 @@ class database
     }
 
     /**
-     * @brief : this function will check if player has already won the circuit
+     * Return a boolean to know if the user has a session.
+     *
+     * @param $A_ID_JOUEUR (Int) User id.
+     * @return (Boolean) If the user has a session.
+     */
+    function verifyPlayerSession($A_ID_JOUEUR){
+        return self::f_query("SELECT count(*) FROM Groupe WHERE id_joueur ='".$A_ID_JOUEUR."'")[0]['count(*)'];
+    }
+
+    /**
+     * Return the session data.
+     *
+     * @param $A_ID_JOUEUR (Int) User id.
+     * @return (Array) Session data
+     */
+    function getSessionByHost($A_ID_JOUEUR)
+    {
+        if (self::f_query("SELECT * FROM Groupe a, Groupe_Joueur b WHERE a.id_joueur =" . $A_ID_JOUEUR . " AND a.id_groupe = b.id_groupe")) {
+            return self::f_query("SELECT * FROM Groupe a, Groupe_Joueur b WHERE a.id_joueur =" . $A_ID_JOUEUR . " AND a.id_groupe = b.id_groupe ORDER BY b.score DESC");
+        }
+        if (self::f_query("SELECT * FROM Groupe WHERE id_joueur =" . $A_ID_JOUEUR)) {
+            return self::f_query("SELECT * FROM Groupe WHERE id_joueur =" . $A_ID_JOUEUR)[0];
+        }
+        return [];
+    }
+
+     /** @brief : this function will check if player has already won the circuit
      *
      * @param $A_ID_JOUEUR (Integer) : id of the player who won the game
      * @param $A_ID_CIRCUIT (Integer) : id of the circuit won by player
@@ -485,6 +562,65 @@ class database
             return -1;
         }
         return $l_score[0]["SUM(points)"];
+    }
+
+    /**
+     * Adding player to the player list of a multiplayer session
+     *
+     * @param $A_PLAYER (String) : player nickname
+     * @param $A_SESSION_CODE (String) : session to join code
+     * @return bool|int
+     */
+    function insert_player_to_multiplayer_session($A_PLAYER, $A_SESSION_CODE){
+        if ($l_id_groupe = self::f_query("SELECT id_groupe FROM Groupe WHERE code='".$A_SESSION_CODE."'")) {
+            if (sizeof($l_id_groupe) == 1) {
+                $l_is_insert_ok = self::f_query("INSERT INTO Groupe_Joueur (pseudo_groupe,score,id_groupe) VALUES ('" . $A_PLAYER . "',0," . $l_id_groupe[0]["id_groupe"] . ")", true);
+                var_dump($l_is_insert_ok);
+
+                return $l_is_insert_ok == "Success";
+            }
+            return -1;
+        }
+        return -1;
+    }
+    function select_player_session_id($A_PLAYER, $A_SESSION_CODE){
+        if ($l_id_groupe = self::f_query("SELECT id_groupe FROM Groupe WHERE code='".$A_SESSION_CODE."'")) {
+            if (sizeof($l_id_groupe) == 1) {
+                $l_player_id = self::f_query("SELECT id_groupejoueur FROM Groupe_Joueur a, Groupe b WHERE pseudo_groupe='".$A_PLAYER."' AND a.id_groupe = b.id_groupe AND code='".$A_SESSION_CODE."'");
+                return $l_player_id[0]['id_groupejoueur'];
+            }
+            return -1;
+        }
+        return -1;
+    }
+
+    function getSessionByCode($A_SESSION_CODE){
+        return self::f_query("SELECT * FROM Groupe a, Groupe_Joueur b WHERE a.code ='" . $A_SESSION_CODE . "' AND a.id_groupe = b.id_groupe ORDER BY b.score DESC");;
+    }
+
+    function getCircuitsByTheme($A_THEME_ID){
+        return self::f_query("SELECT id_circuit FROM Circuit WHERE id_theme =" . $A_THEME_ID);
+    }
+
+    /**
+     * @param $A_ID_PLAYER (Integer) : id of the player to get username
+     *
+     * @return
+     */
+    function get_username_from_id($A_ID_PLAYER){
+        $l_username = self::f_query("SELECT pseudo FROM Joueur WHERE id_joueur='".$A_ID_PLAYER."'");
+        if($l_username=="Error"){
+            return -1;
+        }
+        return $l_username[0]["pseudo"];
+    }
+
+    function setSessionPlayerScore($A_ID_PLAYER,$A_INDEX_CIRCUIT){
+        $l_circuit = (int) self::getCircuitsByTheme(self::f_query("SELECT b.id_theme FROM Groupe_Joueur a, Groupe b WHERE a.id_groupejoueur=".$A_ID_PLAYER." AND a.id_groupe=b.id_groupe")[0]['id_theme'])[$A_INDEX_CIRCUIT]['id_circuit'];
+        $l_old_score = (int) self::f_query("SELECT score FROM Groupe_Joueur WHERE id_groupejoueur=".$A_ID_PLAYER)[0]['score'];
+        $l_point = (int) self::f_query("SELECT points FROM Circuit WHERE id_circuit=".$l_circuit)[0]['points'];
+        $l_is_update_ok = self::f_query("UPDATE Groupe_Joueur SET score=".($l_old_score+$l_point)." WHERE id_groupejoueur=".$A_ID_PLAYER,true);
+        return $l_is_update_ok === "Success";
     }
 }
 //TODO : voir pour de la composition

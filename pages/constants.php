@@ -1,50 +1,51 @@
 <?php
 /** @file /pages/constants.php
  *
- * File that defines all the website constants
+ *  @details File that defines all the website constants
  *
  * @author SAE S3 NetKart
  */
 
 /**
  * Images directory link constant
- * @const K_IMAGE
+ *
+ * @const K_IMAGE (String)
  */
 define('K_IMAGE','../assets/image/');
 
 /**
  * Styles directory link constant
- * @const K_STYLE
+ * @const K_STYLE (String)
  */
 define('K_STYLE','../assets/style/');
 
 /**
  * Scripts javaScript directory link constant
- * @const K_SCRIPT
+ * @const K_SCRIPT (String)
  */
 define('K_SCRIPT','../assets/script/');
 
 /**
  * Maximal number questions constant
- * @const K_MAX_QUESTIONS
+ * @const K_MAX_QUESTIONS (Int)
  */
 define('K_MAX_QUESTIONS', 3);
 
 /**
  * Maximal number images per questions constant
- * @const K_MAX_IMAGES
+ * @const K_MAX_IMAGES (Int)
  */
 define('K_MAX_IMAGES', 3);
 
 /**
  * DB Circuit table name constant
- * @const K_DB_CIRCUIT
+ * @const K_DB_CIRCUIT (String)
  */
 define('K_DB_CIRCUIT', 'Circuit');
 
 /**
  * DB Circuit checkpoint table name constant
- * @const K_DB_CIRCUIT_CHECKPOINT
+ * @const K_DB_CIRCUIT_CHECKPOINT (String)
  */
 define('K_DB_CIRCUIT_CHECKPOINT', 'Circuit_Checkpoint');
 

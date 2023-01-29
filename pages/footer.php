@@ -1,14 +1,19 @@
 <?php
 /** @file /pages/footer.php
  *
- * File that generate the footer of other pages
+ *  @details File that generate the footer of other pages
  *
  * @author SAE S3 NetKart
  */
 
+/**
+ * Footer generator
+ *
+ * @return void
+ */
 function endPage(){
 ?>
-    <footer class="footer">
+    <footer class="footer not-print-section">
         <div class="footer-one"><img src="<?php echo K_IMAGE ?>icon_black.png" alt="NetKart Icon"></div>
         <div class="footer-two">
             PAGES<br/>

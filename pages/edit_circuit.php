@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * @file /pages/new-circuit.php
  *
  * @details File to show circuits created by user
@@ -7,15 +7,24 @@
  * @author SAE S3 NetKart
  */
 require ("./database/database.php");
-include './header.php';
-startPage("Edit",["../assets/style/main", "../assets/style/edit_theme"],["../assets/script/theme"]);
-
+require ('header.php');
+session_start();
+startPage("Edit",["../assets/style/main", "../assets/style/edit_theme"],["../assets/script/theme", K_SCRIPT."check_connection"]);
+if (!isset($_SESSION['id_user'])) {
+    ?>
+    <script>
+        check_connection(false);
+    </script>
+    <?php
+}
 /*
+
  * Check if password and confirmation are set
  */
-if(True){ # isset($_SESSION id joueur
+if(isset($_SESSION['id_user'])){ # isset($_SESSION id joueur
 
-    $l_user_id = 5; //TODO : recupérer le pseudo stocké en variable de session
+    $l_user_id = $_SESSION['id_user'];
+
 
     $l_db = new database();
 
@@ -34,6 +43,32 @@ if(True){ # isset($_SESSION id joueur
         <input type="submit" value="Créer un circuit">
     </form>
     </div>
+    <?php  if (isset($_GET['error'])){?>
+    <div class="error">
+        <?php
+        if($_GET['error']==1){
+            echo "Une erreur est survenue et la suppression ne s'est pas réalisée.";
+        }
+        elseif ($_GET['error']==2){
+            echo "Une erreur est survenue lors de la mise à jour du circuit.";
+        }
+        elseif ($_GET['error']==3){
+            echo "Un circuit avec ce nom existe déjà.";
+        }?>
+    </div>
+    <?php }
+    if (isset($_GET['success'])){?>
+    <div class="success">
+        <?php
+        if($_GET['success']==1){
+            echo "La suppression s'est réalisée correctement.";
+        }
+        elseif($_GET['success']==2){
+            echo "La mise à jour s'est réalisée correctement.";
+        }?>
+
+    </div>
+<?php }?>
     <div class="all_theme">
 
     <?php
@@ -57,10 +92,22 @@ if(True){ # isset($_SESSION id joueur
         <div class="modify_delete">
             <div class="theme">
                 <img class="theme_image" alt="circuit" src=<?=K_IMAGE . $l_db->get_image_circuit($item["id_circuitimage"])[0]["image"].PHP_EOL;?>>
-                <h3><?= $item["nom_circuit"].PHP_EOL;?></h3>
+                <?php
+                    $l_title = $item["nom_circuit"];
+                    if (strlen($l_title) > 30) {
+                        $l_title = substr("$l_title", 0, 30)."...";
+                    }
+                    if (strlen($l_title) > 15)
+                    {
+                        $l_title = substr("$l_title", 0, 15).PHP_EOL.substr("$l_title", 15, 30);
+
+                    }
+
+                ?>
+                <h3><?php echo $l_title?></h3>
                 <p class="points">Points: <?= $item["points"].PHP_EOL;?></p>
                 <div class="form_div">
-                    <form class="modify" method="post" action="new-circuit_post.php">
+                    <form class="modify" method="post" action="modify-circuit.php">
                         <input type="hidden" value="<?php echo $item["id_circuit"]; ?>" name="id_circuit_to_modify">
                         <input type="submit" value="Modifier">
                     </form>
@@ -96,19 +143,8 @@ if(True){ # isset($_SESSION id joueur
     </div>
     <?php
 
-    //TODO : afficher les données sous forme d'éléments comme dans la page thèmes
-
-
-
-    // TODO : if there is no circuit created by user, redirect to page and print "no circuit" + button to create new one
-
     $l_db->close();
 
-
-    //TODO : renvoyer sur la page, afficher que l'inscription est ok et demander de se connecter
-
-
-//TODO : renvoyer sur la page (redirection automatique VERS LA PAGE D'ERREUR si aucun des champs n'est rempli)<?php
 
 include './footer.php';
 endPage();

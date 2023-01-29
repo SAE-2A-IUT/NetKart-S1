@@ -1,0 +1,351 @@
+:root{
+    --purple : #8F55FF;
+}
+
+#game {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10%;
+}
+
+#terminal {
+    background-color: var(--black);
+    color: var(--white);
+    height: 100%;
+    max-height: 42vh;
+    min-height: 42vh;
+    max-width: 83vh;
+    min-width: 83vh;
+    padding: 0.5em 1em 1.5em 0.5em;
+    margin: 0;
+}
+
+#terminal-input {
+    color: white;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    left: 6em;
+    width: 15em;
+    font-size: initial;
+}
+
+#terminal-input:focus-visible {
+    outline: 0;
+}
+
+#terminal-input-text {
+    color: white;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    position: relative;
+    bottom: 0;
+    margin: 0;
+}
+
+#terminal-output {
+    position: relative;
+    overflow-y: scroll;
+    max-height: 98.5%;
+    top: -0.2em;
+    width: 102.4%;
+}
+
+#terminal-output::-webkit-scrollbar {
+    background-color: black;
+}
+
+#left-game {
+    max-width: 46%;
+    min-width: 46%;
+}
+
+#right-game {
+    background-size: 100% auto;
+    background-repeat-y: no-repeat;
+    width: 22%;
+    margin-top: 15.2%;
+    min-height: 65vh;
+    position: relative;
+    margin-left: 3%;
+}
+
+#question-statement, #question {
+    width: 93%;
+    line-height: 128%;
+}
+
+#question{
+    color: var(--dark-blue);
+}
+
+#icon {
+    width: 3em;
+    height: 100%;
+    margin-right: 15%;
+    margin-left: 11%;
+}
+
+.question-image-origin {
+    max-width: 30%;
+    max-height: 5.5em;
+    margin-right: 2%;
+}
+
+.question-image-origin:hover + .question-image, .question-image:hover {
+    display: block;
+}
+
+.question-image {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    box-shadow: var(--dark-blue) 0 0 1.5em;
+    z-index: 2;
+}
+
+#modal {
+    position: fixed;
+    left: 32.5%;
+    top: 30%;
+    height: 43vh;
+    width: 80vh;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 2px;
+    z-index: 3;
+}
+
+#modal-close {
+    left: 89%;
+    font-size: 3em;
+    position: relative;
+}
+
+#modal-body {
+    text-align: center;
+    font-size: 260%;
+    font-weight: bold;
+}
+
+#modal-return, #modal-restart {
+    color: var(--white);
+    border: none;
+    font-size: 1.2em;
+    height: 2.3em;
+    margin: 0.6em;
+}
+
+#modal-return {
+    background-color: var(--dark-blue);
+}
+
+#modal-restart {
+    background-color: var(--red);
+}
+
+#score{
+    font-size: 50%;
+    font-weight: initial;
+}
+
+#modal-footer {
+    text-align: center;
+    position: relative;
+}
+
+#modal-title {
+    font-size: 1.35em;
+}
+
+#url{
+    display: flex;
+    align-items: center;
+    width: 96%;
+    background-color: #EBEBEB;
+    padding: 2%;
+    border-radius: 4px;
+    overflow: hidden;
+    line-height: 150%;
+    white-space: nowrap;
+    min-height: 19%;
+    position: absolute;
+    top: -25%;
+}
+
+#player_kart, #enemy_kart {
+    position: absolute;
+    width: 3.5em;
+    z-index: 1;
+}
+
+#flag {
+    width: 2.5em;
+    z-index: 0;
+}
+
+#victory, #lose {
+    width: 14%;
+    vertical-align: middle;
+    margin-left: 1em;
+}
+
+.player{
+    background-color: var(--purple);
+    width: 100%;
+    color: var(--white);
+    margin-bottom: 0.25em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.player.me{
+    background-color: var(--red);
+}
+.player.even{
+    background-color: var(--dark-blue);
+}
+
+.leaderboard_image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4.5em;
+    height: 4.5em;
+    border-radius: 5px;
+    position: relative;
+    right: 0;
+
+}
+.leaderboard_image img{
+    width: 90%;
+    height: auto;
+}
+
+.player .right{
+    display: flex;
+    text-align: right;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.player .right, .player .left{
+    line-height: 2em;
+    padding: 0.5em;
+}
+
+#crown{
+    width: 2em;
+    margin-right: 0.2em;
+}
+
+.leaderboard.popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background-color: var(--black-transparent);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.leaderboard.popup .disclaimer{
+    color: var(--white);
+    text-shadow: var(--black) 0px 0px 1em;
+}
+.leaderboard.button .disclaimer{
+    display: none;
+}
+
+.leaderboard.popup .leaderboard_image{
+    display: none;
+}
+
+.leaderboard.popup .classement{
+    width: 80%;
+    height: 70%;
+    border-radius: 5px;
+    overflow: auto;
+    background-color: var(--white);
+}
+.leaderboard_image:hover{
+    background-color: var(--white);
+}
+.leaderboard.button{
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    left: 57%;
+}
+
+.leaderboard.button .classement{
+    display: none;
+}
+
+@media screen and (max-width: 900px) {
+    #game {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .question-image-origin:hover + .question-image, .question-image:hover {
+        transform: scale(2.5);
+    }
+
+    .question-image, .question-image-origin {
+        width: 40%;
+    }
+
+    #left-game {
+        max-width: 100%;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 27%;
+    }
+
+    #right-game {
+        width: 58%;
+    }
+
+    #terminal {
+        min-height: 20em;
+        max-height: 20em;
+        max-width: 47em;
+        min-width: 83vw;
+    }
+
+    #terminal-output {
+        max-height: 20em;
+        top: -0.4em;
+        width: 102.2%;
+        text-align: initial;
+    }
+
+    #terminal-input-text {
+        float: left;
+    }
+
+    #circuit-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .leaderboard.button{
+        position: relative;
+        justify-content: center;
+        left: unset;
+    }
+
+    .leaderboard.popup .disclaimer{
+        text-align: center;
+    }
+}

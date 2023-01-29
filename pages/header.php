@@ -1,10 +1,11 @@
 <?php
 /** @file /pages/header.php
  *
- * File that generate the header of other pages
+ * @details File that generate the header of other pages
  *
  * @author SAE S3 NetKart
  */
+
 
 require 'constants.php';
 
@@ -17,11 +18,11 @@ require 'constants.php';
  * @param $A_CONNECTED
  * @return void
  */
-function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT, $A_CONNECTED=false){
-?>
-
+function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT){
+    ?>
 <!-- Header connected -->
-<?php if ($A_CONNECTED){?>
+
+<?php if (isset($_SESSION['id_user'])){?>
 <!DOCTYPE html>
 <html lang="fr-FR">
 <head>
@@ -52,9 +53,9 @@ function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT, $A_CONNECTED=false){
 <header>
 </header>
 
-<div class="header">
+<div class="header not-print-section">
     <div class="header-left">
-        <a href="homepage.php"><img src="<?php echo K_IMAGE?>icon_black_small.png" alt="logo" width="90em"></a>
+        <a href="homepage.php"><img src="<?php echo K_IMAGE?>icon_black_small.webp" alt="logo" width="90em"></a>
     </div>
     <div class="header-right">
         <div>
@@ -67,19 +68,13 @@ function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT, $A_CONNECTED=false){
         <a href="rules.php">RÈGLES DU JEU</a>
         </div>
         <div>
-            <a href="#mes-circuits">NOUVELLE SESSION</a>
+            <a href="create-session.php">NOUVELLE SESSION</a>
         </div>
         <div>
-            <a href="#mes-circuits">MES CIRCUITS</a>
+            <a href="edit_circuit.php">MES CIRCUITS</a>
         </div>
         <div>
             <a href="user.php">PROFIL</a>
-        </div>
-        <div>
-        <form method="post" action="#" enctype="text/plain" style="display: flex; flex-direction: row">
-            <input type="text" placeholder="Code multijoueur" required class="input-header">
-            <input type="submit" value="OK" class="submit-header">
-        </form>
         </div>
         <div>
         <a href="connection.php" class="hbutton">DECONNEXION</a>
@@ -124,7 +119,7 @@ else {
 
 <div class="header">
     <div class="header-left">
-        <a href="homepage.php"><img src="<?php echo K_IMAGE?>icon_black_small.png" alt="logo" width="90em"></a>
+        <a href="homepage.php"><img src="<?php echo K_IMAGE?>icon_black_small.webp" alt="logo" width="90em"></a>
     </div>
     <div class="header-right">
         <div>
@@ -137,8 +132,8 @@ else {
             <a href="rules.php">RÈGLES DU JEU</a>
         </div>
         <div>
-            <form method="post" action="#" enctype="text/plain" style="display: flex; flex-direction: row">
-                <input type="text" placeholder="Code multijoueur" required class="input-header">
+            <form method="post" action="#" " style="display: flex; flex-direction: row">
+                <input type="text" name="session_code" placeholder="Code multijoueur" required class="input-header">
                 <input type="submit" value="OK" class="submit-header">
             </form>
         </div>
@@ -148,6 +143,9 @@ else {
     </div>
 </div>
 <?php
+    if (isset($_POST['session_code'])){
+        require 'join_session.php';
+    }
 }}
 ?>
 

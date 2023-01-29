@@ -1,19 +1,20 @@
 <?php
 /** @file /pages/contact.php
  *
- * PHP page that allows the user to send an email to report an error, a suggestion or other
+ *  @details PHP page that allows the user to send an email to report an error, a suggestion or other
  *
  * @author SAE S3 NetKart
  */
 
-include '../pages/header.php';
+require ('header.php');
+session_start();
 startPage("Contact",["../assets/style/main","../assets/style/contact"],[]);
 ?>
 <div class="body-page">
     <div class="content">
         <h1>Nous contacter</h1>
         <p>Des questions, une suggestion, une erreur?</p>
-        <img class="thumb_img" src="../assets/image/contact_page_image.jpg" alt="zoli madame avec une enveloppe">
+        <img class="thumb_img" src="../assets/image/contact_page_image.webp" alt="zoli madame avec une enveloppe">
         <?php
         if(isset($_POST['submit'])){
             $receiver = "contact.netkart@gmail.com";
@@ -56,6 +57,6 @@ startPage("Contact",["../assets/style/main","../assets/style/contact"],[]);
     </div>
 </div>
 <?php
-include '../pages/footer.php';
+require '../pages/footer.php';
 endPage();
 ?>

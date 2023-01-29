@@ -1,13 +1,20 @@
 <?php
 /** @file /pages/connection.php
  *
- * PHP page that allows the user to either register or login by filling in the required fields
+ *  @details PHP page that allows the user to either register or login by filling in the required fields
  *
  * @author SAE S3 NetKart
  */
 
-include './header.php';
+require ('header.php');
+session_start();
 startPage("Connexion",["../assets/style/main", "../assets/style/connection"],["../assets/script/connection"]);
+if (isset($_SESSION['id_user'])) {
+    session_destroy();
+    print_r($_SESSION['id_user']);
+    header('Location: connection.php?success=3');
+    exit();
+}
 ?>
 <div class="body-page">
     <div class="connection-select">
@@ -21,7 +28,7 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
         <div class="error">
             <?php
                 if ($l_code_err == 1){
-            ?>Le compte n'éxiste pas ou le mot de passe est erroné.
+            ?>Le compte n'existe pas ou le mot de passe est erroné.
             <?php }
             if ($l_code_err == 2){
                 ?>Le mot de passe et la confirmation de mot de passe sont différents.
@@ -40,6 +47,9 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
             <?php }
             if ($l_code_err == 7){
                 ?>Ce lien de confirmation n'est plus valide.
+            <?php }
+            if ($l_code_err == 8){
+                ?>veuillez vous connecter pour accéder a cette page.
             <?php }?>
 
         </div>
@@ -52,7 +62,10 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
                 ?>Le compte est bel et bien créé, veillez verifier votre boite mail.
                 <?php }
                 if ($l_code_success == 2){
-                ?>email verifié, vous pouvez désormais vous connecter.
+                    ?>email verifier, vous pouvez désormais vous connecter.
+                <?php }
+                if ($l_code_success == 3){
+                    ?>Déconnexion réussie
                 <?php }?>
 
             </div>
@@ -62,7 +75,7 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
             <input type="text" placeholder="Nom d'utilisateur" maxlength="50" id="username-connection" name="username-connection" class="form-input" required><br>
 
             <label for="password-connection">Mot de passe</label>
-            <input type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!*µ$£¤=+°@_~#]).{8,72}$" placeholder="Mot de passe" id="password-connection" name="password-connection" class="form-input" required><br>
+            <input type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!*µ$£¤=+°@_~#]).{8,72}$" placeholder="Mot de passe" id="password-connection" name="password-connection" class="form-input" title="Mot de passe d'au moins 8 caractères, avec au moins une majuscule, une minuscule, un chiffre et un caractère spécial parmi cette liste : ? ! * µ $ £ ¤ = + ° @ _ ~ #" required><br>
 
             <input type="submit" value="CONNEXION" class="submit-connection black-button">
         </form>
@@ -86,7 +99,7 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
             <input type="text" placeholder="Pseudo" id="username-register" maxlength="50" name="username-register" class="form-input" required><br>
 
             <label for="password-register">Mot de passe</label>
-            <input type="password" placeholder="Mot de passe" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!*µ$£¤=+°@_~#]).{8,72}$"  id="password-register" name="password-register" class="form-input" required><br>
+            <input type="password" placeholder="Mot de passe" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!*µ$£¤=+°@_~#]).{8,72}$" title="Mot de passe d'au moins 8 caractères, avec au moins une majuscule, une minuscule, un chiffre et un caractère spécial parmi cette liste : ? ! * µ $ £ ¤ = + ° @ _ ~ #" id="password-register" name="password-register" class="form-input" required><br>
 
             <label for="password-verify">Confirmation du Mot de passe</label>
             <input type="password" placeholder="Confirmation du  Mot de passe" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!*µ$£¤=+°@_~#]).{8,72}$"  id="password-verify" name="password-verify" class="form-input" required><br>
@@ -102,6 +115,6 @@ startPage("Connexion",["../assets/style/main", "../assets/style/connection"],[".
 </div>
 
 <?php
-include './footer.php';
+require './footer.php';
 endPage();
 ?>
