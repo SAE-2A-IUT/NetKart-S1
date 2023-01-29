@@ -14,7 +14,7 @@
 function endPage(){
 ?>
     <footer class="footer not-print-section">
-        <div class="footer-one"><img src="<?php echo K_IMAGE ?>icon_black.png" alt="NetKart Icon"></div>
+        <div class="footer-one"><img src="<?php echo K_IMAGE ?>icon_black.webp" alt="NetKart Icon"></div>
         <div class="footer-two">
             PAGES<br/>
             <a href="homepage.php">Accueil</a>
