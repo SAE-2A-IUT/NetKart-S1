@@ -83,8 +83,8 @@ $l_nb_max_question_images = K_MAX_IMAGES;
                 $l_nb_img = 1;
                 foreach ($l_images as $l_image){?>
                     <div>
-                        <img class="original_img" src="<?php echo K_IMAGE; ?>circuit<?php echo $l_nb_img; ?>.jpg" alt="<?php echo $l_image['image']; ?> - originale">
-                        <img class="hover_img" src="<?php echo K_IMAGE; ?>circuit<?php echo $l_nb_img; ?>.jpg" alt="<?php echo $l_image['image']; ?>">
+                        <img class="original_img" src="<?php echo K_IMAGE; ?>circuit<?php echo $l_nb_img; ?>.webp" alt="<?php echo $l_image['image']; ?> - originale">
+                        <img class="hover_img" src="<?php echo K_IMAGE; ?>circuit<?php echo $l_nb_img; ?>.webp" alt="<?php echo $l_image['image']; ?>">
                         <span><?php echo $l_image['image']; ?></span>
                     </div>
                     <?php

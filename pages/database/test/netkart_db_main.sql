@@ -78,10 +78,10 @@ CREATE TABLE `Circuit_Image` (
 --
 
 INSERT INTO `Circuit_Image` (`id_circuitimage`, `image`) VALUES
-(1, 'circuit1.jpg'),
-(2, 'circuit2.jpg'),
-(3, 'circuit3.jpg'),
-(4, 'circuit4.jpg');
+(1, 'circuit1.webp'),
+(2, 'circuit2.webp'),
+(3, 'circuit3.webp'),
+(4, 'circuit4.webp');
 
 -- --------------------------------------------------------
 
@@ -199,22 +199,22 @@ CREATE TABLE `Question_Image` (
 --
 
 INSERT INTO `Question_Image` (`id_questionimage`, `image_question`, `id_question`) VALUES
-(51, 'image1.png', 1),
-(52, 'image2.png', 1),
-(53, '22CVJCG4aw.png', 85),
-(54, 'JTGVGB1jrK.png', 86),
-(55, 'RTXoE5bpXn.png', 86),
-(56, 'hHCcio7oIZ.png', 87),
-(57, 'image3.png', 33),
-(58, 'image4.png', 33),
-(59, 'image5.png', 33),
-(77, 'TzOCk1QLM7.jpg', 97),
-(78, 'CKt36qSaj7.jpg', 98),
-(79, 'pxQlNyoAcK.png', 98),
-(81, 'b6NMPS0vE2.png', 103),
-(82, 'ocl4qhmHWT.png', 104),
+(51, 'image1.webp', 1),
+(52, 'image2.webp', 1),
+(53, '22CVJCG4aw.webp', 85),
+(54, 'JTGVGB1jrK.webp', 86),
+(55, 'RTXoE5bpXn.webp', 86),
+(56, 'hHCcio7oIZ.webp', 87),
+(57, 'image3.webp', 33),
+(58, 'image4.webp', 33),
+(59, 'image5.webp', 33),
+(77, 'TzOCk1QLM7.webp', 97),
+(78, 'CKt36qSaj7.webp', 98),
+(79, 'pxQlNyoAcK.webp', 98),
+(81, 'b6NMPS0vE2.webp', 103),
+(82, 'ocl4qhmHWT.webp', 104),
 (83, 'AhSRHHKNOu.gif', 105),
-(84, 'ubfeUYYSKD.png', 103),
+(84, 'ubfeUYYSKD.webp', 103),
 (85, 'PTfQ0eN7XQ.', 103),
 (86, 'uVbg9CtnqO.', 104);
 

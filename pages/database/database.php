@@ -583,6 +583,24 @@ class database
         }
         return -1;
     }
+    function select_player_session_id($A_PLAYER, $A_SESSION_CODE){
+        if ($l_id_groupe = self::f_query("SELECT id_groupe FROM Groupe WHERE code='".$A_SESSION_CODE."'")) {
+            if (sizeof($l_id_groupe) == 1) {
+                $l_player_id = self::f_query("SELECT id_groupejoueur FROM Groupe_Joueur a, Groupe b WHERE pseudo_groupe='".$A_PLAYER."' AND a.id_groupe = b.id_groupe AND code='".$A_SESSION_CODE."'");
+                return $l_player_id[0]['id_groupejoueur'];
+            }
+            return -1;
+        }
+        return -1;
+    }
+
+    function getSessionByCode($A_SESSION_CODE){
+        return self::f_query("SELECT * FROM Groupe a, Groupe_Joueur b WHERE a.code ='" . $A_SESSION_CODE . "' AND a.id_groupe = b.id_groupe ORDER BY b.score DESC");;
+    }
+
+    function getCircuitsByTheme($A_THEME_ID){
+        return self::f_query("SELECT id_circuit FROM Circuit WHERE id_theme =" . $A_THEME_ID);
+    }
 
     /**
      * @param $A_ID_PLAYER (Integer) : id of the player to get username
@@ -595,6 +613,14 @@ class database
             return -1;
         }
         return $l_username[0]["pseudo"];
+    }
+
+    function setSessionPlayerScore($A_ID_PLAYER,$A_INDEX_CIRCUIT){
+        $l_circuit = (int) self::getCircuitsByTheme(self::f_query("SELECT b.id_theme FROM Groupe_Joueur a, Groupe b WHERE a.id_groupejoueur=".$A_ID_PLAYER." AND a.id_groupe=b.id_groupe")[0]['id_theme'])[$A_INDEX_CIRCUIT]['id_circuit'];
+        $l_old_score = (int) self::f_query("SELECT score FROM Groupe_Joueur WHERE id_groupejoueur=".$A_ID_PLAYER)[0]['score'];
+        $l_point = (int) self::f_query("SELECT points FROM Circuit WHERE id_circuit=".$l_circuit)[0]['points'];
+        $l_is_update_ok = self::f_query("UPDATE Groupe_Joueur SET score=".($l_old_score+$l_point)." WHERE id_groupejoueur=".$A_ID_PLAYER,true);
+        return $l_is_update_ok === "Success";
     }
 }
 //TODO : voir pour de la composition

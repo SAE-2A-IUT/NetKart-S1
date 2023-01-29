@@ -1,4 +1,4 @@
-<a class="join_session_shadow" href=""></a>
+<a class="join_session_shadow" hreuf=""></a>
 <form method="post" class="join_session_form" action="join_session_post.php">
     <a class="session_cross" href="">X</a>
     <div class="form_container">
