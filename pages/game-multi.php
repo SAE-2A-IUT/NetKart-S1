@@ -127,7 +127,6 @@ $l_db->close();
             </div>
             <div id="modal-body">null</div>
             <div id="modal-footer">
-                <button id="modal-return" type="button">Retour</button>
                 <button id="modal-restart" type="button">Suivant</button>
             </div>
         </div>
@@ -216,12 +215,13 @@ $l_db->close();
         }
     }
 
-    function setVictoryDB(circuitListSize,element) {
+    function setVictoryDB(circuitListSize, element, status) {
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "./victory.php", true);
         const formData = new FormData();
         formData.append("circuitListSize", circuitListSize);
         formData.append("playerId", <?= $_SESSION['id_user_session']; ?>);
+        formData.append("status", status);
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
@@ -229,9 +229,10 @@ $l_db->close();
                         document.getElementById(element).innerHTML += "<br><span id='score'>Vous avez finis la partie !</span>" ;
                         document.getElementById('modal-restart').style.display = "none" ;
                     }else{
-                        document.getElementById(element).innerHTML += "<br><span id='score'>vous avez gagné : " + <?php echo $score_circuit?> + "points</span>";
+                        if (status === "ally"){
+                            document.getElementById(element).innerHTML += "<br><span id='score'>vous avez gagné : " + <?php echo $score_circuit?> + "points</span>";
+                        }
                     }
-                    displayModal();
                 } else {
                     console.error(xhr.status + " " + xhr.statusText);
                 }
@@ -240,14 +241,13 @@ $l_db->close();
         xhr.send(formData);
     }
 
-
     function setVictory(element, status) {
         let modal = document.getElementById(element);
         game = true;
         modal.innerHTML = status === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>";
-        if (status === "ally"){
-            setVictoryDB(<?= sizeof($l_all_circuit); ?>, element);
-        }
+        setVictoryDB(<?= sizeof($l_all_circuit); ?>, element, status);
+        displayModal();
+        modal.style.display = "block";
     }
 </script>
 
