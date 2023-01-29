@@ -112,7 +112,7 @@ if (isset($l_session[0]['id_groupejoueur'])) {
                                 <span class="left"><?php echo $l_player['nickname']; ?></span>
                                 <div class="right"><?php
                                     if ($l_player_position == 0) {
-                                        ?><img id="crown" src="<?php echo K_IMAGE ?>crown.png"><?php
+                                        ?><img id="crown" src="<?php echo K_IMAGE ?>crown.webp"><?php
                                     }
                                     echo $l_player['score']; ?>
                                 </div>
@@ -132,13 +132,13 @@ if (isset($l_session[0]['id_groupejoueur'])) {
                 <span class="not-print-section"><?php if (!($l_session_expired)) {
                         echo $l_time_diff . ' minutes';
                     } else {
-                        echo '@TODO : supprimer session';
+                        echo 'Temps expiré';
                     } ?></span>
                 <h1 class="not-print-section">Code session</h1>
                 <span class="not-print-section"><?php if ($l_session["code"]) {
                         echo $l_session["code"];
                     } else {
-                        echo 'ARJM3D';
+                        echo "Erreur : le code de session n'existe pas";
                     } ?></span>
                 <?php if ($l_session["id_groupe"]) { ?>
                     <form class="export not-print-section" id="export" method="post" action="javascript:exportToPDF()">
