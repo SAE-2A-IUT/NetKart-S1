@@ -585,6 +585,14 @@ class database
         }
         return $l_username[0]["pseudo"];
     }
+
+    function setSessionPlayerScore($A_ID_PLAYER,$A_INDEX_CIRCUIT){
+        $l_circuit = (int) self::getCircuitsByTheme(self::f_query("SELECT b.id_theme FROM Groupe_Joueur a, Groupe b WHERE a.id_groupejoueur=".$A_ID_PLAYER." AND a.id_groupe=b.id_groupe")[0]['id_theme'])[$A_INDEX_CIRCUIT]['id_circuit'];
+        $l_old_score = (int) self::f_query("SELECT score FROM Groupe_Joueur WHERE id_groupejoueur=".$A_ID_PLAYER)[0]['score'];
+        $l_point = (int) self::f_query("SELECT points FROM Circuit WHERE id_circuit=".$l_circuit)[0]['points'];
+        $l_is_update_ok = self::f_query("UPDATE Groupe_Joueur SET score=".($l_old_score+$l_point)." WHERE id_groupejoueur=".$A_ID_PLAYER,true);
+        return $l_is_update_ok === "Success";
+    }
 }
 //TODO : voir pour de la composition
 
