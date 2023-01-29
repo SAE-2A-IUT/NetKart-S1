@@ -43,14 +43,30 @@ if(isset($_SESSION['id_user'])){ # isset($_SESSION id joueur
         <input type="submit" value="Créer un circuit">
     </form>
     </div>
-    <?php  if (isset($_GET['error']) && $_GET['error']){?>
+    <?php  if (isset($_GET['error'])){?>
     <div class="error">
-        Une erreur est survenue et la suppression ne s'est pas réalisée.
+        <?php
+        if($_GET['error']==1){
+            echo "Une erreur est survenue et la suppression ne s'est pas réalisée.";
+        }
+        elseif ($_GET['error']==2){
+            echo "Une erreur est survenue lors de la mise à jour du circuit.";
+        }
+        elseif ($_GET['error']==3){
+            echo "Un circuit avec ce nom existe déjà.";
+        }?>
     </div>
     <?php }
-    if (isset($_GET['success']) && $_GET['success']){?>
+    if (isset($_GET['success'])){?>
     <div class="success">
-        La suppression s'est réalisée correctement.
+        <?php
+        if($_GET['success']==1){
+            echo "La suppression s'est réalisée correctement.";
+        }
+        elseif($_GET['success']==2){
+            echo "La mise à jour s'est réalisée correctement.";
+        }?>
+
     </div>
 <?php }?>
     <div class="all_theme">
@@ -91,7 +107,7 @@ if(isset($_SESSION['id_user'])){ # isset($_SESSION id joueur
                 <h3><?php echo $l_title?></h3>
                 <p class="points">Points: <?= $item["points"].PHP_EOL;?></p>
                 <div class="form_div">
-                    <form class="modify" method="post" action="new-circuit_post.php">
+                    <form class="modify" method="post" action="modify-circuit.php">
                         <input type="hidden" value="<?php echo $item["id_circuit"]; ?>" name="id_circuit_to_modify">
                         <input type="submit" value="Modifier">
                     </form>
@@ -127,19 +143,8 @@ if(isset($_SESSION['id_user'])){ # isset($_SESSION id joueur
     </div>
     <?php
 
-    //TODO : afficher les données sous forme d'éléments comme dans la page thèmes
-
-
-
-    // TODO : if there is no circuit created by user, redirect to page and print "no circuit" + button to create new one
-
     $l_db->close();
 
-
-    //TODO : renvoyer sur la page, afficher que l'inscription est ok et demander de se connecter
-
-
-//TODO : renvoyer sur la page (redirection automatique VERS LA PAGE D'ERREUR si aucun des champs n'est rempli)<?php
 
 include './footer.php';
 endPage();

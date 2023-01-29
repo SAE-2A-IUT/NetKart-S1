@@ -228,7 +228,7 @@ class database
      */
     function get_circuit_information($A_CIRCUIT_ID)
     {
-        $l_sql = "SELECT id_circuit, nom_circuit, points, id_circuitimage FROM Circuit WHERE id_circuit=" . $A_CIRCUIT_ID;
+        $l_sql = "SELECT id_circuit, nom_circuit, points, id_circuitimage, id_theme FROM Circuit WHERE id_circuit=" . $A_CIRCUIT_ID;
         $l_result = $this->l_conn->query($l_sql);
 
         if (!$l_result) {
@@ -238,7 +238,9 @@ class database
         return $l_result->fetch_all(MYSQLI_ASSOC);
     }
 
-    // TODO : documenter
+    /**
+     * @return (Array) : array that contains all circuits informations
+     */
     function get_all_circuit(){
         $l_result = self::f_query(
             "SELECT id_circuit, nom_circuit, points, image, id_theme 
@@ -370,8 +372,8 @@ class database
      * @return (Integer) : the id of the circuit created or -1 if an error occurred
      */
     function insert_circuit($A_NOM_CIRCUIT, $A_POINTS, $A_THEME, $A_JOUEUR, $A_CIRCUIT_IMAGE){
-        $l_is_inert_ok = self::f_query("INSERT INTO Circuit (nom_circuit, points, id_theme, id_joueur, id_circuitimage) VALUES ('$A_NOM_CIRCUIT', $A_POINTS, $A_THEME, $A_JOUEUR, $A_CIRCUIT_IMAGE)",true);
-        if ($l_is_inert_ok=="Success"){
+        $l_is_insert_ok = self::f_query("INSERT INTO Circuit (nom_circuit, points, id_theme, id_joueur, id_circuitimage) VALUES ('$A_NOM_CIRCUIT', $A_POINTS, $A_THEME, $A_JOUEUR, $A_CIRCUIT_IMAGE)",true);
+        if ($l_is_insert_ok=="Success"){
             $l_circuit_id = self::f_query("SELECT id_circuit FROM Circuit WHERE nom_circuit ='".$A_NOM_CIRCUIT."'");
             return $l_circuit_id[0]["id_circuit"];
         }
@@ -379,22 +381,50 @@ class database
     }
 
     /**
+     * @param $A_ID_CIRCUIT : id of the circuit to update
+     * @param $A_NOM_CIRCUIT (String) : name of the updated circuit
+     * @param $A_POINTS (Integer) : number of points the user will get after finishing circuit
+     * @param $A_THEME (Integer) : id of the theme the circuit belong to
+     * @param $A_JOUEUR (Integer) : id of the player who created the circuit
+     * @param $A_CIRCUIT_IMAGE (Integer) : id of the image of the circuit
+     *
+     * @return (boolean) : True if update successful, False otherwise
+     */
+    function update_circuit($A_ID_CIRCUIT, $A_NOM_CIRCUIT, $A_POINTS, $A_THEME, $A_JOUEUR, $A_CIRCUIT_IMAGE){
+        $l_is_update_ok = self::f_query("UPDATE Circuit SET nom_circuit='".$A_NOM_CIRCUIT."', points=".$A_POINTS.", id_theme=".$A_THEME.", id_joueur=".$A_JOUEUR.", id_circuitimage=".$A_CIRCUIT_IMAGE." WHERE id_circuit=".$A_ID_CIRCUIT,true);
+        return $l_is_update_ok=="Success";
+    }
+
+    /**
      * @brief this function insert a question from a circuit into database
      *
-     * @param $A_TITRE (String) : title of the question
      * @param $A_CONSIGNE (String) : detailed question
+     * @param $A_QUESTION (String) : question
      * @param $A_REPONSE (String) : answer of the question
      * @param $A_CIRCUIT (Integer) : id of the circuit the question belongs to
      *
      * @return (Integer) : the id of the question created or -1 if an error occurred
      */
-    function insert_question($A_TITRE, $A_CONSIGNE, $A_REPONSE, $A_CIRCUIT){
-        $l_is_insert_ok = self::f_query("INSERT INTO Question (consigne, question, reponse, id_circuit) VALUES ('".$A_CONSIGNE."', '".$A_TITRE."', '".$A_REPONSE."',".$A_CIRCUIT.")",true);
+    function insert_question($A_CONSIGNE, $A_QUESTION, $A_REPONSE, $A_CIRCUIT){
+        $l_is_insert_ok = self::f_query("INSERT INTO Question (consigne, question, reponse, id_circuit) VALUES ('".$A_CONSIGNE."','".$A_QUESTION."', '".$A_REPONSE."',".$A_CIRCUIT.")",true);
         if ($l_is_insert_ok=="Success"){
-            $l_question_id = self::f_query("SELECT id_question FROM Question WHERE question ='".$A_TITRE."' AND id_circuit=".$A_CIRCUIT);
+            $l_question_id = self::f_query("SELECT id_question FROM Question WHERE question ='".$A_QUESTION."' AND id_circuit=".$A_CIRCUIT);
             return $l_question_id[0]["id_question"];
         }
         return -1;
+    }
+
+    /**
+     * @param $A_ID_QUESTION (Integer) : id of the question
+     * @param $A_CONSIGNE (String) : detailed question
+     * @param $A_QUESTION (String) : question
+     * @param $A_REPONSE (String) : answer of the question
+     *
+     * @return (boolean) : True if update successful, False otherwise
+     */
+    function update_question($A_ID_QUESTION, $A_QUESTION, $A_CONSIGNE, $A_REPONSE){
+        $l_is_update_ok = self::f_query("UPDATE Question SET question='".$A_QUESTION."', consigne='".$A_CONSIGNE."', reponse='".$A_REPONSE."' WHERE id_question=".$A_ID_QUESTION, true);
+        return $l_is_update_ok=="Success";
     }
 
     /**
@@ -587,6 +617,14 @@ class database
             return -1;
         }
         return $l_username[0]["pseudo"];
+    }
+
+    function setSessionPlayerScore($A_ID_PLAYER,$A_INDEX_CIRCUIT){
+        $l_circuit = (int) self::getCircuitsByTheme(self::f_query("SELECT b.id_theme FROM Groupe_Joueur a, Groupe b WHERE a.id_groupejoueur=".$A_ID_PLAYER." AND a.id_groupe=b.id_groupe")[0]['id_theme'])[$A_INDEX_CIRCUIT]['id_circuit'];
+        $l_old_score = (int) self::f_query("SELECT score FROM Groupe_Joueur WHERE id_groupejoueur=".$A_ID_PLAYER)[0]['score'];
+        $l_point = (int) self::f_query("SELECT points FROM Circuit WHERE id_circuit=".$l_circuit)[0]['points'];
+        $l_is_update_ok = self::f_query("UPDATE Groupe_Joueur SET score=".($l_old_score+$l_point)." WHERE id_groupejoueur=".$A_ID_PLAYER,true);
+        return $l_is_update_ok === "Success";
     }
 }
 //TODO : voir pour de la composition

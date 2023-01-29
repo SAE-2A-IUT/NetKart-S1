@@ -100,7 +100,7 @@ $l_nb_max_question_images = K_MAX_IMAGES;
                 ?>
                 <label class="question"><span>Question n°<?php echo $l_nb_question;?></span><span class="arrow close"></span></label>
                 <div class="hidden question_content">
-                    <input name="question[<?php echo $l_nb_question;?>][titre]" type="text" placeholder="Intitulé de la question" maxlength="200" required>
+                    <input name="question[<?php echo $l_nb_question;?>][question]" type="text" placeholder="Intitulé de la question" maxlength="200" required>
                     <label>Consigne</label>
                     <textarea name="question[<?php echo $l_nb_question;?>][consigne]" placeholder="Consigne de la question" aria-atomic="true" required></textarea>
                     <label>Réponse</label>

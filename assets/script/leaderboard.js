@@ -1,7 +1,7 @@
 
     let l_is_leaderboard_displayed = 0;
 
-    function refreshLeaderboard(session_code,player_name) {
+    function refreshLeaderboard(session_code,player_name,auto_reload = false) {
 
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "./leaderboard.php", true);
@@ -18,6 +18,9 @@
             }
         }
         xhr.send(formData);
+        if (auto_reload){
+            setTimeout(() => {refreshLeaderboard(session_code,player_name,auto_reload);},5000);
+        }
     }
 
     function displayLeaderboard(){
