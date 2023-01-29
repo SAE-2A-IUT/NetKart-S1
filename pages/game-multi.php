@@ -221,6 +221,7 @@ $l_db->close();
         xhr.open("POST", "./victory.php", true);
         const formData = new FormData();
         formData.append("circuitListSize", circuitListSize);
+        formData.append("playerId", <?= $_SESSION['id_user_session']; ?>);
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {

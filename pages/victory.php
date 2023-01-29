@@ -9,7 +9,11 @@
 session_start();
 require("./database/database.php");
 
-if (isset($_POST['circuitListSize'])){
+if (isset($_POST['circuitListSize']) && isset($_POST['playerId'])){
+    $l_db = new database();
+    $l_db->connection();
+    $l_db->setSessionPlayerScore((int)$_POST['playerId'],$_SESSION['session_circuit']);
+    $l_db->close();
     function nextCircuit($l_circuitListSize, $index ){
         if(!isLastCircuit($l_circuitListSize, $index)){
             ++$_SESSION['session_circuit'];
