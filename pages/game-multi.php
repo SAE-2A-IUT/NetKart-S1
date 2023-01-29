@@ -45,7 +45,6 @@ else {
 }
 
 
-$id_user = 1;
 $questionNumber = 0;
 $name_circuit = $l_db->get_circuit_information($id_circuit)[$questionNumber]['nom_circuit'];
 $score_circuit =  $l_db->get_circuit_information($id_circuit)[$questionNumber]['points'];
@@ -129,7 +128,7 @@ $l_db->close();
             <div id="modal-body">null</div>
             <div id="modal-footer">
                 <button id="modal-return" type="button">Retour</button>
-                <button id="modal-restart" type="button">Recommencer</button>
+                <button id="modal-restart" type="button">Suivant</button>
             </div>
         </div>
     </div>
@@ -217,22 +216,21 @@ $l_db->close();
         }
     }
 
-    function setVictoryDB(id_user, id_circuit, element) {
+    function setVictoryDB(circuitListSize,element) {
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "./victory.php", true);
         const formData = new FormData();
-        formData.append("id_user", id_user);
-        formData.append("id_circuit", id_circuit);
+        formData.append("circuitListSize", circuitListSize);
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
-                    if (xhr.responseText === 'add') {
+                    if (xhr.responseText === 'finish') {
+                        document.getElementById(element).innerHTML += "<br><span id='score'>Vous avez finis la partie !</span>" ;
+                        document.getElementById('modal-restart').style.display = "none" ;
+                    }else{
                         document.getElementById(element).innerHTML += "<br><span id='score'>vous avez gagné : " + <?php echo $score_circuit?> + "points</span>";
-                        displayModal();
-                    }else if (xhr.responseText === 'already') {
-                        document.getElementById(element).innerHTML += "<br><span id='score'>vos points ont déjà été enregistrés </span>";
-                        displayModal();
                     }
+                    displayModal();
                 } else {
                     console.error(xhr.status + " " + xhr.statusText);
                 }
@@ -247,7 +245,7 @@ $l_db->close();
         game = true;
         modal.innerHTML = status === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>";
         if (status === "ally"){
-            setVictoryDB(<?php echo $id_user?>, <?php echo $id_circuit?>, element);
+            setVictoryDB(<?= sizeof($l_all_circuit); ?>, element);
         }
     }
 </script>
