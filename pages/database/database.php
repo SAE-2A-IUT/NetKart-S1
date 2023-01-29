@@ -335,6 +335,8 @@ class database
 
             }
         }
+        // Delete circuits in Statistiques table
+        self::f_delete("Statistiques","id_circuitStatistiques=".$A_CIRCUIT_ID);
         // Delete circuit
         return self::f_delete("Circuit","id_circuit=".$A_CIRCUIT_ID);
     }
