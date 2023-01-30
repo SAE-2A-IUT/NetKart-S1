@@ -5,10 +5,10 @@ if(isset($_POST['session_code'])){
     $l_db = new database();
     $l_db->connection();
     $l_session_code = $_POST['session_code'];
-    $l_session = $l_db->getSessionByCode($l_session_code)[0];
+    $l_session = $l_db->get_session_by_code($l_session_code)[0];
     if (isset($l_session['id_groupejoueur'])){
         $l_players = [];
-        foreach ($l_db->getSessionByCode($l_session_code) as $l_player){
+        foreach ($l_db->get_session_by_code($l_session_code) as $l_player){
             $l_players[]=[
                 'score'     => $l_player['score'],
                 'nickname'  => $l_player['pseudo_groupe'],
