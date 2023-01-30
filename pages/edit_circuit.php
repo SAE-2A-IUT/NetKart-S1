@@ -80,11 +80,21 @@ if(isset($_SESSION['id_user'])){ # isset($_SESSION id joueur
         foreach ($l_circuit_informations as $item):?>
             <?php $l_count_loop = $l_count_loop + 1; ?>
         <script>
+            /**
+             * @brief this function change the button to a confirm button
+             *
+             * @param count (int) : the id of the button
+             */
             function Confirm(count) {
                 document.getElementById("first_delete" + count).style.display = "none";
                 document.getElementById("delete" + count).style.display = "block";
             }
 
+            /**
+             * @brief this change the page
+             *
+             * @param link (String) : the path of the new page
+             */
             function redirect(link) {
                 window.open(link);
             }
