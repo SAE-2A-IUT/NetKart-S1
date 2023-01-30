@@ -23,17 +23,17 @@ $l_db->connection();
 
 if(isset($_SESSION['session_code'])){
     $l_session_code = $_SESSION['session_code'];
-    $l_session = $l_db->getSessionByCode($_SESSION['session_code'])[0];
+    $l_session = $l_db->get_session_by_code($_SESSION['session_code'])[0];
     if (isset($l_session['id_groupejoueur'])){
         $l_players = [];
-        foreach ($l_db->getSessionByCode($_SESSION['session_code']) as $l_player){
+        foreach ($l_db->get_session_by_code($_SESSION['session_code']) as $l_player){
             $l_players[]=[
                 'score'     => $l_player['score'],
                 'nickname'  => $l_player['pseudo_groupe'],
             ];
         }
     }
-    $l_all_circuit = $l_db->getCircuitsByTheme($l_session['id_theme']) ;
+    $l_all_circuit = $l_db->get_circuits_by_theme($l_session['id_theme']) ;
     if (isset($_SESSION['session_circuit'])){
         $id_circuit = $l_all_circuit[$_SESSION['session_circuit']]['id_circuit'];
     }

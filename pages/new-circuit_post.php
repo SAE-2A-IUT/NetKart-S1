@@ -9,6 +9,12 @@
 require("./database/database.php");
 session_start();
 
+/**
+ * @brief generate random string
+ *
+ * @param $length (int) : the lenght of the string generated
+ * @return (String) : the randomly generated string
+ */
 function generateRandomString($length = 10) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);

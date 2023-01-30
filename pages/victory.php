@@ -13,7 +13,7 @@ if (isset($_POST['circuitListSize']) && isset($_POST['playerId']) && isset($_POS
     $l_db = new database();
     if ($_POST['status'] === "ally"){
         $l_db->connection();
-        $l_db->setSessionPlayerScore((int)$_POST['playerId'],$_SESSION['session_circuit']);
+        $l_db->set_session_player_score((int)$_POST['playerId'],$_SESSION['session_circuit']);
         $l_db->close();
     }
     function nextCircuit($l_circuitListSize, $index ){
