@@ -8,6 +8,13 @@
 require ('header.php');
 session_start();
 startPage("Accueil",["../assets/style/main"],[], false);
+if (isset($_GET['userdeleted'])&&$_GET['userdeleted']){
+    ?>
+    <div style="position: absolute; color: var(--green);">
+        Le compte a bel et bien été supprimé !
+    </div>
+    <?php
+}
 ?>
 
 <div class="body-page">
