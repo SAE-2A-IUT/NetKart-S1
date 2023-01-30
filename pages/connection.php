@@ -11,7 +11,6 @@ session_start();
 startPage("Connexion",["../assets/style/main", "../assets/style/connection"],["../assets/script/connection"]);
 if (isset($_SESSION['id_user'])) {
     session_destroy();
-    print_r($_SESSION['id_user']);
     header('Location: connection.php?success=3');
     exit();
 }

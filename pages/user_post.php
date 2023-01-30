@@ -9,10 +9,17 @@
 require ("./database/database.php");
 
 $l_db = new database();
+session_start();
 
 $l_db->connection();
 
-$l_username = 16; //TODO : recupérer le pseudo stocké en variable de session
+if(!isset($_SESSION['id_user'])){
+    $l_db->close();
+    header("Location:error.html");
+    exit();
+}
+
+$l_user_id = $_SESSION['id_user'];
 
 /*
  * Check if password and confirmation are set
@@ -35,7 +42,7 @@ if(isset($_POST["new_password"]) and isset($_POST["new_password_conf"])){
     echo $l_password;
 
     //Updating password
-    $l_is_update_ok = $l_db->update_password($l_username, $l_password);
+    $l_is_update_ok = $l_db->update_password($l_user_id, $l_password);
 
     // Check if update is successful
     if(!$l_is_update_ok){
@@ -52,7 +59,7 @@ if(isset($_POST["new_password"]) and isset($_POST["new_password_conf"])){
 }
 elseif (isset($_POST["delete_account"])){
 
-    $l_user_circuits = $l_db->get_circuit_created_by_user($l_username);
+    $l_user_circuits = $l_db->get_circuit_created_by_user($l_user_id);
 
     // Deleting all circuits created by user
     foreach ($l_user_circuits as $l_circuit){
@@ -64,7 +71,17 @@ elseif (isset($_POST["delete_account"])){
     }
 
     // Deleting user
-    $l_is_user_delete_ok = $l_db->f_delete("Joueur","id_joueur=".$l_username);
+    $l_id_session = $l_db->f_query("SELECT id_groupe FROM Groupe WHERE id_joueur=".$l_user_id);
+    print_r($l_id_session);
+    if($l_id_session !="Error" and sizeof($l_id_session) > 0){
+        $l_id_session = $l_id_session[0]["id_groupe"];
+        echo "deuxieme : ".$l_id_session;
+        $l_is_group_delete_ok = $l_db->delete_session_multi($l_id_session);
+        if(!$l_is_group_delete_ok){
+            //TODO : redirect
+        }
+    }
+    $l_is_user_delete_ok = $l_db->f_delete("Joueur","id_joueur=".$l_user_id);
     if(!$l_is_user_delete_ok){
         $l_db->close();
         //TODO : redirect to user page and print that delete was incomplete as an error occured
