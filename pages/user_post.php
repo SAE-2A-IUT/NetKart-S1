@@ -47,7 +47,7 @@ if(isset($_POST["new_password"]) and isset($_POST["new_password_conf"])){
     // Check if update is successful
     if(!$l_is_update_ok){
         $l_db->close();
-        header("Location:user.php?success=TwT");
+        header("Location:user.php?error=TwT");
         exit();
     }
     else {
@@ -66,7 +66,9 @@ elseif (isset($_POST["delete_account"])){
         $l_is_circuit_delete_ok = $l_db->delete_circuit_with_id($l_circuit["id_circuit"]);
         if(!$l_is_circuit_delete_ok){
             $l_db->close();
-            //TODO : redirect to user page and print that delete was incomplete as an error occured
+            //redirect to user page and print that delete was incomplete as an error occurred
+            header("Location:connection.php?error=1");
+            exit();
         }
     }
 
@@ -78,19 +80,24 @@ elseif (isset($_POST["delete_account"])){
         echo "deuxieme : ".$l_id_session;
         $l_is_group_delete_ok = $l_db->delete_session_multi($l_id_session);
         if(!$l_is_group_delete_ok){
-            //TODO : redirect
+            //redirect to user page and print that an error occurred when trying to delete the user session
+            header("Location:connection.php?error=2");
+            exit();
         }
     }
     $l_is_user_delete_ok = $l_db->f_delete("Joueur","id_joueur=".$l_user_id);
     if(!$l_is_user_delete_ok){
         $l_db->close();
-        //TODO : redirect to user page and print that delete was incomplete as an error occured
+        //redirect to user page and print that delete was incomplete as an error occured
+        header("Location:connection.php?error=3");
+        exit();
     }
 
     $l_db->close();
 
-    //TODO : redirect to homepage, end session and print that account deletion was successful
-
+    //redirect to homepage, end session and print that account deletion was successful
+    header("Location:homepage.php?userdeleted=1");
+    exit();
 }
 else {
     $l_db->close();
