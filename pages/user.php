@@ -18,7 +18,7 @@ if (!isset($_SESSION['id_user'])) {
     </script>
     <?php
 }
-$l_player_id = 1;
+$l_player_id = $_SESSION['id_user'];
 
 $l_db = new database();
 
@@ -34,17 +34,32 @@ if($l_score == NULL){
     <div class="body-page">
         <div class="body">
         <div class="left">
-            <h1>User1207</h1>
+            <h1><?php echo $l_db->get_username_from_id($l_player_id); ?></h1>
             <?php
                 if (isset($_GET['success']))
                 {
-                    if ($_GET['success'] == "TwT"){
-                        ?><h2 class="error">Une erreur est survenue et la mise a jour du mot de passe n'a pas fonctionné</h2><?php
-                    }
-                    else {
+                    if ($_GET['success'] == "UwU"){
                         ?><h2 class="success">Mot de passe modifié</h2><?php
                     }
-
+                    if ($_GET['success'] == "UwU"){
+                        ?><h2 class="success">Mot de passe modifié</h2><?php
+                    }
+                }
+                if (isset($_GET['error']))
+                {?><h2 class="error"><?php
+                    if ($_GET['error'] == "TwT"){
+                        echo 'Une erreur est survenue et la mise a jour du mot de passe n\'a pas fonctionné';
+                    }
+                    if ($_GET['error'] == 1){
+                        echo 'Une erreur a eu lieu et le compte ne s\'est pas supprimée car ses circuit ne se sont pas supprimés';
+                    }
+                    if ($_GET['error'] == 2){
+                        echo 'Suite à une erreur dans la suppression de la session associé, le compte ne s\'est pas supprimée';
+                    }
+                    if ($_GET['error'] == 3){
+                        echo 'Une erreur a eu lieu et le compte ne s\'est pas supprimée';
+                    }
+                    ?> </h2><?php
                 }
             ?>
             <div class="new_password">

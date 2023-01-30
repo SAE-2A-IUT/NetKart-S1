@@ -141,7 +141,7 @@ $l_db->close();
         response = response.toString();
         switch (input) {
             case "help":
-                return ["Liste des commandes disponibles : clear", "yellow"];
+                return ["Liste des commandes disponibles :<br>clear<br>help<br>shutdown 0", "yellow"];
 
             case response:
                 correctAnswer('player_kart', player_coordinates_, 'ally');
@@ -191,6 +191,13 @@ $l_db->close();
 
             case "clear" :
                 return ["clear", "null"];
+
+            case "shutdown 0" :
+                window.location.replace("https://www.google.com");
+                return;
+
+            case "UwU":
+                return ["<span style='font-size: 30px'>🦄🌈☁️🧚‍♀</span>", "null"];
 
             default:
                 return ["Commande non reconnue", "red"];
