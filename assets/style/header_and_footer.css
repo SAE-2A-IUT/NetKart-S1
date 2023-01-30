@@ -1,0 +1,241 @@
+:root {
+    --dark-blue: #6320EE;
+    --light-blue: #8075FF;
+    --red: #D52941;
+    --light-grey: #EBEBEB;
+    --white: #FAFAFA;
+    --black: #151515;
+    --grey: #8D8D8D;
+    --half-light-grey: #b2b2b2;
+    --main-font : 'Montserrat';
+}
+/* Style the header with a grey background and some padding */
+.header {
+    overflow: hidden;
+    padding: 0.5em;
+}
+
+.header-left a img{
+    width: 61%;
+}
+
+/* Style the header links */
+.header a {
+    font-family: var(--main-font);
+    color: var(--grey);
+    text-align: center;
+    padding: 0 0.5em 0 0.5em;
+    line-height: 3em;
+    text-decoration: none;
+    font-size: 0.7em;
+}
+
+/* Style button link*/
+.header a.hbutton {
+    color: var(--white);
+    background-color: var(--black);
+    margin: 1em;
+}
+
+.header a.hbutton:hover {
+    background-color: var(--black);
+}
+
+/* Change the background color on mouse-over */
+.header a:hover {
+    background-color: var(--white);
+    color: var(--light-blue);
+}
+
+/* Style the active/current link*/
+.header a.active {
+    color: var(--black);
+    font-weight: bold;
+}
+
+/* Float the link section to the right */
+.header-right {
+    display: flex;
+    align-items: center;
+    float: right;
+}
+
+.header-right div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    float: left;
+}
+
+.input-header  {
+    height: 2.2em;
+    border : 1px solid var(--grey);
+    margin-left: 1em;
+    font-family: var(--main-font);
+}
+
+.submit-header {
+    font-family: var(--main-font);
+    background-color: var(--light-grey);
+    margin-left: 0.1em;
+}
+
+.submit-header:hover {
+    color: var(--light-blue);
+}
+
+/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+@media screen and (max-width: 500px) {
+    .header a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+    .header-right {
+        float: none;
+    }
+}
+
+.footer{
+    padding: 1%;
+    background-color: var(--light-grey);
+    display: flex;
+    font-size: 0.8em;
+    line-height: 150%;
+}
+
+.footer-one{
+    flex: 2 1 auto;
+}
+
+.footer-one img{
+    width: 16%;
+}
+
+.footer-two{
+    flex: 1 1 auto;
+    flex-direction: row;
+}
+
+.footer-three{
+    flex: 1 1 auto;
+    flex-direction: row;
+}
+
+.footer > div {
+    color: var(--black);
+    font-weight: bold;
+}
+
+footer > div > a {
+    font-weight: normal;
+    color: var(--black);
+    text-decoration: none;
+}
+
+p{
+    color: var(--grey);
+    line-height: 1.5em;
+}
+
+.join_session_shadow{
+    z-index: 9998;
+    background-color: var(--black-transparent);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.join_session_form{
+    z-index: 9999;
+    background-color: var(--white);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 60%;
+    box-shadow: var(--dark-blue) 0 0 1.5em;
+    border-radius: 5px;
+}
+
+.form_container{
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);    height: 55%;
+    width: 100%;
+}
+
+.session_cross{
+    text-decoration: none;
+    font-weight: bold;
+    position: absolute;
+    top: 4%;
+    right: 4%;
+}
+
+.join_session_form .form-input{
+    border: 1px solid var(--light-grey);
+    margin-top: 0.3em;
+    padding: 2% 0 2% 1%;
+    width: 80%;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.purple-button{
+    background-color: var(--dark-blue);
+    text-transform: uppercase;
+    color: var(--white);
+    width: 80%;
+    line-height: 3em;
+}
+
+@media screen and (max-width: 740px) {
+    .header-left a img{
+        display: none;
+    }
+
+    .footer-one{
+        display: none;
+    }
+
+    .header a{
+        padding: 0.3em;
+    }
+
+    .input-header{
+        height: 2em;
+    }
+
+    .header a{
+        padding: 0 0.5em 0 0.5em;
+        line-height: 3em;
+    }
+}
+
+@media screen and (max-width: 570px) {
+    .header-right{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header-right {
+        float: none;
+    }
+}
+
+
+

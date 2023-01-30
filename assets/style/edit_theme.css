@@ -1,0 +1,264 @@
+.all_theme {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.modify_delete {
+    position: relative;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 20%;
+    height: 30%;
+    margin-right: 2%;
+}
+
+.modify_delete:hover .theme_image {
+    opacity: 0.3;
+}
+
+.modify_delete:hover h3 {
+    top: 0;
+    text-shadow: 2px 2px 2px var(--white);
+    color: var(--dark-grey);
+}
+
+.modify_delete:hover .points {
+    top: 20%;
+    text-shadow: 2px 2px 2px var(--white);
+    color: var(--dark-grey);
+}
+
+.modify_delete:hover .form_div {
+    opacity: 1;
+}
+
+
+.joue_div {
+    position: relative;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 20%;
+    height: 30%;
+    margin-right: 2%;
+    display: none;
+}
+
+.joue_div:hover .theme_image {
+    opacity: 0.3;
+}
+
+.joue_div:hover h3 {
+    top: 0;
+    text-shadow: 2px 2px 2px var(--white);
+    color: var(--dark-grey);
+}
+
+.joue_div:hover .points {
+    top: 20%;
+    text-shadow: 2px 2px 2px var(--white);
+    color: var(--dark-grey);
+}
+
+.joue_div:hover .form_div {
+    opacity: 1;
+}
+
+.joue_div:hover .form_div2 {
+    opacity: 1;
+}
+
+.theme {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+
+}
+
+
+
+.theme_image {
+    position: relative;
+    width: 100%;
+    grid-row-start: 1;
+    grid-column-start: 1;
+    transition: opacity 0.5s ease;
+}
+
+h1 {
+    position: relative;
+    top: 20%;
+    height: 10%;
+    font-weight: 700;
+    font-size: 2vw;
+    text-align: center;
+    text-transform: uppercase;
+    color: black;
+    transition: top .5s ease, color .5s ease;
+    grid-row-start: 1;
+    grid-column-start: 1;
+}
+
+h3 {
+    position: relative;
+    top: 20%;
+    height: 15%;
+    font-weight: 700;
+    line-height: 100%;
+    overflow: hidden;
+    font-size: 2vw;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    text-shadow: 2px 2px 2px var(--black);
+    transition: top .5s ease, color .5s ease;
+    grid-row-start: 1;
+    grid-column-start: 1;
+}
+
+.points {
+    position: relative;
+    top: 40%;
+    height: 10%;
+    font-weight: 300;
+    font-size: 1.5vw;
+    text-shadow: 2px 2px 2px var(--black);
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    transition: top .5s ease, color .5s ease;
+    grid-row-start: 1;
+    grid-column-start: 1;
+}
+
+
+
+.form_div {
+    position: relative;
+    width: 100%;
+    top: 40%;
+    height: 60%;
+    text-align: center;
+    opacity: 0;
+    transition: opacity .35s ease;
+    grid-row-start: 1;
+    grid-column-start: 1;
+}
+
+.form_div2 {
+    position: relative;
+    width: 100%;
+    top: 50%;
+    height: 60%;
+    text-align: center;
+    opacity: 0;
+    transition: opacity .35s ease;
+    grid-row-start: 1;
+    grid-column-start: 1;
+}
+
+.modify input {
+    width: 80%;
+    padding: 6% 6%;
+    text-align: center;
+    font-size: 1vw;
+    color: var(--white);
+    background-color: var(--black);
+    border: solid 2px white;
+    margin-bottom: 10%;
+    cursor: pointer;
+}
+
+.delete input{
+    width: 80%;
+    padding: 6% 6%;
+    text-align: center;
+    font-size: 1vw;
+    color: var(--white);
+    background-color: var(--red);
+    border: solid 2px var(--black);
+    margin-bottom: 10%;
+    cursor: pointer;
+
+}
+
+.joue input {
+    width: 80%;
+    padding: 6% 6%;
+    text-align: center;
+    font-size: 1vw;
+    color: var(--white);
+    background-color: var(--black);
+    border: solid 2px white;
+    margin-bottom: 10%;
+    cursor: pointer;
+}
+
+
+
+.no_circuit {
+    text-align: center;
+}
+.create_ciruit {
+    text-align: right;
+}
+
+.create input {
+    position: relative;
+    top: 20%;
+    height: 10%;
+    padding: 1% 3% 1% 3%;
+    font-weight: 600;
+    font-size: 1vw;
+    text-align: center;
+    text-transform: uppercase;
+    color: black;
+    background-color: var(--light-blue);
+}
+
+.create2 input {
+    position: relative;
+    top: 20%;
+    height: 10%;
+    padding: 1% 3% 1% 3%;
+    font-weight: 600;
+    margin-bottom: 5%;
+    font-size: 1vw;
+    text-align: center;
+    text-transform: uppercase;
+    color: black;
+    background-color: var(--light-blue);
+}
+
+/**********************************************************************************************************************/
+
+
+
+.first_delete input{
+    width: 80%;
+    padding: 6% 6%;
+    text-align: center;
+    font-size: 1vw;
+    color: var(--white);
+    background-color: #a51f32;
+    border: solid 2px var(--black);
+    margin-bottom: 10%;
+    cursor: pointer;
+}
+
+
+.delete {
+    display: none;
+}
+
+.error{
+    color: var(--red);
+}
+.success{
+    color: var(--green);
+}

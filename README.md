@@ -2,6 +2,8 @@
   
 SAE S3 IUT Informatique Aix
 
+Nom des variables, commentaires... EN ANGLAIS
+
 ## Conventions de nommage
   
 * Pour les variables et fonctions, suivre la Snake Case : mots en minuscules séparés par des underscores '_'.
