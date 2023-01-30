@@ -55,15 +55,15 @@ if (!($l_db->verifyPlayerSession($l_id_joueur))) {
     exit();
 }
 
-$l_session = $l_db->getSessionByHost($l_id_joueur);
+$l_session = $l_db->get_session_by_host($l_id_joueur);
 
 
 $l_players = [];
 if (isset($l_session[0]['id_groupejoueur'])) {
 
-    $l_session = $l_db->getSessionByHost($l_id_joueur)[0];
+    $l_session = $l_db->get_session_by_host($l_id_joueur)[0];
 
-    foreach ($l_db->getSessionByHost($l_id_joueur) as $l_player) {
+    foreach ($l_db->get_session_by_host($l_id_joueur) as $l_player) {
         $l_players[] = [
             'score' => $l_player['score'],
             'nickname' => $l_player['pseudo_groupe'],

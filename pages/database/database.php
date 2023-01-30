@@ -510,7 +510,7 @@ class database
      * @param $A_ID_JOUEUR (Int) User id.
      * @return (Array) Session data
      */
-    function getSessionByHost($A_ID_JOUEUR)
+    function get_session_by_host($A_ID_JOUEUR)
     {
         if (self::f_query("SELECT * FROM Groupe a, Groupe_Joueur b WHERE a.id_joueur =" . $A_ID_JOUEUR . " AND a.id_groupe = b.id_groupe")) {
             return self::f_query("SELECT * FROM Groupe a, Groupe_Joueur b WHERE a.id_joueur =" . $A_ID_JOUEUR . " AND a.id_groupe = b.id_groupe ORDER BY b.score DESC");
