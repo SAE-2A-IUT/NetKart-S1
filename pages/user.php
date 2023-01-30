@@ -18,7 +18,7 @@ if (!isset($_SESSION['id_user'])) {
     </script>
     <?php
 }
-$l_player_id = 1;
+$l_player_id = $_SESSION['id_user'];
 
 $l_db = new database();
 
@@ -34,7 +34,7 @@ if($l_score == NULL){
     <div class="body-page">
         <div class="body">
         <div class="left">
-            <h1>User1207</h1>
+            <h1><?php echo $l_db->get_username_from_id($l_player_id); ?></h1>
             <?php
                 if (isset($_GET['success']))
                 {
