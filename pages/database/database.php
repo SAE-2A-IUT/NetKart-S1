@@ -239,7 +239,8 @@ class database
     }
 
     /**
-     * @return (Array) : array that contains all circuits informations
+     * @biref Get all information of all the circuit in the database
+     * @return (Array) : array that contains all circuits information
      */
     function get_all_circuit(){
         $l_result = self::f_query(
@@ -269,7 +270,7 @@ class database
      *
      * @param $A_CIRCUIT_ID (String) : id of the circuit
      *
-     * @return():
+     * @return (Array) : all the circuit questions information
      */
     function get_question_circuit($A_CIRCUIT_ID)
     {
@@ -561,7 +562,11 @@ class database
         return $l_is_delete_ok;
     }
 
-    // TODO : Commenter
+    /**
+     * Get the sum of the circuit score obtained by user by they id
+     * @param $A_ID_JOUEUR (int) : user identifiant
+     * @return int|mixed|string
+     */
     function get_score_player_id($A_ID_JOUEUR){
         $l_score = self::f_query("SELECT SUM(points) FROM Circuit, Statistiques WHERE id_circuit = id_circuitStatistiques AND id_joueurStatistiques=".$A_ID_JOUEUR);
         if($l_score=="Error"){
@@ -589,6 +594,14 @@ class database
         }
         return -1;
     }
+
+    /**
+     * Get a player session id from his nickname and session code
+     *
+     * @param $A_PLAYER (String) User nickname
+     * @param $A_SESSION_CODE (String) Session code
+     * @return int|mixed|string
+     */
     function select_player_session_id($A_PLAYER, $A_SESSION_CODE){
         if ($l_id_groupe = self::f_query("SELECT id_groupe FROM Groupe WHERE code='".$A_SESSION_CODE."'")) {
             if (sizeof($l_id_groupe) == 1) {
@@ -600,18 +613,31 @@ class database
         return -1;
     }
 
-    function getSessionByCode($A_SESSION_CODE){
+    /**
+     * Get all session information from the session code
+     *
+     * @param $A_SESSION_CODE (String) Session code
+     * @return string
+     */
+    function get_session_by_code($A_SESSION_CODE){
         return self::f_query("SELECT * FROM Groupe a, Groupe_Joueur b WHERE a.code ='" . $A_SESSION_CODE . "' AND a.id_groupe = b.id_groupe ORDER BY b.score DESC");;
     }
 
-    function getCircuitsByTheme($A_THEME_ID){
+    /**
+     *
+     *
+     * @param $A_THEME_ID
+     * @return string
+     */
+    function get_circuits_by_theme($A_THEME_ID){
         return self::f_query("SELECT id_circuit FROM Circuit WHERE id_theme =" . $A_THEME_ID);
     }
 
     /**
-     * @param $A_ID_PLAYER (Integer) : id of the player to get username
+     * Get user name from user id
      *
-     * @return
+     * @param $A_ID_PLAYER (Integer) : id of the player to get username
+     * @return int|mixed|string
      */
     function get_username_from_id($A_ID_PLAYER){
         $l_username = self::f_query("SELECT pseudo FROM Joueur WHERE id_joueur='".$A_ID_PLAYER."'");
@@ -621,8 +647,15 @@ class database
         return $l_username[0]["pseudo"];
     }
 
-    function setSessionPlayerScore($A_ID_PLAYER,$A_INDEX_CIRCUIT){
-        $l_circuit = (int) self::getCircuitsByTheme(self::f_query("SELECT b.id_theme FROM Groupe_Joueur a, Groupe b WHERE a.id_groupejoueur=".$A_ID_PLAYER." AND a.id_groupe=b.id_groupe")[0]['id_theme'])[$A_INDEX_CIRCUIT]['id_circuit'];
+    /**
+     * Edit session player score when they win a circuit
+     *
+     * @param $A_ID_PLAYER
+     * @param $A_INDEX_CIRCUIT
+     * @return bool
+     */
+    function set_session_player_score($A_ID_PLAYER, $A_INDEX_CIRCUIT){
+        $l_circuit = (int) self::get_circuits_by_theme(self::f_query("SELECT b.id_theme FROM Groupe_Joueur a, Groupe b WHERE a.id_groupejoueur=".$A_ID_PLAYER." AND a.id_groupe=b.id_groupe")[0]['id_theme'])[$A_INDEX_CIRCUIT]['id_circuit'];
         $l_old_score = (int) self::f_query("SELECT score FROM Groupe_Joueur WHERE id_groupejoueur=".$A_ID_PLAYER)[0]['score'];
         $l_point = (int) self::f_query("SELECT points FROM Circuit WHERE id_circuit=".$l_circuit)[0]['points'];
         $l_is_update_ok = self::f_query("UPDATE Groupe_Joueur SET score=".($l_old_score+$l_point)." WHERE id_groupejoueur=".$A_ID_PLAYER,true);
