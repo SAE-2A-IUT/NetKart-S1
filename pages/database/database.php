@@ -51,7 +51,7 @@ class database
     function remove_apostrophe($A_QUERY)
     {
         $pattern = '/[a-zA-Z0-9]\'[a-zA-Z0-9]/';
-        $pattern2 = '/\'/';
+        $pattern2 = '/[\'\"]/';
         $replacement = " ";
         preg_match_all($pattern, $A_QUERY, $matches);
         foreach ($matches[0] as $match) {
