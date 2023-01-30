@@ -47,9 +47,14 @@ class database
             exit();
         }
     }
-
+    /**
+     * @brief this function remove apostrophe from a query
+     *
+     * @param $A_QUERY (String) : the query
+     * @return (String) : the query without apostrophe
+     */
     function remove_apostrophe($A_QUERY)
-    {
+    {   
         $pattern = '/[a-zA-Z0-9]\'[a-zA-Z0-9]/';
         $pattern2 = '/\'/';
         $replacement = " ";
