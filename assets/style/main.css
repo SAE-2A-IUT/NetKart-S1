@@ -107,6 +107,14 @@ body {
     }
 }
 
+@media screen and (max-width: 570px) {
+    .preview-game {
+        top: 40%;
+        left: 5%;
+        font-size: 70%;
+    }
+}
+
 /* styles for the scrollbar */
 ::-webkit-scrollbar {
     width: 10px; /* width of the scrollbar */
