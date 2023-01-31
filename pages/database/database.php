@@ -163,7 +163,7 @@ class database
      */
     function update_password($A_USERNAME, $A_NEW_PASSWORD)
     {
-        $l_sql = "UPDATE Joueur SET mot_de_passe = '" . $A_NEW_PASSWORD . "' WHERE pseudo = '" . $A_USERNAME."'";
+        $l_sql = "UPDATE Joueur SET mot_de_passe = '" . $A_NEW_PASSWORD . "' WHERE id_joueur = '" . $A_USERNAME."'";
         if (!$this->l_conn->query($l_sql)) {
             echo("Error description: " . $this->l_conn->error);
             return False;
