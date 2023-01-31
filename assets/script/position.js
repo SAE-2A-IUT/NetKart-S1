@@ -33,7 +33,7 @@ function sendCommand(questionResponse) {
 function displayModal() {
     const modal = document.getElementById("modal");
     const close = document.getElementById("modal-close");
-    const returnBtn = document.getElementById("modal-return");
+    const returnBtn = document.getElementById("modal-return") || {};
     const restartBtn = document.getElementById("modal-restart");
 
     modal.style.display = "block";
