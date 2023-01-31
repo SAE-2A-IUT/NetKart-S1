@@ -41,9 +41,6 @@ if($l_score == NULL){
                     if ($_GET['success'] == "UwU"){
                         ?><h2 class="success">Mot de passe modifié</h2><?php
                     }
-                    if ($_GET['success'] == "UwU"){
-                        ?><h2 class="success">Mot de passe modifié</h2><?php
-                    }
                 }
                 if (isset($_GET['error']))
                 {?><h2 class="error"><?php
