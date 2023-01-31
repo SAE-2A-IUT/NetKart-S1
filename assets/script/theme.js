@@ -11,7 +11,7 @@ function show_theme(theme) {
     const form = document.getElementsByClassName("joue_div");
     for(const element of form){
         //remove the "circuit_id_" from the theme name
-        if(element.id.slice(11) === theme_id) {
+        if(element.id.slice(11).split("_")[0] === theme_id) {
             if (element.style.display === "block") {
                 element.style.display = "none";
                 theme.style.border = "none";
