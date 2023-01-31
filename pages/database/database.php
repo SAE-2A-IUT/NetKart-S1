@@ -595,9 +595,9 @@ class database
 
                 return $l_is_insert_ok == "Success";
             }
-            return -1;
+            return 0;
         }
-        return -1;
+        return 0;
     }
 
     /**
