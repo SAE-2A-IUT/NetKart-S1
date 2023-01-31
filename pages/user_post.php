@@ -94,7 +94,7 @@ elseif (isset($_POST["delete_account"])){
     }
 
     $l_db->close();
-
+    session_destroy();
     //redirect to homepage, end session and print that account deletion was successful
     header("Location:homepage.php?userdeleted=1");
     exit();

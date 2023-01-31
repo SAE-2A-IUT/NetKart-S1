@@ -41,9 +41,6 @@ if($l_score == NULL){
                     if ($_GET['success'] == "UwU"){
                         ?><h2 class="success">Mot de passe modifié</h2><?php
                     }
-                    if ($_GET['success'] == "UwU"){
-                        ?><h2 class="success">Mot de passe modifié</h2><?php
-                    }
                 }
                 if (isset($_GET['error']))
                 {?><h2 class="error"><?php
@@ -64,7 +61,7 @@ if($l_score == NULL){
             ?>
             <div class="new_password">
                 <span>Changer son mot de passe :</span>
-                <form class="new_psw_form" method="post" action="user_post_2.php">
+                <form class="new_psw_form" method="post" action="user_post.php">
                     <label>Nouveau mot de passe</label>
                     <input name="new_password" type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!*µ$£¤=+°@_~#]).{8,72}$" title="Mot de passe d'au moins 8 caractères, avec au moins une majuscule, une minuscule, un chiffre et un caractère spécial parmi cette liste : ? ! * µ $ £ ¤ = + ° @ _ ~ #">                    <label>Confirmation</label>
                     <input name="new_password_conf" type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!*µ$£¤=+°@_~#]).{8,72}$" aria-label="Mot de passe d'au moins 8 caractères, avec au moins une majuscule, une minuscule, un chiffre et un caractère spécial parmi cette liste : ? ! * µ $ £ ¤ = + ° @ _ ~ #">

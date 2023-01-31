@@ -11,7 +11,14 @@ session_start();
 startPage("Connexion",["../assets/style/main", "../assets/style/connection"],["../assets/script/connection"]);
 if (isset($_SESSION['id_user'])) {
     session_destroy();
-    header('Location: connection.php?success=3');
+    if (isset($_GET['success'])) {
+        if ($_GET['success'] == 4){
+            header('Location: connection.php?success=4');
+        }
+    }
+    else {
+        header('Location: connection.php?success=3');
+    }
     exit();
 }
 ?>
@@ -65,6 +72,9 @@ if (isset($_SESSION['id_user'])) {
                 <?php }
                 if ($l_code_success == 3){
                     ?>Déconnexion réussie
+                <?php }
+                if ($l_code_success == 4){
+                    ?>Mot de passe modifié avec success.
                 <?php }?>
 
             </div>
