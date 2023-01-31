@@ -61,7 +61,7 @@ $l_themes = $l_db->get_all_themes();
 
 
         <?php foreach ($l_circuits as $l_circuit){?>
-        <div class="joue_div" id="circuit_id_<?php echo $l_circuit['id_theme']; ?>">
+        <div class="joue_div" id="circuit_id_<?php echo $l_circuit['id_theme']; ?>_<?php echo $l_circuit['id_circuit']; ?>">
             <div class="theme">
                 <img class="theme_image" alt="circuit" src="../assets/image/<?php echo $l_circuit['image']; ?>">
                 <?php

@@ -327,6 +327,7 @@ class database
                 if ($l_all_images != NULL) {
                     foreach ($l_all_images as $l_images) {
                         foreach ($l_images as $l_image) {
+                            self::delete_image($l_image);
                             self::f_delete("Question_Image", "id_questionimage=" . $l_image);
                         }
                     }
@@ -349,6 +350,13 @@ class database
         self::f_delete("Statistiques","id_circuitStatistiques=".$A_CIRCUIT_ID);
         // Delete circuit
         return self::f_delete("Circuit","id_circuit=".$A_CIRCUIT_ID);
+    }
+
+    function delete_image($l_image_id) {
+        $target_dir = "../assets/image/upload/";
+        $l_image = self::f_query("SELECT image_question FROM Question_Image WHERE id_questionimage =".$l_image_id)[0]["image_question"];
+        echo $target_dir.$l_image;
+        unlink($target_dir.$l_image);
     }
 
     /**
