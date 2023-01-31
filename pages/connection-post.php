@@ -90,8 +90,8 @@ elseif (isset($_POST["firstname"]) and isset($_POST["lastname"])
             exit();
         }else{
 
-            $l_page = "http://localhost/pages/mail-confirm.php?user=" . $l_username_register . "&code=" . $l_code_verification;
-            //$l_page = "https://netkart.alwaysdata.net/pages/mail-confirm.php?user=" . $l_username_register . "&code=" . $l_code_verification;
+            //$l_page = "http://localhost/pages/mail-confirm.php?user=" . $l_username_register . "&code=" . $l_code_verification;
+            $l_page = "https://netkart.alwaysdata.net/pages/mail-confirm.php?user=" . $l_username_register . "&code=" . $l_code_verification;
             echo $l_page;
             $l_message = "Bonjour " . $l_username_register . ", merci de cliquer sur ce lien pour verifié votre email: " . $l_page;
             mail($l_email,'Confirmation de mail pour Netkart', $l_message);
