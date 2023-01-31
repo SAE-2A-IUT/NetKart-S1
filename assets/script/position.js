@@ -42,6 +42,11 @@ function displayModal() {
         modal.style.display = "none";
     }
 
+    returnBtn.onclick = function () {
+        modal.style.display = "none";
+        window.location.assign("themes.php");
+    }
+
     restartBtn.onclick = function () {
         window.location.reload();
     }
