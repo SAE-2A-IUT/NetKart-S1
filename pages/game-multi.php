@@ -243,8 +243,9 @@ $l_db->close();
 
     function setVictory(element, status) {
         let modal = document.getElementById(element);
+        if (game === false)
+            modal.innerHTML = status === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>";
         game = true;
-        modal.innerHTML = status === "enemy" ? "Défaite ... <img src=\'../assets/image/lose.webp\' alt=\'lose\' id=\'lose\'>" : "Victoire ! <img src=\'../assets/image/victory.webp\' alt=\'victory\' id=\'victory\'>";
         setVictoryDB(<?= sizeof($l_all_circuit); ?>, element, status);
         displayModal();
         modal.style.display = "block";
