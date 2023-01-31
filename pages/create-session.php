@@ -68,7 +68,6 @@ if (isset($_GET['deleted']) && $_GET['deleted']){?>
             <option value="">Choisir le thème</option>
             <?php
             foreach ($l_themes as $l_theme){?>
-            <label for="theme">
                 <option value="<?php echo $l_theme["id_theme"]; ?>"><?php echo $l_theme["nom_theme"];
             } ?>
         </select><br>

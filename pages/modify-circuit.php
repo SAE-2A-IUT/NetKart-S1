@@ -59,15 +59,14 @@ if (isset($_GET['error'])){
             <input name="circuit_name" type="text" value="<?php echo $l_general_informations[0]["nom_circuit"] ?>" placeholder="Nom du circuit (Limite : 100 charactères)" maxlength="100" required>
             <label>Thème du circuit</label>
             <select name="circuit_theme" required>
+                <option value="" label=" "></option>
                 <?php
                 $l_themes = $l_db->get_all_themes();
                 foreach ($l_themes as $l_theme){
                     if($l_theme["id_theme"]==$l_general_informations[0]["id_theme"]){?>
-                        <label for="theme">
                         <option value="<?php echo $l_theme["id_theme"]; ?>" selected><?php echo $l_theme["nom_theme"];
                     }
                     else{?>
-                        <label for="theme">
                     <option value="<?php echo $l_theme["id_theme"]; ?>"><?php echo $l_theme["nom_theme"];
                     }
                 } ?>

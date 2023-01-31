@@ -55,7 +55,7 @@ function startPage($A_TITLE, $A_CSS_NAME, $A_JS_SCRIPT){
 
 <div class="header not-print-section">
     <div class="header-left">
-        <a href="homepage.php"><img src="<?php echo K_IMAGE?>icon_black_small.webp" alt="logo" width="90em"></a>
+        <a href="homepage.php"><img src="<?php echo K_IMAGE?>icon_black_small.webp" alt="logo"></a>
     </div>
     <div class="header-right">
         <div>
@@ -132,7 +132,7 @@ else {
             <a href="rules.php">RÈGLES DU JEU</a>
         </div>
         <div>
-            <form method="post" action="#" " style="display: flex; flex-direction: row">
+            <form method="post" action="#" style="display: flex; flex-direction: row">
                 <input type="text" name="session_code" placeholder="Code multijoueur" required class="input-header">
                 <input type="submit" value="OK" class="submit-header">
             </form>

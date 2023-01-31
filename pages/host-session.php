@@ -98,9 +98,9 @@ if (isset($l_session[0]['id_groupejoueur'])) {
         <p class="print-section" style="display: none"><?php
             date_default_timezone_set('Europe/Paris');
             echo date('d-m-Y H:i:s');?></p>
-            <div class="left" class="print-section">
-                <h1>Participants</h1>
-                <div class="classement">
+            <div class="left">
+                <h1 class="print-section">Participants</h1>
+                <div class="classement print-section">
                     <?php
                     if (sizeof($l_players) > 0) {
                         $l_player_position = 0;
@@ -166,7 +166,6 @@ if (isset($l_session[0]['id_groupejoueur'])) {
                 </script>
             </div>
         </div>
-    </div>
 </div>
 <?php
 $l_db->close();

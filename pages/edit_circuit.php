@@ -150,7 +150,7 @@ if(isset($_SESSION['id_user'])){ # isset($_SESSION id joueur
         </div>
         <?php
     }?>
-    </div>
+</div>
     <?php
 
     $l_db->close();

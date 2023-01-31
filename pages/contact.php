@@ -32,7 +32,7 @@ startPage("Contact",["../assets/style/main","../assets/style/contact"],[]);
             echo "Mail envoyé. Merci " . $name . ", on vous recontactera dès que possible.";
         }
         ?>
-        <form method="post" name="myemailform" action="">
+        <form method="post" name="myemailform" action="#">
             <div class="div_form">
                 <div class="input_zone">
                     <div class="input1"><label for="Name">Nom:</label>

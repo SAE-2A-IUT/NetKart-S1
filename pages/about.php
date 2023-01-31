@@ -39,12 +39,12 @@ startPage("A propos",[K_STYLE."main",K_STYLE."about"],[]);
             </span>
             <h2>Credit</h2>
             <h3 class="credit-title"><a href="https://fr.freepik.com/" target="_blank">Image sur Freepik</a></h3>
-            <span class="text">
+            <div class="text">
                 <p>jcomp</p>
                 <p>pch.vector</p>
                 <p>vectorjuice</p>
                 <p>iconixar</p>
-            </span>
+            </div>
 
         </div>
     </div>
