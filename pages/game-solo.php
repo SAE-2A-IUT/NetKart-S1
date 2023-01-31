@@ -29,7 +29,7 @@ else {
     header('Location: ./error.html');
     exit();
 }
-$id_user = 1;
+$id_user = $_SESSION['id_user'];
 $questionNumber = 0;
 $name_circuit = $l_db->get_circuit_information($id_circuit)[$questionNumber]['nom_circuit'];
 $score_circuit =  $l_db->get_circuit_information($id_circuit)[$questionNumber]['points'];
