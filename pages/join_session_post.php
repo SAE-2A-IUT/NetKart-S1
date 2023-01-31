@@ -4,7 +4,8 @@
     $l_db = new database();
     $l_db->connection();
     if (!$l_db->check_if_element_already_used('Groupe_Joueur', 'pseudo_groupe',$_POST['session_pseudo'])){
-        if ($l_db->insert_player_to_multiplayer_session($_POST['session_pseudo'],$_POST['session_code'])){
+        $l_is_insert_ok = $l_db->insert_player_to_multiplayer_session($_POST['session_pseudo'],$_POST['session_code']) ;
+        if ($l_is_insert_ok){
             $_SESSION['session_code'] = $_POST['session_code'];
             $_SESSION['session_pseudo'] = $_POST['session_pseudo'];
             $_SESSION['session_circuit'] = 0;
@@ -13,10 +14,10 @@
             header('Location: game-multi.php');
             exit();
         }
-        header('Location: error.html');
+        header('Location: homepage.php');
         exit();
     }
     $l_db->close();
-    header('Location: error.html');
+    header('Location: homepage.php');
     exit();
 ?>
