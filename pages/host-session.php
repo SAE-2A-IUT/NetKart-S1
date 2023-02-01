@@ -85,22 +85,14 @@ if (isset($l_session[0]['id_groupejoueur'])) {
     $l_session_expired = timeDiff($l_session ["code"], $l_db)['finished'];
     $l_delete_error = (isset($_GET['deleted']) && !$_GET['deleted']);
         ?>
-        <div class="alert not-print-section">
-            <?php if ($l_session_expired) {
-                echo 'La partie a expiré';
-            } elseif ($l_delete_error) {
-                echo 'La suppression n\'a pas eu lieu';
-            } else {
-                echo 'Il reste moins de ' . ($l_time_diff + 1) . ' minutes !';
-            } ?>
-        </div>
+    <div class="alert not-print-section"></div>
     <div class="body">
         <H1 class="print-section" style="display: none">Résultats de la session multijoueur</H1>
         <p class="print-section" style="display: none"><?php
             date_default_timezone_set('Europe/Paris');
             echo date('d-m-Y H:i:s');?></p>
             <div class="left">
-                <h1 class="print-section">Participants</h1>
+                <h1 class="print-section">Participants - <?= $l_session["nom_groupe"];?></h1>
                 <div class="classement print-section">
                     <?php
                     if (sizeof($l_players) > 0) {
