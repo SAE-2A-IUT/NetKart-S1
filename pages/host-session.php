@@ -75,13 +75,15 @@ if (isset($l_session[0]['id_groupejoueur'])) {
     setTimeout(() => {
         refreshLeaderboard('<?=$l_session ["code"];?>','null',true);
     }, 5000);
+    setTimeout(() => {
+        refreshTimeLeft('<?=$l_session ["code"];?>',true);
+    }, 30000);
 </script>
 <div class="body-page">
     <?php
     $l_time_diff = timeDiff($l_session ["code"], $l_db)['timeDiff'];
     $l_session_expired = timeDiff($l_session ["code"], $l_db)['finished'];
     $l_delete_error = (isset($_GET['deleted']) && !$_GET['deleted']);
-    if (($l_time_diff < 5) || $l_session_expired || $l_delete_error) {
         ?>
         <div class="alert not-print-section">
             <?php if ($l_session_expired) {
@@ -92,7 +94,6 @@ if (isset($l_session[0]['id_groupejoueur'])) {
                 echo 'Il reste moins de ' . ($l_time_diff + 1) . ' minutes !';
             } ?>
         </div>
-    <?php } ?>
     <div class="body">
         <H1 class="print-section" style="display: none">Résultats de la session multijoueur</H1>
         <p class="print-section" style="display: none"><?php
@@ -129,7 +130,7 @@ if (isset($l_session[0]['id_groupejoueur'])) {
             </div>
             <div class="right">
                 <h1 class="not-print-section">Temps restant</h1>
-                <span class="not-print-section"><?php if (!($l_session_expired)) {
+                <span class="not-print-section time-left"><?php if (!($l_session_expired)) {
                         echo $l_time_diff . ' minutes';
                     } else {
                         echo 'Temps expiré';
