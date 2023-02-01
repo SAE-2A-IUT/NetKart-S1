@@ -47,12 +47,12 @@ if(isset($_POST["new_password"]) and isset($_POST["new_password_conf"])){
     // Check if update is successful
     if(!$l_is_update_ok){
         $l_db->close();
-        header("Location:user.php?error=TwT");
+        header("Location:user.php?error=2");
         exit();
     }
     else {
         $l_db->close();
-        header("Location:connection.php?success=UwU");
+        header("Location:connection.php?success=4");
         exit();
     }
     $l_db->close();
