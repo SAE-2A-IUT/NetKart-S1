@@ -23,10 +23,10 @@ class database
     /**
      * constructor of database class, initialise variables to connect to database
      */
-    function __construct($A_SERVERNAME = "mysql-netkart.alwaysdata.net",
-                         $A_USERNAME = "netkart_admin",
-                         $A_PASSWORD = "NetkartSAES3",
-                         $A_DBNAME = "netkart_db_main"
+    function __construct($A_SERVERNAME = "",
+                         $A_USERNAME = "",
+                         $A_PASSWORD = "",
+                         $A_DBNAME = ""
                         )
     {
         $this->l_servername = $A_SERVERNAME;
