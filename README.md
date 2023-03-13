@@ -2,7 +2,7 @@
   
 SAE S3 IUT Informatique Aix
 
-Nom des variables, commentaires... EN ANGLAIS
+Nom des variables, commentaires... en anglais
 
 ## Conventions de nommage
   
